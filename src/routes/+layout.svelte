@@ -18,6 +18,7 @@
 
 	export let data: LayoutData
 	console.log(data)
+
 	function initMap() {
 		alert('ok')
 	}
@@ -27,29 +28,25 @@
 	let zIndex = 0
 
 	onMount(() => {
-		const script = document.createElement('script')
-		script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_ENV_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`
-		script.async = true
-		script.defer = true
-		document.body.appendChild(script)
-
 		const savedNatureDataString = localStorage.getItem('nature')
-		console.log(savedNatureDataString)
 		if (savedNatureDataString) {
 			try {
-				// Parse the saved data from local storage
 				const { $nature: natureString } = JSON.parse(savedNatureDataString)
 				if (natureString != '') {
-					// button?.click()
 					$nature = natureString
 				}
 			} catch (err) {
-				// Handle any errors that occurred while parsing the saved data
 				console.error(err)
 			}
 		} else {
 			$nature = 'HASHTAG'
 		}
+
+		const script = document.createElement('script')
+		script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_ENV_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`
+		script.async = true
+		script.defer = true
+		document.body.appendChild(script)
 	})
 
 	Pusher.logToConsole = true
@@ -76,7 +73,6 @@
 				<TopHeaderLeft />
 			</div>
 			<div class="windowContainers container2">
-				<!-- <button class="btn" on:click={handleClick} /> -->
 				{#if $searchInput != ''}
 					<MiddleSearchData />
 				{:else}
@@ -111,18 +107,12 @@
 	.lockScreen {
 		background-color: var(--primaryTheme);
 	}
-	.box {
-		height: 1000px;
-		width: 100%;
-		overflow: auto;
-	}
 	.leftMargin {
 		margin-left: calc(var(--averageMargin) / 2);
 	}
 	.rightMargin {
 		margin-right: calc(var(--averageMargin) / 2);
 	}
-	/* flexing */
 
 	.show {
 		transition: all 300ms ease-in-out;
@@ -132,7 +122,6 @@
 	}
 	.notShow {
 		transition: all 300ms ease-in-out;
-		/* transform: translateX(-100%); */
 		opacity: 0%;
 		z-index: 0;
 		width: 0%;
@@ -148,14 +137,6 @@
 		z-index: 1;
 	}
 
-	/* end-of-flexing */
-	.btn {
-		height: calc(var(--buttonHW) * 2);
-		width: calc(var(--buttonHW) * 2);
-		background: var(--secondaryTheme);
-		box-shadow: var(--boxInsetShadows);
-		border-radius: var(--borderRadius);
-	}
 	.windowContainers {
 		width: 100%;
 		overflow: hidden;
@@ -171,17 +152,12 @@
 	}
 	.container2 {
 		height: 100%;
-		/* overflow: auto; */
 
 		z-index: 0;
 
-		/* padding-bottom: 75px; */
-		/* padding-top: 100px; */
 		padding-bottom: 0rem;
 	}
 	.container3 {
-		/* background: var(--primaryTheme); */
-		/* background-image: linear-gradient(0deg, var(--primaryTheme) 0%, var(--secondaryTheme) 100%); */
 		height: 75px;
 		z-index: 1;
 
@@ -221,23 +197,10 @@
 		justify-content: center;
 		align-items: center;
 		height: 100%;
-		/* width: 100%; */
 		overflow: hidden;
 		position: relative;
 
 		background-color: var(--secondaryTheme);
-	}
-
-	.windowLeft {
-		/* width: 30vw; */
-	}
-	.windowLeftSwitch {
-	}
-	.windowRight {
-		/* width: 70vw; */
-		/* border-left: 1px solid var(--tertiaryTheme); */
-	}
-	.windowRightSwitch {
 	}
 
 	@media screen and (max-width: 768px) {
@@ -253,7 +216,6 @@
 			z-index: 1;
 		}
 
-		/* Add a class to trigger the slide-out animation */
 		.nonWidth {
 			z-index: 0;
 			animation: slideOut 1s both;

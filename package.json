@@ -1,6 +1,6 @@
 {
-	"name": "new-vercel-project",
-	"version": "0.0.1",
+	"name": "wassup-world",
+	"version": "0.0.9",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",

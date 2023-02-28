@@ -114,8 +114,7 @@
 		class="textBox"
 		on:click={() => {
 			$isLocked = !$isLocked
-		}}
-	>
+		}}>
 		<h1 class="headerText">
 			<span style="color: var(--secondary)">wassup </span><span>{$userName}</span>{#if $userName != ''}<span>!</span>{/if}
 		</h1>

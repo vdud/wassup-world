@@ -1,9 +1,36 @@
 <script lang="ts">
 	import { userName } from '$lib/stores/userName'
+	import { loginResponseData } from '$lib/stores/loginResponseData'
 	import { isLocked } from '$lib/stores/isLocked'
+	$: if ($userName) $userName = $userName.toLowerCase()
 
-	function unLock() {
+	async function unLock() {
 		$isLocked = false
+
+		if ($userName != '') {
+			const res = await fetch('/api/logInData', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ data: $userName }),
+			})
+			const response = await res.json()
+			if (res.ok) {
+				$loginResponseData = response
+				console.log('$loginResponseData =')
+				console.log($loginResponseData)
+				$userName = response.data.name
+				console.log('$userName = ')
+				console.log($userName)
+			} else if (!res.ok) {
+				alert('failed to find unsername')
+				alert(response.message)
+			}
+		}
+	}
+	function handleKeyUp(event: any) {
+		$userName = $userName.toLowerCase()
 	}
 
 	function handleLockKeyDown(event: any) {
@@ -17,9 +44,14 @@
 </script>
 
 <div class="LockScreen">
-	<div class="locContainers top"><h1 class="lockHeader"><span style="color:var(--secondary)">wassup</span> {$userName.length > 0 ? $userName + '!' : 'world'}</h1></div>
+	<div class="locContainers top">
+		<h1 class="lockHeader">
+			<span style="color:var(--secondary)">wassup</span>
+			<span style={$userName.length > 0 ? $userName + '' : 'opacity:var(--dull)'}>{$userName.length > 0 ? $userName + '!' : 'world!'}</span>
+		</h1>
+	</div>
 	<div class="locContainers middle">
-		<input type="text" spellcheck="false" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" onkeypress="return event.charCode != 32" maxlength="18" class="loginInput" on:keydown={handleLockKeyDown} bind:value={$userName} placeholder="world" />
+		<input type="text" spellcheck="false" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" onkeypress="return event.charCode != 32" maxlength="18" class="loginInput" on:keydown={handleLockKeyDown} on:keyup={handleKeyUp} bind:value={$userName} placeholder="world" />
 
 		{#if $userName.length < 3}
 			<button disabled class="fa fa-arrow-right arrow disabled" />
@@ -68,7 +100,7 @@
 		width: 400px;
 		height: auto;
 		border: none;
-		background-color: var(--primaryTheme);
+		background-color: transparent;
 		font-size: calc(var(--fontSize) * 2);
 		padding: calc(var(--averageMargin) * 2) calc(var(--averageMargin) * 3);
 
@@ -85,6 +117,8 @@
 		font-family: Imprima;
 		scale: 2;
 		color: var(--primary);
+		/* lowercase font */
+		text-transform: lowercase;
 	}
 	input::placeholder {
 		color: var(--primaryThemeInverted);

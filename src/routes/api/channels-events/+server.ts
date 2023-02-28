@@ -10,6 +10,7 @@ const pusher = new Pusher({
 
 export const POST = (async ({ request }) => {
 	const { data } = await request.json()
+	console.log('channel-events-data')
 	console.log(data)
 
 	pusher.trigger('channel-name', 'client-event-name', {
