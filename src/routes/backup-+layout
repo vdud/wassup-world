@@ -1,0 +1,86 @@
+<!-- <script context="module">
+    import "https://js.pusher.com/5.0/pusher.min.js"
+</script> -->
+<script lang="ts">
+	import type { LayoutData } from './$types'
+
+	export let data: LayoutData
+	console.log(data)
+
+	import { json } from '@sveltejs/kit'
+	// import { success } from "../main"
+	import Pusher from 'pusher-js'
+	import { onDestroy, onMount } from 'svelte'
+
+	import { pushData } from '../pusher'
+
+	let message = 'Hello, world!'
+	Pusher.logToConsole = true
+	// let pusher = new Pusher("c10249d511522dcedfec", {
+	// 	cluster: "ap2"
+	// })
+
+	// 	app_id = "1555322"
+	// key = "c10249d511522dcedfec"
+	// secret = "fb1b9ed7e1136155ad24"
+	// cluster = "ap2"
+
+	// 	const pusher = new Pusher({
+	//   appId: "1555322",
+	//   key: "c10249d511522dcedfec",
+	//   secret: "fb1b9ed7e1136155ad24",
+	//   cluster: "ap2",
+	//   useTLS: true
+	// });
+
+	// onMount(() => {
+	const pusher = new Pusher(import.meta.env.VITE_APP_KEY, {
+		cluster: import.meta.env.VITE_APP_CLUSTER,
+	})
+	let privateChannel = pusher.subscribe('privateChannelName').bind('client-my-event', (data: any) => {
+		alert(data.message)
+	})
+
+	let res: any
+	// onMount(() => {
+	// 	privateChannel.bind("client-my-event", (data) => {
+	// 		alert(data.message)
+	// 	})
+	// })
+	const handleClick = () => {
+		pushData({ message: message })
+		// privateChannel.trigger('client-my-event', { message: 'Alarm' })
+
+		try {
+			res = json(Response)
+			console.log('res')
+			console.log(res)
+		} catch (e) {
+			console.log(e)
+		}
+		// await Response.json()
+		// console.log(await res.json())
+	}
+
+	onDestroy(() => {
+		pusher.unsubscribe('privateChannelName')
+		pusher.disconnect()
+	})
+</script>
+
+<h1>Pusher Test</h1>
+<p>
+	Try publishing an event to channel <code>my-channel</code>
+	with event name <code>my-event</code>.
+</p>
+
+<main>
+	<h1>Hello, world!</h1>
+	<p>Message: {message}</p>
+	<input type="text" name="message" id="msg " bind:value={message} />
+	<button on:click={handleClick}>Trigger event</button>
+</main>
+
+<!-- <button on:click={handleClick}>PUSH ME!</button> -->
+
+<slot />

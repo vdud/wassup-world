@@ -1,0 +1,156 @@
+:root {
+	--blue: #1e90ff;
+	--white: #fff;
+	--black: #000;
+
+	--gold: gold;
+
+	--primary: #cd7b41;
+	--secondary: #7fb785;
+	--optDark: #b1453e;
+	--optLight: #ffeead;
+	--secOptDark: #b08daf;
+	--secOptLight: #c38387;
+	--disabled: #414141;
+
+	--primaryTheme: #1f1f1f;
+	--secondaryTheme: #2a2a2a;
+	--tertiaryTheme: #3a3a3a55;
+
+	--primaryThemeInverted: #fff;
+	--secondaryThemeInverted: #eee;
+	--tertiaryThemeInverted: #eee5;
+
+	--oradnge: #cd7b41;
+	--green: #7fb785;
+	--red: #b1453e;
+	--yellow: #ffeead;
+	--purple: #b08daf;
+	--pink: #c38387;
+	--grey: #414141;
+	--greyLight: #41414184;
+
+	--dull: 70%;
+	--extraDull: 20%;
+
+	--averageMargin: 10px;
+
+	--buttonHW: 30px;
+	--borderRadius: calc(var(--buttonHW) / 2);
+	--smallerBorderRadius: calc(var(--buttonHW) / 3);
+
+	--boxShadows: 0px 0px 8px #1119, 0px 0px 1px #111;
+	--boxShadowsBlur: 0px 0px 25px #1119, 0px 0px 8px #1118;
+	--boxInsetShadows: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
+
+	--fontSize: 16px;
+}
+
+@font-face {
+	font-family: Imprima;
+	src: url(../css/Imprima-Regular.ttf);
+}
+
+@font-face {
+	font-family: UBold;
+	src: url(../css/Ubuntu-B.ttf);
+}
+
+@font-face {
+	font-family: ULight;
+	src: url(../css/Ubuntu-L.ttf);
+}
+
+button {
+	cursor: pointer;
+	color: var(--primaryTheme);
+}
+
+input,
+button,
+input:focus,
+input:active,
+input:visited {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	white-space: nowrap;
+
+	border: none;
+	outline: none;
+	box-shadow: none;
+	resize: none;
+}
+
+h1,
+p {
+	font-weight: 400;
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
+main,
+body {
+	background-color: var(--primaryTheme);
+	margin: 0;
+	padding: 0;
+
+	width: 100vw;
+	height: 100vh;
+
+	overflow: hidden;
+
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+/* Designing for scroll-bar */
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #444;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.absoluteBox {
+	position: absolute;
+	height: var(--buttonHW);
+	width: var(--buttonHW);
+	border-radius: calc(var(--borderRadius) / 1.5);
+	background-color: var(--primaryTheme);
+
+	cursor: pointer;
+
+	top: calc(var(--averageMargin) + 2px);
+	right: calc(var(--averageMargin) * 2);
+
+	transition: all 200ms ease-in-out;
+}
+.absoluteBox:hover {
+	box-shadow: var(--boxShadows);
+}
+
+.absoluteBox:active {
+	box-shadow: var(--boxInsetShadows);
+	background-color: var(--primaryTheme);
+}

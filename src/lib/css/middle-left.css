@@ -1,0 +1,268 @@
+.item3 {
+	display: flex;
+}
+.textLoc {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 0 1rem;
+	color: var(--secondaryTheme);
+
+	font-weight: 400;
+}
+.text1 {
+	height: 40px;
+	font-size: calc(var(--fontSize) * 1.2);
+	font-family: ULight;
+	margin-left: -1rem;
+
+	color: var(--secondaryThemeInverted);
+}
+.text2 {
+	height: 25px;
+	font-size: calc(var(--fontSize) / 1.5);
+	background-color: var(--primaryTheme);
+	font-family: UBold;
+	border-radius: calc(var(--averageMargin) / 2);
+	box-shadow: var(--boxInsetShadows);
+
+	color: var(--tertiaryThemeInverted);
+
+	margin-bottom: 5px;
+}
+.text3 {
+	height: 15px;
+
+	font-size: calc(var(--fontSize) / 1.75);
+
+	background-color: var(--tertiaryThemeInverted);
+	border-radius: calc(var(--averageMargin) / 4);
+	font-family: UBold;
+
+	opacity: 0.6;
+
+	margin-right: var(--averageMargin);
+}
+.locBox {
+	height: 90px;
+	overflow: hidden;
+
+	margin-left: var(--averageMargin);
+	border-left: 2px solid var(--secondaryThemeInverted);
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	background-color: var(--secondaryTheme);
+
+	transition: border-left 100ms ease-out;
+}
+.locBox:hover {
+	border-left: 8px solid var(--secondaryThemeInverted);
+}
+.locBoxItems {
+	width: auto;
+	height: 100%;
+
+	padding-left: var(--averageMargin);
+}
+.LogoButton {
+	background-color: var(--secondaryThemeInverted);
+	scale: 0.6;
+	padding: calc(var(--averageMargin) / 2) var(--averageMargin);
+
+	border-radius: calc(var(--averageMargin) / 2);
+	color: var(--primaryTheme);
+}
+.contactBox {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 1rem;
+}
+.cText {
+	font-family: UBold;
+	color: var(--primary);
+	font-size: calc(var(--fontSize) * 1);
+}
+.arrow {
+	background-color: var(--secondaryThemeInverted);
+	padding: calc(var(--averageMargin));
+	scale: 0.75;
+	border-radius: var(--borderRadius);
+}
+.sendMsgBox {
+	background-color: var(--primaryTheme);
+	padding: 0.1rem;
+	padding-right: var(--averageMargin);
+	width: max-content;
+	box-shadow: var(--boxShadows);
+
+	border-radius: calc(var(--borderRadius) * 1.4);
+	margin: 1rem 0rem 1rem 1.25rem;
+
+	transition: box-shadow 200ms ease-out, background-color 200ms ease-out;
+
+	cursor: pointer;
+}
+.sendMsgBox:hover {
+	box-shadow: var(--boxShadowsBlur);
+	background-color: var(--secondaryTheme);
+}
+.sendMsgBox:active {
+	box-shadow: var(--boxInsetShadows);
+	background-color: var(--primaryTheme);
+}
+.hashMsg {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(var(--fontSize) * 1.2);
+	padding: calc(var(--averageMargin) / 2);
+
+	font-family: UBold;
+	font-weight: 400;
+}
+.fontBox {
+	padding-left: calc(var(--averageMargin) * 1.2);
+}
+/* .sendMsgBox {
+    width: auto;
+    height: calc(var(--fontSize) * 2.5);
+    margin: 1rem;
+    background-color: var(--primaryTheme);
+    border-radius: calc(var(--borderRadius) * 2);
+
+    padding-left: calc(var(--averageMargin) * 1.5);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+} */
+.gradient {
+	width: 100%;
+	height: 200%;
+	background: linear-gradient(90deg, #0000 40%, var(--secondaryTheme) 95%);
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	right: 0;
+
+	pointer-events: none;
+}
+.middleData {
+	width: 100%;
+	height: 100%;
+
+	padding-left: 10px;
+	padding-top: calc(100px + var(--averageMargin) * 1.8);
+	/* padding-bottom: 100px; */
+	overflow: hidden;
+	overflow-y: scroll;
+}
+
+.paddedData {
+	width: 100%;
+	height: auto;
+	margin-bottom: 240px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.natureBox {
+	width: 100%;
+	border: 1px solid var(--tertiaryThemeInverted);
+	margin-bottom: 1rem;
+	border-radius: calc(var(--borderRadius) / 2);
+	overflow: hidden;
+}
+.natureLogo {
+	width: 100%;
+	height: 40px;
+
+	display: flex;
+	justify-content: flex-start;
+
+	padding-left: 1rem;
+	padding-top: calc(var(--averageMargin) / 2);
+	align-items: center;
+}
+.fa {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.faUser {
+	color: var(--secondary);
+}
+.faLoc {
+	color: var(--secOptDark);
+}
+.faHash {
+	color: var(--primary);
+}
+.faAd {
+	color: var(--secOptLight);
+}
+.natureDataBox {
+	width: 1000px;
+	height: auto;
+
+	border-radius: calc(var(--borderRadius) / 4);
+	overflow: hidden;
+
+	border-top: 1px solid var(--tertiaryThemeInverted);
+
+	background-color: var(--primaryTheme);
+}
+.contact {
+	height: 50px;
+	width: 100%;
+	margin-top: calc(var(--averageMargin) * 1.5);
+
+	/* overflow: hidden; */
+	position: relative;
+
+	overflow: scroll;
+}
+.locationPredictions {
+	height: auto;
+
+	overflow: hidden;
+}
+.flexContact {
+	width: fit-content;
+	height: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: start;
+	align-items: center;
+
+	padding-right: 760px;
+}
+.contactBox {
+	width: auto;
+	height: calc(var(--fontSize) * 1.75);
+	margin-left: calc(var(--averageMargin) * 2);
+	background-color: var(--primaryTheme);
+	border-radius: calc(var(--borderRadius) / 2);
+	padding-left: var(--averageMargin);
+	box-shadow: var(--boxShadows);
+
+	cursor: pointer;
+
+	transition: all 200ms ease-out;
+}
+.contactBox:hover {
+	box-shadow: var(--boxShadowsBlur);
+	background-color: var(--secondaryTheme);
+}
+.contactBox:active {
+	box-shadow: var(--boxInsetShadows);
+	background-color: var(--primaryTheme);
+}
