@@ -24,7 +24,6 @@
 				console.log('$userName = ')
 				console.log($userName)
 			} else if (!res.ok) {
-				alert('failed to find unsername')
 				alert(response.message)
 			}
 		}

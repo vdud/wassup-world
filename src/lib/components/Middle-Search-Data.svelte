@@ -55,7 +55,7 @@
 				<div class=" locationPredictions" id="locationPredictions">
 					{#each $locationPrediction as loc}
 						<a
-							href="/{loc.description
+							href="/LOC/{loc.description
 								.replace(/\s/g, '-')
 								.replace(/[^a-zA-Z0-9-]/g, '')
 								.toLowerCase()}"
@@ -63,8 +63,7 @@
 							id={loc.description
 								.replace(/\s/g, '-')
 								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}
-						>
+								.toLowerCase()}>
 							<div class="locBoxItems item1"><p class="textLoc text1">{loc.structured_formatting.main_text}</p></div>
 
 							{#if loc.structured_formatting.secondary_text != undefined}

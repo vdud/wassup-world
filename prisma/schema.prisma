@@ -10,43 +10,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  name        String     @unique
-  messages    Message[]
-  ownedGroups Groups[]
-  allGroups   AllUsers[]
+model user {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+
+  ownedGroups groups[]
+  allGroups   allUsers[]
+  messages    message[]
+
+  @@unique([name, id])
 }
 
-model Message {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  text      String
-  sender    User   @relation(fields: [senderId], references: [id])
-  senderId  String
-  Groups    Groups @relation(fields: [messageId], references: [id])
-  messageId String
-}
-
-model Groups {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+model groups {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  userOwner User?      @relation(fields: [OwnerId], references: [id])
+  userOwner user?    @relation(fields: [OwnerId, ownerName], references: [id, name])
+  ownerName String?
   OwnerId   String?
-  message   Message[]
-  nature    nature     @default(PUBLIC)
-  allUsers  AllUsers[]
+  updatedAt DateTime @updatedAt
+
+  nature   nature     @default(PUBLIC)
+  allUsers allUsers[]
+
+  @@unique([id, name])
 }
 
-model AllUsers {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
+model message {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  group   Groups @relation(fields: [groupId], references: [id])
-  groupId String
-  role    role   @default(USER)
+  Groups      allUsers @relation(fields: [userGroupId, groupName], references: [id, groupName])
+  userGroupId String
+  groupName   String
+
+  text     String @db.String
+  user     user   @relation(fields: [userName, senderId], references: [name, id])
+  userName String
+  senderId String
+
+  createdAt DateTime @default(now())
+}
+
+model allUsers {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  user     user   @relation(fields: [userId, userName], references: [id, name])
+  userName String
+  userId   String
+
+  group     groups @relation(fields: [groupId, groupName], references: [id, name])
+  groupName String
+  groupId   String
+  role      role   @default(USER)
+
+  message message[]
 
   @@unique([userId, groupId])
+  @@unique([id, groupName])
 }
 
 enum nature {

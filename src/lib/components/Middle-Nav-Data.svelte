@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { locationPrediction } from '$lib/stores/locationPrediction'
+	import { loginResponseData } from '$lib/stores/loginResponseData'
 	import { nature } from '$lib/stores/nature'
 	import { json } from '@sveltejs/kit'
 
@@ -44,8 +45,7 @@
 							id={loc.description
 								.replace(/\s/g, '-')
 								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}
-						>
+								.toLowerCase()}>
 							{#if loc.structured_formatting.secondary_text != undefined}
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{loc.structured_formatting.secondary_text.toUpperCase()}</p>
@@ -85,8 +85,7 @@
 							id={loc.description
 								.replace(/\s/g, '-')
 								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}
-						>
+								.toLowerCase()}>
 							{#if loc.structured_formatting.secondary_text != undefined}
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{loc.structured_formatting.secondary_text.toUpperCase()}</p>
@@ -126,8 +125,7 @@
 							id={loc.description
 								.replace(/\s/g, '-')
 								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}
-						>
+								.toLowerCase()}>
 							{#if loc.structured_formatting.secondary_text != undefined}
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{loc.structured_formatting.secondary_text.toUpperCase()}</p>

@@ -17,20 +17,23 @@ export const POST = (async ({ request }) => {
 		},
 		include: {
 			allGroups: true,
-			messages: true,
-			ownedGroups: true,
+			// messages: true,
+			// ownedGroups: true,
 		},
 	})
-	console.log(findUser)
 
 	if (!findUser) {
 		const createAcc = await prisma.user.create({
 			data: {
 				name: userName,
 			},
+			include: {
+				allGroups: true,
+			},
 		})
 		return json({ success: true, data: createAcc })
-	} else {
-		return json({ success: true, data: findUser })
 	}
+	console.log(findUser)
+
+	return json({ success: true, data: findUser })
 }) satisfies RequestHandler

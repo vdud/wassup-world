@@ -38,7 +38,6 @@
 		"eslint-plugin-svelte3": "^4.0.0",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.8.1",
-		"prisma": "^4.10.1",
 		"publint": "^0.1.9",
 		"svelte": "^3.54.0",
 		"svelte-check": "^3.0.1",
@@ -51,9 +50,10 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^4.10.1",
+		"@prisma/client": "^4.11.0",
 		"@sveltejs/adapter-vercel": "^2.0.4",
 		"mongodb": "^5.0.1",
+		"prisma": "^4.11.0",
 		"pusher": "^5.1.2",
 		"pusher-js": "^8.0.1"
 	}
