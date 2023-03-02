@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model user {
+    name           String    @id @unique
+    senderMessages message[] @relation(name: "MessageSender")
+    groups         group[]   @relation(name: "GroupMembers")
+    groupOwner     group[]   @relation(name: "GroupOwner")
+}
+
+model group {
+    id          String    @id @default(uuid())
+    groupname   String?
+    messages    message[]
+    users       user[]    @relation(name: "GroupMembers")
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    groupNature nature    @default(PUBLIC)
+    owner       user?     @relation(name: "GroupOwner", fields: [ownerName], references: [name])
+    ownerName   String?
+}
+
+enum role {
+    ADMIN
+    USER
+}
+
+enum nature {
+    PUBLIC
+    HASHTAGS
+    LOCATIONS
+}
+
+model message {
+    id        String   @id @default(uuid())
+    sender    user     @relation(name: "MessageSender", fields: [senderId], references: [name])
+    senderId  String
+    group     group    @relation(fields: [groupId], references: [id])
+    groupId   String
+    text      String   @db.VarChar(1000)
+    createdAt DateTime @default(now())
+}

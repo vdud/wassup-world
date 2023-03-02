@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { userName } from '$lib/stores/userName'
-	import { loginResponseData } from '$lib/stores/loginResponseData'
-	import { isLocked } from '$lib/stores/isLocked'
-	$: if ($userName) $userName = $userName.toLowerCase()
+	import { userName } from '$lib/stores/userName';
+	import { loginResponseData } from '$lib/stores/loginResponseData';
+	import { isLocked } from '$lib/stores/isLocked';
+	import { json } from '@sveltejs/kit';
+	$: if ($userName) $userName = $userName.toLowerCase();
 
 	async function unLock() {
-		$isLocked = false
+		$isLocked = false;
 
 		if ($userName != '') {
 			const res = await fetch('/api/logInData', {
@@ -14,30 +15,32 @@
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ data: $userName }),
-			})
-			const response = await res.json()
+			});
+			const response = await res.json();
 			if (res.ok) {
-				$loginResponseData = response
-				console.log('$loginResponseData =')
-				console.log($loginResponseData)
-				$userName = response.data.name
-				console.log('$userName = ')
-				console.log($userName)
+				$loginResponseData = response.data.allGroups;
+
+				console.log(response.data.allGroups);
+				console.log('$loginResponseData =');
+				console.log($loginResponseData);
+				$userName = response.data.name;
+				console.log('$userName = ');
+				console.log($userName);
 			} else if (!res.ok) {
-				alert(response.message)
+				alert(response.message);
 			}
 		}
 	}
 	function handleKeyUp(event: any) {
-		$userName = $userName.toLowerCase()
+		$userName = $userName.toLowerCase();
 	}
 
 	function handleLockKeyDown(event: any) {
 		if (event.key === 'Escape') {
-			$userName = ''
+			$userName = '';
 		}
 		if (event.key === 'Enter' && $userName.length > 2) {
-			unLock()
+			unLock();
 		}
 	}
 </script>

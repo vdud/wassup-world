@@ -16,20 +16,24 @@ model user {
 
   ownedGroups groups[]
   allGroups   allUsers[]
-  messages    message[]
+  myMessages  message[]
 
   @@unique([name, id])
 }
 
 model groups {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  userOwner user?    @relation(fields: [OwnerId, ownerName], references: [id, name])
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String  @unique
+  userOwner user?   @relation(fields: [OwnerId, ownerName], references: [id, name])
   ownerName String?
   OwnerId   String?
+
   updatedAt DateTime @updatedAt
 
-  nature   nature     @default(PUBLIC)
+  message message[]
+
+  nature nature @default(PUBLIC)
+
   allUsers allUsers[]
 
   @@unique([id, name])
@@ -38,33 +42,35 @@ model groups {
 model message {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  Groups      allUsers @relation(fields: [userGroupId, groupName], references: [id, groupName])
-  userGroupId String
-  groupName   String
+  // Groups      allUsers @relation(fields: [userGroupId, groupName], references: [id, groupName])
+  // userGroupId String
+  // groupName   String
 
   text     String @db.String
   user     user   @relation(fields: [userName, senderId], references: [name, id])
   userName String
   senderId String
 
+  group     groups @relation(fields: [groupName, groupId], references: [name, id])
+  groupName String
+  groupId   String
+
   createdAt DateTime @default(now())
 }
 
 model allUsers {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
   user     user   @relation(fields: [userId, userName], references: [id, name])
-  userName String
   userId   String
+  userName String
 
   group     groups @relation(fields: [groupId, groupName], references: [id, name])
-  groupName String
   groupId   String
+  groupName String
   role      role   @default(USER)
 
-  message message[]
-
   @@unique([userId, groupId])
-  @@unique([id, groupName])
 }
 
 enum nature {

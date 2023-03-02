@@ -2,10 +2,14 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
+
+	console.log('data.body.data');
+	console.log(data.body.data);
 </script>
 
 <div class="middleScroll">
 	<div class="slot">
+		<div class="whiteSpace" />
 		<div class="text sender" />
 		<div class="text yoMe" />
 	</div>

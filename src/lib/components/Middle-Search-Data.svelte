@@ -1,9 +1,38 @@
 <script lang="ts">
-	import { locationPrediction } from '$lib/stores/locationPrediction'
-	import { nature } from '$lib/stores/nature'
-	import { json } from '@sveltejs/kit'
+	import { userName } from '$lib/stores/userName';
+	import { user_message } from '$lib/stores/user_message';
+	import { isFlex } from '$lib/stores/isFlex';
+	import { fullDisplay } from '$lib/stores/fullDisplay';
+
+	import { locationPrediction } from '$lib/stores/locationPrediction';
+	import { nature } from '$lib/stores/nature';
+	import { json } from '@sveltejs/kit';
+	import { searchInput } from '$lib/stores/searchInput';
+	import { searchData } from '$lib/stores/searchData';
 
 	// $: console.log($locationPrediction)
+
+	const toggleTranslation = (loc: any) => {
+		$fullDisplay = 'nonHidden';
+
+		const url = loc.description
+			.replace(/\s/g, '-')
+			.replace(/[^a-zA-Z0-9-]/g, '')
+			.toLowerCase();
+
+		window.location.pathname = $userName + '/LOC/' + url;
+
+		$isFlex = !$isFlex;
+
+		setTimeout(() => {
+			$user_message = '';
+			$fullDisplay = 'hidden';
+		}, 600);
+	};
+
+	function hasSpace(s) {
+		return s.indexOf('-') >= 0;
+	}
 </script>
 
 <div class="middleData">
@@ -11,40 +40,83 @@
 	<div class="paddedData">
 		<div class="natureBox " style={$nature === 'PUBLIC' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-user faUser" /></div>
-			<div class="natureDataBox">
-				<div class="contact">
-					<div class="flexContact">
-						<div class="contactBox">
-							<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
-							<div class="cBoxText"><p class="cText" style="color: var(--secondary)">HarryPotter</p></div>
+
+			{#if hasSpace($searchInput) === false && $searchInput.length < 19}
+				<div class="natureDataBox">
+					<div class="contact">
+						<div class="flexContact">
+							{#if $searchData.searchUserData.length > 0}
+								{#each $searchData.searchUserData as user}
+									<div class="contactBox">
+										<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+										<div class="cBoxText">
+											<p class="cText" style="color: var(--secondary)">
+												{user.name}
+											</p>
+										</div>
+									</div>
+								{/each}
+							{:else}
+								<div class="contactBox">
+									<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+									<div class="cBoxText">
+										<p class="cText" style="color: var(--secondary)">No User Found</p>
+									</div>
+								</div>
+							{/if}
 						</div>
 					</div>
+					<button class="sendMsgBox">
+						<p class="hashMsg">
+							<span class="fa fa-arrow-right  fontBox arrow" />
+							<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
+							<span class="BOLD fontBox" style="color:var(--secondary)">;{$searchInput}</span>
+						</p>
+					</button>
 				</div>
-				<button class="sendMsgBox">
-					<p class="hashMsg">
-						<span class="fa fa-arrow-right  fontBox arrow" />
-						<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
-						<span class="BOLD fontBox" style="color:var(--secondary)">;harry</span>
-					</p>
-				</button>
-			</div>
+			{:else}
+				<div class="natureDataBox">
+					<button class="sendMsgBox">
+						<p class="hashMsg">
+							<span class="fa fa-arrow-right  fontBox arrow" />
+							<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
+							<span class="BOLD fontBox" style="color:var(--secondary)">No Space 🤭</span>
+						</p>
+					</button>
+				</div>
+			{/if}
 		</div>
 		<div class="natureBox " style={$nature === 'HASHTAG' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-hashtag faHash" /></div>
 			<div class="natureDataBox">
 				<div class="contact">
 					<div class="flexContact">
-						<div class="contactBox">
-							<div class="i"><i class="fa fa-hashtag  LogoButton" /></div>
-							<div class="cBoxText"><p class="cText" style="color: var(--primary)">HarryPotter</p></div>
-						</div>
+						{#if $searchData.searchGroupData.length > 0}
+							{#each $searchData.searchGroupData as group}
+								<div class="contactBox">
+									<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+									<div class="cBoxText">
+										<p class="cText" style="color: var(--secondary)">
+											{group.name}
+										</p>
+									</div>
+								</div>
+							{/each}
+						{:else}
+							<div class="contactBox">
+								<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+								<div class="cBoxText">
+									<p class="cText" style="color: var(--secondary)">No Group Found</p>
+								</div>
+							</div>
+						{/if}
 					</div>
 				</div>
 				<button class="sendMsgBox"
 					><p class="hashMsg">
 						<span class="fa fa-arrow-right  fontBox arrow" />
 						<span class=" fontBox " style="color:var(--secondaryThemeInverted)">Go To </span>
-						<span class=" fontBox cText" style="color:var(--primary)"> #harry-potter</span>
+						<span class=" fontBox cText" style="color:var(--primary)"> #{$searchInput}</span>
 					</p>
 				</button>
 			</div>
@@ -54,11 +126,8 @@
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">
 					{#each $locationPrediction as loc}
-						<a
-							href="/LOC/{loc.description
-								.replace(/\s/g, '-')
-								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}"
+						<button
+							on:click={toggleTranslation.bind(globalThis, loc)}
 							class="locBox"
 							id={loc.description
 								.replace(/\s/g, '-')
@@ -85,7 +154,7 @@
 									{/if}
 								{/each}
 							</div>
-						</a>
+						</button>
 					{/each}
 				</div>
 			</div>

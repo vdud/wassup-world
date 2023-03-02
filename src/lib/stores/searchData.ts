@@ -1,9 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const searchData = writable(
-    {
-        success: false,
-        groupList: [],
-        userList: []
-    }
-);
+export const searchData = writable({
+	searchUserData: [],
+	searchGroupData: [],
+});

@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { locationPrediction } from '$lib/stores/locationPrediction'
-	import { loginResponseData } from '$lib/stores/loginResponseData'
-	import { nature } from '$lib/stores/nature'
-	import { json } from '@sveltejs/kit'
-
-	// $: console.log($locationPrediction)
+	import { locationPrediction } from '$lib/stores/locationPrediction';
+	import { loginResponseData } from '$lib/stores/loginResponseData';
+	import { nature } from '$lib/stores/nature';
+	import { json } from '@sveltejs/kit';
+	import { timeSince } from '$lib/timeFormat';
 </script>
 
 <div class="middleData">
@@ -35,121 +34,103 @@
 			<div class="natureLogo"><i class="fa fa-location-pin faLoc" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">
-					{#each $locationPrediction as loc}
-						<a
-							href="/{loc.description
-								.replace(/\s/g, '-')
-								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}"
-							class="locBox"
-							id={loc.description
-								.replace(/\s/g, '-')
-								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}>
-							{#if loc.structured_formatting.secondary_text != undefined}
-								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2">{loc.structured_formatting.secondary_text.toUpperCase()}</p>
-								</div>
-							{:else}
-								<div class="locBoxItems item1">
-									<p class="textLoc text2" style="font-family:UBold">OFFICIAL</p>
-								</div>
-							{/if}
-							<div class="locBoxItems item2"><p class="textLoc text1" style="color:var(--secOptDark)">{loc.structured_formatting.main_text}</p></div>
+					{#each $loginResponseData as loginData}
+						{#if loginData.group.nature === 'LOCATIONS'}
+							{#if loginData.group.message != null}
+								{#each loginData.group.message as message}
+									<a href="/LOC/{message.name}" class="locBox" id={loginData.group.id}>
+										<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+											<p class="textLoc text2">{message.groupName}</p>
+										</div>
+										<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secondary);padding-right:calc(var(--averageMargin)/3)">{message.userName}; </span><span style="color:var(--primary);opacity:var(--dull)">{message.text}</span></p></div>
 
-							<div class="locBoxItems item3">
-								{#each loc.types as aboutLoc, i}
-									{#if i >= 0}
-										<p class="textLoc text3">{aboutLoc.replace(/_/g, ' ').toUpperCase()}</p>
-									{:else if i === 0}
-										<p class="textLoc text3" style="margin-left: 0;">no tags available...</p>
-									{/if}
+										<div class="locBoxItems item3">
+											<p class="textLoc text3">{@html timeSince(message.createdAt)}</p>
+										</div>
+									</a>
 								{/each}
-							</div>
-						</a>
+							{/if}
+						{/if}
 					{/each}
 				</div>
+				<div class="noMoreBox" />
+				<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 			</div>
 		</div>
 		<div class="natureBox " style={$nature === 'HASHTAG' ? 'order:1' : 'order:3'}>
 			<div class="natureLogo"><i class="fa fa-hashtag faHash" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">
-					{#each $locationPrediction as loc}
-						<a
-							href="/{loc.description
-								.replace(/\s/g, '-')
-								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}"
-							class="locBox"
-							id={loc.description
-								.replace(/\s/g, '-')
-								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}>
-							{#if loc.structured_formatting.secondary_text != undefined}
-								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2">{loc.structured_formatting.secondary_text.toUpperCase()}</p>
-								</div>
-							{:else}
-								<div class="locBoxItems item1">
-									<p class="textLoc text2" style="font-family:UBold">OFFICIAL</p>
-								</div>
-							{/if}
-							<div class="locBoxItems item2"><p class="textLoc text1" style="color:var(--primary)">{loc.structured_formatting.main_text}</p></div>
+					{#each $loginResponseData as loginData}
+						{#if loginData.group.nature === 'HASHTAGS'}
+							{#each loginData.group.message as message}
+								<a href="/LOC/{message.name}" class="locBox" id={loginData.group.id}>
+									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+										<p class="textLoc text2">{message.groupName}</p>
+									</div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secondary);padding-right:calc(var(--averageMargin)/3)">{message.userName}; </span><span style="color:var(--primary);opacity:var(--dull)">{message.text}</span></p></div>
 
-							<div class="locBoxItems item3">
-								{#each loc.types as aboutLoc, i}
-									{#if i >= 0}
-										<p class="textLoc text3">{aboutLoc.replace(/_/g, ' ').toUpperCase()}</p>
-									{:else if i === 0}
-										<p class="textLoc text3" style="margin-left: 0;">no tags available...</p>
-									{/if}
-								{/each}
-							</div>
-						</a>
+									<div class="locBoxItems item3">
+										<p class="textLoc text3">{@html timeSince(message.createdAt)}</p>
+									</div>
+								</a>
+							{/each}
+						{/if}
 					{/each}
 				</div>
+				<div class="noMoreBox" />
+				<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 			</div>
 		</div>
 		<div class="natureBox " style={$nature === 'PUBLIC' ? 'order:1' : 'order:4'}>
 			<div class="natureLogo"><i class="fa fa-user-o faUser" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">
-					{#each $locationPrediction as loc}
-						<a
-							href="/{loc.description
-								.replace(/\s/g, '-')
-								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}"
-							class="locBox"
-							id={loc.description
-								.replace(/\s/g, '-')
-								.replace(/[^a-zA-Z0-9-]/g, '')
-								.toLowerCase()}>
-							{#if loc.structured_formatting.secondary_text != undefined}
-								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2">{loc.structured_formatting.secondary_text.toUpperCase()}</p>
-								</div>
-							{:else}
-								<div class="locBoxItems item1">
-									<p class="textLoc text2" style="font-family:UBold">OFFICIAL</p>
-								</div>
-							{/if}
-							<div class="locBoxItems item2"><p class="textLoc text1" style="color:var(--secondary)">{loc.structured_formatting.main_text}</p></div>
+					{#each $loginResponseData as loginData}
+						{#if loginData.group.nature === 'PUBLIC'}
+							{#each loginData.group.message as message}
+								<a href="/LOC/{message.name}" class="locBox" id={loginData.group.id}>
+									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+										<p class="textLoc text2">{message.groupName}</p>
+									</div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secondary);padding-right:calc(var(--averageMargin)/3)">{message.userName}; </span><span style="color:var(--primary);opacity:var(--dull)">{message.text}</span></p></div>
 
-							<div class="locBoxItems item3">
-								{#each loc.types as aboutLoc, i}
-									{#if i >= 0}
-										<p class="textLoc text3">{aboutLoc.replace(/_/g, ' ').toUpperCase()}</p>
-									{:else if i === 0}
-										<p class="textLoc text3" style="margin-left: 0;">no tags available...</p>
-									{/if}
-								{/each}
-							</div>
-						</a>
+									<div class="locBoxItems item3">
+										<p class="textLoc text3">{@html timeSince(message.createdAt)}</p>
+									</div>
+								</a>
+							{/each}
+						{/if}
 					{/each}
 				</div>
+				<div class="noMoreBox" />
+				<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<style>
+	.noMoreBox {
+		height: calc(var(--averageMargin) * 2);
+		width: 100%;
+	}
+	.noMoreText {
+		height: calc(var(--averageMargin) * 3);
+	}
+	.noText {
+		font-size: calc(var(--fontSize) / 1.2);
+		font-family: UBold;
+		width: max-content;
+		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
+		border-radius: calc(var(--borderRadius) / 3);
+		color: var(--primaryTheme);
+		background-color: var(--primaryThemeInverted);
+		margin: var(--averageMargin);
+		scale: 0.9;
+		opacity: var(--extraDull);
+	}
+	.locationPredictions {
+		border-bottom: 0.5px solid var(--tertiaryThemeInverted);
+	}
+</style>
