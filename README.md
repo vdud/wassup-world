@@ -1,4 +1,4 @@
-Open-Source Realtime Chat-App,
+## Open-Source Realtime Chat-App,
 
 I am very excited about metaverse, so I created this app with Svelte JS framework,
 if you know how to use svelte, then please join on my journey to make this the only social media app one person need to have,
@@ -13,4 +13,4 @@ Just take look at env.d.ts so you can generate your own api for testing and deve
 3. Google Places Api
 
 
-also here's the website link: [`wassup.world`](https://www.wassup.world/)
+## also here's the website link: [`wassup.world`](https://www.wassup.world/)
