@@ -1,39 +1,16 @@
-# create-svelte
+Open-Source Realtime Chat-App,
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+I am very excited about metaverse, so I created this app with Svelte JS framework,
+if you know how to use svelte, then please join on my journey to make this the only social media app one person need to have,
+It is going to be coders focus app, so content creators should be coders, 
+It is going to serve all the local businesses, like NightClubs, Restaurants, Cafes...etc
+I want o integrate it with crypto currency and payment system so, users can easily transer crypto to friend on the go, and can be anon.
 
-## Creating a project
+## Want to try it out?
+Just take look at env.d.ts so you can generate your own api for testing and development,
+1. MongoDb
+2. Pusher-Realtime
+3. Google Places Api
 
-If you're seeing this, you've probably already done this step. Congrats!
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-# pusher-mongo-env
+also here's the website link: [`wassup.world`](https://www.wassup.world/)
