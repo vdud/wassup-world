@@ -47,24 +47,6 @@
 		PlacesApi.async = true
 		PlacesApi.defer = true
 		document.body.appendChild(PlacesApi)
-
-		const analyticsGoogle = document.createElement('script')
-		analyticsGoogle.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_ANAL_ID}`
-		analyticsGoogle.async = true
-		analyticsGoogle.defer = true
-		document.body.appendChild(analyticsGoogle)
-
-		const analyticsGoogle2 = document.createElement('script')
-		analyticsGoogle2.innerHTML = `window.dataLayer = window.dataLayer || []
-		function gtag() {
-			dataLayer.push(arguments)
-		}
-		gtag('js', new Date())
-
-		gtag('config', '${import.meta.env.VITE_ANAL_ID}`
-		analyticsGoogle2.async = true
-		analyticsGoogle2.defer = true
-		document.body.appendChild(analyticsGoogle2)
 	})
 
 	Pusher.logToConsole = true
