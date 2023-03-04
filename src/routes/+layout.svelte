@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '$lib/css/middle-left.css'
 	import '../css/new-app.css'
+
 	import { isFlex } from '$lib/stores/isFlex'
 	import { isLocked } from '$lib/stores/isLocked'
 	import { nature } from '$lib/stores/nature'
