@@ -1,10 +1,9 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { PageData } from './$types'
 
-	export let data: PageData;
+	export let data: PageData
 
-	console.log('data.body.data');
-	console.log(data.body.data);
+	console.log(JSON.parse(data.body.data))
 </script>
 
 <div class="middleScroll">

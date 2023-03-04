@@ -1,5 +1,5 @@
-import adapter from '@sveltejs/adapter-vercel'
-import { vitePreprocess } from '@sveltejs/kit/vite'
+import adapter from '@sveltejs/adapter-vercel';
+import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -9,7 +9,10 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
+		alias: {
+			$db: './src/db',
+		},
 	},
-}
+};
 
-export default config
+export default config;

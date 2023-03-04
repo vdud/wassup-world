@@ -50,10 +50,8 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"@prisma/client": "^4.11.0",
 		"@sveltejs/adapter-vercel": "^2.0.4",
 		"mongodb": "^5.0.1",
-		"prisma": "^4.11.0",
 		"pusher": "^5.1.2",
 		"pusher-js": "^8.0.1"
 	}

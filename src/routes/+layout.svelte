@@ -42,11 +42,29 @@
 			$nature = 'HASHTAG'
 		}
 
-		const script = document.createElement('script')
-		script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_ENV_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`
-		script.async = true
-		script.defer = true
-		document.body.appendChild(script)
+		const PlacesApi = document.createElement('script')
+		PlacesApi.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_ENV_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`
+		PlacesApi.async = true
+		PlacesApi.defer = true
+		document.body.appendChild(PlacesApi)
+
+		const analyticsGoogle = document.createElement('script')
+		analyticsGoogle.src = `https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_ANAL_ID}`
+		analyticsGoogle.async = true
+		analyticsGoogle.defer = true
+		document.body.appendChild(analyticsGoogle)
+
+		const analyticsGoogle2 = document.createElement('script')
+		analyticsGoogle2.innerHTML = `window.dataLayer = window.dataLayer || []
+		function gtag() {
+			dataLayer.push(arguments)
+		}
+		gtag('js', new Date())
+
+		gtag('config', '${import.meta.env.VITE_ANAL_ID}`
+		analyticsGoogle2.async = true
+		analyticsGoogle2.defer = true
+		document.body.appendChild(analyticsGoogle2)
 	})
 
 	Pusher.logToConsole = true

@@ -29,6 +29,7 @@ model groups {
   OwnerId   String?
 
   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
 
   message message[]
 
@@ -36,7 +37,14 @@ model groups {
 
   allUsers allUsers[]
 
+  latestMesssage latestMessage?
+
   @@unique([id, name])
+}
+
+type latestMessage {
+  text      String
+  createdAt DateTime @default(now())
 }
 
 model message {

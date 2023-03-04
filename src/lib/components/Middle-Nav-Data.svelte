@@ -1,9 +1,12 @@
 <script lang="ts">
-	import { locationPrediction } from '$lib/stores/locationPrediction';
-	import { loginResponseData } from '$lib/stores/loginResponseData';
-	import { nature } from '$lib/stores/nature';
-	import { json } from '@sveltejs/kit';
-	import { timeSince } from '$lib/timeFormat';
+	import { locationPrediction } from '$lib/stores/locationPrediction'
+	import { loginResponseData } from '$lib/stores/loginResponseData'
+	import { nature } from '$lib/stores/nature'
+	import { json } from '@sveltejs/kit'
+	import { timeSince } from '$lib/timeFormat'
+	import { success } from '$lib/pusher'
+
+	$: console.log($loginResponseData)
 </script>
 
 <div class="middleData">
@@ -34,83 +37,119 @@
 			<div class="natureLogo"><i class="fa fa-location-pin faLoc" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">
-					{#each $loginResponseData as loginData}
-						{#if loginData.group.nature === 'LOCATIONS'}
-							{#if loginData.group.message != null}
-								{#each loginData.group.message as message}
-									<a href="/LOC/{message.name}" class="locBox" id={loginData.group.id}>
-										<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-											<p class="textLoc text2">{message.groupName}</p>
-										</div>
-										<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secondary);padding-right:calc(var(--averageMargin)/3)">{message.userName}; </span><span style="color:var(--primary);opacity:var(--dull)">{message.text}</span></p></div>
+					{#if $loginResponseData.success === false || $loginResponseData.data.formatedLOCdata === undefined || $loginResponseData.data.formatedLOCdata.length === 0}
+						<div class="noMoreBox" />
+						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
+					{:else if $loginResponseData.success === true}
+						{#each $loginResponseData.data.formatedLOCdata as group}
+							<a href="/LOC/{group.name}" class="locBox">
+								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+									<p class="textLoc text2">{group.name}</p>
+								</div>
+								{#if group.latestMessage === undefined}
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox">SEND MESSAGE</span><span class="fa fa-arrow-right sendArrow" /></p></div>
+								{:else}
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
+								{/if}
 
-										<div class="locBoxItems item3">
-											<p class="textLoc text3">{@html timeSince(message.createdAt)}</p>
-										</div>
-									</a>
-								{/each}
-							{/if}
-						{/if}
-					{/each}
+								<div class="locBoxItems item3">
+									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
+								</div>
+							</a>
+						{/each}
+					{/if}
 				</div>
-				<div class="noMoreBox" />
-				<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 			</div>
 		</div>
 		<div class="natureBox " style={$nature === 'HASHTAG' ? 'order:1' : 'order:3'}>
 			<div class="natureLogo"><i class="fa fa-hashtag faHash" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">
-					{#each $loginResponseData as loginData}
-						{#if loginData.group.nature === 'HASHTAGS'}
-							{#each loginData.group.message as message}
-								<a href="/LOC/{message.name}" class="locBox" id={loginData.group.id}>
-									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2">{message.groupName}</p>
-									</div>
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secondary);padding-right:calc(var(--averageMargin)/3)">{message.userName}; </span><span style="color:var(--primary);opacity:var(--dull)">{message.text}</span></p></div>
+					{#if $loginResponseData.success === false || $loginResponseData.data.formatedHASHTAGSdata === undefined || $loginResponseData.data.formatedHASHTAGSdata.length === 0}
+						<div class="noMoreBox" />
+						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
+					{:else if $loginResponseData.success === true}
+						{#each $loginResponseData.data.formatedHASHTAGSdata as group}
+							<a href="/LOC/{group.name}" class="locBox">
+								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+									<p class="textLoc text2">{group.name}</p>
+								</div>
+								{#if group.latestMessage === undefined}
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox">SEND MESSAGE</span><span class="fa fa-arrow-right sendArrow" /></p></div>
+								{:else}
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
+								{/if}
 
-									<div class="locBoxItems item3">
-										<p class="textLoc text3">{@html timeSince(message.createdAt)}</p>
-									</div>
-								</a>
-							{/each}
-						{/if}
-					{/each}
+								<div class="locBoxItems item3">
+									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
+								</div>
+							</a>
+						{/each}
+					{/if}
 				</div>
-				<div class="noMoreBox" />
-				<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 			</div>
 		</div>
 		<div class="natureBox " style={$nature === 'PUBLIC' ? 'order:1' : 'order:4'}>
 			<div class="natureLogo"><i class="fa fa-user-o faUser" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">
-					{#each $loginResponseData as loginData}
-						{#if loginData.group.nature === 'PUBLIC'}
-							{#each loginData.group.message as message}
-								<a href="/LOC/{message.name}" class="locBox" id={loginData.group.id}>
-									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2">{message.groupName}</p>
-									</div>
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secondary);padding-right:calc(var(--averageMargin)/3)">{message.userName}; </span><span style="color:var(--primary);opacity:var(--dull)">{message.text}</span></p></div>
+					{#if $loginResponseData.success === false || $loginResponseData.data.formatedPUBLICdata === undefined || $loginResponseData.data.formatedPUBLICdata.length === 0}
+						<div class="noMoreBox" />
+						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
+					{:else if $loginResponseData.success === true}
+						{#each $loginResponseData.data.formatedPUBLICdata as group}
+							<a href="/LOC/{group.name}" class="locBox">
+								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+									<p class="textLoc text2">{group.name}</p>
+								</div>
+								{#if group.latestMessage === undefined}
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox">SEND MESSAGE</span><span class="fa fa-arrow-right sendArrow" /></p></div>
+								{:else}
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
+								{/if}
 
-									<div class="locBoxItems item3">
-										<p class="textLoc text3">{@html timeSince(message.createdAt)}</p>
-									</div>
-								</a>
-							{/each}
-						{/if}
-					{/each}
+								<div class="locBoxItems item3">
+									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
+								</div>
+							</a>
+						{/each}
+					{/if}
 				</div>
-				<div class="noMoreBox" />
-				<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 			</div>
 		</div>
 	</div>
 </div>
 
 <style>
+	.sendBox {
+		font-size: calc(var(--fontSize) / 1.2);
+		font-family: UBold;
+		width: max-content;
+		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
+		border-radius: calc(var(--borderRadius) / 3);
+		color: var(--primaryTheme);
+		background-color: var(--secOptLight);
+		box-shadow: var(--boxShadows);
+		margin: calc(var(--averageMargin) * -0.5);
+		scale: 0.9;
+		transition: all 200ms ease-in-out;
+	}
+	.sendArrow {
+		color: var(--primaryTheme);
+		font-size: calc(var(--fontSize) / 1.2);
+		margin-left: calc(var(--averageMargin) / 2);
+		background-color: var(--secOptLight);
+		box-shadow: var(--boxShadows);
+		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
+		border-radius: calc(var(--borderRadius) / 3);
+		transition: all 200ms ease-in-out;
+	}
+	.sendArrow:hover,
+	.sendBox:hover {
+		background-color: var(--primaryTheme);
+		color: var(--primaryThemeInverted);
+		box-shadow: var(--boxInsetShadow);
+	}
 	.noMoreBox {
 		height: calc(var(--averageMargin) * 2);
 		width: 100%;

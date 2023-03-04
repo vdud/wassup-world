@@ -1,37 +1,37 @@
 <script lang="ts">
-	import { userName } from '$lib/stores/userName';
-	import { user_message } from '$lib/stores/user_message';
-	import { isFlex } from '$lib/stores/isFlex';
-	import { fullDisplay } from '$lib/stores/fullDisplay';
+	import { userName } from '$lib/stores/userName'
+	import { user_message } from '$lib/stores/user_message'
+	import { isFlex } from '$lib/stores/isFlex'
+	import { fullDisplay } from '$lib/stores/fullDisplay'
 
-	import { locationPrediction } from '$lib/stores/locationPrediction';
-	import { nature } from '$lib/stores/nature';
-	import { json } from '@sveltejs/kit';
-	import { searchInput } from '$lib/stores/searchInput';
-	import { searchData } from '$lib/stores/searchData';
+	import { locationPrediction } from '$lib/stores/locationPrediction'
+	import { nature } from '$lib/stores/nature'
+	import { json } from '@sveltejs/kit'
+	import { searchInput } from '$lib/stores/searchInput'
+	import { searchData } from '$lib/stores/searchData'
 
 	// $: console.log($locationPrediction)
 
 	const toggleTranslation = (loc: any) => {
-		$fullDisplay = 'nonHidden';
+		$fullDisplay = 'nonHidden'
 
 		const url = loc.description
 			.replace(/\s/g, '-')
 			.replace(/[^a-zA-Z0-9-]/g, '')
-			.toLowerCase();
+			.toLowerCase()
 
-		window.location.pathname = $userName + '/LOC/' + url;
+		window.location.pathname = $userName + '/LOC/' + url
 
-		$isFlex = !$isFlex;
+		$isFlex = !$isFlex
 
 		setTimeout(() => {
-			$user_message = '';
-			$fullDisplay = 'hidden';
-		}, 600);
-	};
+			$user_message = ''
+			$fullDisplay = 'hidden'
+		}, 600)
+	}
 
 	function hasSpace(s) {
-		return s.indexOf('-') >= 0;
+		return s.indexOf('-') >= 0
 	}
 </script>
 
@@ -112,7 +112,17 @@
 						{/if}
 					</div>
 				</div>
-				<button class="sendMsgBox"
+				<button
+					class="sendMsgBox"
+					on:click={() => {
+						$fullDisplay = 'nonHidden'
+						window.location.pathname = $userName + '/HASH/' + $searchInput
+						$isFlex = !$isFlex
+						setTimeout(() => {
+							$user_message = ''
+							$fullDisplay = 'hidden'
+						}, 600)
+					}}
 					><p class="hashMsg">
 						<span class="fa fa-arrow-right  fontBox arrow" />
 						<span class=" fontBox " style="color:var(--secondaryThemeInverted)">Go To </span>
