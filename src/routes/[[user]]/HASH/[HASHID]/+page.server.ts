@@ -5,21 +5,18 @@ import { mainUser, groups } from '$db/collections'
 
 export const load = (async ({ params }) => {
 	const { user, HASHID } = params
-
-	const findUser = await mainUser.findOne({ name: user })
-	if (!findUser) {
-		return
-	}
 	const latestMessages: any = []
 
-	const findGroup = await groups.findOne({ name: HASHID })
+	const findUser = await mainUser.findOne({ name: user })
+	if (findUser) {
+		const findGroup = await groups.findOne({ name: HASHID, nature: 'HASHTAGS' })
 
-	if (!findGroup) {
-		await groups.insertOne({ name: HASHID, allUsers: [findUser._id], nature: 'HASHTAGS', createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
-			await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: res.insertedId } })
-		})
+		if (!findGroup) {
+			await groups.insertOne({ name: HASHID, allUsers: [findUser._id], nature: 'HASHTAGS', createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
+				await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: res.insertedId } })
+			})
+		}
 	}
-
 	// const againFind = await groups.findOne({ name: HASHID, allUsers: findUser._id })
 	// if (!againFind) {
 	// 	await groups.updateOne({ name: HASHID }, { $push: { allUsers: findUser._id } })
@@ -47,6 +44,14 @@ export const load = (async ({ params }) => {
 					as: 'allUsers',
 				},
 			},
+			// {
+			// 	$lookup: {
+			// 		from: 'messages',
+			// 		localField: 'messages',
+			// 		foreignField: '_id',
+			// 		as: 'messages',
+			// 	},
+			// },
 			{
 				$project: {
 					_id: 0,
@@ -60,6 +65,9 @@ export const load = (async ({ params }) => {
 			},
 		])
 		.toArray()
+
+	console.log('returnData')
+	console.log(returnData)
 
 	return {
 		status: 200,

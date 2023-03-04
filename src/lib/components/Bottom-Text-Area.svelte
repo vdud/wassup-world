@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	let rows
 	import { textAreaHeight } from '../stores/textAreaHeight'
 	import { fullScreen } from '../stores/fullScreen'
@@ -14,21 +14,21 @@
 	$: $user_message.substring(0, 999)
 	$: $user_message = `${$user_message}`
 
-	function autoResize(e) {
+	function autoResize(e: KeyboardEvent) {
 		if (e.key === 'Enter' && !e.shiftKey) {
 			e.preventDefault()
 			const formData = document.getElementById('formDataButton')
 			formData?.click()
 			$user_message = ''
 		} else {
-			const ta = document.getElementById('textarea')
-			const div = document.getElementById('ta-frame')
+			const ta: any = document.getElementById('textarea')
+			const div: any = document.getElementById('ta-frame')
 			setTimeout(function () {
 				ta.style.cssText = 'height:0px'
 				var height = Math.min(30 * 5, ta.scrollHeight)
 				div.style.cssText = 'height:' + height + 'px'
 				ta.style.cssText = 'height:' + height + 'px'
-			}, 0)
+			}, 100)
 		}
 	}
 	let members = '<members only/>'
@@ -56,12 +56,12 @@
 <div class="textArea">
 	<div class="textBox">
 		{#if $nature === 'HASHTAG' || $nature === 'LOCATION' || $canSend === true}
-			<div id="chat">
+			<div id="chat" class="switch">
 				<div id="ta-frame">
 					<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="256" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
 				</div>
 			</div>
-			<div class={$fullScreen ? 'hidden' : 'sendButton'}>
+			<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
 				{#if $nature === 'HASHTAG' || $nature === 'LOCATION'}
 					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
 				{:else}
@@ -71,13 +71,24 @@
 			<!-- </form> -->
 		{:else}
 			<div id="chat">
-				<div class="lock "><i class="fa fa-lock" /></div>
+				<div class="lock switch"><i class="fa fa-lock" /></div>
 			</div>
 		{/if}
 	</div>
 </div>
 
 <style>
+	.switch {
+		animation: fade 200ms both ease-in-out;
+	}
+	@keyframes fade {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
 	.fa-lock {
 		color: var(--primaryThemeInverted);
 	}
@@ -101,15 +112,14 @@
 	}
 
 	.lock {
-		background-color: var(--tertiaryTheme);
+		background-color: var(--primaryTheme);
 		position: absolute;
-		width: 97%;
-		height: 1.65rem;
-		padding: 0.25rem 1rem;
+		width: 100%;
+		height: 2.1rem;
 		opacity: var(--dull);
 
-		border-radius: var(--borderRadius);
-		margin-bottom: 5px;
+		border-radius: calc(var(--borderRadius) / 2);
+		margin-bottom: 6px;
 
 		display: flex;
 		align-items: center;
@@ -125,7 +135,7 @@
 		display: flex;
 		flex-direction: column-reverse;
 		height: 100%;
-		width: 100%;
+		width: calc(100% - 6px);
 
 		position: relative;
 	}

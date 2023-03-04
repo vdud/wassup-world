@@ -7,6 +7,19 @@
 	import { success } from '$lib/pusher'
 
 	$: console.log($loginResponseData)
+
+	const toggleLoc = (groupName: any) => {
+		window.location.pathname = '/LOC/' + groupName
+		$nature = 'LOCATIONS'
+	}
+	const toggleHashtag = (groupName: any) => {
+		window.location.pathname = '/HASH/' + groupName
+		$nature = 'HASHTAGS'
+	}
+	const togglePublic = (groupName: any) => {
+		window.location.pathname = groupName
+		$nature = 'PUBLIC'
+	}
 </script>
 
 <div class="middleData">
@@ -41,21 +54,21 @@
 						<div class="noMoreBox" />
 						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 					{:else if $loginResponseData.success === true}
-						{#each $loginResponseData.data.formatedLOCdata as group}
-							<a href="/LOC/{group.name}" class="locBox">
+						{#each $loginResponseData.data.formatedLOCdata as { name, latestMessage, updatedAt }}
+							<button on:click={toggleLoc.bind(globalThis, name)} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2">{group.name}</p>
+									<p class="textLoc text2">{name}</p>
 								</div>
-								{#if group.latestMessage === undefined}
+								{#if latestMessage === undefined}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox">SEND MESSAGE</span><span class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{latestMessage}</span></p></div>
 								{/if}
 
 								<div class="locBoxItems item3">
-									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
+									<p class="textLoc text3">{timeSince(updatedAt)}</p>
 								</div>
-							</a>
+							</button>
 						{/each}
 					{/if}
 				</div>
@@ -70,7 +83,7 @@
 						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedHASHTAGSdata as group}
-							<a href="/LOC/{group.name}" class="locBox">
+							<button on:click={toggleHashtag.bind(globalThis, group.name)} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{group.name}</p>
 								</div>
@@ -83,7 +96,7 @@
 								<div class="locBoxItems item3">
 									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
 								</div>
-							</a>
+							</button>
 						{/each}
 					{/if}
 				</div>
@@ -98,7 +111,7 @@
 						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedPUBLICdata as group}
-							<a href="/LOC/{group.name}" class="locBox">
+							<button on:click={togglePublic.bind(globalThis, group.name)} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{group.name}</p>
 								</div>
@@ -111,7 +124,7 @@
 								<div class="locBoxItems item3">
 									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
 								</div>
-							</a>
+							</button>
 						{/each}
 					{/if}
 				</div>

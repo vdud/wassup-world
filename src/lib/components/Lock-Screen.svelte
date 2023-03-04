@@ -2,10 +2,31 @@
 	import { userName } from '$lib/stores/userName'
 	import { loginResponseData } from '$lib/stores/loginResponseData'
 	import { isLocked } from '$lib/stores/isLocked'
+	import { onMount } from 'svelte'
 	import { json } from '@sveltejs/kit'
 	$: if ($userName) $userName = $userName.toLowerCase()
 
+	onMount(() => {
+		const savedDataString = localStorage.getItem('formData')
+		const button = document.getElementById('submit')
+		if (savedDataString) {
+			try {
+				// Parse the saved data from local storage
+				const { $userName: savedUserName } = JSON.parse(savedDataString)
+				if (savedUserName != '') {
+					// button?.click()
+					$userName = savedUserName
+					unLock()
+				}
+			} catch (err) {
+				// Handle any errors that occurred while parsing the saved data
+				console.error(err)
+			}
+		}
+	})
+
 	async function unLock() {
+		localStorage.setItem('formData', JSON.stringify({ $userName }))
 		$isLocked = false
 
 		if ($userName != '') {
