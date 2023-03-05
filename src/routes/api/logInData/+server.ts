@@ -54,7 +54,7 @@ export const POST = (async ({ request }) => {
 			])
 			.toArray()
 
-		console.log(formattedUserData)
+		// console.log(formattedUserData)
 
 		const formatedPUBLICdata = () => {
 			if (formattedUserData.length === 0) {
@@ -81,6 +81,5 @@ export const POST = (async ({ request }) => {
 		}
 
 		return json({ success: true, userName_id: findUser._id, data: { formatedPUBLICdata: formatedPUBLICdata(), formatedHASHTAGSdata: formatedHASHTAGSdata(), formatedLOCdata: formatedLOCdata() } })
-		// return json({ success: true, data: formattedUserData[0] })
 	}
 }) satisfies RequestHandler

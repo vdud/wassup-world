@@ -9,6 +9,8 @@
 	import { json } from '@sveltejs/kit'
 	import { searchInput } from '$lib/stores/searchInput'
 	import { searchData } from '$lib/stores/searchData'
+	import { userName_id } from '$lib/stores/userName_id'
+	import { publicReciever_Id } from '$lib/stores/publicReciever_Id'
 
 	// $: console.log($locationPrediction)
 
@@ -50,7 +52,7 @@
 									<button
 										on:click={() => {
 											$fullDisplay = 'nonHidden'
-											window.location.pathname = $userName + '/' + user.name
+											window.location.pathname = $userName_id + '/PUB/' + user._id
 											$isFlex = !$isFlex
 											setTimeout(() => {
 												$user_message = ''
@@ -78,9 +80,21 @@
 					</div>
 					<button
 						class="sendMsgBox"
-						on:click={() => {
+						on:click={async () => {
 							$fullDisplay = 'nonHidden'
-							window.location.pathname = $userName + '/' + $searchInput
+							const res = await fetch('/api/publicReciever_Id', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+								},
+								body: JSON.stringify({ data: $searchInput }),
+							})
+							const response = await res.json()
+							if (res.ok) {
+								window.location.pathname = $userName_id + '/PUB/' + response.publicReciever_Id
+							} else if (!res.ok) {
+								alert(response.message)
+							}
 							$isFlex = !$isFlex
 							setTimeout(() => {
 								$user_message = ''

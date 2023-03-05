@@ -15,7 +15,7 @@
 		$nature = 'HASHTAGS'
 	}
 	const togglePublic = (groupName: any) => {
-		window.location.pathname = groupName
+		window.location.pathname = '/PUB/' + groupName
 		$nature = 'PUBLIC'
 	}
 </script>
@@ -58,7 +58,7 @@
 									<p class="textLoc text2">{name}</p>
 								</div>
 								{#if latestMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox">SEND MESSAGE</span><span class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style="background-color:var(--secOptDark)">SEND MESSAGE</span><span style="background-color:var(--secOptDark)" class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{latestMessage}</span></p></div>
 								{/if}
@@ -86,7 +86,7 @@
 									<p class="textLoc text2">{group.name}</p>
 								</div>
 								{#if group.latestMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox">SEND MESSAGE</span><span class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style="background-color:var(--primary)">SEND MESSAGE</span><span style="background-color:var(--primary)" class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
 								{/if}
@@ -114,7 +114,7 @@
 									<p class="textLoc text2">{group.name}</p>
 								</div>
 								{#if group.latestMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox">SEND MESSAGE</span><span class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize); "><span class="sendBox" style="background-color:var(--secondary)">SEND MESSAGE</span><span style="background-color:var(--secondary)" class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
 								{/if}
@@ -139,7 +139,6 @@
 		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
 		border-radius: calc(var(--borderRadius) / 3);
 		color: var(--primaryTheme);
-		background-color: var(--secOptLight);
 		box-shadow: var(--boxShadows);
 		margin: calc(var(--averageMargin) * -0.5);
 		scale: 0.9;
@@ -149,7 +148,6 @@
 		color: var(--primaryTheme);
 		font-size: calc(var(--fontSize) / 1.2);
 		margin-left: calc(var(--averageMargin) / 2);
-		background-color: var(--secOptLight);
 		box-shadow: var(--boxShadows);
 		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
 		border-radius: calc(var(--borderRadius) / 3);

@@ -6,6 +6,7 @@
 	import { onMount } from 'svelte'
 	onMount(() => {
 		$userGroup_id = JSON.parse(data.body.data)._id
+		console.log('GroupId = ' + $userGroup_id)
 	})
 </script>
 
