@@ -7,44 +7,35 @@ import { ObjectId } from 'mongodb'
 export const load = (async ({ params }) => {
 	const { user, PUB } = params
 
+	console.log(user)
+	console.log(PUB)
+
 	if (user) {
 		const userSender = await mainUser.findOne({ _id: new ObjectId(user) })
-		console.log(userSender)
-		if (!userSender) {
+		const userReciever = await mainUser.findOne({ _id: new ObjectId(PUB) })
+
+		if (!userSender || !userReciever) {
 			return
 		}
-		const latestMessages: any = []
-		const userReciever = await mainUser.findOne({ _id: new ObjectId(PUB) })
-		console.log(userReciever)
-		// if (!userReciever) {
-		// 	const newUserReciever = await mainUser.insertOne({
-		// 		name: PUB.replace(/\s/g, '')
-		// 			.replace(/[^a-zA-Z0-9-]/g, '')
-		// 			.toLowerCase(),
-		// 	})
 
-		// 	await groups.insertOne({ name: `${userSender.name};${PUB}`, allUsers: [userSender._id, newUserReciever.insertedId], nature: 'PUBLIC', createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
-		// 		await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: res.insertedId } })
-		// 		await mainUser.updateOne({ _id: newUserReciever.insertedId }, { $push: { allGroups: res.insertedId } })
-		// 	})
-		// } else
-		if (userReciever) {
-			const findGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}` })
-			const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}` })
+		const findFirstGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}` })
+		const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}` })
 
-			if (!findGroup && !findSecondGroup) {
-				await groups.insertOne({ name: `${userSender.name};${userReciever.name}`, allUsers: [userSender._id, userReciever._id], nature: 'PUBLIC', createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
-					await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: res.insertedId } })
-					await mainUser.updateOne({ _id: userReciever._id }, { $push: { allGroups: res.insertedId } })
-				})
-			}
-		}
-		const userRecieverAgain = await mainUser.findOne({ _id: new ObjectId(user) })
+		if (!findFirstGroup && !findSecondGroup) {
+			const newGroup = await groups.insertOne({
+				name: `${userSender.name};${userReciever.name}`,
+				allUsers: [userSender._id, userReciever._id],
+				nature: 'PUBLIC',
+				createdAt: new Date(),
+				updatedAt: new Date(),
+			})
 
-		if (userRecieverAgain) {
+			await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: newGroup.insertedId } })
+			await mainUser.updateOne({ _id: userReciever._id }, { $push: { allGroups: newGroup.insertedId } })
+
 			const returnData = await groups
 				.aggregate([
-					{ $match: { name: `${userRecieverAgain.name};${userSender.name}` } },
+					{ $match: { _id: newGroup.insertedId } },
 					{
 						$lookup: {
 							from: 'user',
@@ -67,39 +58,69 @@ export const load = (async ({ params }) => {
 				])
 				.toArray()
 
-			if (returnData.length === 0) {
-				const returnData = await groups
-					.aggregate([
-						{ $match: { name: `${userSender.name};${userRecieverAgain.name}` } },
-						{
-							$lookup: {
-								from: 'user',
-								localField: 'allUsers',
-								foreignField: '_id',
-								as: 'allUsers',
-							},
+			return {
+				status: 200,
+				body: {
+					data: JSON.stringify(returnData[0]),
+				},
+			}
+		} else if (findFirstGroup) {
+			const returnData = await groups
+				.aggregate([
+					{ $match: { _id: findFirstGroup._id } },
+					{
+						$lookup: {
+							from: 'user',
+							localField: 'allUsers',
+							foreignField: '_id',
+							as: 'allUsers',
 						},
-						{
-							$project: {
+					},
+					{
+						$project: {
+							_id: 1,
+							name: 1,
+							messages: 1,
+							allUsers: {
 								_id: 1,
 								name: 1,
-								messages: 1,
-								allUsers: {
-									_id: 1,
-									name: 1,
-								},
 							},
 						},
-					])
-					.toArray()
-
-				return {
-					status: 200,
-					body: {
-						data: JSON.stringify(returnData[0]),
 					},
-				}
+				])
+				.toArray()
+
+			return {
+				status: 200,
+				body: {
+					data: JSON.stringify(returnData[0]),
+				},
 			}
+		} else if (findSecondGroup) {
+			const returnData = await groups
+				.aggregate([
+					{ $match: { _id: findSecondGroup._id } },
+					{
+						$lookup: {
+							from: 'user',
+							localField: 'allUsers',
+							foreignField: '_id',
+							as: 'allUsers',
+						},
+					},
+					{
+						$project: {
+							_id: 1,
+							name: 1,
+							messages: 1,
+							allUsers: {
+								_id: 1,
+								name: 1,
+							},
+						},
+					},
+				])
+				.toArray()
 
 			return {
 				status: 200,
@@ -110,35 +131,37 @@ export const load = (async ({ params }) => {
 		}
 	}
 
-	const returnData = await groups
-		.aggregate([
-			{ $match: { name: PUB } },
-			{
-				$lookup: {
-					from: 'user',
-					localField: 'allUsers',
-					foreignField: '_id',
-					as: 'allUsers',
-				},
-			},
-			{
-				$project: {
-					_id: 1,
-					name: 1,
-					messages: 1,
-					allUsers: {
-						_id: 1,
-						name: 1,
+	if (!user) {
+		const returnData = await groups
+			.aggregate([
+				{ $match: { name: PUB, nature: 'PUBLIC' } },
+				{
+					$lookup: {
+						from: 'user',
+						localField: 'allUsers',
+						foreignField: '_id',
+						as: 'allUsers',
 					},
 				},
-			},
-		])
-		.toArray()
+				{
+					$project: {
+						_id: 1,
+						name: 1,
+						messages: 1,
+						allUsers: {
+							_id: 1,
+							name: 1,
+						},
+					},
+				},
+			])
+			.toArray()
 
-	return {
-		status: 200,
-		body: {
-			data: JSON.stringify(returnData[0]),
-		},
+		return {
+			status: 200,
+			body: {
+				data: JSON.stringify(returnData[0]),
+			},
+		}
 	}
 }) as PageServerLoad
