@@ -1,39 +1,38 @@
 <script lang="ts">
-	import { currentLayoutPage } from '$lib/stores/currentLayoutPage';
-	import { fullDisplay } from '$lib/stores/fullDisplay';
-	import { isFlex } from '$lib/stores/isFlex';
-	import { isLocked } from '$lib/stores/isLocked';
-	import { userName } from '$lib/stores/userName';
-	import { user_message } from '$lib/stores/user_message';
+	import { currentLayoutPage } from '$lib/stores/currentLayoutPage'
+	import { fullDisplay } from '$lib/stores/fullDisplay'
+	import { isFlex } from '$lib/stores/isFlex'
+	import { isLocked } from '$lib/stores/isLocked'
+	import { userName } from '$lib/stores/userName'
+	import { user_message } from '$lib/stores/user_message'
 
-	import { nature } from '$lib/stores/nature';
-	import { searchInput } from '$lib/stores/searchInput';
-	import { locationPrediction } from '$lib/stores/locationPrediction';
-	import { json } from '@sveltejs/kit';
+	import { nature } from '$lib/stores/nature'
+	import { searchInput } from '$lib/stores/searchInput'
+	import { locationPrediction } from '$lib/stores/locationPrediction'
+	import { json } from '@sveltejs/kit'
 	// import { searchGET } from '$lib/stores/pusher'
-	import { onDestroy, onMount } from 'svelte';
-	import { searchData } from '$lib/stores/searchData';
+	import { onDestroy, onMount } from 'svelte'
+	import { searchData } from '$lib/stores/searchData'
 
-	console.log($locationPrediction);
 	$: $searchInput = $searchInput
 		.replace(/\s/g, '-')
 		.replace(/[^a-zA-Z0-9-]/g, '')
-		.toLowerCase();
+		.toLowerCase()
 
-	let name = 'world';
+	let name = 'world'
 
 	const toggle = () => {
-		$fullDisplay = 'nonHidden';
+		$fullDisplay = 'nonHidden'
 
-		$isFlex = !$isFlex;
+		$isFlex = !$isFlex
 
 		setTimeout(() => {
 			// $user_message = ''
-			$fullDisplay = 'hidden';
-		}, 600);
-	};
+			$fullDisplay = 'hidden'
+		}, 600)
+	}
 
-	let response: any;
+	let response: any
 	// const handleClick = () => {
 	// 	if ($searchInput != '') {
 	// 		// searchGET({ searchData: $searchInput })
@@ -69,7 +68,7 @@
 				},
 				types: [],
 			},
-		];
+		]
 	}
 
 	async function handleClick(event: any) {
@@ -80,25 +79,23 @@
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ data: $searchInput }),
-			});
-			const response = await res.json();
-			console.log(response.data);
-			$searchData = response.data;
+			})
+			const response = await res.json()
+			$searchData = response.data
 
 			if (!res.ok) {
-				alert('failed to search data');
-				alert(response.message);
+				alert('failed to search data')
+				alert(response.message)
 			}
 
-			const service = new google.maps.places.AutocompleteService();
+			const service = new google.maps.places.AutocompleteService()
 
-			console.log(service);
 			try {
 				const predictions = service.getPlacePredictions({ input: $searchInput }).then((predictions: any) => {
-					$locationPrediction = predictions.predictions;
-				});
+					$locationPrediction = predictions.predictions
+				})
 			} catch (e) {
-				console.log(e);
+				console.log(e)
 			}
 		} else {
 			$locationPrediction = [
@@ -110,7 +107,7 @@
 					},
 					types: ['NOT FOUND'],
 				},
-			];
+			]
 		}
 	}
 </script>
@@ -119,7 +116,7 @@
 	<button
 		class="textBox"
 		on:click={() => {
-			$isLocked = !$isLocked;
+			$isLocked = !$isLocked
 		}}>
 		<h1 class="headerText">
 			<span style="color: var(--secondary)">wassup </span><span>{$userName}</span>{#if $userName != ''}<span>!</span>{/if}

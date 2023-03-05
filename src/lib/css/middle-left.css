@@ -85,6 +85,8 @@
 	font-family: UBold;
 	color: var(--primary);
 	font-size: calc(var(--fontSize) * 1);
+
+	width: max-content;
 }
 .arrow {
 	background-color: var(--secondaryThemeInverted);

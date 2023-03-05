@@ -57,7 +57,7 @@ export const load = (async ({ params }) => {
 			// },
 			{
 				$project: {
-					_id: 0,
+					_id: 1,
 					name: 1,
 					messages: 1,
 					allUsers: {

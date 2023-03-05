@@ -47,7 +47,6 @@
 			return
 		}
 		const time = new Date()
-		console.log($user_message)
 		// socket.emit('sendSingle', message, time, $userName, $reciever, $currentGroupId)
 		$user_message = ''
 	}

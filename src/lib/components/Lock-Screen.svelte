@@ -4,6 +4,7 @@
 	import { isLocked } from '$lib/stores/isLocked'
 	import { onMount } from 'svelte'
 	import { json } from '@sveltejs/kit'
+	import { userName_id } from '$lib/stores/userName_id'
 	$: if ($userName) $userName = $userName.toLowerCase()
 
 	onMount(() => {
@@ -40,6 +41,7 @@
 			const response = await res.json()
 			if (res.ok) {
 				$loginResponseData = response
+				$userName_id = response.userName_id
 			} else if (!res.ok) {
 				alert(response.message)
 			}

@@ -14,13 +14,16 @@ export const load = (async ({ params }) => {
 		const latestMessages: any = []
 		const userReciever = await mainUser.findOne({ name: PUB })
 		if (!userReciever) {
-			await mainUser.insertOne({ name: PUB, createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
-				await groups.insertOne({ name: `${userSender.name};${PUB}`, allUsers: [userSender._id, res.insertedId], nature: 'PUBLIC', createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
-					await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: res.insertedId } })
-					await mainUser.updateOne({ _id: res.insertedId }, { $push: { allGroups: res.insertedId } })
-				})
+			// /[^A-Za-z\s]/g,''
+			const newUserReciever = await mainUser.insertOne({
+				name: PUB.toLowerCase().replace(/\^A-Za-z\s/g, ''),
 			})
-		} else {
+
+			await groups.insertOne({ name: `${userSender.name};${PUB}`, allUsers: [userSender._id, newUserReciever.insertedId], nature: 'PUBLIC', createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
+				await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: res.insertedId } })
+				await mainUser.updateOne({ _id: newUserReciever.insertedId }, { $push: { allGroups: res.insertedId } })
+			})
+		} else if (userReciever) {
 			const findGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}` })
 			const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}` })
 
@@ -47,7 +50,7 @@ export const load = (async ({ params }) => {
 					},
 					{
 						$project: {
-							_id: 0,
+							_id: 1,
 							name: 1,
 							messages: 1,
 							allUsers: {
@@ -73,7 +76,7 @@ export const load = (async ({ params }) => {
 						},
 						{
 							$project: {
-								_id: 0,
+								_id: 1,
 								name: 1,
 								messages: 1,
 								allUsers: {
@@ -84,6 +87,13 @@ export const load = (async ({ params }) => {
 						},
 					])
 					.toArray()
+
+				return {
+					status: 200,
+					body: {
+						data: JSON.stringify(returnData[0]),
+					},
+				}
 			}
 
 			return {
@@ -108,7 +118,7 @@ export const load = (async ({ params }) => {
 			},
 			{
 				$project: {
-					_id: 0,
+					_id: 1,
 					name: 1,
 					messages: 1,
 					allUsers: {

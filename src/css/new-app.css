@@ -124,12 +124,13 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #444;
+	background: var(--tertiaryTheme);
+	border-radius: 2px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+	background: var(--tertiaryThemeInverted);
 }
 
 .absoluteBox {

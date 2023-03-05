@@ -7,14 +7,14 @@ export const POST = (async ({ request }) => {
 	const { data } = await request.json()
 	const userName = data
 
-	const fundUser = await mainUser.findOne({ name: userName })
-	if (!fundUser) {
-		await mainUser.insertOne({ name: userName, allGroups: [] })
-		return json({ success: true, data: { formatedPUBLICdata: [], formatedHASHTAGSdata: [], formatedLOCdata: [] } })
+	const findUser = await mainUser.findOne({ name: userName })
+	if (!findUser) {
+		const newUser = await mainUser.insertOne({ name: userName, allGroups: [] })
+		return json({ success: true, userName_id: newUser.insertedId, data: { formatedPUBLICdata: [], formatedHASHTAGSdata: [], formatedLOCdata: [] } })
 	} else {
 		const formattedUserData = await mainUser
 			.aggregate([
-				{ $match: { _id: fundUser._id } },
+				{ $match: { _id: findUser._id } },
 				{
 					$lookup: {
 						from: 'groups',
@@ -25,7 +25,7 @@ export const POST = (async ({ request }) => {
 				},
 				{
 					$project: {
-						_id: 0,
+						_id: 1,
 						name: 1,
 						allGroups: {
 							_id: 1,
@@ -54,7 +54,7 @@ export const POST = (async ({ request }) => {
 			])
 			.toArray()
 
-		// console.log(formattedUserData)
+		console.log(formattedUserData)
 
 		const formatedPUBLICdata = () => {
 			if (formattedUserData.length === 0) {
@@ -80,7 +80,7 @@ export const POST = (async ({ request }) => {
 			return locData
 		}
 
-		return json({ success: true, data: { formatedPUBLICdata: formatedPUBLICdata(), formatedHASHTAGSdata: formatedHASHTAGSdata(), formatedLOCdata: formatedLOCdata() } })
+		return json({ success: true, userName_id: findUser._id, data: { formatedPUBLICdata: formatedPUBLICdata(), formatedHASHTAGSdata: formatedHASHTAGSdata(), formatedLOCdata: formatedLOCdata() } })
 		// return json({ success: true, data: formattedUserData[0] })
 	}
 }) satisfies RequestHandler

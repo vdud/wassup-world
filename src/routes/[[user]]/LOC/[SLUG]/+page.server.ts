@@ -1,4 +1,3 @@
-import { json } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
 import { mainUser, groups } from '$db/collections'
@@ -12,7 +11,6 @@ export const load = (async ({ params }) => {
 		if (!findUser) {
 			return
 		}
-		const latestMessages: any = []
 
 		const findGroup = await groups.findOne({ name: SLUG })
 		if (!findGroup) {

@@ -1,7 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types'
-
 	export let data: PageData
 
-	console.log(JSON.parse(data.body.data))
+	import { userGroup_id } from '$lib/stores/userGroup_id'
+	import { onMount } from 'svelte'
+	onMount(() => {
+		$userGroup_id = JSON.parse(data.body.data)._id
+	})
 </script>

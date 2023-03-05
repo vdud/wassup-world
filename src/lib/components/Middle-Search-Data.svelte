@@ -9,6 +9,7 @@
 	import { json } from '@sveltejs/kit'
 	import { searchInput } from '$lib/stores/searchInput'
 	import { searchData } from '$lib/stores/searchData'
+	import { userName_id } from '$lib/stores/userName_id'
 
 	// $: console.log($locationPrediction)
 
@@ -30,8 +31,8 @@
 		}, 600)
 	}
 
-	function hasSpace(s) {
-		return s.indexOf('-') >= 0
+	function hasSpace(searchInput: string) {
+		return searchInput.indexOf('-') >= 0
 	}
 </script>
 
@@ -47,14 +48,24 @@
 						<div class="flexContact">
 							{#if $searchData.searchUserData.length > 0}
 								{#each $searchData.searchUserData as user}
-									<div class="contactBox">
+									<button
+										on:click={() => {
+											$fullDisplay = 'nonHidden'
+											window.location.pathname = $userName + '/' + user.name
+											$isFlex = !$isFlex
+											setTimeout(() => {
+												$user_message = ''
+												$fullDisplay = 'hidden'
+											}, 600)
+										}}
+										class="contactBox">
 										<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
 										<div class="cBoxText">
 											<p class="cText" style="color: var(--secondary)">
 												{user.name}
 											</p>
 										</div>
-									</div>
+									</button>
 								{/each}
 							{:else}
 								<div class="contactBox">
@@ -69,12 +80,12 @@
 					<button
 						class="sendMsgBox"
 						on:click={() => {
-							// $fullDisplay = 'nonHidden'
+							$fullDisplay = 'nonHidden'
 							window.location.pathname = $userName + '/' + $searchInput
 							$isFlex = !$isFlex
 							setTimeout(() => {
 								$user_message = ''
-								// $fullDisplay = 'hidden'
+								$fullDisplay = 'hidden'
 							}, 600)
 						}}>
 						<p class="hashMsg">
@@ -103,14 +114,24 @@
 					<div class="flexContact">
 						{#if $searchData.searchGroupData.length > 0}
 							{#each $searchData.searchGroupData as group}
-								<div class="contactBox">
+								<button
+									on:click={() => {
+										$fullDisplay = 'nonHidden'
+										window.location.pathname = '/HASH/' + group.name
+										$isFlex = !$isFlex
+										setTimeout(() => {
+											$user_message = ''
+											$fullDisplay = 'hidden'
+										}, 600)
+									}}
+									class="contactBox">
 									<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
 									<div class="cBoxText">
 										<p class="cText" style="color: var(--secondary)">
 											{group.name}
 										</p>
 									</div>
-								</div>
+								</button>
 							{/each}
 						{:else}
 							<div class="contactBox">
@@ -125,12 +146,12 @@
 				<button
 					class="sendMsgBox"
 					on:click={() => {
-						// $fullDisplay = 'nonHidden'
+						$fullDisplay = 'nonHidden'
 						window.location.pathname = $userName + '/HASH/' + $searchInput
 						$isFlex = !$isFlex
 						setTimeout(() => {
 							$user_message = ''
-							// $fullDisplay = 'hidden'
+							$fullDisplay = 'hidden'
 						}, 600)
 					}}
 					><p class="hashMsg">
