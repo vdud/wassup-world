@@ -9,7 +9,6 @@
 	import { json } from '@sveltejs/kit'
 	import { searchInput } from '$lib/stores/searchInput'
 	import { searchData } from '$lib/stores/searchData'
-	import { userName_id } from '$lib/stores/userName_id'
 
 	// $: console.log($locationPrediction)
 
