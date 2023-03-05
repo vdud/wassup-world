@@ -54,7 +54,7 @@ export const POST = (async ({ request }) => {
 			])
 			.toArray()
 
-		console.log(formattedUserData)
+		// console.log(formattedUserData)
 
 		const formatedPUBLICdata = () => {
 			if (formattedUserData.length === 0) {

@@ -2,4 +2,7 @@
 	import type { PageData } from './$types'
 
 	export let data: PageData
+
+	console.log(JSON.parse(data.body.data))
+	console.log(data)
 </script>

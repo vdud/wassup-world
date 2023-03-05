@@ -66,7 +66,17 @@
 							{/if}
 						</div>
 					</div>
-					<button class="sendMsgBox">
+					<button
+						class="sendMsgBox"
+						on:click={() => {
+							// $fullDisplay = 'nonHidden'
+							window.location.pathname = $userName + '/' + $searchInput
+							$isFlex = !$isFlex
+							setTimeout(() => {
+								$user_message = ''
+								// $fullDisplay = 'hidden'
+							}, 600)
+						}}>
 						<p class="hashMsg">
 							<span class="fa fa-arrow-right  fontBox arrow" />
 							<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
@@ -115,12 +125,12 @@
 				<button
 					class="sendMsgBox"
 					on:click={() => {
-						$fullDisplay = 'nonHidden'
+						// $fullDisplay = 'nonHidden'
 						window.location.pathname = $userName + '/HASH/' + $searchInput
 						$isFlex = !$isFlex
 						setTimeout(() => {
 							$user_message = ''
-							$fullDisplay = 'hidden'
+							// $fullDisplay = 'hidden'
 						}, 600)
 					}}
 					><p class="hashMsg">

@@ -17,6 +17,8 @@ export const load = (async ({ params }) => {
 			})
 		}
 	}
+
+	// // JOIN GROUP ON VISIT //////////////////////////
 	// const againFind = await groups.findOne({ name: HASHID, allUsers: findUser._id })
 	// if (!againFind) {
 	// 	await groups.updateOne({ name: HASHID }, { $push: { allUsers: findUser._id } })
@@ -33,6 +35,7 @@ export const load = (async ({ params }) => {
 	// }
 
 	// const returnData = await groups.findOne({ name: HASHID })
+
 	const returnData = await groups
 		.aggregate([
 			{ $match: { name: HASHID } },
@@ -72,7 +75,7 @@ export const load = (async ({ params }) => {
 	return {
 		status: 200,
 		body: {
-			data: JSON.stringify(returnData),
+			data: JSON.stringify(returnData[0]),
 		},
 	}
 }) as PageServerLoad
