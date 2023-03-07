@@ -9,26 +9,40 @@
 	import { userName_id } from '$lib/stores/userName_id'
 	import { canSend } from '$lib/stores/canSend'
 	import { pusher } from '$lib/pusher'
+	import { currentPage } from '$lib/stores/currentPage'
+	import { userName } from '$lib/stores/userName'
+	import { isPUBLIC } from '$lib/stores/isPUBLIC'
+	import { isPUBLICgroupData } from '$lib/stores/isPUBLICgroupData'
 
+	$canSend = false
+
+	$isPUBLIC = true
 	onMount(() => {
-		$canSend = true
+		$currentPage = 'PUB'
 		$userGroup_id = JSON.parse(data.body.data)._id
 		const bodyData = JSON.parse(data.body.data)
+		$isPUBLICgroupData = JSON.parse(data.body.data)
+
+		console.log('JSON.parse(data.body.data)', JSON.parse(data.body.data))
 
 		pusher.subscribe(JSON.parse(data.body.data)._id).bind('inserted', (data: any) => {
 			console.log(data.message)
 			console.log(data)
 		})
-		bodyData.allUsers.forEach((user: any) => {
+
+		JSON.parse(data.body.data).allUsers.forEach((user: any) => {
 			console.log(user._id)
 			console.log($userName_id)
 			if (user._id !== $userName_id) {
 				$canSendReciever = user._id
+			} else {
+				$canSend = true
 			}
 		})
 	})
 
 	onDestroy(() => {
+		$currentPage = ''
 		$canSend = false
 	})
 </script>

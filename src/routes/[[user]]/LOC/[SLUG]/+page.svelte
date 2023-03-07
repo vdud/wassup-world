@@ -3,15 +3,23 @@
 	export let data: PageData
 
 	import { userGroup_id } from '$lib/stores/userGroup_id'
-	import { onMount } from 'svelte'
+	import { onMount, onDestroy } from 'svelte'
 	import { pusher } from '$lib/pusher'
+	import { canSend } from '$lib/stores/canSend'
+	import { currentPage } from '$lib/stores/currentPage'
+	import { isPUBLIC } from '$lib/stores/isPUBLIC'
 	onMount(() => {
+		$currentPage = 'LOC'
 		$userGroup_id = JSON.parse(data.body.data)._id
 
 		pusher.subscribe($userGroup_id).bind('inserted', (data: any) => {
 			console.log(data.message)
 			console.log(data)
 		})
+	})
+
+	onDestroy(() => {
+		$currentPage = ''
 	})
 </script>
 

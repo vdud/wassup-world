@@ -15,6 +15,7 @@
 	import { pusher } from '$lib/pusher'
 	import Pusher from 'pusher-js'
 	import { userGroup_id } from '$lib/stores/userGroup_id'
+	import { currentPage } from '$lib/stores/currentPage'
 
 	// $: $user_message.substring(0, 999)
 	// $: $user_message = `${$user_message}`
@@ -40,6 +41,7 @@
 		}
 	}
 	const socketWorker = async () => {
+		console.log('socketWorker')
 		const message = $user_message.trim().slice(0, 999)
 
 		console.log(message)
@@ -64,6 +66,7 @@
 		$user_message = ''
 	}
 	const singleSocketWorker = async () => {
+		console.log('singleSocketWorker')
 		const message = $user_message.trim().slice(0, 999)
 		console.log(message)
 		if (message === '') {
@@ -90,7 +93,7 @@
 
 <div class="textArea">
 	<div class="textBox">
-		{#if $nature === 'HASHTAG' || $nature === 'LOCATION' || $canSend === true}
+		{#if $currentPage === 'HASH' || $currentPage === 'LOC' || $canSend === true}
 			<div id="chat" class="switch">
 				<div id="ta-frame">
 					<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="999" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />

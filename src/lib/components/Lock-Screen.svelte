@@ -5,7 +5,11 @@
 	import { onMount } from 'svelte'
 	import { json } from '@sveltejs/kit'
 	import { userName_id } from '$lib/stores/userName_id'
+	import { isPUBLICgroupData } from '$lib/stores/isPUBLICgroupData'
+	import { isPUBLIC } from '$lib/stores/isPUBLIC'
 	import { userGroup_id } from '$lib/stores/userGroup_id'
+	import { canSend } from '$lib/stores/canSend'
+	import { canSendReciever } from '$lib/stores/canSendReciever'
 	$: if ($userName) $userName = $userName.toLowerCase()
 
 	import { pusher } from '$lib/pusher'
@@ -49,6 +53,19 @@
 				pusher.subscribe($userName_id).bind('inserted', (data: any) => {
 					console.log(data.message)
 				})
+				if ($isPUBLIC === true) {
+					$isPUBLICgroupData.allUsers.forEach((user: any) => {
+						// console.log(user._id)
+						// console.log($userName_id)
+						if (user._id !== $userName_id) {
+							$canSendReciever = user._id
+							$canSend = false
+						} else if (user._id === $userName_id) {
+							$canSend = true
+							// console.log('$canSend', $canSend)
+						}
+					})
+				}
 				console.log($userName_id)
 
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
