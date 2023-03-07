@@ -4,9 +4,14 @@
 
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { onMount } from 'svelte'
+	import { pusher } from '$lib/pusher'
 	onMount(() => {
 		$userGroup_id = JSON.parse(data.body.data)._id
-		console.log('GroupId = ' + $userGroup_id)
+
+		pusher.subscribe($userGroup_id).bind('inserted', (data: any) => {
+			console.log(data.message)
+			console.log(data)
+		})
 	})
 </script>
 

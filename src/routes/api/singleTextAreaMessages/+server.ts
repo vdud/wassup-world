@@ -10,11 +10,14 @@ const pusher = new Pusher({
 })
 
 export const POST = (async ({ request }) => {
-	const { message, $userGroup_id } = await request.json()
+	const { message, $canSendReciever, $userGroup_id } = await request.json()
 
 	console.log(message)
-	console.log($userGroup_id)
+	console.log($canSendReciever)
 
+	pusher.trigger($canSendReciever, 'inserted', {
+		message: message,
+	})
 	pusher.trigger($userGroup_id, 'inserted', {
 		message: message,
 	})

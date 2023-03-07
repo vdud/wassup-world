@@ -1,16 +1,16 @@
 <script lang="ts">
 	let rows
-	import { textAreaHeight } from '../stores/textAreaHeight'
-	import { fullScreen } from '../stores/fullScreen'
-	import { canSend } from '../stores/canSend'
-	import { nature } from '../stores/nature'
-	import { userName } from '../stores/userName'
+	import { textAreaHeight } from '$lib/stores/textAreaHeight'
+	import { fullScreen } from '$lib/stores/fullScreen'
+	import { canSend } from '$lib/stores/canSend'
+	import { nature } from '$lib/stores/nature'
+	import { userName } from '$lib/stores/userName'
 	import { onDestroy, onMount } from 'svelte'
-	import { currentGroupMembers } from '../stores/currentGroupMembers'
-	import { currentGroupId } from '../stores/currentGroupId'
-	import { user_message } from '../stores/user_message'
-	import { reciever } from '../stores/reciever'
-	import { currentGroupData } from '../stores/currentGroupData'
+	import { currentGroupMembers } from '$lib/stores/currentGroupMembers'
+	import { currentGroupId } from '$lib/stores/currentGroupId'
+	import { user_message } from '$lib/stores/user_message'
+	import { canSendReciever } from '$lib/stores/canSendReciever'
+	import { currentGroupData } from '$lib/stores/currentGroupData'
 
 	import { pusher } from '$lib/pusher'
 	import Pusher from 'pusher-js'
@@ -22,7 +22,11 @@
 	function autoResize(e: KeyboardEvent) {
 		if (e.key === 'Enter' && !e.shiftKey) {
 			e.preventDefault()
-			socketWorker()
+			if ($canSend === true) {
+				singleSocketWorker()
+			} else {
+				socketWorker()
+			}
 			$user_message = ''
 		} else {
 			const ta: any = document.getElementById('textarea')
@@ -52,7 +56,28 @@
 		const response = await res.json()
 		console.log(response)
 		if (!res.ok) {
-			alert('failed to search data')
+			alert(response.message)
+		}
+
+		$user_message = ''
+	}
+	const singleSocketWorker = async () => {
+		const message = $user_message.trim().slice(0, 999)
+		if (message === '') {
+			return
+		}
+		const time = new Date()
+
+		const res = await fetch('/api/singleTextAreaMessages', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ message, $canSendReciever, $userGroup_id }),
+		})
+		const response = await res.json()
+		console.log(response)
+		if (!res.ok) {
 			alert(response.message)
 		}
 
@@ -68,9 +93,15 @@
 					<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="999" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
 				</div>
 			</div>
-			<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
-				<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
-			</div>
+			{#if $canSend === false}
+				<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
+					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
+				</div>
+			{:else if $canSend === true}
+				<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
+					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={singleSocketWorker} />
+				</div>
+			{/if}
 		{:else}
 			<div id="chat">
 				<div class="lock switch"><i class="fa fa-lock" /></div>

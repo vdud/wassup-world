@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte'
 	import { json } from '@sveltejs/kit'
 	import { userName_id } from '$lib/stores/userName_id'
+	import { userGroup_id } from '$lib/stores/userGroup_id'
 	$: if ($userName) $userName = $userName.toLowerCase()
 
 	import { pusher } from '$lib/pusher'
@@ -45,29 +46,38 @@
 			if (res.ok) {
 				$loginResponseData = response
 				$userName_id = response.userName_id
+				pusher.subscribe($userName_id).bind('inserted', (data: any) => {
+					console.log(data.message)
+				})
 				console.log($userName_id)
 
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
 					console.log(element._id)
-					pusher.subscribe(element._id).bind('inserted', (data: any) => {
-						console.log(data.message)
-						console.log(data)
-					})
+					if ($userGroup_id != element._id) {
+						pusher.subscribe(element._id).bind('inserted', (data: any) => {
+							console.log(data.message)
+							console.log(data)
+						})
+					}
 				})
 				$loginResponseData.data.formatedLOCdata.forEach((element: any) => {
 					console.log(element._id)
-					pusher.subscribe(element._id).bind('inserted', (data: any) => {
-						console.log(data.message)
-						console.log(data)
-					})
+					if ($userGroup_id != element._id) {
+						pusher.subscribe(element._id).bind('inserted', (data: any) => {
+							console.log(data.message)
+							console.log(data)
+						})
+					}
 				})
 
 				$loginResponseData.data.formatedPUBLICdata.forEach((element: any) => {
 					console.log(element._id)
-					pusher.subscribe(element._id).bind('inserted', (data: any) => {
-						console.log(data.message)
-						console.log(data)
-					})
+					if ($userGroup_id != element._id) {
+						pusher.subscribe(element._id).bind('inserted', (data: any) => {
+							console.log(data.message)
+							console.log(data)
+						})
+					}
 				})
 			} else if (!res.ok) {
 				alert(response.message)
