@@ -7,6 +7,8 @@
 	import { nature } from '$lib/stores/nature'
 	import { searchInput } from '$lib/stores/searchInput'
 
+	import { pusher } from '$lib/pusher'
+
 	import type { LayoutData } from './$types'
 
 	import TopHeaderLeft from '$lib/components/Top-Header-Left.svelte'
@@ -23,7 +25,6 @@
 	function initMap() {
 		alert('ok')
 	}
-	import Pusher from 'pusher-js'
 	import { onDestroy, onMount } from 'svelte'
 
 	let zIndex = 0
@@ -50,17 +51,8 @@
 		document.body.appendChild(PlacesApi)
 	})
 
-	Pusher.logToConsole = true
-	const pusher = new Pusher(import.meta.env.VITE_APP_KEY, {
-		cluster: import.meta.env.VITE_APP_CLUSTER,
-	})
-	let privateChannel = pusher.subscribe('privateChannelName').bind('client-my-event', (data: any) => {
-		alert(data.message)
-	})
-
 	onDestroy(() => {
-		pusher.unsubscribe('privateChannelName')
-		pusher.disconnect()
+		// pusher.disconnect()
 	})
 </script>
 

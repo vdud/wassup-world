@@ -31,7 +31,6 @@
 		})
 		const response = await res.json()
 		if (res.ok) {
-			// window.location.pathname = $userName_id + '/HASH/' + response.hashtagGroup_Id
 			window.location.pathname = $userName_id + '/LOC/' + response.locGroup_Id
 		} else if (!res.ok) {
 			alert(response.message)
@@ -206,7 +205,13 @@
 				<div class=" locationPredictions" id="locationPredictions">
 					{#each $locationPrediction as loc}
 						<button
-							on:click={toggleTranslation.bind(globalThis, loc.description)}
+							on:click={toggleTranslation.bind(
+								globalThis,
+								loc.description
+									.replace(/\s/g, '-')
+									.replace(/[^a-zA-Z0-9-]/g, '')
+									.toLowerCase(),
+							)}
 							class="locBox"
 							id={loc.description
 								.replace(/\s/g, '-')

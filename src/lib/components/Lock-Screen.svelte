@@ -7,6 +7,9 @@
 	import { userName_id } from '$lib/stores/userName_id'
 	$: if ($userName) $userName = $userName.toLowerCase()
 
+	import { pusher } from '$lib/pusher'
+	import Pusher from 'pusher-js'
+
 	onMount(() => {
 		const savedDataString = localStorage.getItem('formData')
 		const button = document.getElementById('submit')
@@ -42,6 +45,30 @@
 			if (res.ok) {
 				$loginResponseData = response
 				$userName_id = response.userName_id
+				console.log($userName_id)
+
+				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
+					console.log(element._id)
+					pusher.subscribe(element._id).bind('inserted', (data: any) => {
+						console.log(data.message)
+						console.log(data)
+					})
+				})
+				$loginResponseData.data.formatedLOCdata.forEach((element: any) => {
+					console.log(element._id)
+					pusher.subscribe(element._id).bind('inserted', (data: any) => {
+						console.log(data.message)
+						console.log(data)
+					})
+				})
+
+				$loginResponseData.data.formatedPUBLICdata.forEach((element: any) => {
+					console.log(element._id)
+					pusher.subscribe(element._id).bind('inserted', (data: any) => {
+						console.log(data.message)
+						console.log(data)
+					})
+				})
 			} else if (!res.ok) {
 				alert(response.message)
 			}

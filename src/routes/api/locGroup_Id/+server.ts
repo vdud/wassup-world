@@ -16,11 +16,11 @@ export const POST = (async ({ request }) => {
 
 		if (!hashGroup) {
 			// const newGroup = await groups.insertOne({ name: loc, allUsers: [userName._id], nature: 'LOCATIONS', createdAt: new Date(), updatedAt: new Date() })
-			const newGroup = await groups.insertOne({ name: loc, allUsers: [$userName_id], nature: 'LOCATIONS', createdAt: new Date(), updatedAt: new Date() })
+			const newGroup = await groups.insertOne({ name: loc, allUsers: [mainUserFind._id], nature: 'LOCATIONS', createdAt: new Date(), updatedAt: new Date() })
 
 			return json({ success: true, locGroup_Id: newGroup.insertedId })
 		} else if (hashGroup) {
-			await groups.updateOne({ _id: hashGroup._id }, { $addToSet: { allUsers: $userName_id } })
+			await groups.updateOne({ _id: hashGroup._id }, { $addToSet: { allUsers: mainUserFind._id } })
 			return json({ success: true, locGroup_Id: hashGroup._id })
 		}
 	}

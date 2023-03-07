@@ -1,4 +1,5 @@
 import type { RequestHandler } from './$types'
+import { json } from '@sveltejs/kit'
 
 import Pusher from 'pusher'
 const pusher = new Pusher({
@@ -9,19 +10,25 @@ const pusher = new Pusher({
 })
 
 export const POST = (async ({ request }) => {
-	const { data } = await request.json()
+	const { message, $userGroup_id } = await request.json()
 	console.log('channel-events-data')
-	console.log(data)
+	console.log(message)
+	console.log($userGroup_id)
 
-	pusher.trigger('channel-name', 'client-event-name', {
-		message: data,
+	pusher.trigger($userGroup_id, 'inserted', {
+		message: message,
 	})
 
-	return new Response('success', {
-		status: 200,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		statusText: 'TMKC!',
-	})
+	// pusher.trigger('privateChannelName', 'client-my-event', {
+	// 	message: message,
+	// })
+	// return new Response('success', {
+	// 	status: 200,
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 	},
+	// 	statusText: 'TMKC!',
+	// })
+
+	return json({ success: true })
 }) satisfies RequestHandler

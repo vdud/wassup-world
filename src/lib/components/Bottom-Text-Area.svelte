@@ -11,14 +11,18 @@
 	import { user_message } from '../stores/user_message'
 	import { reciever } from '../stores/reciever'
 	import { currentGroupData } from '../stores/currentGroupData'
-	$: $user_message.substring(0, 999)
-	$: $user_message = `${$user_message}`
+
+	import { pusher } from '$lib/pusher'
+	import Pusher from 'pusher-js'
+	import { userGroup_id } from '$lib/stores/userGroup_id'
+
+	// $: $user_message.substring(0, 999)
+	// $: $user_message = `${$user_message}`
 
 	function autoResize(e: KeyboardEvent) {
 		if (e.key === 'Enter' && !e.shiftKey) {
 			e.preventDefault()
-			const formData = document.getElementById('formDataButton')
-			formData?.click()
+			socketWorker()
 			$user_message = ''
 		} else {
 			const ta: any = document.getElementById('textarea')
@@ -31,23 +35,27 @@
 			}, 100)
 		}
 	}
-	let members = '<members only/>'
-	function socketWorker() {
-		const message = $user_message
-		if (message.trim() === '') {
+	const socketWorker = async () => {
+		const message = $user_message.trim().slice(0, 999)
+		if (message === '') {
 			return
 		}
 		const time = new Date()
-		// socket.emit('send', message, time, $currentGroupId, $userName)
-		$user_message = ''
-	}
-	function socketWorkerSingle() {
-		const message = $user_message
-		if (message.trim() === '') {
-			return
+
+		const res = await fetch('/api/textAreaMessages', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ message, $userGroup_id }),
+		})
+		const response = await res.json()
+		console.log(response)
+		if (!res.ok) {
+			alert('failed to search data')
+			alert(response.message)
 		}
-		const time = new Date()
-		// socket.emit('sendSingle', message, time, $userName, $reciever, $currentGroupId)
+
 		$user_message = ''
 	}
 </script>
@@ -57,17 +65,12 @@
 		{#if $nature === 'HASHTAG' || $nature === 'LOCATION' || $canSend === true}
 			<div id="chat" class="switch">
 				<div id="ta-frame">
-					<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="256" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
+					<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="999" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
 				</div>
 			</div>
 			<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
-				{#if $nature === 'HASHTAG' || $nature === 'LOCATION'}
-					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
-				{:else}
-					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorkerSingle} />
-				{/if}
+				<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
 			</div>
-			<!-- </form> -->
 		{:else}
 			<div id="chat">
 				<div class="lock switch"><i class="fa fa-lock" /></div>

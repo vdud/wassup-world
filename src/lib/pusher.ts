@@ -2,7 +2,7 @@
 import Pusher from 'pusher-js'
 
 // Initialize Channels client
-const pusher = new Pusher(import.meta.env.VITE_APP_KEY, {
+export const pusher = new Pusher(import.meta.env.VITE_APP_KEY, {
 	cluster: import.meta.env.VITE_APP_CLUSTER,
 })
 Pusher.logToConsole = true
