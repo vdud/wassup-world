@@ -41,6 +41,8 @@
 	}
 	const socketWorker = async () => {
 		const message = $user_message.trim().slice(0, 999)
+
+		console.log(message)
 		if (message === '') {
 			return
 		}
@@ -63,6 +65,7 @@
 	}
 	const singleSocketWorker = async () => {
 		const message = $user_message.trim().slice(0, 999)
+		console.log(message)
 		if (message === '') {
 			return
 		}
