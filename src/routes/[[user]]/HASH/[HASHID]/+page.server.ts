@@ -18,7 +18,8 @@ export const load = (async ({ params }) => {
 				const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: { $in: [findGroup._id] } })
 
 				if (!findUserLink) {
-					await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroup._id } })
+					// await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroup._id } })
+					await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 				}
 
 				const returnData = await groups

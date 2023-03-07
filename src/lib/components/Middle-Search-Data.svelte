@@ -14,15 +14,28 @@
 
 	// $: console.log($locationPrediction)
 
-	const toggleTranslation = (loc: any) => {
+	const toggleTranslation = async (loc: any) => {
 		$fullDisplay = 'nonHidden'
 
-		const url = loc.description
+		loc = loc
 			.replace(/\s/g, '-')
 			.replace(/[^a-zA-Z0-9-]/g, '')
 			.toLowerCase()
 
-		window.location.pathname = $userName + '/LOC/' + url
+		const res = await fetch('/api/locGroup_Id', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ loc, $userName_id }),
+		})
+		const response = await res.json()
+		if (res.ok) {
+			// window.location.pathname = $userName_id + '/HASH/' + response.hashtagGroup_Id
+			window.location.pathname = $userName_id + '/LOC/' + response.locGroup_Id
+		} else if (!res.ok) {
+			alert(response.message)
+		}
 
 		$isFlex = !$isFlex
 
@@ -193,7 +206,7 @@
 				<div class=" locationPredictions" id="locationPredictions">
 					{#each $locationPrediction as loc}
 						<button
-							on:click={toggleTranslation.bind(globalThis, loc)}
+							on:click={toggleTranslation.bind(globalThis, loc.description)}
 							class="locBox"
 							id={loc.description
 								.replace(/\s/g, '-')

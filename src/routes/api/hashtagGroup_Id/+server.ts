@@ -14,7 +14,6 @@ export const POST = (async ({ request }) => {
 		const hashGroup = await groups.findOne({ name: $searchInput, nature: 'HASHTAGS' })
 
 		if (!hashGroup) {
-			// const newGroup = await groups.insertOne({ name: $searchInput, allUsers: [userName._id], nature: 'HASHTAGS', createdAt: new Date(), updatedAt: new Date() })
 			const newGroup = await groups.insertOne({ name: $searchInput, allUsers: [$userName_id], nature: 'HASHTAGS', createdAt: new Date(), updatedAt: new Date() })
 
 			return json({ success: true, hashtagGroup_Id: newGroup.insertedId })

@@ -18,7 +18,8 @@ export const load = (async ({ params }) => {
 				const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: { $in: [findGroup._id] } })
 
 				if (!findUserLink) {
-					await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroup._id } })
+					// await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroup._id } })
+					await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 				}
 
 				const returnData = await groups
@@ -62,45 +63,44 @@ export const load = (async ({ params }) => {
 				}
 			}
 		}
-	} else {
-		const returnData = await groups
-			.aggregate([
-				{ $match: { name: SLUG, nature: 'LOCATIONS' } },
-				{
-					$lookup: {
-						from: 'user',
-						localField: 'allUsers',
-						foreignField: '_id',
-						as: 'allUsers',
-					},
+	}
+	const returnData = await groups
+		.aggregate([
+			{ $match: { name: SLUG, nature: 'LOCATIONS' } },
+			{
+				$lookup: {
+					from: 'user',
+					localField: 'allUsers',
+					foreignField: '_id',
+					as: 'allUsers',
 				},
-				{
-					$lookup: {
-						from: 'messages',
-						localField: 'messages',
-						foreignField: '_id',
-						as: 'messages',
-					},
+			},
+			{
+				$lookup: {
+					from: 'messages',
+					localField: 'messages',
+					foreignField: '_id',
+					as: 'messages',
 				},
-				{
-					$project: {
+			},
+			{
+				$project: {
+					_id: 1,
+					name: 1,
+					messages: 1,
+					allUsers: {
 						_id: 1,
 						name: 1,
-						messages: 1,
-						allUsers: {
-							_id: 1,
-							name: 1,
-						},
 					},
 				},
-			])
-			.toArray()
-
-		return {
-			status: 200,
-			body: {
-				data: JSON.stringify(returnData[0]),
 			},
-		}
+		])
+		.toArray()
+
+	return {
+		status: 200,
+		body: {
+			data: JSON.stringify(returnData[0]),
+		},
 	}
 }) as PageServerLoad

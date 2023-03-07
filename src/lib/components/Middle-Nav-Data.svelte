@@ -6,6 +6,8 @@
 	import { timeSince } from '$lib/timeFormat'
 	import { success } from '$lib/pusher'
 
+	console.log($loginResponseData)
+
 	const toggleLoc = (groupName: any) => {
 		window.location.pathname = '/LOC/' + groupName
 		$nature = 'LOCATIONS'
