@@ -58,7 +58,7 @@
 									<p class="textLoc text2">{name}</p>
 								</div>
 								{#if latestMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style="background-color:var(--secOptDark)">SEND MESSAGE</span><span style="background-color:var(--secOptDark)" class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{latestMessage}</span></p></div>
 								{/if}
@@ -86,7 +86,7 @@
 									<p class="textLoc text2">{group.name}</p>
 								</div>
 								{#if group.latestMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style="background-color:var(--primary)">SEND MESSAGE</span><span style="background-color:var(--primary)" class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
 								{/if}
@@ -114,7 +114,7 @@
 									<p class="textLoc text2">{group.name}</p>
 								</div>
 								{#if group.latestMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize); "><span class="sendBox" style="background-color:var(--secondary)">SEND MESSAGE</span><span style="background-color:var(--secondary)" class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize); "><span class="sendBox" style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
 								{/if}
@@ -155,9 +155,8 @@
 	}
 	.sendArrow:hover,
 	.sendBox:hover {
-		background-color: var(--primaryTheme);
-		color: var(--primaryThemeInverted);
-		box-shadow: var(--boxInsetShadow);
+		color: var(--secondaryThemeInverted);
+		text-shadow: var(--boxShadows);
 	}
 	.noMoreBox {
 		height: calc(var(--averageMargin) * 2);

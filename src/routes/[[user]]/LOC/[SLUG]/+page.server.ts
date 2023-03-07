@@ -1,70 +1,106 @@
+import { json } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
 import { mainUser, groups } from '$db/collections'
+import { ObjectId } from 'mongodb'
 
 export const load = (async ({ params }) => {
 	const { user, SLUG } = params
-	console.log('user', user)
+	const latestMessages: any = []
 
 	if (user) {
-		const findUser = await mainUser.findOne({ name: user })
-		if (!findUser) {
-			return
-		}
+		const findUser = await mainUser.findOne({ _id: new ObjectId(user) })
+		console.log(findUser)
+		if (findUser) {
+			const findGroup = await groups.findOne({ _id: new ObjectId(SLUG) })
+			if (findGroup) {
+				// const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: findGroup._id })
+				const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: { $in: [findGroup._id] } })
 
-		const findGroup = await groups.findOne({ name: SLUG })
-		if (!findGroup) {
-			await groups.insertOne({ name: SLUG, allUsers: [findUser._id], nature: 'LOCATIONS', createdAt: new Date(), updatedAt: new Date() }).then(async (res) => {
-				await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: res.insertedId } })
-			})
-		}
+				if (!findUserLink) {
+					await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroup._id } })
+				}
 
-		const againFind = await groups.findOne({ name: SLUG, allUsers: findUser._id })
-		if (!againFind) {
-			await groups.updateOne({ name: SLUG }, { $push: { allUsers: findUser._id } })
-		}
+				const returnData = await groups
+					.aggregate([
+						{ $match: { _id: new ObjectId(SLUG) } },
+						{
+							$lookup: {
+								from: 'user',
+								localField: 'allUsers',
+								foreignField: '_id',
+								as: 'allUsers',
+							},
+						},
+						{
+							$lookup: {
+								from: 'messages',
+								localField: 'messages',
+								foreignField: '_id',
+								as: 'messages',
+							},
+						},
+						{
+							$project: {
+								_id: 1,
+								name: 1,
+								messages: 1,
+								allUsers: {
+									_id: 1,
+									name: 1,
+								},
+							},
+						},
+					])
+					.toArray()
 
-		const findGroupAgain = await groups.findOne({ name: SLUG })
-
-		if (findGroupAgain) {
-			const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: findGroupAgain._id })
-
-			if (!findUserLink) {
-				await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroupAgain._id } })
+				return {
+					status: 200,
+					body: {
+						data: JSON.stringify(returnData[0]),
+					},
+				}
 			}
 		}
-	}
-
-	// const returnData = await groups.findOne({ name: SLUG })
-	const returnData = await groups
-		.aggregate([
-			{ $match: { name: SLUG } },
-			{
-				$lookup: {
-					from: 'user',
-					localField: 'allUsers',
-					foreignField: '_id',
-					as: 'allUsers',
-				},
-			},
-			{
-				$project: {
-					_id: 1,
-					name: 1,
-					messages: 1,
-					allUsers: {
-						_id: 1,
-						name: 1,
+	} else {
+		const returnData = await groups
+			.aggregate([
+				{ $match: { name: SLUG, nature: 'LOCATIONS' } },
+				{
+					$lookup: {
+						from: 'user',
+						localField: 'allUsers',
+						foreignField: '_id',
+						as: 'allUsers',
 					},
 				},
-			},
-		])
-		.toArray()
+				{
+					$lookup: {
+						from: 'messages',
+						localField: 'messages',
+						foreignField: '_id',
+						as: 'messages',
+					},
+				},
+				{
+					$project: {
+						_id: 1,
+						name: 1,
+						messages: 1,
+						allUsers: {
+							_id: 1,
+							name: 1,
+						},
+					},
+				},
+			])
+			.toArray()
 
-	return {
-		status: 200,
-		body: {
-			data: JSON.stringify(returnData[0]),
-		},
+		return {
+			status: 200,
+			body: {
+				data: JSON.stringify(returnData[0]),
+			},
+		}
 	}
 }) as PageServerLoad

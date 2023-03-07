@@ -18,8 +18,8 @@ export const load = (async ({ params }) => {
 			return
 		}
 
-		const findFirstGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}` })
-		const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}` })
+		const findFirstGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}`, nature: 'PUBLIC' })
+		const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}`, nature: 'PUBLIC' })
 
 		if (!findFirstGroup && !findSecondGroup) {
 			const newGroup = await groups.insertOne({

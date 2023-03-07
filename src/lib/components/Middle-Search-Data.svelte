@@ -158,9 +158,21 @@
 				</div>
 				<button
 					class="sendMsgBox"
-					on:click={() => {
+					on:click={async () => {
 						$fullDisplay = 'nonHidden'
-						window.location.pathname = $userName + '/HASH/' + $searchInput
+						const res = await fetch('/api/hashtagGroup_Id', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify({ data: { $searchInput, $userName_id } }),
+						})
+						const response = await res.json()
+						if (res.ok) {
+							window.location.pathname = $userName_id + '/HASH/' + response.hashtagGroup_Id
+						} else if (!res.ok) {
+							alert(response.message)
+						}
 						$isFlex = !$isFlex
 						setTimeout(() => {
 							$user_message = ''
