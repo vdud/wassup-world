@@ -8,7 +8,6 @@ import { ObjectId } from 'mongodb'
 
 export const POST = (async ({ request }) => {
 	const { $searchInput, $userName_id } = await request.json()
-
 	const mainUserFind = await mainUser.findOne({ _id: new ObjectId($userName_id) })
 
 	if (mainUserFind) {
@@ -18,11 +17,14 @@ export const POST = (async ({ request }) => {
 			// const newGroup = await groups.insertOne({ name: $searchInput, allUsers: [userName._id], nature: 'HASHTAGS', createdAt: new Date(), updatedAt: new Date() })
 			const newGroup = await groups.insertOne({ name: $searchInput, allUsers: [$userName_id], nature: 'HASHTAGS', createdAt: new Date(), updatedAt: new Date() })
 
-			return json({ success: true, $searchInput: newGroup.insertedId })
-		} else {
-			return json({ success: true, $searchInput: hashGroup._id })
+			return json({ success: true, hashtagGroup_Id: newGroup.insertedId })
+		} else if (hashGroup) {
+			await groups.updateOne({ _id: hashGroup._id }, { $addToSet: { allUsers: $userName_id } })
+			return json({ success: true, hashtagGroup_Id: hashGroup._id })
 		}
-	} else {
-		return json({ success: false, $searchInput: 'User not found' })
 	}
+	if (!mainUserFind) {
+		return json({ success: false, hashtagGroup_Id: 'User not found' })
+	}
+	return json({ success: false, hashtagGroup_Id: 'oops' })
 }) satisfies RequestHandler
