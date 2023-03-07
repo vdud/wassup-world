@@ -24,7 +24,7 @@
 			e.preventDefault()
 			if ($canSend === true) {
 				singleSocketWorker()
-			} else {
+			} else if ($canSend === false) {
 				socketWorker()
 			}
 			$user_message = ''
