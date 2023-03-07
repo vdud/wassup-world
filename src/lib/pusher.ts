@@ -5,7 +5,7 @@ import Pusher from 'pusher-js'
 export const pusher = new Pusher(import.meta.env.VITE_APP_KEY, {
 	cluster: import.meta.env.VITE_APP_CLUSTER,
 })
-Pusher.logToConsole = true
+Pusher.logToConsole = false
 // Subscribe to the appropriate channel
 const channel = pusher.subscribe('channel-name')
 

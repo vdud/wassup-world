@@ -14,6 +14,7 @@
 
 	import { pusher } from '$lib/pusher'
 	import Pusher from 'pusher-js'
+	import { currentPage } from '$lib/stores/currentPage'
 
 	onMount(() => {
 		const savedDataString = localStorage.getItem('formData')
@@ -34,8 +35,9 @@
 		}
 	})
 
-	async function unLock() {
+	export async function unLock() {
 		localStorage.setItem('formData', JSON.stringify({ $userName }))
+		$canSend = false
 		$isLocked = false
 
 		if ($userName != '') {
@@ -53,25 +55,25 @@
 				pusher.subscribe($userName_id).bind('inserted', (data: any) => {
 					console.log(data.message)
 				})
-				if ($isPUBLIC === true) {
-					$isPUBLICgroupData.allUsers.forEach((user: any) => {
-						// console.log(user._id)
-						// console.log($userName_id)
-						if (user._id !== $userName_id) {
-							$canSendReciever = user._id
-							$canSend = false
-						} else if (user._id === $userName_id) {
-							$canSend = true
-							// console.log('$canSend', $canSend)
-						}
-					})
-				}
+				// if ($isPUBLIC === true) {
+				$isPUBLICgroupData.allUsers.forEach((user: any) => {
+					console.log('user._id', user._id)
+					console.log('$userName_id', response.userName_id)
+					if (user._id === response.userName_id) {
+						$canSend = true
+						console.log('$canSend', $canSend)
+						$currentPage = 'PUB'
+					} else {
+						$canSendReciever = user._id
+					}
+				})
+				// }
 				console.log($userName_id)
 
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
 					console.log(element._id)
 					if ($userGroup_id != element._id) {
-						pusher.subscribe(element._id).bind('inserted', (data: any) => {
+						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
 							console.log(data.message)
 							console.log(data)
 						})
@@ -80,7 +82,7 @@
 				$loginResponseData.data.formatedLOCdata.forEach((element: any) => {
 					console.log(element._id)
 					if ($userGroup_id != element._id) {
-						pusher.subscribe(element._id).bind('inserted', (data: any) => {
+						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
 							console.log(data.message)
 							console.log(data)
 						})
@@ -90,7 +92,7 @@
 				$loginResponseData.data.formatedPUBLICdata.forEach((element: any) => {
 					console.log(element._id)
 					if ($userGroup_id != element._id) {
-						pusher.subscribe(element._id).bind('inserted', (data: any) => {
+						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
 							console.log(data.message)
 							console.log(data)
 						})
@@ -98,6 +100,7 @@
 				})
 			} else if (!res.ok) {
 				alert(response.message)
+				$canSend = false
 			}
 		}
 	}

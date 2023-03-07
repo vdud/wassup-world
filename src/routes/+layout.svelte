@@ -26,6 +26,7 @@
 		alert('ok')
 	}
 	import { onDestroy, onMount } from 'svelte'
+	import { canSend } from '$lib/stores/canSend'
 
 	let zIndex = 0
 

@@ -19,7 +19,7 @@ export const POST = (async ({ request }) => {
 	console.log(message)
 	console.log($userGroup_id)
 
-	pusher.trigger($userGroup_id, 'inserted', {
+	pusher.trigger($userGroup_id, 'inserted_Put', {
 		message: message,
 	})
 

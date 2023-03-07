@@ -23,7 +23,7 @@
 	function autoResize(e: KeyboardEvent) {
 		if (e.key === 'Enter' && !e.shiftKey) {
 			e.preventDefault()
-			if ($canSend === true) {
+			if ($canSend === true && $currentPage === 'PUB') {
 				singleSocketWorker()
 			} else if ($canSend === false) {
 				socketWorker()
@@ -99,13 +99,13 @@
 					<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="999" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
 				</div>
 			</div>
-			{#if $canSend === false}
-				<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
-					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
-				</div>
-			{:else if $canSend === true}
+			{#if $canSend === true && $currentPage === 'PUB'}
 				<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
 					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={singleSocketWorker} />
+				</div>
+			{:else}
+				<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
+					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
 				</div>
 			{/if}
 		{:else}

@@ -12,7 +12,7 @@
 		$currentPage = 'LOC'
 		$userGroup_id = JSON.parse(data.body.data)._id
 
-		pusher.subscribe($userGroup_id).bind('inserted', (data: any) => {
+		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
 			console.log(data.message)
 			console.log(data)
 		})

@@ -13,6 +13,7 @@
 	// import { searchGET } from '$lib/stores/pusher'
 	import { onDestroy, onMount } from 'svelte'
 	import { searchData } from '$lib/stores/searchData'
+	import { canSend } from '$lib/stores/canSend'
 
 	$: $searchInput = $searchInput
 		.replace(/\s/g, '-')
@@ -22,6 +23,7 @@
 	let name = 'world'
 
 	const toggle = () => {
+		$canSend = false
 		$fullDisplay = 'nonHidden'
 
 		$isFlex = !$isFlex

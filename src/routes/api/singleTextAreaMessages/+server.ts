@@ -14,11 +14,12 @@ export const POST = (async ({ request }) => {
 
 	console.log(message)
 	console.log($canSendReciever)
+	console.log($userGroup_id)
 
 	pusher.trigger($canSendReciever, 'inserted', {
 		message: message,
 	})
-	pusher.trigger($userGroup_id, 'inserted', {
+	pusher.trigger($userGroup_id, 'inserted_Put', {
 		message: message,
 	})
 
