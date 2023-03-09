@@ -16,6 +16,7 @@
 	import Pusher from 'pusher-js'
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { currentPage } from '$lib/stores/currentPage'
+	import { isPUBLIC } from '$lib/stores/isPUBLIC'
 
 	// $: $user_message.substring(0, 999)
 	// $: $user_message = `${$user_message}`
@@ -93,26 +94,26 @@
 
 <div class="textArea">
 	<div class="textBox">
-		{#if $currentPage === 'HASH' || $currentPage === 'LOC' || $canSend === true}
-			<div id="chat" class="switch">
-				<div id="ta-frame">
-					<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="999" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
-				</div>
+		<!-- {#if $currentPage === 'HASH' || $currentPage === 'LOC' || $canSend === true} -->
+		<div id="chat" class="switch">
+			<div id="ta-frame">
+				<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="999" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
 			</div>
-			{#if $canSend === true && $currentPage === 'PUB'}
-				<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
-					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={singleSocketWorker} />
-				</div>
-			{:else}
-				<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
-					<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
-				</div>
-			{/if}
+		</div>
+		{#if $canSend === true && $currentPage === 'PUB'}
+			<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
+				<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={singleSocketWorker} />
+			</div>
 		{:else}
+			<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
+				<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
+			</div>
+		{/if}
+		<!-- {:else if $isPUBLIC === true}
 			<div id="chat">
 				<div class="lock switch"><i class="fa fa-lock" /></div>
 			</div>
-		{/if}
+		{/if} -->
 	</div>
 </div>
 

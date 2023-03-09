@@ -13,13 +13,16 @@ export const load = (async ({ params }) => {
 	if (user) {
 		const userSender = await mainUser.findOne({ _id: new ObjectId(user) })
 		const userReciever = await mainUser.findOne({ _id: new ObjectId(PUB) })
-
+		console.log('userSender', userSender)
+		console.log('userReciever', userReciever)
 		if (!userSender || !userReciever) {
 			return
 		}
 
 		const findFirstGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}`, nature: 'PUBLIC' })
 		const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}`, nature: 'PUBLIC' })
+		console.log('findFirstGroup', findFirstGroup)
+		console.log('findSecondGroup', findSecondGroup)
 
 		if (!findFirstGroup && !findSecondGroup) {
 			const newGroup = await groups.insertOne({
@@ -191,60 +194,61 @@ export const load = (async ({ params }) => {
 		}
 	}
 
-	if (!user) {
-		const findGroup = await groups.findOne({ name: PUB, nature: 'PUBLIC' })
+	// if (!user) {
+	const findGroup = await groups.findOne({ name: PUB, nature: 'PUBLIC' })
+	console.log('findGroup', findGroup)
 
-		if (findGroup) {
-			const returnData = await groups
-				.aggregate([
-					{ $match: { _id: findGroup._id } },
-					{
-						$lookup: {
-							from: 'user',
-							localField: 'allUsers',
-							foreignField: '_id',
-							as: 'allUsers',
-						},
+	if (findGroup) {
+		const returnData = await groups
+			.aggregate([
+				{ $match: { _id: findGroup._id } },
+				{
+					$lookup: {
+						from: 'user',
+						localField: 'allUsers',
+						foreignField: '_id',
+						as: 'allUsers',
 					},
-					{
-						$project: {
+				},
+				{
+					$project: {
+						_id: 1,
+						name: 1,
+						messages: 1,
+						allUsers: {
 							_id: 1,
 							name: 1,
-							messages: 1,
-							allUsers: {
-								_id: 1,
-								name: 1,
-							},
 						},
 					},
-				])
-				.toArray()
-
-			const returnMsgData = await massagesCreate
-				.aggregate([
-					{ $match: { group_id: findGroup._id } },
-					{
-						$project: {
-							_id: 1,
-							message: 1,
-							createdAt: 1,
-							sender: 1,
-						},
-					},
-				])
-				.sort({ createdAt: -1 })
-				.limit(10)
-				.toArray()
-
-			return {
-				status: 200,
-				body: {
-					data: JSON.stringify(returnData[0]),
-					messages: JSON.stringify(returnMsgData),
-					groupId: JSON.stringify(findGroup._id),
-					groupName: findGroup.name,
 				},
-			}
+			])
+			.toArray()
+
+		const returnMsgData = await massagesCreate
+			.aggregate([
+				{ $match: { group_id: findGroup._id } },
+				{
+					$project: {
+						_id: 1,
+						message: 1,
+						createdAt: 1,
+						sender: 1,
+					},
+				},
+			])
+			.sort({ createdAt: -1 })
+			.limit(10)
+			.toArray()
+
+		return {
+			status: 200,
+			body: {
+				data: JSON.stringify(returnData[0]),
+				messages: JSON.stringify(returnMsgData),
+				groupId: JSON.stringify(findGroup._id),
+				groupName: findGroup.name,
+			},
 		}
 	}
+	// }
 }) as PageServerLoad

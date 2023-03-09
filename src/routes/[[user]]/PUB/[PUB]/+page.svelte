@@ -46,7 +46,7 @@
 			})
 		}
 		// }, 2000)
-		pusher.subscribe(JSON.parse(data.body.groupId)).bind('inserted_Put', (data: any) => {
+		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
 			const textMessages: any = document.getElementById('textMessages')
 
 			const div = document.createElement('div')
@@ -111,13 +111,13 @@
 	<div class="margins margin-bottom" />
 	<div class="hashMessagesContainer">
 		<div id="textMessages" />
-		<!-- {#each JSON.parse(data.body.messages) as message}
+		{#each JSON.parse(data.body.messages) as message}
 			{#if message.sender !== $userName}
 				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
 			{:else if message.sender === $userName}
 				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
 			{/if}
-		{/each} -->
+		{/each}
 	</div>
 	<div class="margins margin-top" />
 </div>
