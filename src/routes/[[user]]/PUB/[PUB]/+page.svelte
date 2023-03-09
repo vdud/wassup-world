@@ -13,6 +13,8 @@
 	import { userName } from '$lib/stores/userName'
 	import { isPUBLIC } from '$lib/stores/isPUBLIC'
 	import { isPUBLICgroupData } from '$lib/stores/isPUBLICgroupData'
+	import { loginResponseData } from '$lib/stores/loginResponseData'
+	import { isFlex } from '$lib/stores/isFlex'
 
 	// console.log('data', JSON.parse(data.body.data))
 	// console.log('data', data)
@@ -26,6 +28,22 @@
 		$isPUBLICgroupData = JSON.parse(data.body.data)
 		console.log('data', data)
 
+		// setTimeout(() => {
+		if ($isPUBLIC === true && $isFlex === false) {
+			JSON.parse(data.body.data).allUsers.forEach((user: any) => {
+				console.log('user._id', user._id)
+				console.log('$userName_id', $userName_id)
+				if (user._id === $userName_id) {
+					$canSend = true
+					console.log('$canSend', $canSend)
+					$currentPage = 'PUB'
+				} else {
+					$canSendReciever = user._id
+					console.log('$canSendReciever', $canSendReciever)
+				}
+			})
+		}
+		// }, 2000)
 		pusher.subscribe(JSON.parse(data.body.groupId)).bind('inserted_Put', (data: any) => {
 			const textMessages: any = document.getElementById('textMessages')
 

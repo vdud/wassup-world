@@ -15,6 +15,7 @@
 	import { pusher } from '$lib/pusher'
 	import Pusher from 'pusher-js'
 	import { currentPage } from '$lib/stores/currentPage'
+	import { isFlex } from '$lib/stores/isFlex'
 
 	onMount(() => {
 		const savedDataString = localStorage.getItem('formData')
@@ -55,18 +56,20 @@
 				pusher.subscribe($userName_id).bind('inserted', (data: any) => {
 					console.log(data.message)
 				})
-				// if ($isPUBLIC === true) {
-				$isPUBLICgroupData.allUsers.forEach((user: any) => {
-					console.log('user._id', user._id)
-					console.log('$userName_id', response.userName_id)
-					if (user._id === response.userName_id) {
-						$canSend = true
-						console.log('$canSend', $canSend)
-						$currentPage = 'PUB'
-					} else {
-						$canSendReciever = user._id
-					}
-				})
+				// if ($isFlex === false) {
+				setTimeout(() => {
+					$isPUBLICgroupData.allUsers.forEach((user: any) => {
+						console.log('user._id', user._id)
+						console.log('$userName_id', response.userName_id)
+						if (user._id === response.userName_id) {
+							$canSend = true
+							console.log('$canSend', $canSend)
+							$currentPage = 'PUB'
+						} else {
+							$canSendReciever = user._id
+						}
+					})
+				}, 2000)
 				// }
 				console.log($userName_id)
 
@@ -100,7 +103,7 @@
 				})
 			} else if (!res.ok) {
 				alert(response.message)
-				$canSend = false
+				// $canSend = false
 			}
 		}
 	}

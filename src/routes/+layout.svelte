@@ -163,6 +163,10 @@
 	}
 	.main {
 		position: absolute;
+		bottom: 0;
+		right: 0;
+		top: 0;
+		left: 0;
 
 		display: flex;
 		align-items: center;
@@ -240,12 +244,19 @@
 		}
 
 		.main {
+			bottom: 0;
+			right: 0;
 			top: 0;
+			left: 0;
+			/* position: relative; */
+			height: 100%;
+			width: 100%;
 		}
 		.window {
 			height: 99.8%;
 			width: 100%;
 			margin: 0;
+			position: relative;
 		}
 		.windows {
 			box-shadow: var(--boxShadows);
@@ -254,6 +265,10 @@
 		.windowLeft {
 			width: 100vw;
 			position: absolute;
+			bottom: 0;
+			right: 0;
+			top: 0;
+			left: 0;
 
 			z-index: 0;
 		}
@@ -263,6 +278,10 @@
 			position: absolute;
 			width: 100vw;
 			border-left: none;
+			bottom: 0;
+			right: 0;
+			top: 0;
+			left: 0;
 		}
 	}
 
