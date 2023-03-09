@@ -1,6 +1,9 @@
 import type { RequestHandler } from './$types'
 import { json } from '@sveltejs/kit'
 
+import { mainUser, massagesCreate, groups } from '$db/collections'
+import { ObjectId } from 'mongodb'
+
 import Pusher from 'pusher'
 const pusher = new Pusher({
 	appId: import.meta.env.VITE_APP_ID,
@@ -10,18 +13,36 @@ const pusher = new Pusher({
 })
 
 export const POST = (async ({ request }) => {
-	const { message, $userGroup_id } = await request.json()
-
-	console.log(message)
-	console.log($userGroup_id)
-	console.log(message)
-	console.log($userGroup_id)
-	console.log(message)
-	console.log($userGroup_id)
+	const { message, $userGroup_id, $userName } = await request.json()
 
 	pusher.trigger($userGroup_id, 'inserted_Put', {
 		message: message,
+		sender: $userName,
 	})
+
+	const newMessage = await massagesCreate.insertOne({
+		sender: $userName,
+		message: message,
+		group_id: new ObjectId($userGroup_id),
+		createdAt: new Date(),
+	})
+
+	const updateGroup = await groups.updateOne({ _id: new ObjectId($userGroup_id) }, { $set: { lastMessage: message.slice(0, 48), updatedAt: new Date() }, $push: { messages: newMessage.insertedId } }, { upsert: true })
+	// const updateGroup = await groups.updateOne(
+	// 	{ _id: new ObjectId($userGroup_id) },
+	// 	{
+	// 		$set: {
+	// 			lastMessage: message.slice(0, 48),
+	// 			updatedAt: new Date(),
+	// 		},
+	// 		$push: {
+	// 			message: newMessage.insertedId,
+	// 		},
+	// 	},
+	// 	{ upsert: true },
+	// )
+
+	console.log('updateGroup', updateGroup)
 
 	return json({ success: true })
 }) satisfies RequestHandler

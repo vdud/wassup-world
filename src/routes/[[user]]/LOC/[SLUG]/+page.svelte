@@ -8,13 +8,41 @@
 	import { canSend } from '$lib/stores/canSend'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isPUBLIC } from '$lib/stores/isPUBLIC'
+	import { userName } from '$lib/stores/userName'
+	import { userName_id } from '$lib/stores/userName_id'
+	import { json } from '@sveltejs/kit'
+
 	onMount(() => {
 		$currentPage = 'LOC'
-		$userGroup_id = JSON.parse(data.body.data)._id
+		$userGroup_id = JSON.parse(data.groupId)
+		console.log(JSON.parse(data.body.data))
 
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
-			console.log(data.message)
-			console.log(data)
+			const textMessages: any = document.getElementById('textMessages')
+
+			const div = document.createElement('div')
+			div.classList.add('text')
+			if (data.sender === $userName) {
+				div.classList.add('yoMe')
+			} else {
+				div.classList.add('sender')
+			}
+			const p = document.createElement('p')
+			const span1 = document.createElement('span')
+			if (data.sender === $userName) {
+				span1.style.color = 'var(--secondary)'
+			} else {
+				span1.style.color = 'var(--primary)'
+			}
+			span1.innerText = data.sender + '; '
+			const span2 = document.createElement('span')
+			span2.style.color = 'var(--secondaryThemeInverted)'
+			span2.innerText = data.message
+			p.appendChild(span1)
+			p.appendChild(span2)
+			div.appendChild(p)
+
+			textMessages.appendChild(div)
 		})
 	})
 
@@ -23,66 +51,57 @@
 	})
 </script>
 
-<div class="middleScroll">
-	<div class="slot">
-		<div class="whiteSpace" />
-		<div class="text sender" />
-		<div class="text yoMe" />
+<svelte:head>
+	<title>📍{data.body.groupName}</title>
+	<meta name="description" content="This is a simple discourse on location:{data.body.groupName} as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
+</svelte:head>
+
+<div class="hashContainer">
+	<div class="margins margin-bottom" />
+	<div class="hashMessagesContainer">
+		<div id="textMessages" />
+		{#each JSON.parse(data.body.data) as message}
+			{#if message.sender !== $userName}
+				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
+			{:else if message.sender === $userName}
+				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
+			{/if}
+		{/each}
 	</div>
+	<div class="margins margin-top" />
 </div>
 
 <style>
-	.text {
-		height: 100px;
-		border-radius: var(--borderRadius);
-		/* width: clamp(640px, 80%, 800px); */
-		width: clamp(520px, 80%, 800px);
-		margin: var(--averageMargin);
-		background-color: var(--primaryTheme);
-	}
-	.sender {
-		place-self: start;
-		border-top-left-radius: calc(var(--borderRadius) / 4);
-	}
-	.yoMe {
-		place-self: end;
-		border-bottom-right-radius: calc(var(--borderRadius) / 4);
-	}
-	.whiteSpace {
-		height: 10000px;
+	#textMessages {
 		width: 100%;
-
-		background-color: var(--secondaryTheme);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column-reverse;
+		flex-wrap: wrap;
 	}
-	.middleScroll {
-		text-align: center;
+	.margin-bottom {
+		padding: 1.8rem;
+	}
+	.margin-top {
+		padding: 4rem;
+	}
+	.hashContainer {
 		width: 100%;
 		height: 100%;
 
 		display: flex;
 		flex-direction: column-reverse;
-		justify-content: start;
-		align-items: center;
 
-		position: relative;
 		overflow: hidden;
 		overflow-y: scroll;
 	}
-
-	.slot {
-		height: fit-content;
-		margin-bottom: 2rem;
-		width: 100%;
+	.hashMessagesContainer {
 		display: flex;
-		flex-direction: column;
-		justify-content: flex-start;
 		align-items: center;
-
-		position: absolute;
-		bottom: 0;
-		left: 0;
-
-		padding: 1rem 0;
+		justify-content: center;
+		flex-direction: column-reverse;
+		flex-wrap: wrap;
 	}
 
 	@media screen and (max-width: 768px) {

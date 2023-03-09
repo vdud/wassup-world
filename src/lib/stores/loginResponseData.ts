@@ -8,7 +8,7 @@ export const loginResponseData = writable({
 		formatedPUBLICdata: [
 			{
 				name: 'string',
-				latestMessage: 'string',
+				lastMessage: 'string',
 				nature: 'string',
 				updatedAt: 0,
 			},
@@ -16,7 +16,7 @@ export const loginResponseData = writable({
 		formatedHASHTAGSdata: [
 			{
 				name: 'string',
-				latestMessage: 'string',
+				lastMessage: 'string',
 				nature: 'string',
 				updatedAt: 0,
 			},
@@ -24,7 +24,7 @@ export const loginResponseData = writable({
 		formatedLOCdata: [
 			{
 				name: 'string',
-				latestMessage: 'string',
+				lastMessage: 'string',
 				nature: 'string',
 				updatedAt: 0,
 			},

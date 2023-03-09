@@ -53,15 +53,15 @@
 						<div class="noMoreBox" />
 						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 					{:else if $loginResponseData.success === true}
-						{#each $loginResponseData.data.formatedLOCdata as { name, latestMessage, updatedAt }}
+						{#each $loginResponseData.data.formatedLOCdata as { name, lastMessage, updatedAt }}
 							<button on:click={toggleLoc.bind(globalThis, name)} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{name}</p>
 								</div>
-								{#if latestMessage === undefined}
+								{#if lastMessage === undefined}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{latestMessage}</span></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{lastMessage}</span></p></div>
 								{/if}
 
 								<div class="locBoxItems item3">
@@ -86,10 +86,10 @@
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{group.name}</p>
 								</div>
-								{#if group.latestMessage === undefined}
+								{#if group.lastMessage === undefined}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.lastMessage}</span></p></div>
 								{/if}
 
 								<div class="locBoxItems item3">
@@ -114,10 +114,10 @@
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2">{group.name}</p>
 								</div>
-								{#if group.latestMessage === undefined}
+								{#if group.lastMessage === undefined}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize); "><span class="sendBox" style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.latestMessage}</span></p></div>
+									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="latestMessage">{group.lastMessage}</span></p></div>
 								{/if}
 
 								<div class="locBoxItems item3">

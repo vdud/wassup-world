@@ -42,7 +42,7 @@
 	}
 	const socketWorker = async () => {
 		console.log('socketWorker')
-		const message = $user_message.trim().slice(0, 999)
+		const message = $user_message.slice(0, 999)
 
 		console.log(message)
 		if (message === '') {
@@ -55,7 +55,7 @@
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ message, $userGroup_id }),
+			body: JSON.stringify({ message, $userGroup_id, $userName }),
 		})
 		const response = await res.json()
 		console.log(response)
@@ -67,7 +67,7 @@
 	}
 	const singleSocketWorker = async () => {
 		console.log('singleSocketWorker')
-		const message = $user_message.trim().slice(0, 999)
+		const message = $user_message.slice(0, 999)
 		console.log(message)
 		if (message === '') {
 			return
@@ -79,7 +79,7 @@
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ message, $canSendReciever, $userGroup_id }),
+			body: JSON.stringify({ message, $canSendReciever, $userGroup_id, $userName }),
 		})
 		const response = await res.json()
 		console.log(response)
@@ -141,7 +141,7 @@
 
 		background-color: transparent;
 
-		margin: auto;
+		/* margin: auto; */
 	}
 	.textBox {
 		height: 80%;
@@ -174,7 +174,7 @@
 		display: flex;
 		flex-direction: column-reverse;
 		height: 100%;
-		width: calc(100% - 6px);
+		/* width: calc(100% - 6px); */
 
 		position: relative;
 	}

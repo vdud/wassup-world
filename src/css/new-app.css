@@ -155,3 +155,27 @@ body {
 	box-shadow: var(--boxInsetShadows);
 	background-color: var(--primaryTheme);
 }
+
+.text {
+	height: auto;
+	border-radius: var(--borderRadius);
+	/* width: clamp(640px, 80%, 800px); */
+	width: clamp(520px, 80%, 800px);
+	margin: var(--averageMargin);
+	background-color: var(--primaryTheme);
+
+	padding: 1rem 2rem;
+
+	font-size: calc(var(--fontSize) * 1.2);
+	font-family: Imprima;
+}
+.sender {
+	place-self: start;
+	border-top-left-radius: calc(var(--borderRadius) / 4);
+	text-align: left;
+}
+.yoMe {
+	text-align: right;
+	place-self: end;
+	border-bottom-right-radius: calc(var(--borderRadius) / 4);
+}

@@ -31,7 +31,7 @@ export const POST = (async ({ request }) => {
 							_id: 1,
 							name: 1,
 							nature: 1,
-							latestMessage: 1,
+							lastMessage: 1,
 							updatedAt: 1,
 						},
 					},

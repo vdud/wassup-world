@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 
-import { mainUser, groups } from '$db/collections'
+import { mainUser, groups, massagesCreate } from '$db/collections'
 import { ObjectId } from 'mongodb'
 
 export const load = (async ({ params }) => {
@@ -22,103 +22,60 @@ export const load = (async ({ params }) => {
 					await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 				}
 
-				const returnData = await groups
-					.aggregate([
-						{ $match: { _id: new ObjectId(HASHID) } },
-						{
-							$lookup: {
-								from: 'user',
-								localField: 'allUsers',
-								foreignField: '_id',
-								as: 'allUsers',
-							},
-						},
-						{
-							$lookup: {
-								from: 'messages',
-								localField: 'messages',
-								foreignField: '_id',
-								as: 'messages',
-							},
-						},
-						{
-							$project: {
-								_id: 1,
-								name: 1,
-								messages: 1,
-								allUsers: {
+				if (findGroup) {
+					const returnMsgData = await massagesCreate
+						.aggregate([
+							{ $match: { group_id: findGroup._id } },
+							{
+								$project: {
 									_id: 1,
-									name: 1,
+									message: 1,
+									createdAt: 1,
+									sender: 1,
 								},
 							},
-						},
-					])
-					.toArray()
+						])
+						.sort({ createdAt: -1 })
+						.limit(10)
+						.toArray()
 
-				return {
-					status: 200,
-					body: {
-						data: JSON.stringify(returnData[0]),
-					},
+					return {
+						status: 200,
+						groupId: JSON.stringify(findGroup._id),
+						body: {
+							data: JSON.stringify(returnMsgData),
+							groupName: findGroup.name,
+						},
+					}
 				}
 			}
 		}
-	} else {
-		// // JOIN GROUP ON VISIT //////////////////////////
-		// const againFind = await groups.findOne({ name: HASHID, allUsers: findUser._id })
-		// if (!againFind) {
-		// 	await groups.updateOne({ name: HASHID }, { $push: { allUsers: findUser._id } })
-		// }
+	}
+	const findGroup = await groups.findOne({ name: HASHID, nature: 'HASHTAGS' })
 
-		// const findGroupAgain = await groups.findOne({ name: HASHID })
-
-		// if (findGroupAgain) {
-		// 	const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: findGroupAgain._id })
-
-		// 	if (!findUserLink) {
-		// 		await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroupAgain._id } })
-		// 	}
-		// }
-
-		// const returnData = await groups.findOne({ name: HASHID })
-
-		const returnData = await groups
+	if (findGroup) {
+		const returnMsgData = await massagesCreate
 			.aggregate([
-				{ $match: { name: HASHID, nature: 'HASHTAGS' } },
-				{
-					$lookup: {
-						from: 'user',
-						localField: 'allUsers',
-						foreignField: '_id',
-						as: 'allUsers',
-					},
-				},
-				{
-					$lookup: {
-						from: 'messages',
-						localField: 'messages',
-						foreignField: '_id',
-						as: 'messages',
-					},
-				},
+				{ $match: { group_id: findGroup._id } },
 				{
 					$project: {
 						_id: 1,
-						name: 1,
-						messages: 1,
-						allUsers: {
-							_id: 1,
-							name: 1,
-						},
+						message: 1,
+						createdAt: 1,
+						sender: 1,
 					},
 				},
 			])
+			.sort({ createdAt: -1 })
+			.limit(10)
 			.toArray()
 
 		return {
 			status: 200,
+			groupId: JSON.stringify(findGroup._id),
 			body: {
-				data: JSON.stringify(returnData[0]),
+				data: JSON.stringify(returnMsgData),
+				groupName: findGroup.name,
 			},
 		}
 	}
