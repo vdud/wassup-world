@@ -11,12 +11,14 @@
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
 	import { json } from '@sveltejs/kit'
+	import { currentGroupName } from '$lib/stores/currentGroupName'
 
 	onMount(() => {
 		$currentPage = 'LOC'
 		$userGroup_id = JSON.parse(data.groupId)
 		console.log(JSON.parse(data.body.data))
 
+		$currentGroupName = data.body.groupName
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
 			const textMessages: any = document.getElementById('textMessages')
 

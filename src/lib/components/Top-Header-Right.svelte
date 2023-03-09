@@ -3,6 +3,7 @@
 	import { fullDisplay } from '$lib/stores/fullDisplay'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { user_message } from '$lib/stores/user_message'
+	import { currentGroupName } from '$lib/stores/currentGroupName'
 
 	let groupName = 'world'
 
@@ -21,7 +22,7 @@
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)/3);border-top-right-radius:calc(var(--borderRadius)/3)'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			<span>#</span>{#if groupName != ''}<span>Harry Potter</span>{/if}
+			<span>#</span>{#if groupName != ''}<span>{$currentGroupName}</span>{/if}
 		</h1>
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle} />

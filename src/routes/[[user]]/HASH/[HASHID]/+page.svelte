@@ -11,12 +11,14 @@
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
 	import { json } from '@sveltejs/kit'
+	import { currentGroupName } from '$lib/stores/currentGroupName'
 
 	onMount(() => {
 		$currentPage = 'HASH'
 		$userGroup_id = JSON.parse(data.groupId)
 		console.log('$userGroup_id', $userGroup_id)
 		console.log(JSON.parse(data.body.data))
+		$currentGroupName = data.body.groupName
 
 		console.log('data', data)
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {

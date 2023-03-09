@@ -15,6 +15,7 @@
 	import { isPUBLICgroupData } from '$lib/stores/isPUBLICgroupData'
 	import { loginResponseData } from '$lib/stores/loginResponseData'
 	import { isFlex } from '$lib/stores/isFlex'
+	import { currentGroupName } from '$lib/stores/currentGroupName'
 
 	// console.log('data', JSON.parse(data.body.data))
 	// console.log('data', data)
@@ -27,6 +28,7 @@
 		const bodyData = JSON.parse(data.body.data)
 		$isPUBLICgroupData = JSON.parse(data.body.data)
 		console.log('data', data)
+		$currentGroupName = data.body.groupName
 
 		// setTimeout(() => {
 		if ($isPUBLIC === true && $isFlex === false) {
