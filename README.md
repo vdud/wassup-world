@@ -25,8 +25,8 @@ npm run dev --host
 
 Just take look at env.d.ts so you can generate your own api for testing and development,
 
-> MongoDb
-> Pusher-Realtime
-> Google Places Api
+> 1. MongoDb,
+> 2. Pusher-Realtime,
+> 3. Google Places Api.
 
 ## also here's the website link: [`wassup.world`](https://www.wassup.world/)
