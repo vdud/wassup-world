@@ -28,10 +28,13 @@ export const load = (async ({ params }) => {
 				nature: 'PUBLIC',
 				createdAt: new Date(),
 				updatedAt: new Date(),
+				messages: [],
 			})
 
 			await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: newGroup.insertedId } })
 			await mainUser.updateOne({ _id: userReciever._id }, { $push: { allGroups: newGroup.insertedId } })
+
+			console.log('newGroup', newGroup)
 
 			const returnData = await groups
 				.aggregate([
@@ -58,10 +61,29 @@ export const load = (async ({ params }) => {
 				])
 				.toArray()
 
+			const returnMsgData = await massagesCreate
+				.aggregate([
+					{ $match: { group_id: newGroup.insertedId } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+						},
+					},
+				])
+				.sort({ createdAt: -1 })
+				.limit(10)
+				.toArray()
+
 			return {
 				status: 200,
 				body: {
 					data: JSON.stringify(returnData[0]),
+					messages: JSON.stringify(returnMsgData),
+					groupId: JSON.stringify(newGroup.insertedId),
+					groupName: `${userSender.name};${userReciever.name}`,
 				},
 			}
 		} else if (findFirstGroup) {

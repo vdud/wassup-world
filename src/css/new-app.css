@@ -179,3 +179,9 @@ body {
 	place-self: end;
 	border-bottom-right-radius: calc(var(--borderRadius) / 4);
 }
+
+@media screen and (max-width: 768px) {
+	.text {
+		width: 75%;
+	}
+}

@@ -14,6 +14,8 @@
 	import { isPUBLIC } from '$lib/stores/isPUBLIC'
 	import { isPUBLICgroupData } from '$lib/stores/isPUBLICgroupData'
 
+	// console.log('data', JSON.parse(data.body.data))
+	// console.log('data', data)
 	// $canSend = false
 
 	onMount(() => {
@@ -89,13 +91,13 @@
 	<div class="margins margin-bottom" />
 	<div class="hashMessagesContainer">
 		<div id="textMessages" />
-		{#each JSON.parse(data.body.messages) as message}
+		<!-- {#each JSON.parse(data.body.messages) as message}
 			{#if message.sender !== $userName}
 				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
 			{:else if message.sender === $userName}
 				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
 			{/if}
-		{/each}
+		{/each} -->
 	</div>
 	<div class="margins margin-top" />
 </div>
@@ -131,12 +133,6 @@
 		justify-content: center;
 		flex-direction: column-reverse;
 		flex-wrap: wrap;
-	}
-
-	@media screen and (max-width: 768px) {
-		.text {
-			width: 75%;
-		}
 	}
 
 	@media screen and (min-width: 1410px) {
