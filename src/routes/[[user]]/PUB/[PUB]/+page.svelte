@@ -1,51 +1,21 @@
 <script lang="ts">
+	import { userName } from '$lib/stores/userName'
+	import { currentGroupName } from '$lib/stores/currentGroupName'
+	import { currentPage } from '$lib/stores/currentPage'
+	import { userGroup_id } from '$lib/stores/userGroup_id'
+	import { onDestroy, onMount } from 'svelte'
+	import { pusher } from '$lib/pusher'
 	import type { PageData } from './$types'
 	export let data: PageData
 
-	import { userGroup_id } from '$lib/stores/userGroup_id'
-	import { onMount, onDestroy } from 'svelte'
-	import { json } from '@sveltejs/kit'
-	import { canSendReciever } from '$lib/stores/canSendReciever'
-	import { userName_id } from '$lib/stores/userName_id'
-	import { canSend } from '$lib/stores/canSend'
-	import { pusher } from '$lib/pusher'
-	import { currentPage } from '$lib/stores/currentPage'
-	import { userName } from '$lib/stores/userName'
-	import { isPUBLIC } from '$lib/stores/isPUBLIC'
-	import { isPUBLICgroupData } from '$lib/stores/isPUBLICgroupData'
-	import { loginResponseData } from '$lib/stores/loginResponseData'
-	import { isFlex } from '$lib/stores/isFlex'
-	import { currentGroupName } from '$lib/stores/currentGroupName'
-
-	// console.log('data', JSON.parse(data.body.data))
-	// console.log('data', data)
-	// $canSend = false
+	console.log('data', data)
 
 	onMount(() => {
-		$isPUBLIC = true
-		$currentPage = 'PUB'
-		$userGroup_id = JSON.parse(data.body.groupId)
-		const bodyData = JSON.parse(data.body.data)
-		$isPUBLICgroupData = JSON.parse(data.body.data)
-		console.log('data', data)
 		$currentGroupName = data.body.groupName
 
-		// setTimeout(() => {
-		if ($isPUBLIC === true && $isFlex === false) {
-			JSON.parse(data.body.data).allUsers.forEach((user: any) => {
-				console.log('user._id', user._id)
-				console.log('$userName_id', $userName_id)
-				if (user._id === $userName_id) {
-					$canSend = true
-					console.log('$canSend', $canSend)
-					$currentPage = 'PUB'
-				} else {
-					$canSendReciever = user._id
-					console.log('$canSendReciever', $canSendReciever)
-				}
-			})
-		}
-		// }, 2000)
+		$currentPage = 'PUB'
+		$userGroup_id = JSON.parse(data.body.groupId)
+
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
 			const textMessages: any = document.getElementById('textMessages')
 
@@ -73,32 +43,6 @@
 
 			textMessages.appendChild(div)
 		})
-
-		// JSON.parse(data.body.data).allUsers.forEach((user: any) => {
-		// 	console.log(user._id)
-		// 	console.log($userName_id)
-		// 	if (user._id !== $userName_id) {
-		// 		$canSend = true
-		// 		console.log('$canSend?', $canSend)
-		// 	} else if (user._id === $userName_id) {
-		// 		$canSend = false
-		// 		console.log('$canSend', $canSend)
-		// 	}
-		// })
-
-		// if ($isPUBLIC === true) {
-		// 	$isPUBLICgroupData.allUsers.forEach((user: any) => {
-		// 		// console.log(user._id)
-		// 		// console.log($userName_id)
-		// 		if (user._id !== $userName_id) {
-		// 		} else if (user._id === $userName_id) {
-		// 		}
-		// 	})
-		// }
-	})
-
-	onDestroy(() => {
-		$isPUBLIC = false
 	})
 </script>
 
@@ -111,11 +55,11 @@
 	<div class="margins margin-bottom" />
 	<div class="hashMessagesContainer">
 		<div id="textMessages" />
-		{#each JSON.parse(data.body.messages) as message}
-			{#if message.sender !== $userName}
-				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
-			{:else if message.sender === $userName}
-				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
+		{#each JSON.parse(data.body.messages) as { sender, message }}
+			{#if sender !== $userName}
+				<div class="text sender"><p><span style="color:var(--primary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span></p></div>
+			{:else if sender === $userName}
+				<div class="text yoMe"><p><span style="color:var(--secondary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span></p></div>
 			{/if}
 		{/each}
 	</div>

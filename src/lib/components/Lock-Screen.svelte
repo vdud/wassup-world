@@ -38,7 +38,6 @@
 
 	export async function unLock() {
 		localStorage.setItem('formData', JSON.stringify({ $userName }))
-		$canSend = false
 		$isLocked = false
 
 		if ($userName != '') {
@@ -57,19 +56,19 @@
 					console.log(data.message)
 				})
 				// if ($isFlex === false) {
-				setTimeout(() => {
-					$isPUBLICgroupData.allUsers.forEach((user: any) => {
-						console.log('user._id', user._id)
-						console.log('$userName_id', response.userName_id)
-						if (user._id === response.userName_id) {
-							$canSend = true
-							console.log('$canSend', $canSend)
-							$currentPage = 'PUB'
-						} else {
-							$canSendReciever = user._id
-						}
-					})
-				}, 2000)
+				// setTimeout(() => {
+				// 	$isPUBLICgroupData.allUsers.forEach((user: any) => {
+				// 		console.log('user._id', user._id)
+				// 		console.log('$userName_id', response.userName_id)
+				// 		if (user._id === response.userName_id) {
+				// 			$canSend = true
+				// 			console.log('$canSend', $canSend)
+				// 			$currentPage = 'PUB'
+				// 		} else {
+				// 			$canSendReciever = user._id
+				// 		}
+				// 	})
+				// }, 2000)
 				// }
 				console.log($userName_id)
 

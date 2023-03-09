@@ -5,6 +5,7 @@
 	import { canSend } from '$lib/stores/canSend'
 	import { nature } from '$lib/stores/nature'
 	import { userName } from '$lib/stores/userName'
+	import { userName_id } from '$lib/stores/userName_id'
 	import { onDestroy, onMount } from 'svelte'
 	import { currentGroupMembers } from '$lib/stores/currentGroupMembers'
 	import { currentGroupId } from '$lib/stores/currentGroupId'
@@ -24,11 +25,8 @@
 	function autoResize(e: KeyboardEvent) {
 		if (e.key === 'Enter' && !e.shiftKey) {
 			e.preventDefault()
-			if ($canSend === true && $currentPage === 'PUB') {
-				singleSocketWorker()
-			} else if ($canSend === false) {
-				socketWorker()
-			}
+			socketWorker()
+
 			$user_message = ''
 		} else {
 			const ta: any = document.getElementById('textarea')
@@ -56,8 +54,9 @@
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ message, $userGroup_id, $userName }),
+			body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
 		})
+
 		const response = await res.json()
 		console.log(response)
 		if (!res.ok) {
@@ -66,30 +65,31 @@
 
 		$user_message = ''
 	}
-	const singleSocketWorker = async () => {
-		console.log('singleSocketWorker')
-		const message = $user_message.slice(0, 999)
-		console.log(message)
-		if (message === '') {
-			return
-		}
-		const time = new Date()
 
-		const res = await fetch('/api/singleTextAreaMessages', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ message, $canSendReciever, $userGroup_id, $userName }),
-		})
-		const response = await res.json()
-		console.log(response)
-		if (!res.ok) {
-			alert(response.message)
-		}
+	// const singleSocketWorker = async () => {
+	// 	console.log('singleSocketWorker')
+	// 	const message = $user_message.slice(0, 999)
+	// 	console.log(message)
+	// 	if (message === '') {
+	// 		return
+	// 	}
+	// 	const time = new Date()
 
-		$user_message = ''
-	}
+	// 	const res = await fetch('/api/singleTextAreaMessages', {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({ message, $canSendReciever, $userGroup_id, $userName }),
+	// 	})
+	// 	const response = await res.json()
+	// 	console.log(response)
+	// 	if (!res.ok) {
+	// 		alert(response.message)
+	// 	}
+
+	// 	$user_message = ''
+	// }
 </script>
 
 <div class="textArea">
@@ -100,20 +100,9 @@
 				<textarea name="userMessage" id="textarea" spellcheck="false" minlength="1" maxlength="999" cols="0" rows="1" bind:value={$user_message} on:keydown={autoResize} />
 			</div>
 		</div>
-		{#if $canSend === true && $currentPage === 'PUB'}
-			<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
-				<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={singleSocketWorker} />
-			</div>
-		{:else}
-			<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
-				<button class="sendBtn fa fa-paper-plane  " id="formDataButton" on:click={socketWorker} />
-			</div>
-		{/if}
-		<!-- {:else if $isPUBLIC === true}
-			<div id="chat">
-				<div class="lock switch"><i class="fa fa-lock" /></div>
-			</div>
-		{/if} -->
+		<div class="{$fullScreen ? 'hidden' : 'sendButton'} switch">
+			<button class="sendBtn fa fa-paper-plane  " id="formDataButton" style="color: var(--secondary);" on:click={socketWorker} />
+		</div>
 	</div>
 </div>
 

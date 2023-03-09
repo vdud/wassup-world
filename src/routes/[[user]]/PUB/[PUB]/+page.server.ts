@@ -240,6 +240,8 @@ export const load = (async ({ params }) => {
 			.limit(10)
 			.toArray()
 
+		console.log('findGroup._id', findGroup._id.toString())
+
 		return {
 			status: 200,
 			body: {

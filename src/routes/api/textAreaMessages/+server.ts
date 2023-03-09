@@ -13,7 +13,20 @@ const pusher = new Pusher({
 })
 
 export const POST = (async ({ request }) => {
-	const { message, $userGroup_id, $userName } = await request.json()
+	const { message, $userGroup_id, $userName, $userName_id } = await request.json()
+	console.log('$userGroup_id', $userGroup_id)
+	console.log('$userName_id', $userName_id)
+	console.log('$userName', $userName)
+
+	const findUser = await mainUser.findOne({ _id: new ObjectId($userName_id) })
+	const findGroup = await groups.findOne({ _id: new ObjectId($userGroup_id) })
+
+	console.log('findGroup', findGroup)
+	console.log('findUser', findUser)
+
+	if (!findUser || !findGroup) {
+		return json({ success: false })
+	}
 
 	pusher.trigger($userGroup_id, 'inserted_Put', {
 		message: message,
@@ -27,22 +40,21 @@ export const POST = (async ({ request }) => {
 		createdAt: new Date(),
 	})
 
-	const updateGroup = await groups.updateOne({ _id: new ObjectId($userGroup_id) }, { $set: { lastMessage: message.slice(0, 48), updatedAt: new Date() }, $push: { messages: newMessage.insertedId } }, { upsert: true })
-	// const updateGroup = await groups.updateOne(
-	// 	{ _id: new ObjectId($userGroup_id) },
-	// 	{
-	// 		$set: {
-	// 			lastMessage: message.slice(0, 48),
-	// 			updatedAt: new Date(),
-	// 		},
-	// 		$push: {
-	// 			message: newMessage.insertedId,
-	// 		},
-	// 	},
-	// 	{ upsert: true },
-	// )
+	if (findGroup.nature === 'PUBLIC') {
+		// check if group has user init
+		const findUserInGroup = await groups.findOne({ _id: new ObjectId($userGroup_id), allUsers: new ObjectId($userName_id) })
+		if (!findUserInGroup) {
+			await groups.updateOne({ _id: new ObjectId($userGroup_id) }, { $set: { lastMessage: message.slice(0, 48), updatedAt: new Date(), name: `${findGroup.name};${$userName}` }, $push: { messages: newMessage.insertedId }, $addToSet: { allUsers: new ObjectId($userName_id) } }, { upsert: true })
+		}
+	} else {
+		// const updateGroup = await groups.updateOne({ _id: new ObjectId($userGroup_id) }, { $set: { lastMessage: message.slice(0, 48), updatedAt: new Date() }, $push: { messages: newMessage.insertedId, allUsers } }, { upsert: true })
+		const updateGroup = await groups.updateOne({ _id: new ObjectId($userGroup_id) }, { $set: { lastMessage: message.slice(0, 48), updatedAt: new Date() }, $addToSet: { allUsers: new ObjectId($userName_id), messages: newMessage.insertedId } }, { upsert: true })
+		const upDateUser = await mainUser.updateOne({ _id: new ObjectId($userName_id) }, { $addToSet: { allGroups: new ObjectId($userGroup_id) } })
+	}
 
-	console.log('updateGroup', updateGroup)
+	// console.log('newMessage', newMessage)
+	// console.log('upDateUser', upDateUser)
+	//
 
 	return json({ success: true })
 }) satisfies RequestHandler

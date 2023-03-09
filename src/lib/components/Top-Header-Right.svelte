@@ -22,7 +22,7 @@
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)/3);border-top-right-radius:calc(var(--borderRadius)/3)'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			<span>#</span>{#if groupName != ''}<span>{$currentGroupName}</span>{/if}
+			{#if groupName != ''}<span>{$currentGroupName}</span>{/if}
 		</h1>
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle} />
@@ -31,7 +31,7 @@
 
 <style>
 	.chatHeaderText {
-		font-family: UBOLD;
+		font-family: ULight;
 		color: var(--primary);
 
 		color: var(--primaryThemeInverted);

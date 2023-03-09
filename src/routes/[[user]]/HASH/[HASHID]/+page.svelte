@@ -14,6 +14,8 @@
 	import { currentGroupName } from '$lib/stores/currentGroupName'
 
 	onMount(() => {
+		$canSend = false
+		$isPUBLIC = false
 		$currentPage = 'HASH'
 		$userGroup_id = JSON.parse(data.groupId)
 		console.log('$userGroup_id', $userGroup_id)
