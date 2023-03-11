@@ -11,6 +11,7 @@ export const loginResponseData = writable({
 				lastMessage: 'string',
 				nature: 'string',
 				updatedAt: 0,
+				latestMessageSender: 'string',
 			},
 		],
 		formatedHASHTAGSdata: [
@@ -19,6 +20,7 @@ export const loginResponseData = writable({
 				lastMessage: 'string',
 				nature: 'string',
 				updatedAt: 0,
+				latestMessageSender: 'string',
 			},
 		],
 		formatedLOCdata: [
@@ -27,6 +29,7 @@ export const loginResponseData = writable({
 				lastMessage: 'string',
 				nature: 'string',
 				updatedAt: 0,
+				latestMessageSender: 'string',
 			},
 		],
 	},

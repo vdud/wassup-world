@@ -108,6 +108,16 @@
 		.boxRight {
 			right: var(--averageMargin);
 		}
+
+		.chatHeaderText {
+			/* scale: 0.9; */
+			font-size: 1rem;
+			padding-top: 23px;
+		}
+
+		.notRotate {
+			transform: rotate(90deg);
+		}
 	}
 
 	@media screen and (min-width: 1410px) {

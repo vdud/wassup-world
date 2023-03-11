@@ -33,6 +33,7 @@ export const POST = (async ({ request }) => {
 							nature: 1,
 							lastMessage: 1,
 							updatedAt: 1,
+							latestMessageSender: 1,
 						},
 					},
 				},
