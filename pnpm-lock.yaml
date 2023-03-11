@@ -19,6 +19,7 @@ specifiers:
   pusher-js: ^8.0.1
   svelte: ^3.54.0
   svelte-check: ^3.0.1
+  svelte-textarea-autoresize: ^1.0.0
   tslib: ^2.4.1
   typescript: ^4.9.3
   vite: ^4.0.0
@@ -29,6 +30,7 @@ dependencies:
   mongodb: 5.1.0
   pusher: 5.1.2
   pusher-js: 8.0.1
+  svelte-textarea-autoresize: 1.0.0
 
 devDependencies:
   '@playwright/test': 1.31.2
@@ -2243,6 +2245,10 @@ packages:
       svelte: 3.55.1
       typescript: 4.9.5
     dev: true
+
+  /svelte-textarea-autoresize/1.0.0:
+    resolution: {integrity: sha512-n+t7GnkhLkKHJokrcSNlH8PiiLvu5bTgEwhpEsvVdAb4gpQ21rbyyHqvRYYa4quFv5vnQVjgxhYR6oq0yDdhdw==}
+    dev: false
 
   /svelte/3.55.1:
     resolution: {integrity: sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==}

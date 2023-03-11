@@ -12,8 +12,10 @@
 	import { userName_id } from '$lib/stores/userName_id'
 	import { json } from '@sveltejs/kit'
 	import { currentGroupName } from '$lib/stores/currentGroupName'
+	import { isFlex } from '$lib/stores/isFlex'
 
 	onMount(() => {
+		$isFlex = false
 		$canSend = false
 		$isPUBLIC = false
 		$currentPage = 'HASH'
@@ -28,6 +30,7 @@
 
 			const div = document.createElement('div')
 			div.classList.add('text')
+			div.classList.add('newText')
 			if (data.sender === $userName) {
 				div.classList.add('yoMe')
 			} else {
@@ -64,8 +67,8 @@
 
 <div class="hashContainer">
 	<div class="margins margin-bottom" />
+	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		<div id="textMessages" />
 		{#each JSON.parse(data.body.data) as message}
 			{#if message.sender !== $userName}
 				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
@@ -81,11 +84,12 @@
 	#textMessages {
 		width: 100%;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column-reverse;
+		flex-direction: column;
 		flex-wrap: wrap;
+
+		background-color: var(--primaryTheme);
 	}
+
 	.margin-bottom {
 		padding: 1.8rem;
 	}

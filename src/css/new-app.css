@@ -185,3 +185,7 @@ body {
 		width: 75%;
 	}
 }
+
+.newText {
+	background-color: var(--secondaryTheme);
+}

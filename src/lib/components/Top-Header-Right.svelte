@@ -5,6 +5,9 @@
 	import { user_message } from '$lib/stores/user_message'
 	import { currentGroupName } from '$lib/stores/currentGroupName'
 
+	import arrowButton from '$lib/assets/arrowButton.svg'
+	import { currentPage } from '$lib/stores/currentPage'
+
 	let groupName = 'world'
 
 	const toggle = () => {
@@ -22,22 +25,44 @@
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)/3);border-top-right-radius:calc(var(--borderRadius)/3)'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			{#if groupName != ''}<span>{$currentGroupName}</span>{/if}
+			{#if $currentPage === 'HASH'}<span>#{$currentGroupName.toUpperCase()}</span>{:else}<span>{$currentGroupName.toUpperCase()}</span>{/if}
 		</h1>
 	</div>
-	<button class="absoluteBox boxLeft" on:click={toggle} />
+	<button class="absoluteBox boxLeft" on:click={toggle}><img class="arrow {$isFlex ? 'rotate' : 'notRotate'}" src={arrowButton} alt="arrow" /></button>
 	<button class="absoluteBox boxRight" />
 </div>
 
 <style>
+	.rotate {
+		transform: rotate(90deg);
+	}
+	.notRotate {
+		transform: rotate(-90deg);
+	}
+	.absoluteBox {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 20px;
+	}
 	.chatHeaderText {
-		font-family: ULight;
+		font-family: UBold;
 		color: var(--primary);
 
 		color: var(--primaryThemeInverted);
 		opacity: var(--dull);
 
 		padding: 1rem;
+	}
+	.arrow {
+		width: 24px;
+		height: 24px;
+		margin: 0;
+		padding: 0;
+		background-color: transparent;
+		/* transform: rotate(90deg); */
+		filter: invert(0.9);
+		transition: transform 0.3s ease-in-out;
 	}
 
 	.topHeaderRight {

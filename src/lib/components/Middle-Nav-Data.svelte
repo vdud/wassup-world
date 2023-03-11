@@ -24,7 +24,7 @@
 <div class="middleData">
 	<div class="gradient" />
 	<div class="paddedData">
-		<div class="natureBox " style="order:5">
+		<!-- <div class="natureBox " style="order:5">
 			<div class="natureLogo"><i class="fa fa-ad faAd" /></div>
 			<div class="natureDataBox">
 				<div class="contact">
@@ -43,7 +43,7 @@
 					</p>
 				</button>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="natureBox " style={$nature === 'LOCATION' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-location-pin faLoc" /></div>

@@ -15,6 +15,7 @@
 	import TopHeaderRight from '$lib/components/Top-Header-Right.svelte'
 	import BottomNav from '$lib/components/Bottom-Nav.svelte'
 	import BottomTextArea from '$lib/components/Bottom-Text-Area.svelte'
+	import BottomTextArea2 from '$lib/components/Bottom-Text-Area-2.svelte'
 	import MiddleSearchData from '$lib/components/Middle-Search-Data.svelte'
 	import MiddleNavData from '$lib/components/Middle-Nav-Data.svelte'
 	import LockScreen from '$lib/components/Lock-Screen.svelte'
@@ -27,6 +28,7 @@
 	}
 	import { onDestroy, onMount } from 'svelte'
 	import { canSend } from '$lib/stores/canSend'
+	import BottomTextArea_2 from '$lib/components/Bottom-Text-Area-2.svelte'
 
 	let zIndex = 0
 
@@ -53,15 +55,15 @@
 	})
 
 	onDestroy(() => {
-		// pusher.disconnect()
+		pusher.disconnect()
 	})
 </script>
 
 <div class="main">
+	<div class="absoluteFirstWindow lockScreen" style={$isLocked ? '' : 'display:none;'}>
+		<LockScreen />
+	</div>
 	<div class="window">
-		<div class="absoluteFirstWindow lockScreen" style={$isLocked ? '' : 'display:none;'}>
-			<LockScreen />
-		</div>
 		<div class="windows windowLeft {$isFlex ? 'show' : 'notShow'} {$isFlex ? 'width' : 'nonWidth'}">
 			<div class="windowContainers container1 leftMargin">
 				<TopHeaderLeft />
@@ -84,7 +86,7 @@
 			<div class="windowContainers container2">
 				<slot />
 			</div>
-			<div class="windowContainers container3"><BottomTextArea /></div>
+			<div class="windowContainers container3"><BottomTextArea2 /></div>
 		</div>
 	</div>
 </div>
@@ -158,6 +160,10 @@
 		position: absolute;
 		bottom: 0;
 		overflow: visible;
+
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
 
 		background-color: transparent;
 	}
@@ -246,9 +252,9 @@
 		.main {
 			bottom: 0;
 			right: 0;
-			top: 0;
+			/* top: 0; */
 			left: 0;
-			/* position: relative; */
+			position: absolute;
 			height: 100%;
 			width: 100%;
 		}
@@ -298,11 +304,15 @@
 			margin-right: var(--averageMargin);
 			border-bottom-right-radius: var(--borderRadius);
 		}
+		/* .main {
+			background-color: aliceblue;
+		} */
 		.window {
-			border-radius: calc(var(--borderRadius));
+			/* border-radius: calc(var(--borderRadius)); */
 			height: 98%;
 			margin: 10px;
 			border: 1px solid var(--tertiaryTheme);
+			background-color: var(--tertiaryTheme);
 
 			overflow: hidden;
 		}

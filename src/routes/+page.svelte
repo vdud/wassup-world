@@ -1,12 +1,55 @@
+<script>
+	import { autoresize } from 'svelte-textarea-autoresize'
+</script>
+
 <div class="middleScroll">
 	<div class="slot">
 		<div class="whiteSpace " />
 		<div class="text sender" />
 		<div class="text yoMe" />
+
+		<!-- <div class="textAreeaBox">
+			<div class="button" />
+			<textarea use:autoresize class="textArea" placeholder="Type something long into me.." />
+		</div> -->
 	</div>
 </div>
 
 <style>
+	.textAreeaBox {
+		width: 100%;
+		height: fit-content;
+		background-color: var(--primary);
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+
+		position: relative;
+	}
+
+	.button {
+		position: absolute;
+		padding: 1.2rem;
+		background-color: var(--red);
+
+		right: 0.45rem;
+		bottom: 0.45rem;
+		margin: 10px;
+	}
+	.textArea {
+		width: 100%;
+		height: 100%;
+		margin: 10px;
+		padding: 1rem;
+		border: none;
+		outline: none;
+		resize: none;
+		font-size: 1.2rem;
+		border-radius: calc(var(--borderRadius) / 4);
+
+		max-height: 100px;
+	}
+
 	.text {
 		height: 100px;
 		border-radius: var(--borderRadius);

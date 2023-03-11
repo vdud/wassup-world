@@ -6,11 +6,13 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { pusher } from '$lib/pusher'
 	import type { PageData } from './$types'
+	import { isFlex } from '$lib/stores/isFlex'
 	export let data: PageData
 
 	console.log('data', data)
 
 	onMount(() => {
+		$isFlex = false
 		$currentGroupName = data.body.groupName
 
 		$currentPage = 'PUB'
@@ -21,6 +23,7 @@
 
 			const div = document.createElement('div')
 			div.classList.add('text')
+			div.classList.add('newText')
 			if (data.sender === $userName) {
 				div.classList.add('yoMe')
 			} else {
@@ -53,8 +56,8 @@
 
 <div class="hashContainer">
 	<div class="margins margin-bottom" />
+	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		<div id="textMessages" />
 		{#each JSON.parse(data.body.messages) as { sender, message }}
 			{#if sender !== $userName}
 				<div class="text sender"><p><span style="color:var(--primary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span></p></div>
@@ -70,11 +73,12 @@
 	#textMessages {
 		width: 100%;
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column-reverse;
+		flex-direction: column;
 		flex-wrap: wrap;
+
+		background-color: var(--primaryTheme);
 	}
+
 	.margin-bottom {
 		padding: 1.8rem;
 	}
@@ -97,6 +101,12 @@
 		justify-content: center;
 		flex-direction: column-reverse;
 		flex-wrap: wrap;
+	}
+
+	@media screen and (max-width: 768px) {
+		.text {
+			width: 75%;
+		}
 	}
 
 	@media screen and (min-width: 1410px) {

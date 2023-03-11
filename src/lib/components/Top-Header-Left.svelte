@@ -159,11 +159,14 @@
 
 		height: 20px;
 
-		border-radius: var(--borderRadius);
+		border-radius: calc(var(--borderRadius) / 3);
 		margin-left: calc(var(--averageMargin) * -0.25);
 
 		color: var(--tertiaryThemeInverted);
 		padding-left: calc(var(--averageMargin) * 2);
+		padding-top: 3px;
+		padding-bottom: 3px;
+		/* padding: 1rem; */
 
 		font-family: UBold;
 	}
