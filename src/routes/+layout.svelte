@@ -15,7 +15,6 @@
 	import TopHeaderRight from '$lib/components/Top-Header-Right.svelte'
 	import BottomNav from '$lib/components/Bottom-Nav.svelte'
 	import BottomTextArea from '$lib/components/Bottom-Text-Area.svelte'
-	import BottomTextArea2 from '$lib/components/Bottom-Text-Area-2.svelte'
 	import MiddleSearchData from '$lib/components/Middle-Search-Data.svelte'
 	import MiddleNavData from '$lib/components/Middle-Nav-Data.svelte'
 	import LockScreen from '$lib/components/Lock-Screen.svelte'
@@ -28,7 +27,7 @@
 	}
 	import { onDestroy, onMount } from 'svelte'
 	import { canSend } from '$lib/stores/canSend'
-	import BottomTextArea_2 from '$lib/components/Bottom-Text-Area-2.svelte'
+	import BottomTextArea_2 from '$lib/components/Bottom-Text-Area.svelte'
 
 	let zIndex = 0
 
@@ -44,7 +43,7 @@
 				console.error(err)
 			}
 		} else {
-			$nature = 'HASHTAG'
+			$nature = 'LOCATION'
 		}
 
 		const PlacesApi = document.createElement('script')
@@ -86,7 +85,7 @@
 			<div class="windowContainers container2">
 				<slot />
 			</div>
-			<div class="windowContainers container3"><BottomTextArea2 /></div>
+			<div class="windowContainers container3"><BottomTextArea /></div>
 		</div>
 	</div>
 </div>
