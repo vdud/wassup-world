@@ -16,9 +16,11 @@
 	import { canSend } from '$lib/stores/canSend'
 
 	$: $searchInput = $searchInput
+		// .trim()
 		.replace(/\s/g, '-')
 		.replace(/[^a-zA-Z0-9-]/g, '')
 		.toLowerCase()
+		.replace(/-+/g, '-')
 
 	let name = 'world'
 
@@ -74,13 +76,14 @@
 	}
 
 	async function handleClick(event: any) {
+		const searchInputData: any = $searchInput.trim()
 		if ($searchInput != '') {
 			const res = await fetch('/api/searchData', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ data: $searchInput }),
+				body: JSON.stringify({ searchInputData }),
 			})
 			const response = await res.json()
 			$searchData = response.data
@@ -124,7 +127,9 @@
 			<span style="color: var(--secondary)">wassup </span><span>{$userName}</span>{#if $userName != ''}<span>!</span>{/if}
 		</h1>
 	</button>
-	<div class="searchBox"><input class="searchInput" placeholder="search" bind:value={$searchInput} on:keyup={handleClick} on:keydown={handleDown} /></div>
+	<div class="searchBox">
+		<input class="searchInput" placeholder="search" bind:value={$searchInput} on:keyup={handleClick} on:keydown={handleDown} />
+	</div>
 	<!-- <div class="absoluteBox"> -->
 	<button class="absoluteBox icon" on:click={toggle}>
 		{#if $nature === 'PUBLIC'}

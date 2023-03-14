@@ -3,8 +3,8 @@ import type { RequestHandler } from './$types'
 import { mainUser, groups } from '$db/collections'
 
 export const POST = (async ({ request }) => {
-	const { data } = await request.json()
-	console.log(data)
+	const { searchInputData } = await request.json()
+	console.log(searchInputData)
 	// const searchUserData = {}
 	// const searchGroupData = {}
 
@@ -12,7 +12,7 @@ export const POST = (async ({ request }) => {
 		.aggregate([
 			{
 				$match: {
-					name: { $regex: data, $options: 'i' },
+					name: { $regex: searchInputData, $options: 'i' },
 				},
 			},
 			{
@@ -31,7 +31,7 @@ export const POST = (async ({ request }) => {
 		.aggregate([
 			{
 				$match: {
-					name: { $regex: data, $options: 'i' },
+					name: { $regex: searchInputData, $options: 'i' },
 					nature: 'HASHTAGS',
 				},
 			},
