@@ -43,6 +43,9 @@
 	--boxShadowsBlur: 0px 0px 25px #1119, 0px 0px 8px #1118;
 	--boxInsetShadows: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
 
+	--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
+	--boxNeoShadowsInverted: 1px 1px 2px #111111, -2px -2px 2px #414141;
+
 	--fontSize: 16px;
 }
 

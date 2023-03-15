@@ -154,7 +154,7 @@
 	@keyframes loginOut {
 		0% {
 			color: #cd7b41;
-			box-shadow: 2px 2px 3px #111111, -2px -2px 3px #414141;
+			box-shadow: var(--boxNeoShadows);
 		}
 		100% {
 			color: #1f1f1f;
@@ -169,7 +169,7 @@
 			color: #1f1f1f;
 		}
 		100% {
-			box-shadow: 2px 2px 3px #111111, -2px -2px 3px #414141;
+			box-shadow: var(--boxNeoShadows);
 			color: #cd7b41;
 		}
 	}
@@ -215,7 +215,7 @@
 		justify-content: space-between;
 	}
 	.top {
-		height: 325px;
+		height: 250px;
 		width: 100%;
 		/* border-top-left-radius: var(--borderRadius);
 		border-top-right-radius: var(--borderRadius); */

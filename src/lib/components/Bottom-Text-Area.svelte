@@ -44,7 +44,7 @@
 
 <div class="textAreeaBox">
 	<button class="button" on:click={socketWorker} style="{$currentPage === 'PUB' ? 'background-color:var(--secondary)' : ''}{$currentPage === 'HASH' ? 'background-color:var(--primary)' : ''}{$currentPage === 'LOC' ? 'background-color:var(--secOptDark)' : ''}"><img class="sendButtonLogo" src={sendButtonLogo} alt="sendbutton" /></button>
-	<textarea use:autoresize class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type something long into me.." />
+	<textarea use:autoresize class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type your message" />
 </div>
 
 <style>
@@ -56,7 +56,7 @@
 	}
 	.textAreeaBox {
 		width: 100%;
-		height: fit-content;
+		height: calc(max-content + 10px);
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
@@ -120,7 +120,7 @@
 		border-radius: calc(var(--borderRadius) / 3);
 
 		background-color: var(--primaryTheme);
-		box-shadow: var(--boxInsetShadows), var(--boxShadows);
+		box-shadow: var(--boxInsetShadows);
 
 		max-height: 100px;
 	}

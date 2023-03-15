@@ -48,7 +48,7 @@
 	overflow: hidden;
 
 	margin-left: var(--averageMargin);
-	border-left: 2px solid var(--secondaryThemeInverted);
+	border-left: 2px solid var(--tertiaryThemeInverted);
 
 	display: flex;
 	flex-direction: column;
@@ -59,7 +59,7 @@
 	transition: border-left 100ms ease-out;
 }
 .locBox:hover {
-	border-left: 8px solid var(--secondaryThemeInverted);
+	border-left: 8px solid var(--tertiaryThemeInverted);
 }
 .locBoxItems {
 	width: auto;

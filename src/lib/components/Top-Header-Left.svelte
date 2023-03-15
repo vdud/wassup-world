@@ -144,6 +144,9 @@
 </div>
 
 <style>
+	.icon {
+		scale: 1.4;
+	}
 	.fa-hashtag {
 		color: var(--primary);
 	}
@@ -210,13 +213,13 @@
 
 		border-bottom-left-radius: var(--borderRadius);
 
-		box-shadow: var(--boxShadows);
+		/* box-shadow: var(--boxShadows); */
 
 		overflow: visible;
 	}
 	.textBox {
-		width: 435px;
-		height: 100%;
+		width: max-content;
+		height: max-content;
 		padding-left: var(--averageMargin);
 		background-color: transparent;
 		margin: 0;

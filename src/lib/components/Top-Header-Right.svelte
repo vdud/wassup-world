@@ -49,7 +49,7 @@
 	}
 	.chatHeaderText {
 		font-family: UBold;
-		color: var(--disabled);
+		color: var(--tertiaryThemeInverted);
 
 		/* color: var(--primaryThemeInverted); */
 		/* opacity: var(--dull); */
@@ -75,7 +75,7 @@
 
 		border-bottom-right-radius: var(--borderRadius);
 
-		box-shadow: var(--boxShadows);
+		/* box-shadow: var(--boxShadows); */
 
 		/* margin: 0 var(--topLeftMargin) 0 0; */
 		/* transform: translateX(var(--topRightMargin)); */

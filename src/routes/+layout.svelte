@@ -175,6 +175,7 @@
 		right: 0;
 		left: 0;
 		top: 0;
+		background-color: var(--primaryTheme);
 
 		display: flex;
 		align-items: center;
