@@ -75,7 +75,39 @@
 		]
 	}
 
+	//TypeScript DebounceFunction
+	type DebouncedFunction<T extends (...args: any[]) => any> = (...args: Parameters<T>) => void
+
+	function debounce<T extends (...args: any[]) => any>(func: T, wait: number): DebouncedFunction<T> {
+		let timeout: ReturnType<typeof setTimeout>
+		return function executedFunction(this: unknown, ...args: Parameters<T>) {
+			const later = () => {
+				timeout = undefined!
+				func.apply(this, args)
+			}
+			clearTimeout(timeout)
+			timeout = setTimeout(later, wait)
+		}
+	}
+
+	//DebouncedSearchData
+	const debouncedHandleClick = debounce(handleClick, 1000)
+
+	//Main Function
 	async function handleClick(event: any) {
+		//Location-Google-Services-Prediction
+
+		const service = new google.maps.places.AutocompleteService()
+
+		try {
+			const predictions = service.getPlacePredictions({ input: $searchInput }).then((predictions: any) => {
+				$locationPrediction = predictions.predictions
+			})
+		} catch (e) {
+			console.log(e)
+		}
+
+		// search-Data-GET
 		const searchInputData: any = $searchInput.trim()
 		if ($searchInput != '') {
 			const res = await fetch('/api/searchData', {
@@ -91,16 +123,6 @@
 			if (!res.ok) {
 				alert('failed to search data')
 				alert(response.message)
-			}
-
-			const service = new google.maps.places.AutocompleteService()
-
-			try {
-				const predictions = service.getPlacePredictions({ input: $searchInput }).then((predictions: any) => {
-					$locationPrediction = predictions.predictions
-				})
-			} catch (e) {
-				console.log(e)
 			}
 		} else {
 			$locationPrediction = [
@@ -128,7 +150,7 @@
 		</h1>
 	</button>
 	<div class="searchBox">
-		<input class="searchInput" placeholder="SEARCH THE WORLD" bind:value={$searchInput} on:keyup={handleClick} on:keydown={handleDown} />
+		<input class="searchInput" placeholder="SEARCH THE WORLD" bind:value={$searchInput} on:keyup={debouncedHandleClick} on:keydown={handleDown} />
 		<!-- {#if $isFlex === true} -->
 		<button class="searchButton" style={$isFlex === true ? 'opacity:var(--extraDull);' : 'opacity:0;'} disabled>
 			<i class="fa fa-search" />
