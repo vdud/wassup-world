@@ -20,11 +20,11 @@
 		$isPUBLIC = false
 		$currentPage = 'HASH'
 		$userGroup_id = JSON.parse(data.groupId)
-		console.log('$userGroup_id', $userGroup_id)
-		console.log(JSON.parse(data.body.data))
+		// console.log('$userGroup_id', $userGroup_id)
+		// console.log(JSON.parse(data.body.data))
 		$currentGroupName = data.body.groupName
 
-		console.log('data', data)
+		// console.log('data', data)
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
 			const textMessages: any = document.getElementById('textMessages')
 

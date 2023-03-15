@@ -10,8 +10,6 @@
 
 	import { pusher } from '$lib/pusher'
 
-	import type { LayoutData } from './$types'
-
 	import TopHeaderLeft from '$lib/components/Top-Header-Left.svelte'
 	import TopHeaderRight from '$lib/components/Top-Header-Right.svelte'
 	import BottomNav from '$lib/components/Bottom-Nav.svelte'
@@ -20,8 +18,9 @@
 	import MiddleNavData from '$lib/components/Middle-Nav-Data.svelte'
 	import LockScreen from '$lib/components/Lock-Screen.svelte'
 
-	export let data: LayoutData
-	console.log(data)
+	// import type { LayoutData } from './$types'
+	// export let data: LayoutData
+	// console.log(data)
 
 	function initMap() {
 		alert('ok')
@@ -208,7 +207,6 @@
 
 		background-color: var(--secondaryTheme);
 	}
-
 	@media screen and (max-width: 768px) {
 		.leftMargin {
 			margin-left: 0px;
@@ -306,9 +304,9 @@
 			margin-right: var(--averageMargin);
 			border-bottom-right-radius: var(--borderRadius);
 		}
-		/* .main {
-			background-color: aliceblue;
-		} */
+		.main {
+			background-color: var(--primaryTheme);
+		}
 		.window {
 			/* border-radius: calc(var(--borderRadius)); */
 			height: 98%;
@@ -317,6 +315,15 @@
 			background-color: var(--tertiaryTheme);
 
 			overflow: hidden;
+
+			border-radius: 10px;
+			overflow: hidden;
+		}
+		.windows {
+			border-radius: calc(var(--borderRadius) / 2);
+			overflow: hidden;
+
+			background: var(--secondaryTheme);
 		}
 
 		.overMargin {

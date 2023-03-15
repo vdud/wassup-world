@@ -10,7 +10,7 @@ export const load = (async ({ params }) => {
 
 	if (user) {
 		const findUser = await mainUser.findOne({ _id: new ObjectId(user) })
-		console.log(findUser)
+		// console.log(findUser)
 		if (findUser) {
 			const findGroup = await groups.findOne({ _id: new ObjectId(SLUG) })
 			if (findGroup) {

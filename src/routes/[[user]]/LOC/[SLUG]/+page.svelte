@@ -20,7 +20,7 @@
 		$isPUBLIC = false
 		$currentPage = 'LOC'
 		$userGroup_id = JSON.parse(data.groupId)
-		console.log(JSON.parse(data.body.data))
+		// console.log(JSON.parse(data.body.data))
 
 		$currentGroupName = data.body.groupName
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {

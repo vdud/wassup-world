@@ -16,11 +16,11 @@
 		}
 	}
 	const socketWorker = async () => {
-		console.log('socketWorker')
+		// console.log('socketWorker')
 		const message = $user_message.slice(0, 999).trim()
 		$user_message = ''
 
-		console.log(message)
+		// console.log(message)
 		if (message === '') {
 			return
 		}

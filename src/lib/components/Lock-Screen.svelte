@@ -117,7 +117,7 @@
 				// 	})
 				// }, 2000)
 				// }
-				console.log($userName_id)
+				// console.log($userName_id)
 
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
 					console.log(element._id)

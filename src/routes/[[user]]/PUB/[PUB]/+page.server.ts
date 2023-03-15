@@ -7,22 +7,22 @@ import { ObjectId } from 'mongodb'
 export const load = (async ({ params }) => {
 	const { user, PUB } = params
 
-	console.log(user)
-	console.log(PUB)
+	// console.log(user)
+	// console.log(PUB)
 
 	if (user) {
 		const userSender = await mainUser.findOne({ _id: new ObjectId(user) })
 		const userReciever = await mainUser.findOne({ _id: new ObjectId(PUB) })
-		console.log('userSender', userSender)
-		console.log('userReciever', userReciever)
+		// console.log('userSender', userSender)
+		// console.log('userReciever', userReciever)
 		if (!userSender || !userReciever) {
 			return
 		}
 
 		const findFirstGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}`, nature: 'PUBLIC' })
 		const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}`, nature: 'PUBLIC' })
-		console.log('findFirstGroup', findFirstGroup)
-		console.log('findSecondGroup', findSecondGroup)
+		// console.log('findFirstGroup', findFirstGroup)
+		// console.log('findSecondGroup', findSecondGroup)
 
 		if (!findFirstGroup && !findSecondGroup) {
 			const newGroup = await groups.insertOne({
@@ -37,7 +37,7 @@ export const load = (async ({ params }) => {
 			await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: newGroup.insertedId } })
 			await mainUser.updateOne({ _id: userReciever._id }, { $push: { allGroups: newGroup.insertedId } })
 
-			console.log('newGroup', newGroup)
+			// console.log('newGroup', newGroup)
 
 			const returnData = await groups
 				.aggregate([
@@ -196,7 +196,7 @@ export const load = (async ({ params }) => {
 
 	// if (!user) {
 	const findGroup = await groups.findOne({ name: PUB, nature: 'PUBLIC' })
-	console.log('findGroup', findGroup)
+	// console.log('findGroup', findGroup)
 
 	if (findGroup) {
 		const returnData = await groups
@@ -240,7 +240,7 @@ export const load = (async ({ params }) => {
 			.limit(10)
 			.toArray()
 
-		console.log('findGroup._id', findGroup._id.toString())
+		// console.log('findGroup._id', findGroup._id.toString())
 
 		return {
 			status: 200,

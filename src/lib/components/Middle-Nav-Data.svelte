@@ -5,7 +5,7 @@
 	import { json } from '@sveltejs/kit'
 	import { timeSince } from '$lib/timeFormat'
 
-	console.log($loginResponseData)
+	// console.log($loginResponseData)
 
 	const toggleLoc = (groupName: any) => {
 		window.location.pathname = '/LOC/' + groupName

@@ -9,7 +9,7 @@
 	import { isFlex } from '$lib/stores/isFlex'
 	export let data: PageData
 
-	console.log('data', data)
+	// console.log('data', data)
 
 	onMount(() => {
 		$isFlex = false

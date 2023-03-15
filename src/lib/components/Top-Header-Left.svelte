@@ -128,7 +128,12 @@
 		</h1>
 	</button>
 	<div class="searchBox">
-		<input class="searchInput" placeholder="search" bind:value={$searchInput} on:keyup={handleClick} on:keydown={handleDown} />
+		<input class="searchInput" placeholder="SEARCH THE WORLD" bind:value={$searchInput} on:keyup={handleClick} on:keydown={handleDown} />
+		<!-- {#if $isFlex === true} -->
+		<button class="searchButton" style={$isFlex === true ? 'opacity:var(--extraDull);' : 'opacity:0;'} disabled>
+			<i class="fa fa-search" />
+		</button>
+		<!-- {/if} -->
 	</div>
 	<!-- <div class="absoluteBox"> -->
 	<button class="absoluteBox icon" on:click={toggle}>
@@ -171,7 +176,7 @@
 		margin-left: calc(var(--averageMargin) * -0.25);
 
 		color: var(--tertiaryThemeInverted);
-		padding-left: calc(var(--averageMargin) * 2);
+		padding-left: calc(var(--averageMargin) * 3);
 		padding-top: 3px;
 		padding-bottom: 3px;
 		/* padding: 1rem; */
@@ -182,10 +187,11 @@
 	.searchInput::placeholder {
 		color: var(--primaryThemeInverted);
 		opacity: var(--extraDull);
-		font-family: ULight;
+		font-family: UBold;
 	}
 	.searchBox {
 		position: absolute;
+
 		bottom: 14px;
 		right: 0;
 		left: 0;
@@ -197,6 +203,20 @@
 		width: 100%;
 
 		/* margin-left: calc(var(--averageMargin) * -0.5); */
+	}
+	.searchButton {
+		position: absolute;
+		left: calc(var(--averageMargin) * 2);
+		top: 0;
+		height: 100%;
+		width: 20px;
+		background-color: transparent;
+		color: var(--tertiaryThemeInverted);
+		opacity: var(--extraDull);
+
+		pointer-events: none;
+
+		transition: opacity 50ms ease-in-out;
 	}
 	.headerText {
 		font-family: Imprima;
