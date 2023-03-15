@@ -10,23 +10,17 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { canSend } from '$lib/stores/canSend'
 	import { canSendReciever } from '$lib/stores/canSendReciever'
-	import { toggleTheme } from '$lib/stores/toggleTheme'
-	$: if ($userName) $userName = $userName.toLowerCase()
+	$: if ($userName) $userName = $userName.toLowerCase().trim()
 
 	import { pusher } from '$lib/pusher'
 	import Pusher from 'pusher-js'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isFlex } from '$lib/stores/isFlex'
+	import { isDarkMode } from '$lib/stores/isDarkMode'
 
-	// const toggleThemeButton = () => {
-	// 	if ($toggleTheme === 'dark') {
-	// 		console.log('dark')
-	// 		$toggleTheme = 'light'
-	// 	} else {
-	// 		$toggleTheme = 'dark'
-	// 		console.log('light')
-	// 	}
-	// }
+	const toggleThemeButton = () => {
+		$isDarkMode = !$isDarkMode
+	}
 
 	onMount(() => {
 		const savedDataString = localStorage.getItem('formData')
@@ -45,52 +39,6 @@
 				console.error(err)
 			}
 		}
-
-		// const themeToggle = document.getElementById('theme-toggle')
-		// const root = document.documentElement
-		// themeToggle?.addEventListener('click', () => {
-		// 	if (root.style.getPropertyValue('--primaryTheme') === '#1f1f1f') {
-		// 		$toggleTheme = 'light'
-		// 		// Switch to light mode
-		// 		root.style.setProperty('--primaryTheme', '#fff')
-		// 		root.style.setProperty('--secondaryTheme', '#eee')
-		// 		root.style.setProperty('--tertiaryTheme', '#eee5')
-
-		// 		root.style.setProperty('--boxShadows', '0px 0px 8px #1119, 0px 0px 1px #111')
-		// 		root.style.setProperty('--boxShadowsBlur', '0px 0px 25px #1119, 0px 0px 8px #1118')
-		// 		root.style.setProperty('--boxInsetShadows', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
-
-		// 		root.style.setProperty('--primaryThemeInverted', '#1f1f1f')
-		// 		root.style.setProperty('--secondaryThemeInverted', '#2a2a2a')
-		// 		root.style.setProperty('--tertiaryThemeInverted', '#3a3a3a55')
-
-		// 		root.style.setProperty('--boxShadowsInverted', '0px 0px 8px #1119, 0px 0px 1px #111')
-		// 		root.style.setProperty('--boxShadowsBlurInverted', '0px 0px 25px #1119, 0px 0px 8px #1118')
-		// 		root.style.setProperty('--boxInsetShadowsInverted', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
-
-		// 		root.style.setProperty('--boxNeoShadows', ' 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0')
-		// 	} else {
-		// 		$toggleTheme = 'dark'
-		// 		// Switch to dark mode
-		// 		root.style.setProperty('--primaryTheme', '#1f1f1f')
-		// 		root.style.setProperty('--secondaryTheme', '#2a2a2a')
-		// 		root.style.setProperty('--tertiaryTheme', '#3a3a3a55')
-
-		// 		root.style.setProperty('--boxShadows', '0px 0px 8px #1119, 0px 0px 1px #111')
-		// 		root.style.setProperty('--boxShadowsBlur', '0px 0px 25px #1119, 0px 0px 8px #1118')
-		// 		root.style.setProperty('--boxInsetShadows', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
-
-		// 		root.style.setProperty('--primaryThemeInverted', '#fff')
-		// 		root.style.setProperty('--secondaryThemeInverted', '#eee')
-		// 		root.style.setProperty('--tertiaryThemeInverted', '#eee5')
-
-		// 		root.style.setProperty('--boxShadowsInverted', '0px 0px 8px #1119, 0px 0px 1px #111')
-		// 		root.style.setProperty('--boxShadowsBlurInverted', '0px 0px 25px #1119, 0px 0px 8px #1118')
-		// 		root.style.setProperty('--boxInsetShadowsInverted', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
-
-		// 		root.style.setProperty('--boxNeoShadows', '1px 1px 2px #111111, -1px -1px 2px #414141')
-		// 	}
-		// })
 	})
 
 	export async function unLock() {
@@ -199,21 +147,6 @@
 </div>
 
 <style>
-	/* #theme-toggle {
-		background-color: transparent;
-		border: none;
-		color: var(--secondary);
-		width: max-content;
-		font-size: 1.5rem;
-		padding: 1rem;
-
-		border-radius: var(--borderRadius);
-		transition: box-shadow 200ms ease-in-out;
-	}
-	#theme-toggle:hover {
-		cursor: pointer;
-		box-shadow: var(--boxNeoShadows);
-	} */
 	.arrow {
 		background-color: transparent;
 		margin-top: calc(var(--averageMargin) * 2);

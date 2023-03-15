@@ -203,3 +203,19 @@ body {
 textarea:focus {
 	position: static;
 }
+
+#theme-toggle {
+	background-color: transparent;
+	border: none;
+	color: var(--secondary);
+	width: max-content;
+	font-size: 1.5rem;
+	padding: 1rem;
+
+	border-radius: var(--borderRadius);
+	transition: box-shadow 200ms ease-in-out;
+}
+#theme-toggle:hover {
+	cursor: pointer;
+	box-shadow: var(--boxNeoShadows);
+}

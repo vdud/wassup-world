@@ -90,35 +90,37 @@
 							{/if}
 						</div>
 					</div>
-					<button
-						class="sendMsgBox"
-						on:click={async () => {
-							$fullDisplay = 'nonHidden'
-							const res = await fetch('/api/publicReciever_Id', {
-								method: 'POST',
-								headers: {
-									'Content-Type': 'application/json',
-								},
-								body: JSON.stringify({ data: $searchInput }),
-							})
-							const response = await res.json()
-							if (res.ok) {
-								window.location.pathname = $userName_id + '/PUB/' + response.publicReciever_Id
-							} else if (!res.ok) {
-								alert(response.message)
-							}
-							$isFlex = !$isFlex
-							setTimeout(() => {
-								$user_message = ''
-								$fullDisplay = 'hidden'
-							}, 600)
-						}}>
-						<p class="hashMsg">
-							<span class="fa fa-arrow-right  fontBox arrow" />
-							<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
-							<span class="BOLD fontBox" style="color:var(--secondary)">;{$searchInput}</span>
-						</p>
-					</button>
+					{#if $searchInput.length > 2 && $searchInput.length < 19}
+						<button
+							class="sendMsgBox"
+							on:click={async () => {
+								$fullDisplay = 'nonHidden'
+								const res = await fetch('/api/publicReciever_Id', {
+									method: 'POST',
+									headers: {
+										'Content-Type': 'application/json',
+									},
+									body: JSON.stringify({ data: $searchInput }),
+								})
+								const response = await res.json()
+								if (res.ok) {
+									window.location.pathname = $userName_id + '/PUB/' + response.publicReciever_Id
+								} else if (!res.ok) {
+									alert(response.message)
+								}
+								$isFlex = !$isFlex
+								setTimeout(() => {
+									$user_message = ''
+									$fullDisplay = 'hidden'
+								}, 600)
+							}}>
+							<p class="hashMsg">
+								<span class="fa fa-arrow-right  fontBox arrow" />
+								<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
+								<span class="BOLD fontBox" style="color:var(--secondary)">;{$searchInput}</span>
+							</p>
+						</button>
+					{/if}
 				</div>
 			{:else}
 				<div class="natureDataBox">
@@ -126,7 +128,7 @@
 						<p class="hashMsg">
 							<span class="fa fa-arrow-right  fontBox arrow" />
 							<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
-							<span class="BOLD fontBox" style="color:var(--secondary)">No Space 🤭</span>
+							<span class="BOLD fontBox" style="color:var(--secondary)">Noone's here 🤭</span>
 						</p>
 					</button>
 				</div>

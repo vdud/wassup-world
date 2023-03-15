@@ -7,7 +7,6 @@
 	import { nature } from '$lib/stores/nature'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { searchInput } from '$lib/stores/searchInput'
-	import { toggleTheme } from '$lib/stores/toggleTheme'
 
 	// let rootElement: HTMLElement | null = null
 	// $: rootElement && rootElement.style.setProperty('--primaryTheme', $toggleTheme === 'dark' ? '#111' : '#fff')
