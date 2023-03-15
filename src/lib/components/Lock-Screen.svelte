@@ -128,7 +128,7 @@
 		</h1>
 	</div>
 	<div class="locContainers middle">
-		<input type="text" spellcheck="false" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" onkeypress="return event.charCode != 32" maxlength="18" class="loginInput" on:keydown={handleLockKeyDown} on:keyup={handleKeyUp} bind:value={$userName} placeholder="world" />
+		<input type="text" spellcheck="false" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" onkeypress="return event.charCode != 32" maxlength="18" class="loginInput" on:keydown={handleLockKeyDown} on:keyup={handleKeyUp} bind:value={$userName} placeholder="write-your-name..." />
 
 		{#if $userName.length < 3}
 			<button disabled class="fa fa-arrow-right arrow disabled" />
@@ -185,7 +185,7 @@
 		text-align: center;
 	}
 	.lockHeader {
-		font-size: calc(var(--fontSize) * 3);
+		font-size: calc(var(--fontSize) * 2);
 		padding: calc(var(--averageMargin) * 2) calc(var(--averageMargin) * 3);
 		color: var(--primary);
 		font-family: Imprima;
@@ -201,6 +201,7 @@
 		color: var(--primaryThemeInverted);
 		opacity: var(--extraDull);
 		font-family: ULight;
+		scale: 0.5;
 	}
 	.LockScreen {
 		height: 100%;
@@ -214,10 +215,14 @@
 		justify-content: space-between;
 	}
 	.top {
-		height: 200px;
+		height: 325px;
 		width: 100%;
-		border-top-left-radius: var(--borderRadius);
-		border-top-right-radius: var(--borderRadius);
+		/* border-top-left-radius: var(--borderRadius);
+		border-top-right-radius: var(--borderRadius); */
+
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
 	}
 	.middle {
 		height: auto;
