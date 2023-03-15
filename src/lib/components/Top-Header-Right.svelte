@@ -25,10 +25,14 @@
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)/3);border-top-right-radius:calc(var(--borderRadius)/3)'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			{#if $currentPage === 'HASH'}<span>#{$currentGroupName.toUpperCase()}</span>{:else}<span>{$currentGroupName.toUpperCase()}</span>{/if}
+			{#if $currentPage === 'HASH'}<span
+					>#{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span
+				>{:else}<span
+					>{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span
+				>{/if}
 		</h1>
 	</div>
-	<button class="absoluteBox boxLeft" on:click={toggle}><img class="arrow {$isFlex ? 'rotate' : 'notRotate'}" src={arrowButton} alt="arrow" /></button>
+	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-house" style="color: var(--secondary);scale:1.4;" /></button>
 	<button class="absoluteBox boxRight" />
 </div>
 
@@ -50,6 +54,11 @@
 	.chatHeaderText {
 		font-family: UBold;
 		color: var(--tertiaryThemeInverted);
+
+		margin: 0 3rem;
+		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));
+		/* font-size: 0rem; */
+		text-align: center;
 
 		/* color: var(--primaryThemeInverted); */
 		/* opacity: var(--dull); */
@@ -95,6 +104,8 @@
 		display: flex;
 		align-items: flex-start;
 		justify-content: center;
+		/* margin: 0 10rem; */
+		/* background-color: red; */
 	}
 
 	@media screen and (max-width: 768px) {
@@ -113,7 +124,7 @@
 
 		.chatHeaderText {
 			/* scale: 0.9; */
-			font-size: 1rem;
+			font-size: 0.75rem;
 			padding-top: 23px;
 		}
 

@@ -129,19 +129,26 @@
 		<input class="searchInput" placeholder="SEARCH THE WORLD" bind:value={$searchInput} on:keyup={debouncedHandleClick} on:keydown={handleDown} />
 		{#if $searchInput === ''}
 			<button class="searchButton" style={$isFlex === true ? 'opacity:var(--extraDull);' : 'opacity:0;'} disabled>
-				<i class="fa fa-magnifying-glass-location" />
+				{#if $nature === 'PUBLIC'}
+					<i class="fa fa-user-o" style="color: var(--tertiaryThemeInverted);" />
+				{:else if $nature === 'HASHTAG'}
+					<i class="fa fa-hashtag" style="color: var(--tertiaryThemeInverted);" />
+				{:else if $nature === 'LOCATION'}
+					<i class="fa fa-location-pin" style="color: var(--tertiaryThemeInverted);" />
+				{/if}
 			</button>
 		{/if}
 	</div>
 	<!-- <div class="absoluteBox"> -->
 	<button class="absoluteBox icon" on:click={toggle}>
-		{#if $nature === 'PUBLIC'}
+		<i class="fa fa-comment-dots" style="color:var(--primary)" />
+		<!-- {#if $nature === 'PUBLIC'}
 			<i class="fa fa-user-o pad" />
 		{:else if $nature === 'HASHTAG'}
 			<i class="fa fa-hashtag" />
 		{:else if $nature === 'LOCATION'}
 			<i class="fa fa-location-pin pad" />
-		{/if}
+		{/if} -->
 	</button>
 	<!-- </div> -->
 </div>
@@ -161,7 +168,8 @@
 	}
 
 	.searchInput {
-		width: 85%;
+		width: 100%;
+		margin: var(--averageMargin);
 		height: 10px;
 		background-color: var(--secondaryTheme);
 		box-shadow: var(--boxInsetShadows);
@@ -171,13 +179,14 @@
 		height: 20px;
 
 		border-radius: calc(var(--borderRadius) / 3);
-		margin-left: calc(var(--averageMargin) * -0.25);
+		/* margin-left: calc(var(--averageMargin) * -0.25); */
 
 		color: var(--tertiaryThemeInverted);
 		padding-top: 3px;
 		padding-bottom: 3px;
+		padding-left: var(--averageMargin);
 		/* padding: 1rem; */
-		padding-left: calc(var(--averageMargin) * 1);
+		/* padding-left: calc(var(--averageMargin) * 1); */
 
 		font-family: UBold;
 	}
@@ -206,10 +215,11 @@
 	}
 	.searchButton {
 		position: absolute;
-		left: calc(var(--averageMargin) * 3);
+		left: 0;
+		margin-left: calc(var(--averageMargin) * 2);
 		top: 0;
 		height: 100%;
-		width: 20px;
+		width: calc(var(--averageMargin) * 1.5);
 		background-color: transparent;
 		color: var(--secondaryThemeInverted);
 
