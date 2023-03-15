@@ -12,7 +12,8 @@ export const POST = (async ({ request }) => {
 		.aggregate([
 			{
 				$match: {
-					name: { $regex: searchInputData, $options: 'i' },
+					//starts with searchInputData
+					$or: [{ name: { $regex: '^' + searchInputData, $options: 'i' } }, { username: { $regex: '^' + searchInputData, $options: 'i' } }],
 				},
 			},
 			{
@@ -31,7 +32,8 @@ export const POST = (async ({ request }) => {
 		.aggregate([
 			{
 				$match: {
-					name: { $regex: searchInputData, $options: 'i' },
+					//starts with searchInputData
+					name: { $regex: '^' + searchInputData, $options: 'i' },
 					nature: 'HASHTAGS',
 				},
 			},

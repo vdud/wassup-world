@@ -37,31 +37,6 @@
 	}
 
 	let response: any
-	// const handleClick = () => {
-	// 	if ($searchInput != '') {
-	// 		// searchGET({ searchData: $searchInput })
-	// 		console.log(response)
-
-	// 		try {
-	// 			response = json(res)
-	// 			console.log('res')
-	// 			console.log(res)
-	// 		} catch (e) {
-	// 			console.log(e)
-	// 		}
-
-	// 		const service = new google.maps.places.AutocompleteService()
-
-	// 		console.log(service)
-	// 		try {
-	// 			const predictions = service.getPlacePredictions({ input: $searchInput }).then((predictions: any) => {
-	// 				$locationPrediction = predictions.predictions
-	// 			})
-	// 		} catch (e) {
-	// 			console.log(e)
-	// 		}
-	// 	}
-	// }
 	function handleDown(event: any) {
 		$locationPrediction = [
 			{
@@ -96,7 +71,6 @@
 	//Main Function
 	async function handleClick(event: any) {
 		//Location-Google-Services-Prediction
-
 		const service = new google.maps.places.AutocompleteService()
 
 		try {
@@ -139,6 +113,8 @@
 	}
 </script>
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
 <div class="topHeaderLeft">
 	<button
 		class="textBox"
@@ -151,11 +127,11 @@
 	</button>
 	<div class="searchBox">
 		<input class="searchInput" placeholder="SEARCH THE WORLD" bind:value={$searchInput} on:keyup={debouncedHandleClick} on:keydown={handleDown} />
-		<!-- {#if $isFlex === true} -->
-		<button class="searchButton" style={$isFlex === true ? 'opacity:var(--extraDull);' : 'opacity:0;'} disabled>
-			<i class="fa fa-search" />
-		</button>
-		<!-- {/if} -->
+		{#if $searchInput === ''}
+			<button class="searchButton" style={$isFlex === true ? 'opacity:var(--extraDull);' : 'opacity:0;'} disabled>
+				<i class="fa fa-magnifying-glass-location" />
+			</button>
+		{/if}
 	</div>
 	<!-- <div class="absoluteBox"> -->
 	<button class="absoluteBox icon" on:click={toggle}>
@@ -198,10 +174,10 @@
 		margin-left: calc(var(--averageMargin) * -0.25);
 
 		color: var(--tertiaryThemeInverted);
-		padding-left: calc(var(--averageMargin) * 3);
 		padding-top: 3px;
 		padding-bottom: 3px;
 		/* padding: 1rem; */
+		padding-left: calc(var(--averageMargin) * 1);
 
 		font-family: UBold;
 	}
@@ -210,9 +186,11 @@
 		color: var(--primaryThemeInverted);
 		opacity: var(--extraDull);
 		font-family: UBold;
+
+		padding-left: calc(var(--averageMargin) * 2);
 	}
 	.searchBox {
-		position: absolute;
+		position: relative;
 
 		bottom: 14px;
 		right: 0;
@@ -228,13 +206,12 @@
 	}
 	.searchButton {
 		position: absolute;
-		left: calc(var(--averageMargin) * 2);
+		left: calc(var(--averageMargin) * 3);
 		top: 0;
 		height: 100%;
 		width: 20px;
 		background-color: transparent;
-		color: var(--tertiaryThemeInverted);
-		opacity: var(--extraDull);
+		color: var(--secondaryThemeInverted);
 
 		pointer-events: none;
 
@@ -258,6 +235,11 @@
 		/* box-shadow: var(--boxShadows); */
 
 		overflow: visible;
+
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
 	}
 	.textBox {
 		width: max-content;
