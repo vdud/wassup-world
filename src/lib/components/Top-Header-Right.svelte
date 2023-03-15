@@ -44,13 +44,15 @@
 		justify-content: center;
 		align-items: center;
 		padding: 20px;
+
+		position: absolute;
 	}
 	.chatHeaderText {
 		font-family: UBold;
-		color: var(--primary);
+		color: var(--disabled);
 
-		color: var(--primaryThemeInverted);
-		opacity: var(--dull);
+		/* color: var(--primaryThemeInverted); */
+		/* opacity: var(--dull); */
 
 		padding: 1rem;
 	}

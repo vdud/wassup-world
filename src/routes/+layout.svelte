@@ -5,6 +5,7 @@
 	import { isFlex } from '$lib/stores/isFlex'
 	import { isLocked } from '$lib/stores/isLocked'
 	import { nature } from '$lib/stores/nature'
+	import { currentPage } from '$lib/stores/currentPage'
 	import { searchInput } from '$lib/stores/searchInput'
 
 	import { pusher } from '$lib/pusher'
@@ -84,8 +85,10 @@
 			</div>
 			<div class="windowContainers container2">
 				<slot />
+
+				<!-- <div class="containerBottomTextArea"><BottomTextArea /></div> -->
 			</div>
-			<div class="windowContainers container3"><BottomTextArea /></div>
+			<div class="windowContainers container3" style={$currentPage === '' ? 'opacity:0;' : ''}><BottomTextArea /></div>
 		</div>
 	</div>
 </div>
@@ -167,25 +170,24 @@
 		background-color: transparent;
 	}
 	.main {
-		position: absolute;
+		position: relative;
 		bottom: 0;
 		right: 0;
-		top: 0;
 		left: 0;
+		top: 0;
 
 		display: flex;
 		align-items: center;
 		justify-content: center;
 
-		height: 100%;
 		width: 100%;
+		height: 100%;
 	}
 
 	.window {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		position: relative;
 
 		height: 100%;
 		width: clamp(300px, 100%, 1450px);

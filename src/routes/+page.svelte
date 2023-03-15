@@ -1,5 +1,11 @@
 <script>
+	import { currentPage } from '$lib/stores/currentPage'
+	import { onMount } from 'svelte'
 	import { autoresize } from 'svelte-textarea-autoresize'
+
+	onMount(() => {
+		$currentPage = ''
+	})
 </script>
 
 <div class="middleScroll">
