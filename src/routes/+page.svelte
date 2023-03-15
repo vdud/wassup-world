@@ -8,6 +8,11 @@
 	})
 </script>
 
+<svelte:head>
+	<title>HOME</title>
+	<meta name="description" content="OPEN-SOURCE CHAT-APP" />
+</svelte:head>
+
 <div class="middleScroll">
 	<div class="slot">
 		<div class="whiteSpace " />
