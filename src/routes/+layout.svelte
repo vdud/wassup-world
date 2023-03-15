@@ -7,6 +7,12 @@
 	import { nature } from '$lib/stores/nature'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { searchInput } from '$lib/stores/searchInput'
+	import { toggleTheme } from '$lib/stores/toggleTheme'
+
+	// let rootElement: HTMLElement | null = null
+	// $: rootElement && rootElement.style.setProperty('--primaryTheme', $toggleTheme === 'dark' ? '#111' : '#fff')
+	// $: rootElement && rootElement.style.setProperty('--secondaryTheme', $toggleTheme === 'dark' ? '#222' : '#eee')
+	// $: rootElement && rootElement.style.setProperty('--tertiaryTheme', $toggleTheme === 'dark' ? '#333' : '#eee5')
 
 	import { pusher } from '$lib/pusher'
 
@@ -22,9 +28,6 @@
 	// export let data: LayoutData
 	// console.log(data)
 
-	function initMap() {
-		alert('ok')
-	}
 	import { onDestroy, onMount } from 'svelte'
 	import { canSend } from '$lib/stores/canSend'
 	import BottomTextArea_2 from '$lib/components/Bottom-Text-Area.svelte'
@@ -93,6 +96,11 @@
 </div>
 
 <style>
+	:root {
+		--primaryTheme: #1f1f1f;
+		--secondaryTheme: #2a2a2a;
+		--tertiaryTheme: #3a3a3a55;
+	}
 	.absoluteFirstWindow {
 		position: absolute;
 		top: 0;

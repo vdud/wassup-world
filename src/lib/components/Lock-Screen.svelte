@@ -18,6 +18,16 @@
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isFlex } from '$lib/stores/isFlex'
 
+	// const toggleThemeButton = () => {
+	// 	if ($toggleTheme === 'dark') {
+	// 		console.log('dark')
+	// 		$toggleTheme = 'light'
+	// 	} else {
+	// 		$toggleTheme = 'dark'
+	// 		console.log('light')
+	// 	}
+	// }
+
 	onMount(() => {
 		const savedDataString = localStorage.getItem('formData')
 		const button = document.getElementById('submit')
@@ -36,51 +46,51 @@
 			}
 		}
 
-		const themeToggle = document.getElementById('theme-toggle')
-		const root = document.documentElement
-		themeToggle.addEventListener('click', () => {
-			if (root.style.getPropertyValue('--primaryTheme') === '#1f1f1f') {
-				$toggleTheme = 'light'
-				// Switch to light mode
-				root.style.setProperty('--primaryTheme', '#fff')
-				root.style.setProperty('--secondaryTheme', '#eee')
-				root.style.setProperty('--tertiaryTheme', '#eee5')
+		// const themeToggle = document.getElementById('theme-toggle')
+		// const root = document.documentElement
+		// themeToggle?.addEventListener('click', () => {
+		// 	if (root.style.getPropertyValue('--primaryTheme') === '#1f1f1f') {
+		// 		$toggleTheme = 'light'
+		// 		// Switch to light mode
+		// 		root.style.setProperty('--primaryTheme', '#fff')
+		// 		root.style.setProperty('--secondaryTheme', '#eee')
+		// 		root.style.setProperty('--tertiaryTheme', '#eee5')
 
-				root.style.setProperty('--boxShadows', '0px 0px 8px #1119, 0px 0px 1px #111')
-				root.style.setProperty('--boxShadowsBlur', '0px 0px 25px #1119, 0px 0px 8px #1118')
-				root.style.setProperty('--boxInsetShadows', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadows', '0px 0px 8px #1119, 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadowsBlur', '0px 0px 25px #1119, 0px 0px 8px #1118')
+		// 		root.style.setProperty('--boxInsetShadows', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
 
-				root.style.setProperty('--primaryThemeInverted', '#1f1f1f')
-				root.style.setProperty('--secondaryThemeInverted', '#2a2a2a')
-				root.style.setProperty('--tertiaryThemeInverted', '#3a3a3a55')
+		// 		root.style.setProperty('--primaryThemeInverted', '#1f1f1f')
+		// 		root.style.setProperty('--secondaryThemeInverted', '#2a2a2a')
+		// 		root.style.setProperty('--tertiaryThemeInverted', '#3a3a3a55')
 
-				root.style.setProperty('--boxShadowsInverted', '0px 0px 8px #1119, 0px 0px 1px #111')
-				root.style.setProperty('--boxShadowsBlurInverted', '0px 0px 25px #1119, 0px 0px 8px #1118')
-				root.style.setProperty('--boxInsetShadowsInverted', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadowsInverted', '0px 0px 8px #1119, 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadowsBlurInverted', '0px 0px 25px #1119, 0px 0px 8px #1118')
+		// 		root.style.setProperty('--boxInsetShadowsInverted', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
 
-				root.style.setProperty('--boxNeoShadows', ' 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0')
-			} else {
-				$toggleTheme = 'dark'
-				// Switch to dark mode
-				root.style.setProperty('--primaryTheme', '#1f1f1f')
-				root.style.setProperty('--secondaryTheme', '#2a2a2a')
-				root.style.setProperty('--tertiaryTheme', '#3a3a3a55')
+		// 		root.style.setProperty('--boxNeoShadows', ' 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0')
+		// 	} else {
+		// 		$toggleTheme = 'dark'
+		// 		// Switch to dark mode
+		// 		root.style.setProperty('--primaryTheme', '#1f1f1f')
+		// 		root.style.setProperty('--secondaryTheme', '#2a2a2a')
+		// 		root.style.setProperty('--tertiaryTheme', '#3a3a3a55')
 
-				root.style.setProperty('--boxShadows', '0px 0px 8px #1119, 0px 0px 1px #111')
-				root.style.setProperty('--boxShadowsBlur', '0px 0px 25px #1119, 0px 0px 8px #1118')
-				root.style.setProperty('--boxInsetShadows', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadows', '0px 0px 8px #1119, 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadowsBlur', '0px 0px 25px #1119, 0px 0px 8px #1118')
+		// 		root.style.setProperty('--boxInsetShadows', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
 
-				root.style.setProperty('--primaryThemeInverted', '#fff')
-				root.style.setProperty('--secondaryThemeInverted', '#eee')
-				root.style.setProperty('--tertiaryThemeInverted', '#eee5')
+		// 		root.style.setProperty('--primaryThemeInverted', '#fff')
+		// 		root.style.setProperty('--secondaryThemeInverted', '#eee')
+		// 		root.style.setProperty('--tertiaryThemeInverted', '#eee5')
 
-				root.style.setProperty('--boxShadowsInverted', '0px 0px 8px #1119, 0px 0px 1px #111')
-				root.style.setProperty('--boxShadowsBlurInverted', '0px 0px 25px #1119, 0px 0px 8px #1118')
-				root.style.setProperty('--boxInsetShadowsInverted', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadowsInverted', '0px 0px 8px #1119, 0px 0px 1px #111')
+		// 		root.style.setProperty('--boxShadowsBlurInverted', '0px 0px 25px #1119, 0px 0px 8px #1118')
+		// 		root.style.setProperty('--boxInsetShadowsInverted', 'inset 0px 0px 6px #0004, inset 0px 0px 1px #111')
 
-				root.style.setProperty('--boxNeoShadows', '1px 1px 2px #111111, -1px -1px 2px #414141')
-			}
-		})
+		// 		root.style.setProperty('--boxNeoShadows', '1px 1px 2px #111111, -1px -1px 2px #414141')
+		// 	}
+		// })
 	})
 
 	export async function unLock() {
@@ -184,12 +194,12 @@
 		{/if}
 	</div>
 	<div class="locContainers bottom">
-		<button id="theme-toggle"><span class="fa fa-adjust" /></button>
+		<!-- <button id="theme-toggle" on:click={toggleThemeButton}><span class="fa fa-adjust" /></button> -->
 	</div>
 </div>
 
 <style>
-	#theme-toggle {
+	/* #theme-toggle {
 		background-color: transparent;
 		border: none;
 		color: var(--secondary);
@@ -203,7 +213,7 @@
 	#theme-toggle:hover {
 		cursor: pointer;
 		box-shadow: var(--boxNeoShadows);
-	}
+	} */
 	.arrow {
 		background-color: transparent;
 		margin-top: calc(var(--averageMargin) * 2);
