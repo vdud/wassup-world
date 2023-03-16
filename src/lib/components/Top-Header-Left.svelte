@@ -251,6 +251,8 @@
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: space-between;
+		/* box-shadow: var(--boxShadowsBlur); */
+		/* box-shadow: 10px 0px 10px var(--green); */
 	}
 	.textBox {
 		width: max-content;

@@ -154,11 +154,12 @@
 
 		z-index: 1;
 
-		box-shadow: var(--boxInsetShadow);
-
 		/* background-color: var(--secondaryTheme); */
 
+		/* box-shadow: 0 0 10px red; */
 		overflow: hidden;
+		/* border-bottom-right-radius: var(--borderRadius);
+		border-bottom-left-radius: var(--borderRadius); */
 	}
 	.container2 {
 		height: 100%;
@@ -308,6 +309,7 @@
 	@media screen and (min-width: 1410px) {
 		.container1 {
 			margin-top: calc(var(--averageMargin) / 2);
+			border-radius: var(--borderRadius);
 		}
 		.leftMargin {
 			border-radius: var(--borderRadius) 0 0 var(--borderRadius);

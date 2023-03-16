@@ -82,7 +82,7 @@
 
 		/* margin: 0 var(--topLeftMargin) 0 0; */
 		/* transform: translateX(var(--topRightMargin)); */
-		overflow: visible;
+		/* overflow: hidden; */
 	}
 	.boxLeft {
 		left: calc(var(--averageMargin) * 2);

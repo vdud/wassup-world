@@ -81,7 +81,7 @@
 		height: 10000px;
 		width: 100%;
 
-		background-color: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 	}
 	.middleScroll {
 		text-align: center;
