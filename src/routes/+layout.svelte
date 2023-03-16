@@ -316,6 +316,7 @@
 		.container1 {
 			margin-top: calc(var(--averageMargin) / 2);
 			border-radius: var(--borderRadius);
+			/* border: 1px solid var(--optDark); */
 		}
 		.leftMargin {
 			border-radius: var(--borderRadius) 0 0 var(--borderRadius);

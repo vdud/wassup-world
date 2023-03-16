@@ -18,7 +18,7 @@
 	--tertiaryTheme: #3a3a3a55;
 
 	--primaryThemeInverted: #fff;
-	--secondaryThemeInverted: #eee;
+	--secondaryThemeInverted: #bbb;
 	--tertiaryThemeInverted: #eee5;
 
 	--orange: #cd7b41;
@@ -45,7 +45,7 @@
 
 	--boxShadowsInverted: 0px 0px 8px #1119, 0px 0px 1px #111;
 	--boxShadowsBlurInverted: 0px 0px 25px #1119, 0px 0px 8px #1118;
-	--boxInsetShadowsInverted: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
+	--boxInsetShadowsInverted: inset 0px 0px 10px #fff1, inset 0px 0px 3px #ccc3;
 
 	--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
 	--boxNeoShadowsInverted: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;

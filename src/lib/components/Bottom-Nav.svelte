@@ -22,8 +22,7 @@
 				localStorage.setItem('nature', JSON.stringify({ $nature }))
 			}}
 			class="fa fa-hashtag navContainer"
-			style={$nature === 'HASHTAG' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'HASHTAG' ? 'childTranslated' : ''}" /></button
-		>
+			style={$nature === 'HASHTAG' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'HASHTAG' ? 'childTranslated' : ''}" /></button>
 	</div>
 	<div class="nav nav3 {$nature === 'LOCATION' ? 'selectedNav' : 'unselectedNav'}">
 		<button
@@ -32,8 +31,7 @@
 				localStorage.setItem('nature', JSON.stringify({ $nature }))
 			}}
 			class="fa fa-location-pin navContainer "
-			style={$nature === 'LOCATION' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'LOCATION' ? 'childTranslated' : ''}" /></button
-		>
+			style={$nature === 'LOCATION' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'LOCATION' ? 'childTranslated' : ''}" /></button>
 	</div>
 </div>
 
@@ -75,11 +73,11 @@
 		height: 140%;
 		border-radius: var(--smallerBorderRadius) var(--smallerBorderRadius) 0 0;
 		background-color: var(--primaryTheme);
-		border: 1px solid var(--secondary);
+		border: 1px solid var(--secondaryTheme);
 		border-bottom: 0;
 	}
 	.unselectedNav {
-		background-color: var(--secondary);
+		background-color: var(--secondaryTheme);
 		height: 100%;
 		border-radius: var(--smallerBorderRadius) var(--smallerBorderRadius) 0 0;
 		border: 1px solid var(--primaryTheme);
@@ -111,7 +109,7 @@
 		width: 100%;
 		height: 100%;
 		border-radius: var(--smallerBorderRadius) var(--smallerBorderRadius) 0 0;
-		box-shadow: var(--boxInsetShadows);
+		box-shadow: var(--boxInsetShadowsInverted);
 
 		display: flex;
 		flex-direction: column-reverse;
