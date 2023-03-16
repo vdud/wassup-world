@@ -70,8 +70,8 @@
 </script>
 
 <svelte:head>
-	<title>{data.body.groupName}</title>
-	<meta name="description" content="This is a simple discourse on location:{data.body.groupName} as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
+	<title>#{data.body.groupName}</title>
+	<meta name="description" content="This is a simple discourse on hashtag : #{data.body.groupName}, as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
 </svelte:head>
 
 <div class="hashContainer">
