@@ -18,6 +18,12 @@ export const POST = (async ({ request }) => {
 	// console.log('$userName_id', $userName_id)
 	// console.log('$userName', $userName)
 
+	pusher.trigger($userGroup_id, 'inserted_Put', {
+		message: message,
+		sender: $userName,
+		createdAt: new Date(),
+	})
+
 	const findUser = await mainUser.findOne({ _id: new ObjectId($userName_id) })
 	const findGroup = await groups.findOne({ _id: new ObjectId($userGroup_id) })
 
@@ -27,11 +33,6 @@ export const POST = (async ({ request }) => {
 	if (!findUser || !findGroup) {
 		return json({ success: false })
 	}
-
-	pusher.trigger($userGroup_id, 'inserted_Put', {
-		message: message,
-		sender: $userName,
-	})
 
 	const newMessage = await massagesCreate.insertOne({
 		sender: $userName,

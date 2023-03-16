@@ -13,6 +13,7 @@
 	import { json } from '@sveltejs/kit'
 	import { currentGroupName } from '$lib/stores/currentGroupName'
 	import { isFlex } from '$lib/stores/isFlex'
+	import { timeSince } from '$lib/timeFormat'
 
 	onMount(() => {
 		$isFlex = false
@@ -44,11 +45,19 @@
 				span1.style.color = 'var(--primary)'
 			}
 			span1.innerText = data.sender + '; '
+
 			const span2 = document.createElement('span')
 			span2.style.color = 'var(--secondaryThemeInverted)'
 			span2.innerText = data.message
+
+			const span3 = document.createElement('span')
+			span3.classList.add('timeSpan')
+			span3.classList.add('timeSpanLeft')
+			span3.innerText = timeSince(data.createdAt)
+
 			p.appendChild(span1)
 			p.appendChild(span2)
+			p.appendChild(span3)
 			div.appendChild(p)
 
 			textMessages.appendChild(div)
@@ -71,9 +80,9 @@
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.data) as message}
 			{#if message.sender !== $userName}
-				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
+				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span><span class="timeSpan timeSpanLeft">{timeSince(message.createdAt)}</span></p></div>
 			{:else if message.sender === $userName}
-				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span></p></div>
+				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span><span class="timeSpan timeSpanLeft">{timeSince(message.createdAt)}</span></p></div>
 			{/if}
 		{/each}
 	</div>

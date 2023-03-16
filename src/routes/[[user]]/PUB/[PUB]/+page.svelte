@@ -7,6 +7,7 @@
 	import { pusher } from '$lib/pusher'
 	import type { PageData } from './$types'
 	import { isFlex } from '$lib/stores/isFlex'
+	import { timeSince } from '$lib/timeFormat'
 	export let data: PageData
 
 	// console.log('data', data)
@@ -23,7 +24,7 @@
 
 			const div = document.createElement('div')
 			div.classList.add('text')
-			div.classList.add('newText')
+			// div.classList.add('newText')
 			if (data.sender === $userName) {
 				div.classList.add('yoMe')
 			} else {
@@ -40,8 +41,15 @@
 			const span2 = document.createElement('span')
 			span2.style.color = 'var(--secondaryThemeInverted)'
 			span2.innerText = data.message
+
+			const span3 = document.createElement('span')
+			span3.classList.add('timeSpan')
+			span3.classList.add('timeSpanLeft')
+			span3.innerText = timeSince(data.createdAt)
+
 			p.appendChild(span1)
 			p.appendChild(span2)
+			p.appendChild(span3)
 			div.appendChild(p)
 
 			textMessages.appendChild(div)
@@ -58,11 +66,11 @@
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		{#each JSON.parse(data.body.messages) as { sender, message }}
+		{#each JSON.parse(data.body.messages) as { sender, message, createdAt }}
 			{#if sender !== $userName}
-				<div class="text sender"><p><span style="color:var(--primary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span></p></div>
+				<div class="text sender"><p><span style="color:var(--primary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span><span class="timeSpan timeSpanRight">{timeSince(createdAt)}</span></p></div>
 			{:else if sender === $userName}
-				<div class="text yoMe"><p><span style="color:var(--secondary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span></p></div>
+				<div class="text yoMe"><p><span style="color:var(--secondary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span><span class="timeSpan timeSpanLeft">{timeSince(createdAt)}</span></p></div>
 			{/if}
 		{/each}
 	</div>
