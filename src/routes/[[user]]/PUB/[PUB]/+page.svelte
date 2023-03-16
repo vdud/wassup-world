@@ -75,8 +75,7 @@
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
-
-		background-color: var(--primaryTheme);
+		animation: fadeIn 300ms both ease-in-out;
 	}
 
 	.margin-bottom {

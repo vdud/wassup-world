@@ -95,11 +95,11 @@
 </div>
 
 <style>
-	:root {
+	/* :root {
 		--primaryTheme: #1f1f1f;
 		--secondaryTheme: #2a2a2a;
 		--tertiaryTheme: #3a3a3a55;
-	}
+	} */
 	.absoluteFirstWindow {
 		position: absolute;
 		top: 0;
@@ -213,6 +213,8 @@
 		position: relative;
 
 		background-color: var(--secondaryTheme);
+
+		border-right: 1px solid var(--tertiaryTheme);
 	}
 	@media screen and (max-width: 768px) {
 		.leftMargin {

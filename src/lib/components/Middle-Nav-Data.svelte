@@ -53,7 +53,7 @@
 						<div class="noMoreBox" />
 						<div class="noMoreText"><p class="noText">NO CHATS TO SHOW...</p></div>
 					{:else if $loginResponseData.success === true}
-						{#each $loginResponseData.data.formatedLOCdata as { name, lastMessage, updatedAt, latestMessageSender }}
+						{#each $loginResponseData.data.formatedLOCdata as { name, lastMessage, updatedAt, latestMessageSender }, i}
 							<button on:click={toggleLoc.bind(globalThis, name)} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2" style="color:var(--secOptDark)">{name}</p>
