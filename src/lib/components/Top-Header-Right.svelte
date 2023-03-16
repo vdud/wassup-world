@@ -22,14 +22,19 @@
 	}
 </script>
 
-<div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5)'}>
+<div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5);'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			{#if $currentPage === 'HASH'}<span
-					>#{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span
-				>{:else}<span
-					>{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span
-				>{/if}
+			{#if $currentPage === 'HASH'}
+				<span
+					>#{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span>
+			{:else if $currentPage === 'LOC'}
+				<span
+					>📍{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span>
+			{:else if $currentPage === 'PUB'}
+				<span
+					>{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span>
+			{/if}
 		</h1>
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-house" style="color: var(--secondary);scale:1.4;" /></button>

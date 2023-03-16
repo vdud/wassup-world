@@ -157,9 +157,11 @@
 		/* background-color: var(--secondaryTheme); */
 
 		/* box-shadow: 0 0 10px red; */
+		/* border: 1px solid var(--primary); */
 		overflow: hidden;
 		/* border-bottom-right-radius: var(--borderRadius);
 		border-bottom-left-radius: var(--borderRadius); */
+		border-top-left-radius: calc(var(--borderRadius) / 2);
 	}
 	.container2 {
 		height: 100%;
@@ -193,6 +195,9 @@
 		align-items: center;
 		justify-content: center;
 
+		background-color: var(--secondaryTheme);
+		box-shadow: var(--boxInsetShadows);
+
 		width: 100%;
 		height: 100%;
 	}
@@ -206,6 +211,7 @@
 		width: clamp(300px, 100%, 1450px);
 
 		overflow: hidden;
+		box-shadow: var(--boxShadowsBlur);
 
 		background-color: var(--primaryTheme);
 	}
