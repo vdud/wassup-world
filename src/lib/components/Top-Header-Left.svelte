@@ -130,18 +130,24 @@
 		{#if $searchInput === ''}
 			<button class="searchButton" style={$isFlex === true ? 'opacity:var(--extraDull);' : 'opacity:0;'} disabled>
 				{#if $nature === 'PUBLIC'}
-					<i class="fa fa-user-o" style="color: var(--tertiaryThemeInverted);" />
+					<i class="fa fa-user-o" />
 				{:else if $nature === 'HASHTAG'}
-					<i class="fa fa-hashtag" style="color: var(--tertiaryThemeInverted);" />
+					<i class="fa fa-hashtag" />
 				{:else if $nature === 'LOCATION'}
-					<i class="fa fa-location-pin" style="color: var(--tertiaryThemeInverted);" />
+					<i class="fa fa-location-pin" />
 				{/if}
 			</button>
 		{/if}
 	</div>
 	<!-- <div class="absoluteBox"> -->
 	<button class="absoluteBox icon" on:click={toggle}>
-		<i class="fa fa-comment-dots" style="color:var(--primary)" />
+		{#if $nature === 'PUBLIC'}
+			<i class="fa-regular fa-heart" style="color:var(--secondary)" />
+		{:else if $nature === 'HASHTAG'}
+			<i class="fa fa-couch" style="color:var(--primary)" />
+		{:else if $nature === 'LOCATION'}
+			<i class="fa-regular fa-globe" style="color:var(--secOptDark)" />
+		{/if}
 		<!-- {#if $nature === 'PUBLIC'}
 			<i class="fa fa-user-o pad" />
 		{:else if $nature === 'HASHTAG'}
@@ -154,24 +160,18 @@
 </div>
 
 <style>
+	.fa {
+		color: var(--tertiaryThemeInverted);
+	}
 	.icon {
 		scale: 1.4;
-	}
-	.fa-hashtag {
-		color: var(--primary);
-	}
-	.fa-location-pin {
-		color: var(--secOptDark);
-	}
-	.fa-user-o {
-		color: var(--secondary);
 	}
 
 	.searchInput {
 		width: 100%;
 		margin: var(--averageMargin);
 		height: 10px;
-		background-color: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 		box-shadow: var(--boxInsetShadows);
 
 		/* padding: 2px 6px; */
@@ -238,9 +238,10 @@
 		position: relative;
 		height: 100%;
 		width: 100%;
-		background: var(--primaryTheme);
+		background: var(--secondaryTheme);
 
 		border-bottom-left-radius: var(--borderRadius);
+		overflow: hidden;
 
 		/* box-shadow: var(--boxShadows); */
 

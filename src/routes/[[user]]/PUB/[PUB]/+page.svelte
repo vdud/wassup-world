@@ -63,6 +63,8 @@
 </svelte:head>
 
 <div class="hashContainer">
+	<div class="gradient" />
+
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
@@ -109,12 +111,12 @@
 		flex-direction: column-reverse;
 		flex-wrap: wrap;
 	}
-
+	/* 
 	@media screen and (max-width: 768px) {
 		.text {
 			width: 75%;
 		}
-	}
+	} */
 
 	@media screen and (min-width: 1410px) {
 	}

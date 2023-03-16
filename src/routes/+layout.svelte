@@ -153,6 +153,12 @@
 		top: 0;
 
 		z-index: 1;
+
+		box-shadow: var(--boxInsetShadow);
+
+		/* background-color: var(--secondaryTheme); */
+
+		overflow: hidden;
 	}
 	.container2 {
 		height: 100%;
@@ -181,7 +187,6 @@
 		right: 0;
 		left: 0;
 		top: 0;
-		background-color: var(--primaryTheme);
 
 		display: flex;
 		align-items: center;
@@ -201,7 +206,7 @@
 
 		overflow: hidden;
 
-		background-color: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 	}
 	.windows {
 		display: flex;
@@ -212,7 +217,7 @@
 		overflow: hidden;
 		position: relative;
 
-		background-color: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 
 		border-right: 1px solid var(--tertiaryTheme);
 	}
@@ -314,14 +319,14 @@
 			border-bottom-right-radius: var(--borderRadius);
 		}
 		.main {
-			background-color: var(--primaryTheme);
+			/* background-color: var(--primaryTheme); */
 		}
 		.window {
 			/* border-radius: calc(var(--borderRadius)); */
 			height: 98%;
 			margin: 10px;
 			border: 1px solid var(--tertiaryTheme);
-			background-color: var(--tertiaryTheme);
+			/* background-color: var(--tertiaryTheme); */
 
 			overflow: hidden;
 
@@ -332,7 +337,7 @@
 			border-radius: calc(var(--borderRadius) / 2);
 			overflow: hidden;
 
-			background: var(--secondaryTheme);
+			/* background: var(--secondaryTheme); */
 		}
 
 		.overMargin {

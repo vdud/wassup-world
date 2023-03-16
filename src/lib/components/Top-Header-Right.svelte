@@ -22,7 +22,7 @@
 	}
 </script>
 
-<div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)/3);border-top-right-radius:calc(var(--borderRadius)/3)'}>
+<div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5)'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
 			{#if $currentPage === 'HASH'}<span
@@ -37,12 +37,6 @@
 </div>
 
 <style>
-	.rotate {
-		transform: rotate(90deg);
-	}
-	.notRotate {
-		transform: rotate(-90deg);
-	}
 	.absoluteBox {
 		display: flex;
 		justify-content: center;
@@ -80,7 +74,7 @@
 		position: relative;
 		height: 100%;
 		width: 100%;
-		background: var(--primaryTheme);
+		background: var(--secondaryTheme);
 
 		border-bottom-right-radius: var(--borderRadius);
 
