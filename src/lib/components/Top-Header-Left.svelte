@@ -162,6 +162,30 @@
 <style>
 	.fa {
 		color: var(--tertiaryThemeInverted);
+		animation: zoomIn 100ms ease-in-out both;
+	}
+	.fa-couch {
+		text-shadow: var(--boxShadows), 0 0 10px var(--primary);
+	}
+	.fa-heart {
+		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
+	}
+	.fa-globe {
+		text-shadow: var(--boxShadows), 0 0 10px var(--secOptDark);
+		/* text-shadow: var(--boxShadows); */
+	}
+	.fa-couch,
+	.fa-heart,
+	.fa-globe {
+		animation: zoomIn 100ms ease-in-out both;
+	}
+	@keyframes zoomIn {
+		0% {
+			transform: scale(0);
+		}
+		100% {
+			transform: scale(1);
+		}
 	}
 	.icon {
 		scale: 1.4;
@@ -178,7 +202,7 @@
 
 		height: 20px;
 
-		border-radius: calc(var(--borderRadius) / 3);
+		border-radius: calc(var(--borderRadius) / 1);
 		/* margin-left: calc(var(--averageMargin) * -0.25); */
 
 		color: var(--tertiaryThemeInverted);
@@ -189,6 +213,11 @@
 		/* padding-left: calc(var(--averageMargin) * 1); */
 
 		font-family: UBold;
+		transition: border-radius 300ms ease-in-out;
+	}
+	.searchInput:active,
+	.searchInput:focus {
+		border-radius: calc(var(--borderRadius) / 2);
 	}
 
 	.searchInput::placeholder {

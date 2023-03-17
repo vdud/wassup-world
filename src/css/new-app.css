@@ -7,7 +7,7 @@
 
 	--primary: #cd7b41;
 	--secondary: #7fb785;
-	--optDark: #b1453e;
+	--optDark: #c63734;
 	--optLight: #ffeead;
 	--secOptDark: #b08daf;
 	--secOptLight: #c38387;
@@ -23,7 +23,7 @@
 
 	--orange: #cd7b41;
 	--green: #7fb785;
-	--red: #b1453e;
+	--red: #c63734;
 	--yellow: #ffeead;
 	--purple: #b08daf;
 	--pink: #c38387;
@@ -158,22 +158,29 @@ body {
 	height: var(--buttonHW);
 	width: var(--buttonHW);
 	border-radius: calc(var(--borderRadius) / 1.5);
-	background-color: var(--primaryTheme);
 
 	cursor: pointer;
 
 	top: calc(var(--averageMargin) + 2px);
 	right: calc(var(--averageMargin) * 2);
 
-	transition: all 200ms ease-in-out;
+	border: 0.25px solid var(--tertiaryTheme);
+
+	/* transition: box-shadow 1000ms ease-in-out; */
+	transition: all 100ms ease-in-out;
+	box-shadow: var(--boxNeoShadows);
+	background-color: var(--secondaryTheme);
 }
 .absoluteBox:hover {
-	box-shadow: var(--boxShadows);
+	box-shadow: var(--boxInsetShadows);
+	background-color: var(--primaryTheme);
+	/* box-shadow: var(--boxShadows); */
 }
 
 .absoluteBox:active {
 	box-shadow: var(--boxInsetShadows);
-	background-color: var(--primaryTheme);
+	background-color: var(--secondaryTheme);
+	/* transition: all 1000ms ease-in-out; */
 }
 
 .text {
@@ -227,6 +234,15 @@ body {
 @media screen and (max-width: 768px) {
 	.text {
 		width: 75%;
+	}
+
+	.icon {
+		padding: 10px;
+		margin-right: 4px;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }
 

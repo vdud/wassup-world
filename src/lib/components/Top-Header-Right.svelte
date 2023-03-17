@@ -5,6 +5,9 @@
 	import { user_message } from '$lib/stores/user_message'
 	import { currentGroupName } from '$lib/stores/currentGroupName'
 
+	// import imageLogoSrc from '../../lib/assets/newL.svg'
+	import imageLogoSrc from '$lib/assets/fknLatest.png'
+
 	import arrowButton from '$lib/assets/arrowButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
 
@@ -38,10 +41,19 @@
 		</h1>
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-house" style="color: var(--secondary);scale:1.4;" /></button>
-	<button class="absoluteBox boxRight" />
+
+	<button class="absoluteBox boxRight"><div><img class="Logo" src={imageLogoSrc} alt="Logo" /></div></button>
 </div>
 
 <style>
+	.Logo {
+		scale: 0.11;
+		margin-top: var(--averageMargin);
+		transition: scale 333ms ease-in-out;
+	}
+	.fa-solid {
+		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
+	}
 	.absoluteBox {
 		display: flex;
 		justify-content: center;
@@ -93,7 +105,11 @@
 		left: calc(var(--averageMargin) * 2);
 	}
 	.boxRight {
+		/* background-color: var(--optDark); */
 		right: calc(var(--averageMargin) * 2);
+		overflow: hidden;
+		/* border: 1px solid var(--optDark); */
+		/* box-shadow: 1px 1px 2px #11111199, -1px -1px 2px #d21a1a50; */
 	}
 	.headerTextBox {
 		overflow: hidden;
