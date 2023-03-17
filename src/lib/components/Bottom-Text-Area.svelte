@@ -3,10 +3,12 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
+	import { applyMessage } from '$lib/applyTextMessage'
 
 	import { autoresize } from 'svelte-textarea-autoresize'
 	import sendButtonLogo from '$lib/assets/sendButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
+	// import { timeSince } from '$lib/timeFormat'
 
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !event.shiftKey) {
@@ -15,9 +17,11 @@
 			$user_message = ''
 		}
 	}
+
 	const socketWorker = async () => {
 		// console.log('socketWorker')
 		const message = $user_message.slice(0, 999).trim()
+		applyMessage({ sender: $userName, message, createdAt: new Date() })
 		$user_message = ''
 
 		// console.log(message)

@@ -20,39 +20,36 @@
 		$userGroup_id = JSON.parse(data.body.groupId)
 
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
-			const textMessages: any = document.getElementById('textMessages')
-
-			const div = document.createElement('div')
-			div.classList.add('text')
-			// div.classList.add('newText')
 			if (data.sender === $userName) {
-				div.classList.add('yoMe')
+				return
 			} else {
+				// if (data.sender !== $userName) {
+				const textMessages: any = document.getElementById('textMessages')
+
+				const div = document.createElement('div')
+				div.classList.add('text')
+				// div.classList.add('newText')
 				div.classList.add('sender')
-			}
-			const p = document.createElement('p')
-			const span1 = document.createElement('span')
-			if (data.sender === $userName) {
-				span1.style.color = 'var(--secondary)'
-			} else {
+				const p = document.createElement('p')
+				const span1 = document.createElement('span')
 				span1.style.color = 'var(--primary)'
+				span1.innerText = data.sender + '; '
+				const span2 = document.createElement('span')
+				span2.style.color = 'var(--secondaryThemeInverted)'
+				span2.innerText = data.message
+
+				const span3 = document.createElement('span')
+				span3.classList.add('timeSpan')
+				span3.classList.add('timeSpanRight')
+				span3.innerText = timeSince(data.createdAt)
+
+				p.appendChild(span1)
+				p.appendChild(span2)
+				p.appendChild(span3)
+				div.appendChild(p)
+
+				textMessages.appendChild(div)
 			}
-			span1.innerText = data.sender + '; '
-			const span2 = document.createElement('span')
-			span2.style.color = 'var(--secondaryThemeInverted)'
-			span2.innerText = data.message
-
-			const span3 = document.createElement('span')
-			span3.classList.add('timeSpan')
-			span3.classList.add('timeSpanLeft')
-			span3.innerText = timeSince(data.createdAt)
-
-			p.appendChild(span1)
-			p.appendChild(span2)
-			p.appendChild(span3)
-			div.appendChild(p)
-
-			textMessages.appendChild(div)
 		})
 	})
 </script>
