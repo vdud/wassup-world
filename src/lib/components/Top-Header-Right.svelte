@@ -47,8 +47,10 @@
 
 <style>
 	.Logo {
-		scale: 0.11;
-		margin-top: var(--averageMargin);
+		scale: 0.1;
+		margin-top: calc(var(--averageMargin) / 1.4);
+		margin-left: calc(var(--averageMargin) / 3);
+
 		transition: scale 333ms ease-in-out;
 	}
 	.fa-solid {
