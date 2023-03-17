@@ -25,7 +25,7 @@
 <div class="middleScroll">
 	<div class="slot">
 		<button class="whiteSpace" on:click={showInfo}><img class="logo" src={imageLogoSrc} alt="Logo" /></button>
-		<div class="Info" style={isShowInfo ? 'height: 200px' : 'height: 0px; padding:0rem;margin:-1rem'}>
+		<div class="Info" style={isShowInfo ? 'height: 200px; opacity:1' : 'height: 0px; padding:0rem;margin-top:-1rem; opacity:0;'}>
 			<div class="headerText">
 				<h1 style="color:var(--secondary);font-family: UBold;"><span>HEY </span><span>{$userName.toUpperCase()}!</span></h1>
 				<p style="color:var(--tertiaryThemeInverted)">Thankyou coming here,</p>
@@ -52,7 +52,7 @@
 		align-items: center; */
 	}
 	.Info {
-		transition: height 333ms ease-in-out, padding 266ms ease-in-out, margin 266ms ease-in-out;
+		transition: height 333ms ease-in-out, padding 266ms ease-in-out, margin-top 266ms ease-in-out, opacity 266ms ease-in-out;
 		height: max-content;
 		width: max-content;
 
