@@ -51,7 +51,7 @@
 				<div class=" locationPredictions" id="locationPredictions">
 					{#if $loginResponseData.success === false || $loginResponseData.data.formatedLOCdata === undefined || $loginResponseData.data.formatedLOCdata.length === 0}
 						<div class="noMoreBox" />
-						<div class="noMoreText"><p class="noText">search to get started...nothing to show yet.</p></div>
+						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedLOCdata as { name, lastMessage, updatedAt, latestMessageSender }, i}
 							<button on:click={toggleLoc.bind(globalThis, name)} class="locBox">
@@ -79,7 +79,9 @@
 				<div class=" locationPredictions" id="locationPredictions">
 					{#if $loginResponseData.success === false || $loginResponseData.data.formatedHASHTAGSdata === undefined || $loginResponseData.data.formatedHASHTAGSdata.length === 0}
 						<div class="noMoreBox" />
-						<div class="noMoreText"><p class="noText">search to get started...nothing to show yet.</p></div>
+						<div class="noMoreText">
+							<i class="fa-solid fa-hand-middle-finger noText" />
+						</div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedHASHTAGSdata as group}
 							<button on:click={toggleHashtag.bind(globalThis, group.name)} class="locBox">
@@ -107,7 +109,7 @@
 				<div class=" locationPredictions" id="locationPredictions">
 					{#if $loginResponseData.success === false || $loginResponseData.data.formatedPUBLICdata === undefined || $loginResponseData.data.formatedPUBLICdata.length === 0}
 						<div class="noMoreBox" />
-						<div class="noMoreText"><p class="noText">search to get started...nothing to show yet.</p></div>
+						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedPUBLICdata as group}
 							<button on:click={togglePublic.bind(globalThis, group.name)} class="locBox">
@@ -167,16 +169,18 @@
 		height: calc(var(--averageMargin) * 3);
 	}
 	.noText {
-		font-size: calc(var(--fontSize) * 0.7);
-		font-family: Imprima;
+		font-size: calc(var(--fontSize) * 0.9);
+		/* font-family: Imprima; */
 		width: max-content;
-		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
-		border-radius: calc(var(--borderRadius) / 3);
+		/* padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2); */
 		color: var(--secondaryThemeInverted);
 		/* background-color: var(--primaryThemeInverted); */
 		margin: var(--averageMargin);
 		scale: 0.9;
 		opacity: var(--extraDull);
+	}
+	.fa-hand-middle-finger {
+		color: var(--primaryThemeInverted);
 	}
 	.locationPredictions {
 		border-bottom: 0.5px solid var(--tertiaryThemeInverted);
