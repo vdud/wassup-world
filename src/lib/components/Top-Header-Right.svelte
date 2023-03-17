@@ -40,15 +40,17 @@
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5);'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			{#if $currentPage === 'HASH'}
-				<span
-					>#{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-			{:else if $currentPage === 'LOC'}
-				<span
-					>📍{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-			{:else if $currentPage === 'PUB'}
-				<span
-					>{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
+			{#if $currentPage !== ''}
+				{#if $currentPage === 'HASHTAGS'}
+					<span
+						>#{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
+				{:else if $currentPage === 'LOCATIONS'}
+					<span
+						>📍{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
+				{:else if $currentPage === 'PUBLIC'}
+					<span
+						>{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
+				{/if}
 			{/if}
 		</h1>
 		<div class="pFlex">
@@ -58,10 +60,12 @@
 				</p>
 			{/if}
 		</div>
-		<div class="pFlex">
-			<p class="chatPText">CreatedAt</p>
-			<p class="chatPText">{timeSince($currentGroupCreatedAt)}</p>
-		</div>
+		{#if $currentPage !== ''}
+			<div class="pFlex">
+				<p class="chatPText">CreatedAt</p>
+				<p class="chatPText">{timeSince($currentGroupCreatedAt)}</p>
+			</div>
+		{/if}
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 	<!-- <button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button> -->

@@ -15,12 +15,13 @@
 	import { isFlex } from '$lib/stores/isFlex'
 	import { timeSince } from '$lib/timeFormat'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
+	import { isLocked } from '$lib/stores/isLocked'
 
 	onMount(() => {
 		$isFlex = false
 		$canSend = false
 		$isPUBLIC = false
-		$currentPage = 'HASH'
+		$currentPage = 'HASHTAGS'
 		$userGroup_id = JSON.parse(data.groupId)
 		// console.log('$userGroup_id', $userGroup_id)
 		// console.log(JSON.parse(data.body.data))
@@ -65,6 +66,11 @@
 	onDestroy(() => {
 		$currentPage = ''
 	})
+	let isLiked = false
+
+	const like = () => {
+		isLiked = !isLiked
+	}
 </script>
 
 <svelte:head>
@@ -76,11 +82,29 @@
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		{#each JSON.parse(data.body.data) as message}
-			{#if message.sender !== $userName}
-				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span><span class="timeSpan timeSpanRight">{timeSince(message.createdAt)}</span></p></div>
-			{:else if message.sender === $userName}
-				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span><span class="timeSpan timeSpanLeft">{timeSince(message.createdAt)}</span></p></div>
+		{#each JSON.parse(data.body.data) as { sender, message, createdAt }}
+			{#if sender !== $userName}
+				<div class="text sender">
+					<p>
+						<span style="color:var(--secondary)">{sender}; </span>
+						<span style="color:var(--secondaryThemeInverted)">{message}</span>
+						<span class="spanFlexLeft">
+							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
+							<span class="timeSpan " style="margin-left: 10px;">{timeSince(createdAt)}</span>
+						</span>
+					</p>
+				</div>
+			{:else if sender === $userName}
+				<div class="text yoMe">
+					<p>
+						<span style="color:var(--secondary)">{sender}; </span>
+						<span style="color:var(--secondaryThemeInverted)">{message}</span>
+						<span class="spanFlexRight">
+							<span class="timeSpan " style="margin-right: 10px;">{timeSince(createdAt)}</span>
+							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
+						</span>
+					</p>
+				</div>
 			{/if}
 		{/each}
 	</div>

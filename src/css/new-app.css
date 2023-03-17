@@ -1,56 +1,114 @@
-:root {
-	--blue: #1e90ff;
-	--white: #fff;
-	--black: #000;
+@media (prefers-color-scheme: dark) {
+	:root {
+		--blue: #1e90ff;
+		--white: #fff;
+		--black: #000;
 
-	--gold: gold;
+		--gold: gold;
 
-	--primary: #cd7b41;
-	--secondary: #7fb785;
-	--optDark: #c63734;
-	--optLight: #ffeead;
-	--secOptDark: #b08daf;
-	--secOptLight: #c38387;
-	--disabled: #414141;
+		--primary: #cd7b41;
+		--secondary: #7fb785;
+		--optDark: #c63734;
+		--optLight: #ffeead;
+		--secOptDark: #b08daf;
+		--secOptLight: #c38387;
+		--disabled: #414141;
 
-	--primaryTheme: #1f1f1f;
-	--secondaryTheme: #2a2a2a;
-	--tertiaryTheme: #3a3a3a55;
+		--primaryTheme: #1f1f1f;
+		--secondaryTheme: #2a2a2a;
+		--tertiaryTheme: #3a3a3a55;
 
-	--primaryThemeInverted: #fff;
-	--secondaryThemeInverted: #bbb;
-	--tertiaryThemeInverted: #eee5;
+		--primaryThemeInverted: #fff;
+		--secondaryThemeInverted: #bbb;
+		--tertiaryThemeInverted: #eee5;
 
-	--orange: #cd7b41;
-	--green: #7fb785;
-	--red: #c63734;
-	--yellow: #ffeead;
-	--purple: #b08daf;
-	--pink: #c38387;
-	--grey: #414141;
-	--greyLight: #41414184;
+		--orange: #cd7b41;
+		--green: #7fb785;
+		--red: #c63734;
+		--yellow: #ffeead;
+		--purple: #b08daf;
+		--pink: #c38387;
+		--grey: #414141;
+		--greyLight: #41414184;
 
-	--dull: 70%;
-	--extraDull: 20%;
+		--dull: 70%;
+		--extraDull: 20%;
 
-	--averageMargin: 10px;
+		--averageMargin: 10px;
 
-	--buttonHW: 30px;
-	--borderRadius: calc(var(--buttonHW) / 2);
-	--smallerBorderRadius: calc(var(--buttonHW) / 3);
+		--buttonHW: 30px;
+		--borderRadius: calc(var(--buttonHW) / 2);
+		--smallerBorderRadius: calc(var(--buttonHW) / 3);
 
-	--boxShadows: 0px 0px 8px #1119, 0px 0px 1px #111;
-	--boxShadowsBlur: 0px 0px 25px #1119, 0px 0px 8px #1118;
-	--boxInsetShadows: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
+		--boxShadows: 0px 0px 8px #1119, 0px 0px 1px #111;
+		--boxShadowsBlur: 0px 0px 25px #1119, 0px 0px 8px #1118;
+		--boxInsetShadows: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
 
-	--boxShadowsInverted: 0px 0px 8px #1119, 0px 0px 1px #111;
-	--boxShadowsBlurInverted: 0px 0px 25px #1119, 0px 0px 8px #1118;
-	--boxInsetShadowsInverted: inset 0px 0px 10px #fff1, inset 0px 0px 3px #ccc3;
+		--boxShadowsInverted: 0px 0px 8px #1119, 0px 0px 1px #111;
+		--boxShadowsBlurInverted: 0px 0px 25px #1119, 0px 0px 8px #1118;
+		--boxInsetShadowsInverted: inset 0px 0px 10px #fff1, inset 0px 0px 3px #ccc3;
 
-	--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
-	--boxNeoShadowsInverted: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
+		--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
+		--boxNeoShadowsInverted: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
 
-	--fontSize: 16px;
+		--fontSize: 16px;
+	}
+}
+@media (prefers-color-scheme: light) {
+	:root {
+		--blue: #1e90ff;
+		--white: #fff;
+		--black: #000;
+
+		--gold: gold;
+
+		--primary: #cd7b41;
+		--secondary: #7fb785;
+		--optDark: #c63734;
+		--optLight: #ffeead;
+		--secOptDark: #b08daf;
+		--secOptLight: #c38387;
+		--disabled: #414141;
+
+		--primaryThemeInverted: #1f1f1f;
+		--secondaryThemeInverted: #333;
+		--tertiaryThemeInverted: #3a3a3a55;
+
+		--primaryTheme: #bbb;
+		--secondaryTheme: #ddd;
+		--tertiaryTheme: #3a3a3a55;
+
+		--orange: #cd7b41;
+		--green: #7fb785;
+		--red: #c63734;
+		--yellow: #ffeead;
+		--purple: #b08daf;
+		--pink: #c38387;
+		--grey: #414141;
+		--greyLight: #41414184;
+
+		--dull: 70%;
+		--extraDull: 20%;
+
+		--averageMargin: 10px;
+
+		--buttonHW: 30px;
+		--borderRadius: calc(var(--buttonHW) / 2);
+		--smallerBorderRadius: calc(var(--buttonHW) / 3);
+
+		--boxShadows: 0px 0px 8px 0.1px #1113, 0px 0px 1px #111;
+		--boxShadowsBlur: 0px 0px 25px #1114, 0px 0px 8px #1118;
+		--boxInsetShadows: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
+
+		--boxShadowsInverted: 0px 0px 8px #eee1, 0px 0px 1px #eee;
+		--boxShadowsBlurInverted: 0px 0px 25px #eee1, 0px 0px 8px #eee4;
+		--boxInsetShadowsInverted: inset 0px 0px 6px #fff1, inset 0px 0px 1px #eee;
+
+		--boxNeoShadowsInverted: 1px 1px 1px #111111, -1px -1px 1px #414141;
+		--boxNeoShadows: 1px 1px 1px #adadad, -1px -1px 1px #e0e0e0;
+
+		--fontSize: 16px;
+	}
 }
 
 @font-face {
@@ -211,13 +269,14 @@ body {
 	/* opacity: var(--dull); */
 	box-shadow: var(--boxShadows);
 	/* opacity: var(--extraDull); */
-	font-size: calc(var(--fontSize) * 0.8);
-	position: absolute;
-	bottom: var(--averageMargin);
+	font-size: calc(var(--fontSize) * 0.7);
+	/* position: absolute; */
+	/* bottom: var(--averageMargin); */
 	/* padding: var(--averageMargin); */
-	margin: 0.1rem 1rem;
+	/* margin: 0.1rem 1rem; */
 	padding: 0.2rem 0.6rem;
 	border-radius: calc(var(--borderRadius) / 3);
+	/* margin-right: 10px; */
 }
 .timeSpanRight {
 	left: 0;
@@ -226,6 +285,17 @@ body {
 .timeSpanLeft {
 	right: 0;
 	left: unset;
+}
+.LikeSpan {
+	background-color: var(--secondaryTheme);
+	cursor: pointer;
+	width: 30px;
+	text-align: center;
+}
+.LikeSpan:hover,
+.LikeSpan:active {
+	background-color: var(--primaryTheme);
+	box-shadow: var(--boxInsetShadows);
 }
 .sender {
 	place-self: start;
@@ -236,6 +306,21 @@ body {
 	text-align: right;
 	place-self: end;
 	border-bottom-right-radius: calc(var(--borderRadius) / 4);
+}
+
+.spanFlexLeft {
+	display: flex;
+	position: absolute;
+	left: 0;
+	bottom: var(--averageMargin);
+	margin: 0.1rem 1rem;
+}
+.spanFlexRight {
+	display: flex;
+	position: absolute;
+	right: 0;
+	bottom: var(--averageMargin);
+	margin: 0.1rem 1rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -283,4 +368,13 @@ textarea:focus {
 	right: 0;
 
 	pointer-events: none;
+}
+
+@keyframes zoomIn {
+	0% {
+		transform: scale(0);
+	}
+	100% {
+		transform: scale(1);
+	}
 }

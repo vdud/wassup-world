@@ -5,6 +5,8 @@
 	import { autoresize } from 'svelte-textarea-autoresize'
 
 	import imageLogoSrc from '$lib/assets/fknLatest.png'
+	import { currentGroupName } from '$lib/stores/currentGroupName'
+	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 
 	let isShowInfo = false
 
@@ -14,6 +16,7 @@
 
 	onMount(() => {
 		$currentPage = ''
+		$currentGroupName = 'HOME'
 	})
 </script>
 

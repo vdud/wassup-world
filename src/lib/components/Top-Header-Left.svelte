@@ -146,7 +146,7 @@
 		{:else if $nature === 'HASHTAG'}
 			<i class="fa fa-couch" style="color:var(--primary)" />
 		{:else if $nature === 'LOCATION'}
-			<i class="fa-solid fa-globe" style="color:var(--secOptDark)" />
+			<i class="fa fa-globe" style="color:var(--secOptDark)" />
 		{/if}
 		<!-- {#if $nature === 'PUBLIC'}
 			<i class="fa fa-user-o pad" />
@@ -178,14 +178,6 @@
 	.fa-heart,
 	.fa-globe {
 		animation: zoomIn 100ms ease-in-out both;
-	}
-	@keyframes zoomIn {
-		0% {
-			transform: scale(0);
-		}
-		100% {
-			transform: scale(1);
-		}
 	}
 	.icon {
 		scale: 1.4;

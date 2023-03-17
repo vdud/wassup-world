@@ -19,15 +19,11 @@
 	}
 
 	const socketWorker = async () => {
-		// console.log('socketWorker')
-
 		const message = $user_message.slice(0, 999).trim()
 		$user_message = ''
-		// console.log(message)
 		if (message === '') {
 			return
 		} else {
-			const time = new Date()
 			applyMessage({ sender: $userName, message, createdAt: new Date() })
 
 			const res = await fetch('/api/textAreaMessages', {
@@ -48,7 +44,7 @@
 </script>
 
 <div class="textAreeaBox">
-	<button class="button" on:click={socketWorker} style="{$currentPage === 'PUB' ? 'background-color:var(--secondary)' : ''}{$currentPage === 'HASH' ? 'background-color:var(--primary)' : ''}{$currentPage === 'LOC' ? 'background-color:var(--secOptDark)' : ''}"><img class="sendButtonLogo" src={sendButtonLogo} alt="sendbutton" /></button>
+	<button class="button" on:click={socketWorker} style="{$currentPage === 'PUBLIC' ? 'background-color:var(--secondary)' : ''}{$currentPage === 'HASHTAGS' ? 'background-color:var(--primary)' : ''}{$currentPage === 'LOCATIONS' ? 'background-color:var(--secOptDark)' : ''}"><img class="sendButtonLogo" src={sendButtonLogo} alt="sendbutton" /></button>
 	<textarea use:autoresize class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type your message" />
 </div>
 
@@ -107,16 +103,11 @@
 
 		right: 0.4rem;
 		bottom: 0.4rem;
-		transition: box-shadow 0.2s ease-in-out, scale 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+		transition: box-shadow 0.2s ease-in-out;
 		/* margin: 10px; */
 	}
 	.button:active {
 		box-shadow: var(--boxInsetShadows);
-	}
-	.button:hover {
-		box-shadow: var(--boxShadowsBlur);
-		border-radius: 20px;
-		scale: 1.6;
 	}
 	.textArea {
 		width: 100%;

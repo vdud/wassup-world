@@ -18,7 +18,7 @@
 		$currentGroupName = data.body.groupName
 		$currentGroupCreatedAt = data.body.createdAt
 
-		$currentPage = 'PUB'
+		$currentPage = 'PUBLIC'
 		$userGroup_id = JSON.parse(data.body.groupId)
 
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
@@ -69,9 +69,27 @@
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.messages) as { sender, message, createdAt }}
 			{#if sender !== $userName}
-				<div class="text sender"><p><span style="color:var(--primary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span><span class="timeSpan timeSpanRight">{timeSince(createdAt)}</span></p></div>
+				<div class="text sender">
+					<p>
+						<span style="color:var(--secondary)">{sender}; </span>
+						<span style="color:var(--secondaryThemeInverted)">{message}</span>
+						<span class="spanFlexLeft">
+							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
+							<span class="timeSpan " style="margin-left: 10px;">{timeSince(createdAt)}</span>
+						</span>
+					</p>
+				</div>
 			{:else if sender === $userName}
-				<div class="text yoMe"><p><span style="color:var(--secondary)">{sender}; </span><span style="color:var(--secondaryThemeInverted)">{message}</span><span class="timeSpan timeSpanLeft">{timeSince(createdAt)}</span></p></div>
+				<div class="text yoMe">
+					<p>
+						<span style="color:var(--secondary)">{sender}; </span>
+						<span style="color:var(--secondaryThemeInverted)">{message}</span>
+						<span class="spanFlexRight">
+							<span class="timeSpan " style="margin-right: 10px;">{timeSince(createdAt)}</span>
+							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
+						</span>
+					</p>
+				</div>
 			{/if}
 		{/each}
 	</div>

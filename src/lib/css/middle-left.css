@@ -21,7 +21,7 @@
 .text2 {
 	height: 25px;
 	font-size: calc(var(--fontSize) / 1.5);
-	background-color: var(--primaryTheme);
+	background-color: var(--secondaryTheme);
 	font-family: UBold;
 	border-radius: calc(var(--averageMargin) / 2);
 	box-shadow: var(--boxInsetShadows);
