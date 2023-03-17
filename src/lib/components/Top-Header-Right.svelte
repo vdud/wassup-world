@@ -51,7 +51,7 @@
 		</h1>
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
-	<button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button>
+	<!-- <button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button> -->
 
 	<button class="absoluteBox boxRight"><div><img class="Logo" src={imageLogoSrc} alt="Logo" /></div></button>
 </div>
@@ -86,7 +86,7 @@
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));
 		/* font-size: 0rem; */
 		text-align: center;
-		margin-left: 6rem;
+		/* margin-left: 6rem; */
 		background-color: var(--tertiaryTheme);
 
 		/* color: var(--primaryThemeInverted); */
