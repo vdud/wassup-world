@@ -195,7 +195,7 @@
 		align-items: center;
 		justify-content: center;
 
-		background-color: var(--secondaryTheme);
+		/* background-color: var(--secondaryTheme); */
 		box-shadow: var(--boxInsetShadows);
 
 		width: 100%;

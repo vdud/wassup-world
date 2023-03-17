@@ -120,10 +120,14 @@ body {
 main {
 	position: relative;
 	height: 100vh;
+
+	/* background-color: red; */
 }
 body {
 	height: 100%;
 	position: fixed;
+
+	background-color: var(--secondaryTheme);
 }
 
 /* Designing for scroll-bar */
