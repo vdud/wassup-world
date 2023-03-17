@@ -20,28 +20,29 @@
 
 	const socketWorker = async () => {
 		// console.log('socketWorker')
-		$user_message = ''
 
 		const message = $user_message.slice(0, 999).trim()
+		$user_message = ''
 		// console.log(message)
 		if (message === '') {
 			return
-		}
-		const time = new Date()
-		applyMessage({ sender: $userName, message, createdAt: time })
+		} else {
+			const time = new Date()
+			applyMessage({ sender: $userName, message, createdAt: new Date() })
 
-		const res = await fetch('/api/textAreaMessages', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
-		})
+			const res = await fetch('/api/textAreaMessages', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
+			})
 
-		const response = await res.json()
-		console.log(response)
-		if (!res.ok) {
-			alert(response.message)
+			const response = await res.json()
+			console.log(response)
+			if (!res.ok) {
+				alert(response.message)
+			}
 		}
 	}
 </script>
