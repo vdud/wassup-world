@@ -64,7 +64,7 @@
 
 <style>
 	.pWidth {
-		width: clamp(400px, 60vw, 600px);
+		width: clamp(300px, 60vw, 700px);
 	}
 	.buttonIcon {
 		height: fit-content;

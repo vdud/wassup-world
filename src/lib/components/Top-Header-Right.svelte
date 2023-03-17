@@ -15,9 +15,19 @@
 
 	const toggle = () => {
 		$fullDisplay = 'nonHidden'
-
 		$isFlex = !$isFlex
+		// window.location.pathname = '/'
+		// window.location.href = '/'
 
+		setTimeout(() => {
+			// $user_message = ''
+			$fullDisplay = 'hidden'
+		}, 600)
+	}
+	const togglehRef = () => {
+		$fullDisplay = 'nonHidden'
+		$isFlex = !$isFlex
+		window.location.href = '/'
 		setTimeout(() => {
 			// $user_message = ''
 			$fullDisplay = 'hidden'
@@ -40,7 +50,8 @@
 			{/if}
 		</h1>
 	</div>
-	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-house" style="color: var(--secondary);scale:1.4;" /></button>
+	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
+	<button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button>
 
 	<button class="absoluteBox boxRight"><div><img class="Logo" src={imageLogoSrc} alt="Logo" /></div></button>
 </div>
@@ -53,8 +64,11 @@
 
 		transition: scale 333ms ease-in-out;
 	}
-	.fa-solid {
+	.fa-bars {
 		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
+	}
+	.fa-house {
+		text-shadow: var(--boxShadows), 0 0 10px var(--primary);
 	}
 	.absoluteBox {
 		display: flex;
@@ -68,15 +82,19 @@
 		font-family: UBold;
 		color: var(--tertiaryThemeInverted);
 
-		margin: 0 3rem;
+		margin: 1rem 3rem;
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));
 		/* font-size: 0rem; */
 		text-align: center;
+		margin-left: 6rem;
+		background-color: var(--tertiaryTheme);
 
 		/* color: var(--primaryThemeInverted); */
 		/* opacity: var(--dull); */
 
-		padding: 1rem;
+		padding: 0.2rem 1rem;
+		box-shadow: var(--boxInsetShadows);
+		border-radius: var(--borderRadius);
 	}
 	.arrow {
 		width: 24px;
@@ -105,6 +123,9 @@
 	}
 	.boxLeft {
 		left: calc(var(--averageMargin) * 2);
+	}
+	.boxLeft2 {
+		left: calc(var(--averageMargin) * 7.4);
 	}
 	.boxRight {
 		/* background-color: var(--optDark); */
