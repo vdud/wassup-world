@@ -25,9 +25,9 @@
 <div class="middleScroll">
 	<div class="slot">
 		<button class="whiteSpace" on:click={showInfo}><img class="logo" src={imageLogoSrc} alt="Logo" /></button>
-		<div class="Info" style={isShowInfo ? 'height: 200px; opacity:1' : 'height: 0px; padding:0rem;margin-top:-1rem; opacity:0;'}>
+		<div class="Info" style={isShowInfo ? 'height: 150px; opacity:1;' : 'height: 0px; padding:0rem;margin-top:-1rem; opacity:0;'}>
 			<div class="headerText">
-				<h1 style="color:var(--secondary);font-family: UBold;"><span>HEY </span><span>{$userName.toUpperCase()}!</span></h1>
+				<h1 style="color:var(--optDark);font-family: UBold;"><span>HEY </span><span>{$userName.toUpperCase()}!</span></h1>
 				<p style="color:var(--tertiaryThemeInverted)">Thankyou coming here,</p>
 				<p style="color:var(--tertiaryThemeInverted)">let me tell you a little bit about the app,</p>
 				<p style="color:var(--tertiaryThemeInverted)">This app is created as a open-source project,</p>
@@ -57,7 +57,7 @@
 		width: max-content;
 
 		background: var(--secondaryTheme);
-		box-shadow: var(--boxInsetShadowsInverted);
+		box-shadow: var(--boxInsetShadowsInverted), var(--boxShadows);
 		border: var(--primaryTheme);
 		padding: 1rem;
 		margin-top: 1rem;
