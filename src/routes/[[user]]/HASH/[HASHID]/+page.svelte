@@ -14,6 +14,7 @@
 	import { currentGroupName } from '$lib/stores/currentGroupName'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { timeSince } from '$lib/timeFormat'
+	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 
 	onMount(() => {
 		$isFlex = false
@@ -24,6 +25,7 @@
 		// console.log('$userGroup_id', $userGroup_id)
 		// console.log(JSON.parse(data.body.data))
 		$currentGroupName = data.body.groupName
+		$currentGroupCreatedAt = data.body.createdAt
 
 		// console.log('data', data)
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
@@ -47,7 +49,7 @@
 
 				const span3 = document.createElement('span')
 				span3.classList.add('timeSpan')
-				span3.classList.add('timeSpanRight')
+				span3.classList.add('timeSpanLeft')
 				span3.innerText = timeSince(data.createdAt)
 
 				p.appendChild(span1)
@@ -76,7 +78,7 @@
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.data) as message}
 			{#if message.sender !== $userName}
-				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span><span class="timeSpan timeSpanLeft">{timeSince(message.createdAt)}</span></p></div>
+				<div class="text sender"><p><span style="color:var(--primary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span><span class="timeSpan timeSpanRight">{timeSince(message.createdAt)}</span></p></div>
 			{:else if message.sender === $userName}
 				<div class="text yoMe"><p><span style="color:var(--secondary)">{message.sender}; </span><span style="color:var(--secondaryThemeInverted)">{message.message}</span><span class="timeSpan timeSpanLeft">{timeSince(message.createdAt)}</span></p></div>
 			{/if}

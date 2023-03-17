@@ -8,6 +8,7 @@
 	import type { PageData } from './$types'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { timeSince } from '$lib/timeFormat'
+	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	export let data: PageData
 
 	// console.log('data', data)
@@ -15,6 +16,7 @@
 	onMount(() => {
 		$isFlex = false
 		$currentGroupName = data.body.groupName
+		$currentGroupCreatedAt = data.body.createdAt
 
 		$currentPage = 'PUB'
 		$userGroup_id = JSON.parse(data.body.groupId)

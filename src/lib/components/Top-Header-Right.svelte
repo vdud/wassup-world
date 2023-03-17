@@ -4,12 +4,14 @@
 	import { isFlex } from '$lib/stores/isFlex'
 	import { user_message } from '$lib/stores/user_message'
 	import { currentGroupName } from '$lib/stores/currentGroupName'
+	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 
 	// import imageLogoSrc from '../../lib/assets/newL.svg'
 	import imageLogoSrc from '$lib/assets/fknLatest.png'
 
 	import arrowButton from '$lib/assets/arrowButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
+	import { timeSince } from '$lib/timeFormat'
 
 	let groupName = 'world'
 
@@ -40,15 +42,26 @@
 		<h1 class="chatHeaderText">
 			{#if $currentPage === 'HASH'}
 				<span
-					>#{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span>
+					>#{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
 			{:else if $currentPage === 'LOC'}
 				<span
-					>📍{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span>
+					>📍{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
 			{:else if $currentPage === 'PUB'}
 				<span
-					>{$currentGroupName.toUpperCase().slice(0, 50)}{#if $currentGroupName.length > 49}...{/if}</span>
+					>{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
 			{/if}
 		</h1>
+		<div class="pFlex">
+			{#if $currentGroupName.length > 29}
+				<p class="chatPText">
+					{$currentGroupName.toUpperCase().slice(0, 60)}{#if $currentGroupName.length > 59}...{/if}
+				</p>
+			{/if}
+		</div>
+		<div class="pFlex">
+			<p class="chatPText">CreatedAt</p>
+			<p class="chatPText">{timeSince($currentGroupCreatedAt)}</p>
+		</div>
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 	<!-- <button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button> -->
@@ -57,6 +70,12 @@
 </div>
 
 <style>
+	.pFlex {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 5px;
+	}
 	.Logo {
 		scale: 0.1;
 		margin-top: calc(var(--averageMargin) * 1);
@@ -78,11 +97,24 @@
 
 		position: absolute;
 	}
+	.chatPText {
+		font-family: UBold;
+		color: var(--tertiaryThemeInverted);
+		background-color: var(--primaryTheme);
+		font-size: 0.6rem;
+		margin: 0;
+		padding: 4px 10px;
+		border-radius: var(--borderRadius);
+		box-shadow: var(--boxInsetShadows);
+		width: max-content;
+		margin-right: 10px;
+	}
 	.chatHeaderText {
+		height: max-content;
 		font-family: UBold;
 		color: var(--tertiaryThemeInverted);
 
-		margin: 1rem 3rem;
+		margin-top: 5px;
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));
 		/* font-size: 0rem; */
 		text-align: center;
@@ -140,8 +172,9 @@
 		height: 100%;
 
 		display: flex;
-		align-items: flex-start;
-		justify-content: center;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
 		/* margin: 0 10rem; */
 		/* background-color: red; */
 	}
@@ -163,7 +196,7 @@
 		.chatHeaderText {
 			/* scale: 0.9; */
 			font-size: 0.75rem;
-			padding-top: 23px;
+			/* padding-top: 23px; */
 		}
 
 		.notRotate {

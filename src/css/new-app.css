@@ -191,7 +191,8 @@ body {
 	margin: 0 var(--averageMargin);
 	/* background-color: var(--primaryTheme); */
 
-	padding: 1rem 2rem;
+	padding: 1rem 1rem;
+	padding-bottom: 2.6rem;
 
 	font-size: calc(var(--fontSize) * 1.2);
 	font-family: Imprima;
@@ -205,20 +206,26 @@ body {
 	box-shadow: var(--boxInsetShadows);
 }
 .timeSpan {
-	color: var(--secondaryThemeInverted);
-	opacity: var(--extraDull);
+	background-color: var(--primaryTheme);
+	color: var(--tertiaryThemeInverted);
+	/* opacity: var(--dull); */
+	box-shadow: var(--boxShadows);
+	/* opacity: var(--extraDull); */
 	font-size: calc(var(--fontSize) * 0.8);
 	position: absolute;
-	bottom: 0;
-	padding: var(--averageMargin);
+	bottom: var(--averageMargin);
+	/* padding: var(--averageMargin); */
+	margin: 0.1rem 1rem;
+	padding: 0.2rem 0.6rem;
+	border-radius: calc(var(--borderRadius) / 3);
 }
 .timeSpanRight {
-	right: 0;
-	left: unset;
-}
-.timeSpanLeft {
 	left: 0;
 	right: unset;
+}
+.timeSpanLeft {
+	right: 0;
+	left: unset;
 }
 .sender {
 	place-self: start;

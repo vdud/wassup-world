@@ -87,6 +87,7 @@ export const load = (async ({ params }) => {
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(newGroup.insertedId),
 					groupName: `${userSender.name};${userReciever.name}`,
+					createdAt: new Date(),
 				},
 			}
 		} else if (findFirstGroup) {
@@ -138,6 +139,7 @@ export const load = (async ({ params }) => {
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findFirstGroup._id),
 					groupName: findFirstGroup.name,
+					createdAt: findFirstGroup.createdAt,
 				},
 			}
 		} else if (findSecondGroup) {
@@ -189,6 +191,7 @@ export const load = (async ({ params }) => {
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findSecondGroup._id),
 					groupName: findSecondGroup.name,
+					createdAt: findSecondGroup.createdAt,
 				},
 			}
 		}
@@ -249,6 +252,7 @@ export const load = (async ({ params }) => {
 				messages: JSON.stringify(returnMsgData),
 				groupId: JSON.stringify(findGroup._id),
 				groupName: findGroup.name,
+				createdAt: findGroup.createdAt,
 			},
 		}
 	}

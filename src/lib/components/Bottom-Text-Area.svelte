@@ -20,15 +20,15 @@
 
 	const socketWorker = async () => {
 		// console.log('socketWorker')
-		const message = $user_message.slice(0, 999).trim()
-		applyMessage({ sender: $userName, message, createdAt: new Date() })
 		$user_message = ''
 
+		const message = $user_message.slice(0, 999).trim()
 		// console.log(message)
 		if (message === '') {
 			return
 		}
 		const time = new Date()
+		applyMessage({ sender: $userName, message, createdAt: time })
 
 		const res = await fetch('/api/textAreaMessages', {
 			method: 'POST',
@@ -106,10 +106,16 @@
 
 		right: 0.4rem;
 		bottom: 0.4rem;
+		transition: box-shadow 0.2s ease-in-out, scale 0.2s ease-in-out, border-radius 0.2s ease-in-out;
 		/* margin: 10px; */
 	}
 	.button:active {
 		box-shadow: var(--boxInsetShadows);
+	}
+	.button:hover {
+		box-shadow: var(--boxShadowsBlur);
+		border-radius: 20px;
+		scale: 1.6;
 	}
 	.textArea {
 		width: 100%;

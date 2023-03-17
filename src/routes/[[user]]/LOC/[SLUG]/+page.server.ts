@@ -44,6 +44,7 @@ export const load = (async ({ params }) => {
 					body: {
 						data: JSON.stringify(returnMsgData),
 						groupName: findGroup.name,
+						createdAt: findGroup.createdAt,
 					},
 				}
 			}
@@ -73,6 +74,7 @@ export const load = (async ({ params }) => {
 			body: {
 				data: JSON.stringify(returnMsgData),
 				groupName: findGroup.name,
+				createdAt: findGroup.createdAt,
 			},
 		}
 	}

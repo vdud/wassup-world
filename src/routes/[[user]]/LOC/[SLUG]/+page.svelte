@@ -14,6 +14,7 @@
 	import { currentGroupName } from '$lib/stores/currentGroupName'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { timeSince } from '$lib/timeFormat'
+	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 
 	onMount(() => {
 		$isFlex = false
@@ -21,6 +22,7 @@
 		$isPUBLIC = false
 		$currentPage = 'LOC'
 		$userGroup_id = JSON.parse(data.groupId)
+		$currentGroupCreatedAt = data.body.createdAt
 		// console.log(JSON.parse(data.body.data))
 
 		$currentGroupName = data.body.groupName
