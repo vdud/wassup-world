@@ -21,12 +21,6 @@
 		window.location.pathname = '/PUB/' + groupName
 		$nature = 'PUBLIC'
 	}
-
-	const replaceLatestMessage = (id: String) => {
-		const groupId = document.querySelector(`#${id}`)
-
-		console.log(groupId)
-	}
 </script>
 
 <div class="middleData">

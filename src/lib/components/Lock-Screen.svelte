@@ -17,6 +17,7 @@
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { isDarkMode } from '$lib/stores/isDarkMode'
+	import { applyNavDataMessage } from '$lib/applyTextMessage'
 
 	const toggleThemeButton = () => {
 		$isDarkMode = !$isDarkMode
@@ -82,6 +83,7 @@
 					console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
+							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
 							console.log(data.message)
 							console.log(data)
 						})
@@ -91,6 +93,7 @@
 					console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
+							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
 							console.log(data.message)
 							console.log(data)
 						})
@@ -101,6 +104,7 @@
 					console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
+							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
 							console.log(data.message)
 							console.log(data)
 						})

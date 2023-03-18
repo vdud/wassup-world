@@ -11,6 +11,7 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { debounce } from '$lib/debounce'
+	import { applyNavDataMessage } from '$lib/applyTextMessage'
 	// import { middleScroll } from '$lib/stores/middleScroll'
 	export let data: PageData
 
@@ -28,6 +29,8 @@
 			if (data.sender === $userName) {
 				return
 			} else {
+				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
+
 				// if (data.sender !== $userName) {
 				const textMessages: any = document.getElementById('textMessages')
 

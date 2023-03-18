@@ -22,6 +22,7 @@ export const POST = (async ({ request }) => {
 		message: message,
 		sender: $userName,
 		createdAt: new Date(),
+		groupId: $userGroup_id,
 	})
 
 	const findUser = await mainUser.findOne({ _id: new ObjectId($userName_id) })
