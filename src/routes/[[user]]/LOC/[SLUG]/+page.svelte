@@ -173,6 +173,8 @@
 
 		overflow: hidden;
 		overflow-y: scroll;
+
+		pointer-events: all;
 	}
 	.hashMessagesContainer {
 		display: flex;

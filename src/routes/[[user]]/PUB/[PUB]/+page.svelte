@@ -168,6 +168,7 @@
 		display: flex;
 		flex-direction: column-reverse;
 
+		pointer-events: all;
 		overflow: hidden;
 		overflow-y: scroll;
 	}
