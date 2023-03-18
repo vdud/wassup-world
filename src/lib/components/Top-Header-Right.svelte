@@ -34,7 +34,7 @@
 		// }
 		setTimeout(() => {
 			middleScroll.scrollTop = middleScroll.scrollHeight * -1
-		}, 133)
+		}, 10)
 	}
 </script>
 
