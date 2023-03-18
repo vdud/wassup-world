@@ -12,10 +12,7 @@
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { debounce } from '$lib/debounce'
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/applyTextMessage'
-	// import { middleScroll } from '$lib/stores/middleScroll'
 	export let data: PageData
-
-	// console.log('data', data)
 
 	onMount(() => {
 		$isFlex = false
@@ -30,30 +27,23 @@
 				return
 			} else {
 				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
-				applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
+				applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt })
 			}
 		})
 	})
 
 	const scrolltoBottom = () => {
-		// $middleScroll.scrollTop = $middleScroll.scrollHeight
 		const middleScroll: any = document.getElementById('middleScroll')
 		middleScroll.scrollTop = middleScroll.scrollHeight
-		// console.log('$middleScroll', $middleScroll)
 	}
 
 	let aboveSwitch = false
 	const parseScroll = () => {
 		const middleScroll: any = document.getElementById('middleScroll')
 		if (middleScroll.scrollTop < -69) {
-			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = true
-
-			// console.log('aboveSwitch', aboveSwitch)
 		} else if (middleScroll.scrollTop > -69) {
-			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = false
-			// console.log('aboveSwitch', aboveSwitch)
 		}
 	}
 	const debouncedScroll = debounce(parseScroll, 300)

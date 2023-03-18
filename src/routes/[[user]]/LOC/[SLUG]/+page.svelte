@@ -26,7 +26,6 @@
 		$currentPage = 'LOCATIONS'
 		$userGroup_id = JSON.parse(data.groupId)
 		$currentGroupCreatedAt = data.body.createdAt
-		// console.log(JSON.parse(data.body.data))
 
 		$currentPageHeaderData = data.body.groupName
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
@@ -34,34 +33,28 @@
 				return
 			} else {
 				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
-				applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
+				applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt })
 			}
 		})
 	})
+
 	let isLiked = false
 	const like = () => {
 		isLiked = !isLiked
 	}
 
 	const scrolltoBottom = () => {
-		// $middleScroll.scrollTop = $middleScroll.scrollHeight
 		const middleScroll: any = document.getElementById('middleScroll')
 		middleScroll.scrollTop = middleScroll.scrollHeight
-		// console.log('$middleScroll', $middleScroll)
 	}
 
 	let aboveSwitch = false
 	const parseScroll = () => {
 		const middleScroll: any = document.getElementById('middleScroll')
 		if (middleScroll.scrollTop < -69) {
-			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = true
-
-			// console.log('aboveSwitch', aboveSwitch)
 		} else if (middleScroll.scrollTop > -69) {
-			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = false
-			// console.log('aboveSwitch', aboveSwitch)
 		}
 	}
 	const debouncedScroll = debounce(parseScroll, 300)

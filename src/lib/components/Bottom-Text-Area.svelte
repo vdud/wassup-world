@@ -3,7 +3,7 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { applyMessage, applyNavDataMessage } from '$lib/applyTextMessage'
+	import { applyMessageYoMe, applyNavDataMessage } from '$lib/applyTextMessage'
 
 	import { autoresize } from 'svelte-textarea-autoresize'
 	import sendButtonLogo from '$lib/assets/sendButton.svg'
@@ -23,15 +23,12 @@
 		const message = $user_message.slice(0, 999).trim()
 		const groupId = $userGroup_id
 
-		// scroll to bottom
-		// scroll window to bottom
-
 		$user_message = ''
 		if (message === '') {
 			return
 		} else {
 			applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId })
-			applyMessage({ sender: $userName, message, createdAt: new Date() })
+			applyMessageYoMe({ sender: $userName, message, createdAt: new Date() })
 
 			const res = await fetch('/api/textAreaMessages', {
 				method: 'POST',

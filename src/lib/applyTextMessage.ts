@@ -1,6 +1,6 @@
 import { timeSince } from './timeFormat'
 
-export const applyMessage = (data: any) => {
+export const applyMessageYoMe = (data: any) => {
 	// if (data.sender !== $userName) {
 	const textMessages: any = document.getElementById('textMessages')
 

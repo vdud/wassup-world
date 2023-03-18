@@ -181,9 +181,10 @@
 		border-radius: calc(var(--borderRadius) / 3);
 		color: var(--primaryTheme);
 		box-shadow: var(--boxShadows);
-		margin: calc(var(--averageMargin) * -0.5);
+		/* margin: calc(var(--averageMargin) * -0.5); */
 		scale: 0.9;
 		transition: all 200ms ease-in-out;
+		/* margin-left: 1px; */
 	}
 	.sendArrow {
 		color: var(--primaryTheme);
