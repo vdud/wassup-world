@@ -107,11 +107,11 @@
 <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}>
 	<div class="gradient" />
 
-	{#if aboveSwitch === true}
-		<div class="scrollToBottom">
+	<div class="scrollToBottom">
+		{#if aboveSwitch === true}
 			<button class="scrollButton" on:click={scrolltoBottom}><i class="fa fa-arrow-down" /></button>
-		</div>
-	{/if}
+		{/if}
+	</div>
 
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />

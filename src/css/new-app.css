@@ -429,8 +429,6 @@ textarea:focus {
 	width: 100%;
 	height: max-content;
 	margin-right: -6px;
-	transition: scale 333ms ease-in-out, padding 266ms ease-in-out, margin 266ms ease-in-out, opacity 266ms ease-in-out;
-	/* transition: scale 300ms ease-in-out, opacity 300ms ease-in-out; */
 }
 .infoData {
 	height: 100px;
