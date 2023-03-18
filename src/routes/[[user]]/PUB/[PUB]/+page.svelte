@@ -41,9 +41,19 @@
 				span2.innerText = data.message
 
 				const span3 = document.createElement('span')
-				span3.classList.add('timeSpan')
-				span3.classList.add('timeSpanRight')
-				span3.innerText = timeSince(data.createdAt)
+				span3.classList.add('spanFlexLeft')
+				const span4 = document.createElement('span')
+				span4.classList.add('timeSpan')
+				const span5 = document.createElement('span')
+				span5.classList.add('timeSpan')
+				span5.classList.add('likeSPan')
+				span5.style.marginRight = '10px'
+
+				// span3.append(span5)
+				span3.append(span4)
+
+				// span4.classList.add('timeSpanLeft')
+				span4.innerText = timeSince(data.createdAt)
 
 				p.appendChild(span1)
 				p.appendChild(span2)
@@ -78,8 +88,8 @@
 		{#each JSON.parse(data.body.messages) as { sender, message, createdAt }}
 			{#if sender !== $userName}
 				<div class="text sender">
-					<p>
-						<span style="color:var(--secondary)">{sender}; </span>
+					<p class="textShadows">
+						<span style="color:var(--primary)">{sender}; </span>
 						<span style="color:var(--secondaryThemeInverted)">{message}</span>
 						<span class="spanFlexLeft">
 							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
@@ -89,7 +99,7 @@
 				</div>
 			{:else if sender === $userName}
 				<div class="text yoMe">
-					<p>
+					<p class="textShadows">
 						<span style="color:var(--secondary)">{sender}; </span>
 						<span style="color:var(--secondaryThemeInverted)">{message}</span>
 						<span class="spanFlexRight">

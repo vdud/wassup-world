@@ -153,6 +153,7 @@ p {
 	font-weight: 400;
 	margin: 0;
 	padding: 0;
+	text-shadow: var(--boxShadows);
 }
 a {
 	text-decoration: none;
@@ -291,6 +292,7 @@ body {
 	cursor: pointer;
 	width: 30px;
 	text-align: center;
+	/* margin-left: 10px; */
 }
 .LikeSpan:hover,
 .LikeSpan:active {

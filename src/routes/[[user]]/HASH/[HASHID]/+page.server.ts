@@ -36,7 +36,7 @@ export const load = (async ({ params }) => {
 							},
 						])
 						.sort({ createdAt: -1 })
-						.limit(10)
+						.limit(100)
 						.toArray()
 
 					return {
@@ -68,7 +68,7 @@ export const load = (async ({ params }) => {
 				},
 			])
 			.sort({ createdAt: -1 })
-			.limit(10)
+			.limit(100)
 			.toArray()
 
 		return {

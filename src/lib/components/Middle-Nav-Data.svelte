@@ -4,6 +4,7 @@
 	import { nature } from '$lib/stores/nature'
 	import { json } from '@sveltejs/kit'
 	import { timeSince } from '$lib/timeFormat'
+	import { applyNavDataMessage } from '$lib/applyTextMessage'
 
 	// console.log($loginResponseData)
 
