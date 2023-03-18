@@ -64,7 +64,6 @@
 	})
 
 	let isLiked = false
-
 	const like = () => {
 		isLiked = !isLiked
 	}

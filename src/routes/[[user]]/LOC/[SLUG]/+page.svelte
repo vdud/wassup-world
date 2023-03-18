@@ -59,6 +59,14 @@
 			}
 		})
 	})
+	let isLiked = false
+	const like = () => {
+		isLiked = !isLiked
+	}
+
+	onDestroy(() => {
+		$currentPage = ''
+	})
 </script>
 
 <svelte:head>
