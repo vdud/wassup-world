@@ -10,6 +10,7 @@
 	import { timeSince } from '$lib/timeFormat'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
+	import { debounce } from '$lib/debounce'
 	// import { middleScroll } from '$lib/stores/middleScroll'
 	export let data: PageData
 
@@ -104,7 +105,7 @@
 	<meta name="description" content="This is a simple discourse on location:{data.body.groupName} as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
 </svelte:head>
 
-<div class="hashContainer" id="middleScroll" on:scroll={parseScroll}>
+<div class="hashContainer" id="middleScroll" on:scroll={debounce(parseScroll, 1000)}>
 	<div class="gradient" />
 
 	<div class="scrollToBottom">

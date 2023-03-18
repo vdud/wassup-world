@@ -16,6 +16,7 @@
 	import { timeSince } from '$lib/timeFormat'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
+	import { debounce } from '$lib/debounce'
 
 	onMount(() => {
 		$isFlex = false
@@ -113,7 +114,8 @@
 	</div>
 {/if}
 
-<div class="hashContainer" id="middleScroll" on:scroll={parseScroll}>
+<div class="hashContainer" id="middleScroll" on:scroll={debounce(parseScroll, 1000)}>
+	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">

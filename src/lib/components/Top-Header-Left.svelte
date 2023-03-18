@@ -14,6 +14,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { searchData } from '$lib/stores/searchData'
 	import { canSend } from '$lib/stores/canSend'
+	import { debounce } from '$lib/debounce'
 
 	$: $searchInput = $searchInput
 		// .trim()
@@ -50,20 +51,20 @@
 		]
 	}
 
-	//TypeScript DebounceFunction
-	type DebouncedFunction<T extends (...args: any[]) => any> = (...args: Parameters<T>) => void
+	// //TypeScript DebounceFunction
+	// type DebouncedFunction<T extends (...args: any[]) => any> = (...args: Parameters<T>) => void
 
-	function debounce<T extends (...args: any[]) => any>(func: T, wait: number): DebouncedFunction<T> {
-		let timeout: ReturnType<typeof setTimeout>
-		return function executedFunction(this: unknown, ...args: Parameters<T>) {
-			const later = () => {
-				timeout = undefined!
-				func.apply(this, args)
-			}
-			clearTimeout(timeout)
-			timeout = setTimeout(later, wait)
-		}
-	}
+	// function debounce<T extends (...args: any[]) => any>(func: T, wait: number): DebouncedFunction<T> {
+	// 	let timeout: ReturnType<typeof setTimeout>
+	// 	return function executedFunction(this: unknown, ...args: Parameters<T>) {
+	// 		const later = () => {
+	// 			timeout = undefined!
+	// 			func.apply(this, args)
+	// 		}
+	// 		clearTimeout(timeout)
+	// 		timeout = setTimeout(later, wait)
+	// 	}
+	// }
 
 	//DebouncedSearchData
 	const debouncedHandleClick = debounce(handleClick, 1000)

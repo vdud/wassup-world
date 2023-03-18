@@ -17,6 +17,7 @@
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { isLocked } from '$lib/stores/isLocked'
+	import { debounce } from '$lib/debounce'
 
 	onMount(() => {
 		$isFlex = false
@@ -85,12 +86,12 @@
 	const parseScroll = () => {
 		const middleScroll: any = document.getElementById('middleScroll')
 		if (middleScroll.scrollTop < -69) {
-			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
+			console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = true
 
 			// console.log('aboveSwitch', aboveSwitch)
 		} else if (middleScroll.scrollTop > -69) {
-			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
+			console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = false
 			// console.log('aboveSwitch', aboveSwitch)
 		}
@@ -113,7 +114,8 @@
 	</div>
 {/if}
 
-<div class="hashContainer" id="middleScroll" on:scroll={parseScroll}>
+<div class="hashContainer" id="middleScroll" on:scroll={debounce(parseScroll, 1000)}>
+	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
