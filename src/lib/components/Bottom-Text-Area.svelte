@@ -20,6 +20,10 @@
 
 	const socketWorker = async () => {
 		const message = $user_message.slice(0, 999).trim()
+
+		// scroll to bottom
+		// scroll window to bottom
+
 		$user_message = ''
 		if (message === '') {
 			return
@@ -45,7 +49,7 @@
 
 <div class="textAreeaBox">
 	<button class="button" on:click={socketWorker} style="{$currentPage === 'PUBLIC' ? 'background-color:var(--secondary)' : ''}{$currentPage === 'HASHTAGS' ? 'background-color:var(--primary)' : ''}{$currentPage === 'LOCATIONS' ? 'background-color:var(--secOptDark)' : ''}"><img class="sendButtonLogo" src={sendButtonLogo} alt="sendbutton" /></button>
-	<textarea use:autoresize class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type your message" />
+	<textarea use:autoresize class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type your message..." />
 </div>
 
 <style>
@@ -67,7 +71,6 @@
 		/* background-color: var(--primaryTheme); */
 
 		/* border: 1px solid var(--tertiaryTheme); */
-		/* box-shadow: var(--boxShadows); */
 		background-image: linear-gradient(rgba(0, 0, 0, 0), var(--primaryTheme));
 	}
 
@@ -77,10 +80,13 @@
 
 	textarea {
 		color: var(--secondaryThemeInverted);
+		font-family: ULight;
+		/* box-shadow: var(--boxInsetShadows); */
 	}
 	textarea::placeholder {
 		color: var(--tertiaryThemeInverted);
 		opacity: var(--extraDull);
+		font-family: UBold;
 	}
 	button {
 		border: none;
@@ -123,7 +129,7 @@
 		font-size: 1.2rem;
 		border-radius: calc(var(--borderRadius) / 3);
 
-		background-color: var(--primaryTheme);
+		background-color: var(--secondaryTheme);
 		box-shadow: var(--boxInsetShadows);
 
 		max-height: 100px;
