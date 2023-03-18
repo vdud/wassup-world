@@ -96,6 +96,7 @@
 			// console.log('aboveSwitch', aboveSwitch)
 		}
 	}
+	const debouncedScroll = debounce(parseScroll, 300)
 
 	let isLiked = false
 	const like = () => {
@@ -114,7 +115,7 @@
 	</div>
 {/if}
 
-<div class="hashContainer" id="middleScroll" on:scroll={debounce(parseScroll, 1000)}>
+<div class="hashContainer" id="middleScroll" on:scroll={debouncedScroll}>
 	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />

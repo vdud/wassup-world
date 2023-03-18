@@ -10,16 +10,16 @@
 	// console.log($loginResponseData)
 
 	const toggleLoc = (groupName: any) => {
+		localStorage.setItem('nature', JSON.stringify({ $nature: 'LOCATION' }))
 		window.location.pathname = '/LOC/' + groupName
-		$nature = 'LOCATIONS'
 	}
 	const toggleHashtag = (groupName: any) => {
+		localStorage.setItem('nature', JSON.stringify({ $nature: 'HASHTAG' }))
 		window.location.pathname = '/HASH/' + groupName
-		$nature = 'HASHTAGS'
 	}
 	const togglePublic = (groupName: any) => {
+		localStorage.setItem('nature', JSON.stringify({ $nature: 'PUBLIC' }))
 		window.location.pathname = '/PUB/' + groupName
-		$nature = 'PUBLIC'
 	}
 </script>
 

@@ -1,6 +1,14 @@
 <script>
+	import { debounce } from '$lib/debounce'
 	import { nature } from '$lib/stores/nature'
 	import { onDestroy, onMount } from 'svelte'
+
+	//setlocalStorage
+	const setlocalStorage = () => {
+		localStorage.setItem('nature', JSON.stringify({ $nature }))
+		// console.log('registered')
+	}
+	const debouncedSetlocalStorage = debounce(setlocalStorage, 300)
 </script>
 
 <div class="navBoxy">
@@ -8,7 +16,7 @@
 		<button
 			on:click={() => {
 				$nature = 'PUBLIC'
-				localStorage.setItem('nature', JSON.stringify({ $nature }))
+				debouncedSetlocalStorage()
 				const middleData = document.querySelector('.middleData')
 				middleData?.scrollTo(0, 0)
 			}}
@@ -21,7 +29,8 @@
 		<button
 			on:click={() => {
 				$nature = 'HASHTAG'
-				localStorage.setItem('nature', JSON.stringify({ $nature }))
+				debouncedSetlocalStorage()
+
 				const middleData = document.querySelector('.middleData')
 				middleData?.scrollTo(0, 0)
 			}}
@@ -32,7 +41,8 @@
 		<button
 			on:click={() => {
 				$nature = 'LOCATION'
-				localStorage.setItem('nature', JSON.stringify({ $nature }))
+				debouncedSetlocalStorage()
+
 				const middleData = document.querySelector('.middleData')
 				middleData?.scrollTo(0, 0)
 			}}

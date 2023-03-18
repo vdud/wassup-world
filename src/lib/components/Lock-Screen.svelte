@@ -57,7 +57,7 @@
 			const response = await res.json()
 			if (res.ok) {
 				$loginResponseData = response
-				console.log('$loginResponseData', $loginResponseData)
+				// console.log('$loginResponseData', $loginResponseData)
 				$userName_id = response.userName_id
 				pusher.subscribe($userName_id).bind('inserted', (data: any) => {
 					console.log(data.message)
@@ -80,33 +80,33 @@
 				// console.log($userName_id)
 
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
-					console.log(element._id)
+					// console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
 							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
-							console.log(data.message)
-							console.log(data)
+							// console.log(data.message)
+							// console.log(data)
 						})
 					}
 				})
 				$loginResponseData.data.formatedLOCdata.forEach((element: any) => {
-					console.log(element._id)
+					// console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
 							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
-							console.log(data.message)
-							console.log(data)
+							// console.log(data.message)
+							// console.log(data)
 						})
 					}
 				})
 
 				$loginResponseData.data.formatedPUBLICdata.forEach((element: any) => {
-					console.log(element._id)
+					// console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
 							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
-							console.log(data.message)
-							console.log(data)
+							// console.log(data.message)
+							// console.log(data)
 						})
 					}
 				})

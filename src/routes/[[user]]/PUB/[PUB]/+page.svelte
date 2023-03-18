@@ -92,6 +92,7 @@
 			// console.log('aboveSwitch', aboveSwitch)
 		}
 	}
+	const debouncedScroll = debounce(parseScroll, 300)
 
 	let isLiked = false
 	const like = () => {
@@ -108,7 +109,7 @@
 	<meta name="description" content="This is a simple discourse on location:{data.body.groupName} as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
 </svelte:head>
 
-<div class="hashContainer" id="middleScroll" on:scroll={debounce(parseScroll, 1000)}>
+<div class="hashContainer" id="middleScroll" on:scroll={debouncedScroll}>
 	<div class="gradient" />
 
 	<div class="scrollToBottom">
