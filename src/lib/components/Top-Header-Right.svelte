@@ -40,18 +40,18 @@
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5);'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			{#if $currentPage !== ''}
-				{#if $currentPage === 'HASHTAGS'}
-					<span
-						>#{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-				{:else if $currentPage === 'LOCATIONS'}
-					<span
-						>📍{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-				{:else if $currentPage === 'PUBLIC'}
-					<span
-						>{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-				{/if}
+			<!-- {#if $currentPage !== ''} -->
+			{#if $currentPage === 'HASHTAGS'}
+				<span
+					>#{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
+			{:else if $currentPage === 'LOCATIONS'}
+				<span
+					>📍{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
+			{:else if $currentPage === 'PUBLIC'}
+				<span
+					>{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
 			{/if}
+			<!-- {/if} -->
 		</h1>
 		<div class="pFlex">
 			{#if $currentGroupName.length > 29}

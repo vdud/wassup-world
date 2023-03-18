@@ -63,9 +63,6 @@
 		})
 	})
 
-	onDestroy(() => {
-		$currentPage = ''
-	})
 	let isLiked = false
 
 	const like = () => {

@@ -59,10 +59,6 @@
 			}
 		})
 	})
-
-	onDestroy(() => {
-		$currentPage = ''
-	})
 </script>
 
 <svelte:head>
