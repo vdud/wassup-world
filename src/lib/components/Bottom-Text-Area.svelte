@@ -30,11 +30,7 @@
 		if (message === '') {
 			return
 		} else {
-			// const replaceLatestMessage = (id: String) => {
-			// const groupId = document.querySelector(`#${$userGroup_id}`)
 			applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId })
-
-			// }
 			applyMessage({ sender: $userName, message, createdAt: new Date() })
 
 			const res = await fetch('/api/textAreaMessages', {

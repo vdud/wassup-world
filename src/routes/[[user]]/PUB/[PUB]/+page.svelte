@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { userName } from '$lib/stores/userName'
-	import { currentGroupName } from '$lib/stores/currentGroupName'
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { onDestroy, onMount } from 'svelte'
@@ -11,7 +11,7 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { debounce } from '$lib/debounce'
-	import { applyNavDataMessage } from '$lib/applyTextMessage'
+	import { applyMessageLeft, applyNavDataMessage } from '$lib/applyTextMessage'
 	// import { middleScroll } from '$lib/stores/middleScroll'
 	export let data: PageData
 
@@ -19,7 +19,7 @@
 
 	onMount(() => {
 		$isFlex = false
-		$currentGroupName = data.body.groupName
+		$currentPageHeaderData = data.body.groupName
 		$currentGroupCreatedAt = data.body.createdAt
 
 		$currentPage = 'PUBLIC'
@@ -30,43 +30,7 @@
 				return
 			} else {
 				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
-
-				// if (data.sender !== $userName) {
-				const textMessages: any = document.getElementById('textMessages')
-
-				const div = document.createElement('div')
-				div.classList.add('text')
-				// div.classList.add('newText')
-				div.classList.add('sender')
-				const p = document.createElement('p')
-				const span1 = document.createElement('span')
-				span1.style.color = 'var(--primary)'
-				span1.innerText = data.sender + '; '
-				const span2 = document.createElement('span')
-				span2.style.color = 'var(--secondaryThemeInverted)'
-				span2.innerText = data.message
-
-				const span3 = document.createElement('span')
-				span3.classList.add('spanFlexLeft')
-				const span4 = document.createElement('span')
-				span4.classList.add('timeSpan')
-				const span5 = document.createElement('span')
-				span5.classList.add('timeSpan')
-				span5.classList.add('likeSPan')
-				span5.style.marginRight = '10px'
-
-				// span3.append(span5)
-				span3.append(span4)
-
-				// span4.classList.add('timeSpanLeft')
-				span4.innerText = timeSince(data.createdAt)
-
-				p.appendChild(span1)
-				p.appendChild(span2)
-				p.appendChild(span3)
-				div.appendChild(p)
-
-				textMessages.appendChild(div)
+				applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
 			}
 		})
 	})
@@ -152,47 +116,5 @@
 </div>
 
 <style>
-	#textMessages {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
-		animation: fadeIn 300ms both ease-in-out;
-	}
-
-	.margin-bottom {
-		padding: 1.8rem;
-	}
-	.margin-top {
-		padding: 4rem;
-	}
-	.hashContainer {
-		width: 100%;
-		height: 100%;
-
-		display: flex;
-		flex-direction: column-reverse;
-
-		pointer-events: all;
-		overflow: hidden;
-		overflow-y: scroll;
-	}
-	.hashMessagesContainer {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column-reverse;
-		flex-wrap: wrap;
-	}
-	/* 
-	@media screen and (max-width: 768px) {
-		.text {
-			width: 75%;
-		}
-	} */
-
-	@media screen and (min-width: 1410px) {
-	}
-
-	/* Designing for scroll-bar */
+	/* shifted to new-app.css */
 </style>

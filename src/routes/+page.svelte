@@ -5,7 +5,8 @@
 	import { autoresize } from 'svelte-textarea-autoresize'
 
 	import imageLogoSrc from '$lib/assets/fknLatest.png'
-	import { currentGroupName } from '$lib/stores/currentGroupName'
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
+	import { titleData } from '$lib/stores/titleData'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 
@@ -15,7 +16,9 @@
 
 	onMount(() => {
 		$currentPage = ''
-		$currentGroupName = 'HOME'
+
+		$currentPageHeaderData = 'HOME'
+		$currentGroupCreatedAt = 0
 	})
 
 	let xScroll = 0

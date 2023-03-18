@@ -3,7 +3,7 @@
 	import { fullDisplay } from '$lib/stores/fullDisplay'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { user_message } from '$lib/stores/user_message'
-	import { currentGroupName } from '$lib/stores/currentGroupName'
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 
 	// import imageLogoSrc from '../../lib/assets/newL.svg'
@@ -13,6 +13,8 @@
 	import { currentPage } from '$lib/stores/currentPage'
 	import { timeSince } from '$lib/timeFormat'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
+	import { titleData } from '$lib/stores/titleData'
+	import { userName } from '$lib/stores/userName'
 
 	let groupName = 'world'
 
@@ -41,32 +43,43 @@
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5);'}>
 	<div class="headerTextBox">
 		<h1 class="chatHeaderText">
-			{#if $currentPage != ''}
-				{#if $currentPage === 'HASHTAGS'}
-					<span
-						>#{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-				{:else if $currentPage === 'LOCATIONS'}
-					<span
-						>📍{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-				{:else if $currentPage === 'PUBLIC'}
-					<span
-						>{$currentGroupName.toUpperCase().slice(0, 30)}{#if $currentGroupName.length > 29}...{/if}</span>
-				{/if}
+			{#if $currentPage !== ''}
+				<span>
+					{#if $currentPage === 'HASHTAGS'}
+						#️⃣
+					{:else if $currentPage === 'LOCATIONS'}
+						📍
+					{/if}
+					{$currentPageHeaderData.toUpperCase().slice(0, 30)}
+
+					{#if $currentPageHeaderData.length > 29}
+						...
+					{/if}
+				</span>
+			{:else}
+				<span>{$currentPageHeaderData.toUpperCase()}</span>
 			{/if}
 		</h1>
 		<div class="pFlex">
-			{#if $currentGroupName.length > 29}
-				<p class="chatPText">
-					{$currentGroupName.toUpperCase().slice(0, 60)}{#if $currentGroupName.length > 59}...{/if}
-				</p>
+			{#if $currentPage !== ''}
+				{#if $currentPageHeaderData.length > 29}
+					<p class="chatPText">
+						{$currentPageHeaderData.toUpperCase().slice(0, 60)}{#if $currentPageHeaderData.length > 59}...{/if}
+					</p>
+				{/if}
+			{:else}
+				<p class="chatPText">{$titleData}</p>
 			{/if}
 		</div>
-		{#if $currentPage !== ''}
-			<div class="pFlex">
+		<!-- {#if $currentPage !== '' && $currentGroupCreatedAt !== 0} -->
+		<div class="pFlex">
+			{#if $currentPage !== ''}
 				<p class="chatPText">CreatedAt</p>
 				<p class="chatPText">{timeSince($currentGroupCreatedAt)}</p>
-			</div>
-		{/if}
+			{:else}
+				<p class="chatPText" style="font-family: Imprima;">wassup {$userName}!</p>
+			{/if}
+		</div>
 	</div>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 	<!-- <button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button> -->
@@ -134,18 +147,19 @@
 		font-family: UBold;
 		color: var(--tertiaryThemeInverted);
 
-		margin-top: 5px;
+		margin-top: 12px;
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));
 		/* font-size: 0rem; */
 		text-align: center;
 		/* margin-left: 6rem; */
-		background-color: var(--tertiaryTheme);
+		background-color: var(--secondaryTheme);
 
 		/* color: var(--primaryThemeInverted); */
 		/* opacity: var(--dull); */
 
 		padding: 0.2rem 1rem;
-		box-shadow: var(--boxInsetShadows);
+		/* box-shadow: var(--boxInsetShadows); */
+		box-shadow: var(--boxShadows);
 		border-radius: var(--borderRadius);
 	}
 	.arrow {
