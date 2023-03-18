@@ -41,11 +41,11 @@
 		--smallerBorderRadius: calc(var(--buttonHW) / 3);
 
 		--boxShadows: 0px 0px 8px #1119, 0px 0px 1px #111;
-		--boxShadowsBlur: 0px 0px 25px #1119, 0px 0px 8px #1118;
+		--boxShadowsBlur: 0px 0px 10px #1111, 0px 0px 8px #1118;
 		--boxInsetShadows: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
 
 		--boxShadowsInverted: 0px 0px 8px #1119, 0px 0px 1px #111;
-		--boxShadowsBlurInverted: 0px 0px 25px #1119, 0px 0px 8px #1118;
+		--boxShadowsBlurInverted: 0px 0px 20px #1119, 0px 0px 8px #1118;
 		--boxInsetShadowsInverted: inset 0px 0px 10px #fff1, inset 0px 0px 3px #ccc3;
 
 		--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
@@ -97,7 +97,7 @@
 		--smallerBorderRadius: calc(var(--buttonHW) / 3);
 
 		--boxShadows: 0px 0px 8px 0.1px #1113, 0px 0px 1px #111;
-		--boxShadowsBlur: 0px 0px 25px #1114, 0px 0px 8px #1118;
+		--boxShadowsBlur: 0px 0px 10px #1111, 0px 0px 8px #1118;
 		--boxInsetShadows: inset 0px 0px 6px #0004, inset 0px 0px 1px #111;
 
 		--boxShadowsInverted: 0px 0px 8px #eee1, 0px 0px 1px #eee;
@@ -247,7 +247,7 @@ body {
 	border-radius: calc(var(--borderRadius) * 0.75);
 	/* width: clamp(640px, 80%, 800px); */
 	width: clamp(520px, 80%, 800px);
-	margin: 0 var(--averageMargin);
+	margin: 2px var(--averageMargin);
 	/* background-color: var(--primaryTheme); */
 
 	padding: 1rem 1rem;
@@ -267,17 +267,10 @@ body {
 .timeSpan {
 	background-color: var(--primaryTheme);
 	color: var(--tertiaryThemeInverted);
-	/* opacity: var(--dull); */
-	box-shadow: var(--boxShadows);
-	/* opacity: var(--extraDull); */
+	box-shadow: var(--boxInsetShadows);
 	font-size: calc(var(--fontSize) * 0.7);
-	/* position: absolute; */
-	/* bottom: var(--averageMargin); */
-	/* padding: var(--averageMargin); */
-	/* margin: 0.1rem 1rem; */
 	padding: 0.2rem 0.6rem;
 	border-radius: calc(var(--borderRadius) / 3);
-	/* margin-right: 10px; */
 }
 .timeSpanRight {
 	left: 0;
@@ -287,15 +280,18 @@ body {
 	right: 0;
 	left: unset;
 }
-.LikeSpan {
+.LikeSpan,
+.LikeSpan:active {
 	background-color: var(--secondaryTheme);
 	cursor: pointer;
 	width: 30px;
 	text-align: center;
+	box-shadow: var(--boxShadowsBlur);
+	transition: box-shadow 300ms ease-in-out, background-color 300ms ease-in-out;
 	/* margin-left: 10px; */
 }
 .LikeSpan:hover,
-.LikeSpan:active {
+.LikeSpan::selection {
 	background-color: var(--primaryTheme);
 	box-shadow: var(--boxInsetShadows);
 }

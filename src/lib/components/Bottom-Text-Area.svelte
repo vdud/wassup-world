@@ -64,11 +64,13 @@
 
 		position: relative;
 
-		background-color: var(--secondaryTheme);
+		/* background-color: var(--primaryTheme); */
 
 		/* border: 1px solid var(--tertiaryTheme); */
-		box-shadow: var(--boxShadows);
+		/* box-shadow: var(--boxShadows); */
+		background-image: linear-gradient(rgba(0, 0, 0, 0), var(--primaryTheme));
 	}
+
 	::-webkit-scrollbar {
 		display: none;
 	}
