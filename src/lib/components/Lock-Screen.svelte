@@ -56,6 +56,7 @@
 			const response = await res.json()
 			if (res.ok) {
 				$loginResponseData = response
+				console.log('$loginResponseData', $loginResponseData)
 				$userName_id = response.userName_id
 				pusher.subscribe($userName_id).bind('inserted', (data: any) => {
 					console.log(data.message)

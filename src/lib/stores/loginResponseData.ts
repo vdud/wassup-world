@@ -7,6 +7,7 @@ export const loginResponseData = writable({
 		name: 'string',
 		formatedPUBLICdata: [
 			{
+				_id: 'string',
 				name: 'string',
 				lastMessage: 'string',
 				nature: 'string',
@@ -16,6 +17,7 @@ export const loginResponseData = writable({
 		],
 		formatedHASHTAGSdata: [
 			{
+				_id: 'string',
 				name: 'string',
 				lastMessage: 'string',
 				nature: 'string',
@@ -25,6 +27,7 @@ export const loginResponseData = writable({
 		],
 		formatedLOCdata: [
 			{
+				_id: 'string',
 				name: 'string',
 				lastMessage: 'string',
 				nature: 'string',

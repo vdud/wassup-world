@@ -8,7 +8,9 @@
 	import type { PageData } from './$types'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { timeSince } from '$lib/timeFormat'
+	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
+	// import { middleScroll } from '$lib/stores/middleScroll'
 	export let data: PageData
 
 	// console.log('data', data)
@@ -64,6 +66,29 @@
 			}
 		})
 	})
+
+	const scrolltoBottom = () => {
+		// $middleScroll.scrollTop = $middleScroll.scrollHeight
+		const middleScroll: any = document.getElementById('middleScroll')
+		middleScroll.scrollTop = middleScroll.scrollHeight
+		// console.log('$middleScroll', $middleScroll)
+	}
+
+	let aboveSwitch = false
+	const parseScroll = () => {
+		const middleScroll: any = document.getElementById('middleScroll')
+		if (middleScroll.scrollTop < -69) {
+			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
+			aboveSwitch = true
+
+			// console.log('aboveSwitch', aboveSwitch)
+		} else if (middleScroll.scrollTop > -69) {
+			// console.log('middleScroll.scrollTop', middleScroll.scrollTop)
+			aboveSwitch = false
+			// console.log('aboveSwitch', aboveSwitch)
+		}
+	}
+
 	let isLiked = false
 	const like = () => {
 		isLiked = !isLiked
@@ -79,8 +104,14 @@
 	<meta name="description" content="This is a simple discourse on location:{data.body.groupName} as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
 </svelte:head>
 
-<div class="hashContainer">
+<div class="hashContainer" id="middleScroll" on:scroll={parseScroll}>
 	<div class="gradient" />
+
+	{#if aboveSwitch === true}
+		<div class="scrollToBottom">
+			<button class="scrollButton" on:click={scrolltoBottom}><i class="fa fa-arrow-down" /></button>
+		</div>
+	{/if}
 
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
@@ -110,6 +141,7 @@
 				</div>
 			{/if}
 		{/each}
+		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-6rem; opacity:0;'}><div class="infoData"><h1 class="comingSoon">COMING SOON...</h1></div></div>
 	</div>
 	<div class="margins margin-top" />
 </div>

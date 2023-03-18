@@ -152,6 +152,8 @@
 	/* padding-bottom: 100px; */
 	overflow: hidden;
 	overflow-y: scroll;
+
+	/* pointer-events: none; */
 }
 
 .paddedData {
@@ -170,6 +172,7 @@
 	margin-bottom: 1rem;
 	border-radius: calc(var(--borderRadius) / 2);
 	overflow: hidden;
+	/* pointer-events: all; */
 }
 .natureLogo {
 	width: 100%;
@@ -181,6 +184,8 @@
 	padding-left: 1rem;
 	padding-top: calc(var(--averageMargin) / 2);
 	align-items: center;
+	/* position: fixed; */
+	/* top: 0; */
 
 	background-color: var(--secondaryTheme);
 }

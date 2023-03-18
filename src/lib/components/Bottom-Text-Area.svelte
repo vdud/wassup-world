@@ -67,6 +67,7 @@
 		align-items: flex-end;
 
 		position: relative;
+		pointer-events: all;
 
 		/* background-color: var(--primaryTheme); */
 

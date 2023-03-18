@@ -146,7 +146,7 @@
 		{:else if $nature === 'HASHTAG'}
 			<i class="fa fa-couch" style="color:var(--primary)" />
 		{:else if $nature === 'LOCATION'}
-			<i class="fa fa-globe" style="color:var(--secOptDark)" />
+			<i class="fa-solid fa-globe" style="color:var(--secOptDark)" />
 		{/if}
 		<!-- {#if $nature === 'PUBLIC'}
 			<i class="fa fa-user-o pad" />

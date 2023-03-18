@@ -5,6 +5,7 @@
 	import { json } from '@sveltejs/kit'
 	import { timeSince } from '$lib/timeFormat'
 	import { applyNavDataMessage } from '$lib/applyTextMessage'
+	import { onMount } from 'svelte'
 
 	// console.log($loginResponseData)
 
@@ -54,8 +55,8 @@
 						<div class="noMoreBox" />
 						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
-						{#each $loginResponseData.data.formatedLOCdata as { name, lastMessage, updatedAt, latestMessageSender }, i}
-							<button on:click={toggleLoc.bind(globalThis, name)} class="locBox">
+						{#each $loginResponseData.data.formatedLOCdata as { _id, name, lastMessage, updatedAt, latestMessageSender }, i}
+							<button on:click={toggleLoc.bind(globalThis, name)} id={_id} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2" style="color:var(--secOptDark)">{name}</p>
 								</div>
@@ -85,7 +86,7 @@
 						</div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedHASHTAGSdata as group}
-							<button on:click={toggleHashtag.bind(globalThis, group.name)} class="locBox">
+							<button on:click={toggleHashtag.bind(globalThis, group.name)} id={group._id} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2" style="color:var(--primary)">#{group.name}</p>
 								</div>
@@ -113,7 +114,7 @@
 						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedPUBLICdata as group}
-							<button on:click={togglePublic.bind(globalThis, group.name)} class="locBox">
+							<button on:click={togglePublic.bind(globalThis, group.name)} id={group._id} class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2" style="color:var(--secondary)">{group.name}</p>
 								</div>

@@ -183,6 +183,9 @@
 		justify-content: center;
 
 		background-color: transparent;
+
+		pointer-events: none;
+		/* cursor: auto; */
 	}
 	.main {
 		position: relative;
@@ -196,7 +199,7 @@
 		justify-content: center;
 
 		/* background-color: var(--secondaryTheme); */
-		box-shadow: var(--boxInsetShadows);
+		/* box-shadow: var(--boxInsetShadows); */
 
 		width: 100%;
 		height: 100%;
@@ -209,6 +212,7 @@
 
 		height: 100%;
 		width: clamp(300px, 100%, 1450px);
+		/* border-top-left-radius: var(--borderRadius); */
 
 		overflow: hidden;
 		box-shadow: var(--boxShadowsBlur);

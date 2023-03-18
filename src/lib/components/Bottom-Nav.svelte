@@ -9,6 +9,8 @@
 			on:click={() => {
 				$nature = 'PUBLIC'
 				localStorage.setItem('nature', JSON.stringify({ $nature }))
+				const middleData = document.querySelector('.middleData')
+				middleData?.scrollTo(0, 0)
 			}}
 			class="fa fa-user-o navContainer "
 			style={$nature === 'PUBLIC' ? '' : 'color:var(--primaryTheme'}
@@ -20,6 +22,8 @@
 			on:click={() => {
 				$nature = 'HASHTAG'
 				localStorage.setItem('nature', JSON.stringify({ $nature }))
+				const middleData = document.querySelector('.middleData')
+				middleData?.scrollTo(0, 0)
 			}}
 			class="fa fa-hashtag navContainer"
 			style={$nature === 'HASHTAG' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'HASHTAG' ? 'childTranslated' : ''}" /></button>
@@ -29,6 +33,8 @@
 			on:click={() => {
 				$nature = 'LOCATION'
 				localStorage.setItem('nature', JSON.stringify({ $nature }))
+				const middleData = document.querySelector('.middleData')
+				middleData?.scrollTo(0, 0)
 			}}
 			class="fa fa-location-pin navContainer "
 			style={$nature === 'LOCATION' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'LOCATION' ? 'childTranslated' : ''}" /></button>
@@ -58,6 +64,8 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: space-evenly;
+
+		pointer-events: all;
 	}
 
 	.nav {

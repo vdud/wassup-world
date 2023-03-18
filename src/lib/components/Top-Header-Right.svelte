@@ -12,6 +12,7 @@
 	import arrowButton from '$lib/assets/arrowButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { timeSince } from '$lib/timeFormat'
+	import { isShowInfo } from '$lib/stores/isShowInfo'
 
 	let groupName = 'world'
 
@@ -27,13 +28,13 @@
 		}, 600)
 	}
 	const togglehRef = () => {
-		$fullDisplay = 'nonHidden'
-		$isFlex = !$isFlex
-		window.location.href = '/'
+		const middleScroll: any = document.getElementById('middleScroll')
+		$isShowInfo = !$isShowInfo
+		// if (middleScroll.scrollTop === scrollTop) {
+		// }
 		setTimeout(() => {
-			// $user_message = ''
-			$fullDisplay = 'hidden'
-		}, 600)
+			middleScroll.scrollTop = middleScroll.scrollHeight * -1
+		}, 133)
 	}
 </script>
 
@@ -70,7 +71,7 @@
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 	<!-- <button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button> -->
 
-	<button class="absoluteBox boxRight"><div><img class="Logo" src={imageLogoSrc} alt="Logo" /></div></button>
+	<button class="absoluteBox boxRight" on:click={togglehRef}><div><img class="Logo" src={imageLogoSrc} alt="Logo" /></div></button>
 </div>
 
 <style>
@@ -81,11 +82,19 @@
 		margin-top: 5px;
 	}
 	.Logo {
-		scale: 0.1;
-		margin-top: calc(var(--averageMargin) * 1);
-		margin-left: calc(var(--averageMargin) / 3);
+		scale: 0.08;
+		margin-top: calc(var(--averageMargin) * 0.3);
+		/* margin-left: calc(var(--averageMargin) / 3); */
 
-		transition: scale 333ms ease-in-out;
+		transition: scale 239ms ease-in-out;
+		border-radius: 23%;
+		box-shadow: var(--boxShadowsBlur), var(--boxInsetShadows);
+	}
+	.Logo:hover {
+		scale: 0.1;
+	}
+	.Logo:active {
+		scale: 0.07;
 	}
 	.fa-bars {
 		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
@@ -100,6 +109,14 @@
 		padding: 20px;
 
 		position: absolute;
+	}
+	.boxLeft {
+		left: calc(var(--averageMargin) * 2);
+	}
+	.boxRight {
+		right: calc(var(--averageMargin) * 2);
+		box-shadow: none;
+		/* overflow: hidden; */
 	}
 	.chatPText {
 		font-family: UBold;
@@ -156,19 +173,6 @@
 		/* margin: 0 var(--topLeftMargin) 0 0; */
 		/* transform: translateX(var(--topRightMargin)); */
 		/* overflow: hidden; */
-	}
-	.boxLeft {
-		left: calc(var(--averageMargin) * 2);
-	}
-	.boxLeft2 {
-		left: calc(var(--averageMargin) * 7.4);
-	}
-	.boxRight {
-		/* background-color: var(--optDark); */
-		right: calc(var(--averageMargin) * 2);
-		overflow: hidden;
-		/* border: 1px solid var(--optDark); */
-		/* box-shadow: 1px 1px 2px #11111199, -1px -1px 2px #d21a1a50; */
 	}
 	.headerTextBox {
 		overflow: hidden;

@@ -7,17 +7,19 @@
 	import imageLogoSrc from '$lib/assets/fknLatest.png'
 	import { currentGroupName } from '$lib/stores/currentGroupName'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
-
-	let isShowInfo = false
+	import { isShowInfo } from '$lib/stores/isShowInfo'
 
 	function showInfo() {
-		isShowInfo = !isShowInfo
+		$isShowInfo = !$isShowInfo
 	}
 
 	onMount(() => {
 		$currentPage = ''
 		$currentGroupName = 'HOME'
 	})
+
+	let xScroll = 0
+	let yScroll = 0
 </script>
 
 <svelte:head>
@@ -27,8 +29,8 @@
 
 <div class="middleScroll">
 	<div class="slot">
-		<div class="buttonIcon" style={isShowInfo ? 'margin-top:0rem' : 'margin-top:10rem'}><button class="logoImage" on:click={showInfo}><img class="logo" src={imageLogoSrc} alt="Logo" /></button></div>
-		<div class="Info" style={isShowInfo ? 'scale: 1; opacity:1;' : 'scale: .75; padding:.2rem;margin-top:-2rem; opacity:0;'}>
+		<div class="buttonIcon" style={$isShowInfo ? 'margin-top:0rem' : 'margin-top:10rem'}><button class="logoImage" on:click={showInfo}><img class="logo" src={imageLogoSrc} alt="Logo" /></button></div>
+		<div class="Info" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-30rem; opacity:0;'}>
 			<div class="headerText">
 				<h1 style="color:var(--primary);font-family: UBold;"><span>HEY </span><span>{$userName.toUpperCase()}!</span></h1>
 				<br />
@@ -42,7 +44,7 @@
 				<br />
 				<p class="pWidth">With its user-friendly interface and diverse range of features, Wassup.World is the perfect app for anyone looking to connect with people in their local community or around the world. So why wait? Download Wassup.World today and start chatting!</p>
 				<br />
-				<ul class="pWidth" style="margin-left: -20px;">
+				<!-- <ul class="pWidth" style="margin-left: -20px;">
 					<li><span style="font-weight: bold;">Location-based chat app:</span> Wassup.World allows users to connect with others in their local community in real-time.</li>
 					<br />
 					<li><span style="font-weight: bold;">Barcode system:</span> Users can easily join chat rooms specific to restaurants by scanning barcodes.</li>
@@ -59,7 +61,7 @@
 					<br />
 					<li><span style="font-weight: bold;">Available worldwide:</span> Wassup.World can be used by people around the world, making it a great tool for connecting with people from different cultures and backgrounds.</li>
 					<br />
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 	</div>
