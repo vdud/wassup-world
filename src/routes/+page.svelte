@@ -24,7 +24,17 @@
 
 <svelte:head>
 	<title>Wassup.World - Location-Based Chat App</title>
-	<meta name="description" content="OPEN-SOURCE CHAT-APP" />
+	<meta name="description" content="Wassup.World is a location-based chat app that connects you with people nearby. Join conversations, make new friends, and discover what's happening in your area." />
+	<meta property="og:title" content="Wassup.World - Location-Based Chat App" />
+	<meta property="og:description" content="Wassup.World is a location-based chat app that connects you with people nearby. Join conversations, make new friends, and discover what's happening in your area." />
+	<meta property="og:image" content={imageLogoSrc} />
+	<meta property="og:url" content="https://wassup.world" />
+	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content="Wassup.World" />
+	<!-- <meta name="twitter:title" content="Wassup.World - Location-Based Chat App" />
+	<meta name="twitter:description" content="Wassup.World is a location-based chat app that connects you with people nearby. Join conversations, make new friends, and discover what's happening in your area." />
+	<meta name="twitter:image" content="https://example.com/twitter-image.png" />
+	<meta name="twitter:card" content="summary_large_image" /> -->
 </svelte:head>
 
 <div class="middleScroll">

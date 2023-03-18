@@ -38,4 +38,14 @@ export const applyMessage = (data: any) => {
 	textMessages.appendChild(div)
 }
 
-export const applyNavDataMessage = (data: any) => {}
+export const applyNavDataMessage = (data: any) => {
+	const sender = document.getElementById(`SENDER?${data.groupId}`)
+	const latestMessage = document.getElementById(`LM?${data.groupId}`)
+	const latestMessageTime = document.getElementById(`LMT?${data.groupId}`)
+	if (!sender || !latestMessage || !latestMessageTime) {
+		return
+	}
+	sender.innerText = data.sender + ';'
+	latestMessage.innerText = data.message
+	latestMessageTime.innerText = timeSince(data.createdAt)
+}

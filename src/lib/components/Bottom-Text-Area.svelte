@@ -3,11 +3,12 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { applyMessage } from '$lib/applyTextMessage'
+	import { applyMessage, applyNavDataMessage } from '$lib/applyTextMessage'
 
 	import { autoresize } from 'svelte-textarea-autoresize'
 	import sendButtonLogo from '$lib/assets/sendButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
+	import { timeSince } from '$lib/timeFormat'
 	// import { timeSince } from '$lib/timeFormat'
 
 	function handleKeyDown(event: KeyboardEvent) {
@@ -20,6 +21,7 @@
 
 	const socketWorker = async () => {
 		const message = $user_message.slice(0, 999).trim()
+		const groupId = $userGroup_id
 
 		// scroll to bottom
 		// scroll window to bottom
@@ -28,6 +30,11 @@
 		if (message === '') {
 			return
 		} else {
+			// const replaceLatestMessage = (id: String) => {
+			// const groupId = document.querySelector(`#${$userGroup_id}`)
+			applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId })
+
+			// }
 			applyMessage({ sender: $userName, message, createdAt: new Date() })
 
 			const res = await fetch('/api/textAreaMessages', {

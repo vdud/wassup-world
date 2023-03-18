@@ -21,6 +21,12 @@
 		window.location.pathname = '/PUB/' + groupName
 		$nature = 'PUBLIC'
 	}
+
+	const replaceLatestMessage = (id: String) => {
+		const groupId = document.querySelector(`#${id}`)
+
+		console.log(groupId)
+	}
 </script>
 
 <div class="middleData">
@@ -56,20 +62,36 @@
 						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedLOCdata as { _id, name, lastMessage, updatedAt, latestMessageSender }, i}
-							<button on:click={toggleLoc.bind(globalThis, name)} id={_id} class="locBox">
+							<!-- CONTACT BUTTON - START-->
+							<button on:click={toggleLoc.bind(globalThis, name)} class="locBox">
+								<!-- SENDER -->
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2" style="color:var(--secOptDark)">{name}</p>
 								</div>
+
+								<!-- LATEST MESSAGE -->
 								{#if lastMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize)">
+											<span class="sendBox" style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span>
+											<span style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" />
+										</p>
+									</div>
 								{:else}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{latestMessageSender};</span><span class="latestMessage"> {lastMessage}</span></p></div>
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize)">
+											<span id="SENDER?{_id}" style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{latestMessageSender};</span>
+											<span id="LM?{_id}" class="latestMessage"> {lastMessage}</span>
+										</p>
+									</div>
 								{/if}
 
+								<!-- TIME -->
 								<div class="locBoxItems item3">
-									<p class="textLoc text3">{timeSince(updatedAt)}</p>
+									<p id="LMT?{_id}" class="textLoc text3">{timeSince(updatedAt)}</p>
 								</div>
 							</button>
+							<!-- CONTACT BUTTON - END -->
 						{/each}
 					{/if}
 				</div>
@@ -93,11 +115,16 @@
 								{#if group.lastMessage === undefined}
 									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
 								{:else}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{group.latestMessageSender};</span><span class="latestMessage"> {group.lastMessage}</span></p></div>
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize)">
+											<span id="SENDER?{group._id}" style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{group.latestMessageSender};</span>
+											<span id="LM?{group._id}" class="latestMessage"> {group.lastMessage}</span>
+										</p>
+									</div>
 								{/if}
 
 								<div class="locBoxItems item3">
-									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
+									<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>
 								</div>
 							</button>
 						{/each}
@@ -119,13 +146,23 @@
 									<p class="textLoc text2" style="color:var(--secondary)">{group.name}</p>
 								</div>
 								{#if group.lastMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize); "><span class="sendBox" style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize); ">
+											<span class="sendBox" style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span>
+											<span style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" />
+										</p>
+									</div>
 								{:else}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{group.latestMessageSender};</span><span class="latestMessage"> {group.lastMessage}</span></p></div>
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize)">
+											<span id="SENDER?{group._id}" style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{group.latestMessageSender};</span>
+											<span id="LM?{group._id}" class="latestMessage"> {group.lastMessage}</span>
+										</p>
+									</div>
 								{/if}
 
 								<div class="locBoxItems item3">
-									<p class="textLoc text3">{timeSince(group.updatedAt)}</p>
+									<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>
 								</div>
 							</button>
 						{/each}
