@@ -90,12 +90,6 @@
 		border-radius: 23%;
 		box-shadow: var(--boxShadowsBlur), var(--boxInsetShadows);
 	}
-	.Logo:hover {
-		scale: 0.1;
-	}
-	.Logo:active {
-		scale: 0.07;
-	}
 	.fa-bars {
 		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
 	}
@@ -115,8 +109,13 @@
 	}
 	.boxRight {
 		right: calc(var(--averageMargin) * 2);
-		box-shadow: none;
+		/* box-shadow: none; */
+		overflow: hidden;
 		/* overflow: hidden; */
+	}
+	.boxRight:hover,
+	.boxRight:active {
+		box-shadow: var(--boxShadowsBlur);
 	}
 	.chatPText {
 		font-family: UBold;

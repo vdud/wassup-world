@@ -64,21 +64,21 @@
 								</div>
 
 								<!-- LATEST MESSAGE -->
-								{#if lastMessage === undefined}
-									<div class="locBoxItems item2">
-										<p class="textLoc text1" style="font-size:var(--fontSize)">
-											<span class="sendBox" style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span>
-											<span style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" />
-										</p>
-									</div>
-								{:else}
-									<div class="locBoxItems item2">
-										<p class="textLoc text1" style="font-size:var(--fontSize)">
-											<span id="SENDER?{_id}" style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{latestMessageSender};</span>
-											<span id="LM?{_id}" class="latestMessage"> {lastMessage}</span>
-										</p>
-									</div>
-								{/if}
+								<div class="locBoxItems item2">
+									<p class="textLoc text1" style="font-size:var(--fontSize)">
+										{#if lastMessage === undefined}
+											<span id="SENDER?{_id}" class="latestMessageSender"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
+											<span id="LM?{_id}" class="latestMessage"><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
+										{:else}
+											<span id="SENDER?{_id}" class="latestMessageSender">
+												{latestMessageSender};
+											</span>
+											<span id="LM?{_id}" class="latestMessage">
+												{lastMessage}
+											</span>
+										{/if}
+									</p>
+								</div>
 
 								<!-- TIME -->
 								<div class="locBoxItems item3">
@@ -106,16 +106,21 @@
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2" style="color:var(--primary)">#{group.name}</p>
 								</div>
-								{#if group.lastMessage === undefined}
-									<div class="locBoxItems item2"><p class="textLoc text1" style="font-size:var(--fontSize)"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></p></div>
-								{:else}
-									<div class="locBoxItems item2">
-										<p class="textLoc text1" style="font-size:var(--fontSize)">
-											<span id="SENDER?{group._id}" style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{group.latestMessageSender};</span>
-											<span id="LM?{group._id}" class="latestMessage"> {group.lastMessage}</span>
-										</p>
-									</div>
-								{/if}
+								<div class="locBoxItems item2">
+									<p class="textLoc text1" style="font-size:var(--fontSize)">
+										{#if group.lastMessage === undefined}
+											<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
+											<span id="LM?{group._id}" class="latestMessage"><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
+										{:else}
+											<span id="SENDER?{group._id}" class="latestMessageSender">
+												{group.latestMessageSender};
+											</span>
+											<span id="LM?{group._id}" class="latestMessage">
+												{group.lastMessage}
+											</span>
+										{/if}
+									</p>
+								</div>
 
 								<div class="locBoxItems item3">
 									<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>
@@ -139,21 +144,21 @@
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
 									<p class="textLoc text2" style="color:var(--secondary)">{group.name}</p>
 								</div>
-								{#if group.lastMessage === undefined}
-									<div class="locBoxItems item2">
-										<p class="textLoc text1" style="font-size:var(--fontSize); ">
-											<span class="sendBox" style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'}>SEND MESSAGE</span>
-											<span style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" />
-										</p>
-									</div>
-								{:else}
-									<div class="locBoxItems item2">
-										<p class="textLoc text1" style="font-size:var(--fontSize)">
-											<span id="SENDER?{group._id}" style="color:var(--secOptLight); padding-right:6px" class="latestMessage">{group.latestMessageSender};</span>
-											<span id="LM?{group._id}" class="latestMessage"> {group.lastMessage}</span>
-										</p>
-									</div>
-								{/if}
+								<div class="locBoxItems item2">
+									<p class="textLoc text1" style="font-size:var(--fontSize); ">
+										{#if group.lastMessage === undefined}
+											<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
+											<span id="LM?{group._id}" class="latestMessage"><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
+										{:else}
+											<span id="SENDER?{group._id}" class="latestMessageSender">
+												{group.latestMessageSender};
+											</span>
+											<span id="LM?{group._id}" class="latestMessage">
+												{group.lastMessage}
+											</span>
+										{/if}
+									</p>
+								</div>
 
 								<div class="locBoxItems item3">
 									<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>

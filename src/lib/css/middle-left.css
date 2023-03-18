@@ -156,6 +156,14 @@
 	/* pointer-events: none; */
 }
 
+.latestMessageSender {
+	color: var(--secOptLight);
+	/* padding-right: 6px; */
+}
+.latestMessage {
+	margin-left: 6px;
+}
+
 .paddedData {
 	width: 100%;
 	height: auto;

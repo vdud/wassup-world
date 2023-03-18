@@ -42,9 +42,17 @@ export const applyNavDataMessage = (data: any) => {
 	const sender = document.getElementById(`SENDER?${data.groupId}`)
 	const latestMessage = document.getElementById(`LM?${data.groupId}`)
 	const latestMessageTime = document.getElementById(`LMT?${data.groupId}`)
+
+	// console.log('sender', sender)
+	// console.log('latestMessage', latestMessage)
+	// console.log('latestMessageTime', latestMessageTime)
+
 	if (!sender || !latestMessage || !latestMessageTime) {
 		return
 	}
+	// clear inner HTML
+	sender.innerHTML = ''
+	latestMessage.innerHTML = ''
 	sender.innerText = data.sender + ';'
 	latestMessage.innerText = data.message
 	latestMessageTime.innerText = timeSince(data.createdAt)

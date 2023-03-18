@@ -248,7 +248,7 @@ body {
 	/* width: clamp(640px, 80%, 800px); */
 	width: clamp(520px, 80%, 800px);
 	margin: 2px var(--averageMargin);
-	/* background-color: var(--primaryTheme); */
+	/* background-color: var(--secondaryTheme); */
 
 	padding: 1rem 1rem;
 	padding-bottom: 2.6rem;
@@ -256,13 +256,14 @@ body {
 	font-size: calc(var(--fontSize) * 1.2);
 	font-family: Imprima;
 
-	transition: box-shadow 300ms ease-in-out;
+	transition: box-shadow 300ms ease-in-out, background-color 300ms ease-in-out;
 
 	position: relative;
 	overflow: hidden;
 }
 .text:hover {
 	box-shadow: var(--boxInsetShadows);
+	background-color: var(--secondaryTheme);
 }
 .timeSpan {
 	background-color: var(--primaryTheme);

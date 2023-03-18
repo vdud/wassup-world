@@ -61,10 +61,10 @@
 </script>
 
 <div class="main">
-	<div class="absoluteFirstWindow lockScreen" style={$isLocked ? '' : 'display:none;'}>
-		<LockScreen />
-	</div>
 	<div class="window">
+		<div class="absoluteFirstWindow lockScreen" style={$isLocked ? '' : 'display:none;'}>
+			<LockScreen />
+		</div>
 		<div class="windows windowLeft {$isFlex ? 'show' : 'notShow'} {$isFlex ? 'width' : 'nonWidth'}">
 			<div class="windowContainers container1 leftMargin">
 				<TopHeaderLeft />
@@ -101,15 +101,18 @@
 		--tertiaryTheme: #3a3a3a55;
 	} */
 	.absoluteFirstWindow {
-		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		z-index: 2;
+		position: absolute;
+		border-radius: calc(var(--borderRadius) / 2);
+		/* border-radius: var(--borderRadius); */
 	}
 	.lockScreen {
 		background-color: var(--primaryTheme);
+		/* background-color: var(--red); */
 	}
 	.leftMargin {
 		margin-left: calc(var(--averageMargin) / 2);
@@ -198,6 +201,8 @@
 		align-items: center;
 		justify-content: center;
 
+		overflow: hidden;
+
 		/* background-color: var(--secondaryTheme); */
 		/* box-shadow: var(--boxInsetShadows); */
 
@@ -208,6 +213,7 @@
 	.window {
 		display: flex;
 		justify-content: center;
+		position: relative;
 		align-items: center;
 
 		height: 100%;
@@ -330,9 +336,6 @@
 			border-radius: 0 var(--borderRadius) var(--borderRadius) 0;
 			margin-right: var(--averageMargin);
 			border-bottom-right-radius: var(--borderRadius);
-		}
-		.main {
-			/* background-color: var(--primaryTheme); */
 		}
 		.window {
 			/* border-radius: calc(var(--borderRadius)); */

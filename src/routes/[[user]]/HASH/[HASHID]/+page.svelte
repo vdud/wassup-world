@@ -144,7 +144,7 @@
 				</div>
 			{/if}
 		{/each}
-		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1; margin-top:0' : 'scale: 0;margin-top:0;margin-bottom:-100px; opacity:0;'}><div class="infoData"><h1 class="comingSoon">COMING SOON...</h1></div></div>
+		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1; margin-top:0' : 'scale: 0;margin-top:0;margin-bottom:-100px; opacity:0;'}><div class="infoData"><h1 class="comingSoon">I'm working with business owners to get the best deals for you!</h1></div></div>
 	</div>
 	<div class="margins margin-top" />
 </div>
