@@ -4,7 +4,7 @@
 	import { currentPage } from '$lib/stores/currentPage'
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { onDestroy, onMount } from 'svelte'
-	import { pusher } from '$lib/functions/pusher'
+	import { pusher } from '$lib/bigFunctions/pusher'
 	import type { PageData } from './$types'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { timeSince } from '$lib/bigFunctions/timeFormat'

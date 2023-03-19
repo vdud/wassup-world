@@ -4,7 +4,7 @@
 
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { onMount, onDestroy } from 'svelte'
-	import { pusher } from '$lib/functions/pusher'
+	import { pusher } from '$lib/bigFunctions/pusher'
 	import { canSend } from '$lib/stores/canSend'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isPUBLIC } from '$lib/stores/isPUBLIC'
