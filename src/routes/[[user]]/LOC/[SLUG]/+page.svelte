@@ -25,9 +25,8 @@
 		$isPUBLIC = false
 		$currentPage = 'LOCATIONS'
 		$userGroup_id = JSON.parse(data.groupId)
-		$currentGroupCreatedAt = data.body.createdAt
-
 		$currentPageHeaderData = data.body.groupName
+		$currentGroupCreatedAt = data.body.createdAt
 
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
 			if (data.sender === $userName) {
