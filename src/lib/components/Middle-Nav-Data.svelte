@@ -67,8 +67,8 @@
 								<div class="locBoxItems item2">
 									<p class="textLoc text1" style="font-size:var(--fontSize)">
 										{#if lastMessage === undefined}
-											<span id="SENDER?{_id}" class="latestMessageSender"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
-											<span id="LM?{_id}" class="latestMessage"><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
+											<span id="SENDER?{_id}" class="latestMessageSender"><span class="sendBox" style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
+											<span id="LM?{_id}" class="latestMessage"><span style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
 										{:else}
 											<span id="SENDER?{_id}" class="latestMessageSender">
 												{latestMessageSender};
@@ -147,8 +147,8 @@
 								<div class="locBoxItems item2">
 									<p class="textLoc text1" style="font-size:var(--fontSize); ">
 										{#if group.lastMessage === undefined}
-											<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
-											<span id="LM?{group._id}" class="latestMessage"><span style={$nature === 'HASHTAG' ? 'background-color:var(--primary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
+											<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
+											<span id="LM?{group._id}" class="latestMessage"><span style={$nature === 'PUBLIC' ? 'background-color:var(--secondary)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
 										{:else}
 											<span id="SENDER?{group._id}" class="latestMessageSender">
 												{group.latestMessageSender};
@@ -181,7 +181,8 @@
 		border-radius: calc(var(--borderRadius) / 3);
 		color: var(--primaryTheme);
 		box-shadow: var(--boxShadows);
-		/* margin: calc(var(--averageMargin) * -0.5); */
+		margin: calc(var(--averageMargin) * -0.5);
+		margin-left: calc(var(--averageMargin) * 0.5);
 		scale: 0.9;
 		transition: all 200ms ease-in-out;
 		/* margin-left: 1px; */
