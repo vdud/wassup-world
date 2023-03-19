@@ -86,7 +86,6 @@
 			</div>
 			<div class="windowContainers container2">
 				<slot />
-
 				<!-- <div class="containerBottomTextArea"><BottomTextArea /></div> -->
 			</div>
 			<div class="windowContainers container3" style={$currentPage === '' ? 'opacity:0;' : ''}><BottomTextArea /></div>

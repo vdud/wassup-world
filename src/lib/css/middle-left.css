@@ -5,8 +5,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	padding: 0 1rem;
-	color: var(--secondaryTheme);
+	padding: 0 var(--averageMargin);
 
 	font-weight: 400;
 }
@@ -14,7 +13,7 @@
 	height: 40px;
 	font-size: calc(var(--fontSize) * 1.2);
 	font-family: ULight;
-	margin-left: -1rem;
+	margin-left: calc(var(--averageMargin) * -0.8);
 
 	color: var(--secondaryThemeInverted);
 }
@@ -24,9 +23,10 @@
 	background-color: var(--secondaryTheme);
 	font-family: UBold;
 	border-radius: calc(var(--averageMargin) / 2);
-	box-shadow: var(--boxInsetShadows);
+	box-shadow: var(--boxShadows);
+	overflow: auto;
 
-	color: var(--tertiaryThemeInverted);
+	color: var(--secondaryThemeInverted);
 
 	margin-bottom: 5px;
 }
@@ -34,12 +34,14 @@
 	height: 15px;
 
 	font-size: calc(var(--fontSize) / 1.75);
+	color: var(--secondaryThemeInverted);
 
-	background-color: var(--tertiaryThemeInverted);
+	background-color: var(--primaryTheme);
 	border-radius: calc(var(--averageMargin) / 4);
-	font-family: UBold;
+	font-family: ULight;
+	box-shadow: var(--boxInsetShadows);
 
-	opacity: 0.6;
+	text-transform: capitalize;
 
 	margin-right: var(--averageMargin);
 }
@@ -61,6 +63,30 @@
 .locBox:hover {
 	border-left: 8px solid var(--tertiaryThemeInverted);
 }
+
+/* Notification Themes */
+.locBoxPubNotification {
+	border-left: 2px solid var(--secondary);
+}
+.locBoxHashNotification {
+	border-left: 2px solid var(--primary);
+}
+.locBoxLocationNotification {
+	border-left: 2px solid var(--secOptDark);
+}
+
+/* HOVER STATE */
+.locBoxPubNotification:hover {
+	border-left: 8px solid var(--secondary);
+}
+.locBoxHashNotification:hover {
+	border-left: 8px solid var(--primary);
+}
+.locBoxLocationNotification:hover {
+	border-left: 8px solid var(--secOptDark);
+}
+/* END */
+
 .locBoxItems {
 	width: auto;
 	height: 100%;
@@ -157,11 +183,14 @@
 }
 
 .latestMessageSender {
-	color: var(--secOptLight);
+	/* color: var(--optDark); */
+	font-family: UBold;
 	/* padding-right: 6px; */
 }
 .latestMessage {
+	font-family: Imprima;
 	margin-left: 6px;
+	/* font-weight: 1000; */
 }
 
 .paddedData {
@@ -223,7 +252,7 @@
 
 	border-top: 0.5px solid var(--tertiaryThemeInverted);
 
-	background-color: var(--primaryTheme);
+	background-color: var(--tertiaryThemeInverted);
 }
 .contact {
 	height: 50px;

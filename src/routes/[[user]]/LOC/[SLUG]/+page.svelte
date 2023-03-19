@@ -28,11 +28,12 @@
 		$currentGroupCreatedAt = data.body.createdAt
 
 		$currentPageHeaderData = data.body.groupName
+
 		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
 			if (data.sender === $userName) {
 				return
 			} else {
-				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
+				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
 				applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt })
 			}
 		})

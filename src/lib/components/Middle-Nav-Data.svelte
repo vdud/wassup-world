@@ -50,17 +50,17 @@
 		<div class="natureBox " style={$nature === 'LOCATION' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-location-pin faLoc" /></div>
 			<div class="natureDataBox">
-				<div class=" locationPredictions" id="locationPredictions">
+				<div class=" locationPredictions">
 					{#if $loginResponseData.success === false || $loginResponseData.data.formatedLOCdata === undefined || $loginResponseData.data.formatedLOCdata.length === 0}
 						<div class="noMoreBox" />
 						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedLOCdata as { _id, name, lastMessage, updatedAt, latestMessageSender }, i}
 							<!-- CONTACT BUTTON - START-->
-							<button on:click={toggleLoc.bind(globalThis, name)} class="locBox">
+							<button on:click={toggleLoc.bind(globalThis, name)} id="locBox?{_id}" class="locBox">
 								<!-- SENDER -->
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2" style="color:var(--secOptDark)">{name}</p>
+									<p class="textLoc text2">{name.toUpperCase()}</p>
 								</div>
 
 								<!-- LATEST MESSAGE -->
@@ -94,7 +94,7 @@
 		<div class="natureBox " style={$nature === 'HASHTAG' ? 'order:1' : 'order:3'}>
 			<div class="natureLogo"><i class="fa fa-hashtag faHash" /></div>
 			<div class="natureDataBox">
-				<div class=" locationPredictions" id="locationPredictions">
+				<div class="locationPredictions">
 					{#if $loginResponseData.success === false || $loginResponseData.data.formatedHASHTAGSdata === undefined || $loginResponseData.data.formatedHASHTAGSdata.length === 0}
 						<div class="noMoreBox" />
 						<div class="noMoreText">
@@ -102,9 +102,9 @@
 						</div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedHASHTAGSdata as group}
-							<button on:click={toggleHashtag.bind(globalThis, group.name)} id={group._id} class="locBox">
+							<button on:click={toggleHashtag.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2" style="color:var(--primary)">#{group.name}</p>
+									<p class="textLoc text2">#{group.name.toUpperCase()}</p>
 								</div>
 								<div class="locBoxItems item2">
 									<p class="textLoc text1" style="font-size:var(--fontSize)">
@@ -134,15 +134,15 @@
 		<div class="natureBox " style={$nature === 'PUBLIC' ? 'order:1' : 'order:4'}>
 			<div class="natureLogo"><i class="fa fa-user-o faUser" /></div>
 			<div class="natureDataBox">
-				<div class=" locationPredictions" id="locationPredictions">
+				<div class=" locationPredictions">
 					{#if $loginResponseData.success === false || $loginResponseData.data.formatedPUBLICdata === undefined || $loginResponseData.data.formatedPUBLICdata.length === 0}
 						<div class="noMoreBox" />
 						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedPUBLICdata as group}
-							<button on:click={togglePublic.bind(globalThis, group.name)} id={group._id} class="locBox">
+							<button on:click={togglePublic.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2" style="color:var(--secondary)">{group.name}</p>
+									<p class="textLoc text2">{group.name.toUpperCase()}</p>
 								</div>
 								<div class="locBoxItems item2">
 									<p class="textLoc text1" style="font-size:var(--fontSize); ">

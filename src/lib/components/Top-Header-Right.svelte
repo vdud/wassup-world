@@ -101,7 +101,8 @@
 
 		transition: scale 239ms ease-in-out;
 		border-radius: 23%;
-		box-shadow: var(--boxShadowsBlur), var(--boxInsetShadows);
+		/* box-shadow: var(--boxShadowsBlur), var(--boxInsetShadows); */
+		/* filter: invert() sepia() saturate(0) hue-rotate(0deg) brightness(1.2) contrast(1.2); */
 	}
 	.fa-bars {
 		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
@@ -122,8 +123,10 @@
 	}
 	.boxRight {
 		right: calc(var(--averageMargin) * 2);
+		/* background-color: var(--optDark); */
 		/* box-shadow: none; */
 		overflow: hidden;
+		border: 1px solid var(--optDark);
 		/* overflow: hidden; */
 	}
 	.boxRight:hover,
@@ -132,7 +135,7 @@
 	}
 	.chatPText {
 		font-family: UBold;
-		color: var(--tertiaryThemeInverted);
+		color: var(--secondaryThemeInverted);
 		background-color: var(--primaryTheme);
 		font-size: 0.6rem;
 		margin: 0;
@@ -145,7 +148,7 @@
 	.chatHeaderText {
 		height: max-content;
 		font-family: UBold;
-		color: var(--tertiaryThemeInverted);
+		color: var(--secondaryThemeInverted);
 
 		margin-top: 12px;
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));

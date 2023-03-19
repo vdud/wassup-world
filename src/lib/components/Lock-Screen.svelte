@@ -83,7 +83,7 @@
 					// console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
-							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
+							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' })
 							// console.log(data.message)
 							// console.log(data)
 						})
@@ -93,7 +93,7 @@
 					// console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
-							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
+							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' })
 							// console.log(data.message)
 							// console.log(data)
 						})
@@ -104,7 +104,7 @@
 					// console.log(element._id)
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('inserted_Put', (data: any) => {
-							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId })
+							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
 							// console.log(data.message)
 							// console.log(data)
 						})
