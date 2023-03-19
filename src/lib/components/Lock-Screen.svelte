@@ -12,12 +12,12 @@
 	import { canSendReciever } from '$lib/stores/canSendReciever'
 	$: if ($userName) $userName = $userName.toLowerCase().trim()
 
-	import { pusher } from '$lib/pusher'
+	import { pusher } from '$lib/bigFunctions/pusher'
 	import Pusher from 'pusher-js'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { isDarkMode } from '$lib/stores/isDarkMode'
-	import { applyNavDataMessage } from '$lib/applyTextMessage'
+	import { applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 
 	const toggleThemeButton = () => {
 		$isDarkMode = !$isDarkMode

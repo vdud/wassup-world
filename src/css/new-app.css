@@ -20,11 +20,11 @@
 	:root {
 		--primaryTheme: #bbb;
 		--secondaryTheme: #ddd;
-		--tertiaryTheme: #3a3a3a55;
+		--tertiaryTheme: #3a3a3a;
 
 		--primaryThemeInverted: #565656;
 		--secondaryThemeInverted: #fff;
-		--tertiaryThemeInverted: #e0e0e055;
+		--tertiaryThemeInverted: #797979bb;
 
 		/* --boxShadowsInverted: 0px 0px 8px #eee1, 0px 0px 1px #8e8e8e;
 		--boxShadowsBlurInverted: 0px 0px 25px #eee1, 0px 0px 8px #eee4;
@@ -41,10 +41,10 @@
 	--boxShadowsBlur: 0px 0px 10px #1111, 0px 0px 8px #1118;
 	--boxInsetShadows: inset 0px 0px 6px #0006, inset 0px 0px 1px #111;
 
-	--textShadows: 0px 0px 1px #111, 0px 0px 3px #1116;
+	--textShadows: 0px 0px 1px #1114, 0px 0px 3px #1116;
 
 	--primary: #cd7b41;
-	--secondary: #7fb785;
+	--secondary: #529b59;
 	--optDark: #c63734;
 	--optLight: #ffeead;
 	--secOptDark: #b08daf;

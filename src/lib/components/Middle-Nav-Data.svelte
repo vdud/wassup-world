@@ -3,8 +3,8 @@
 	import { loginResponseData } from '$lib/stores/loginResponseData'
 	import { nature } from '$lib/stores/nature'
 	import { json } from '@sveltejs/kit'
-	import { timeSince } from '$lib/timeFormat'
-	import { applyNavDataMessage } from '$lib/applyTextMessage'
+	import { timeSince } from '$lib/bigFunctions/timeFormat'
+	import { applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { onMount } from 'svelte'
 
 	// console.log($loginResponseData)
@@ -60,7 +60,7 @@
 							<button on:click={toggleLoc.bind(globalThis, name)} id="locBox?{_id}" class="locBox">
 								<!-- SENDER -->
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2">{name.toUpperCase()}</p>
+									<p class="textLoc text2" id="gName?{_id}">{name.toUpperCase()}</p>
 								</div>
 
 								<!-- LATEST MESSAGE -->
@@ -104,7 +104,7 @@
 						{#each $loginResponseData.data.formatedHASHTAGSdata as group}
 							<button on:click={toggleHashtag.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2">#{group.name.toUpperCase()}</p>
+									<p class="textLoc text2" id="gName?{group._id}">#{group.name.toUpperCase()}</p>
 								</div>
 								<div class="locBoxItems item2">
 									<p class="textLoc text1" style="font-size:var(--fontSize)">
@@ -142,7 +142,7 @@
 						{#each $loginResponseData.data.formatedPUBLICdata as group}
 							<button on:click={togglePublic.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2">{group.name.toUpperCase()}</p>
+									<p class="textLoc text2" id="gName?{group._id}">{group.name.toUpperCase()}</p>
 								</div>
 								<div class="locBoxItems item2">
 									<p class="textLoc text1" style="font-size:var(--fontSize); ">

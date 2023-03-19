@@ -4,7 +4,7 @@
 
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { onMount, onDestroy } from 'svelte'
-	import { pusher } from '$lib/pusher'
+	import { pusher } from '$lib/functions/pusher'
 	import { canSend } from '$lib/stores/canSend'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isPUBLIC } from '$lib/stores/isPUBLIC'
@@ -13,12 +13,12 @@
 	import { json } from '@sveltejs/kit'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 	import { isFlex } from '$lib/stores/isFlex'
-	import { timeSince } from '$lib/timeFormat'
+	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { isLocked } from '$lib/stores/isLocked'
-	import { debounce } from '$lib/debounce'
-	import { applyMessageLeft, applyNavDataMessage } from '$lib/applyTextMessage'
+	import { debounce } from '$lib/bigFunctions/debounce'
+	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 
 	onMount(() => {
 		$isFlex = false

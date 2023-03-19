@@ -13,7 +13,7 @@
 	// $: rootElement && rootElement.style.setProperty('--secondaryTheme', $toggleTheme === 'dark' ? '#222' : '#eee')
 	// $: rootElement && rootElement.style.setProperty('--tertiaryTheme', $toggleTheme === 'dark' ? '#333' : '#eee5')
 
-	import { pusher } from '$lib/pusher'
+	import { pusher } from '$lib/bigFunctions/pusher'
 
 	import TopHeaderLeft from '$lib/components/Top-Header-Left.svelte'
 	import TopHeaderRight from '$lib/components/Top-Header-Right.svelte'

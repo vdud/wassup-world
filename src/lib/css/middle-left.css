@@ -116,6 +116,8 @@
 }
 .arrow {
 	background-color: var(--secondaryThemeInverted);
+	color: var(--primaryTheme);
+	text-shadow: none;
 	padding: calc(var(--averageMargin));
 	scale: 0.75;
 	border-radius: var(--borderRadius);
@@ -252,7 +254,7 @@
 
 	border-top: 0.5px solid var(--tertiaryThemeInverted);
 
-	background-color: var(--tertiaryThemeInverted);
+	/* background-color: var(--secondaryTheme); */
 }
 .contact {
 	height: 50px;
@@ -269,6 +271,9 @@
 
 	overflow: hidden;
 	background-color: var(--secondaryTheme);
+	display: flex;
+	flex-direction: column-reverse;
+	/* align-items: center; */
 }
 .flexContact {
 	width: fit-content;

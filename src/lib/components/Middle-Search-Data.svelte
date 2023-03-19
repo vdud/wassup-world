@@ -152,7 +152,7 @@
 										}, 600)
 									}}
 									class="contactBox">
-									<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+									<div class="i"><i class="fa fa-hashtag  LogoButton" /></div>
 									<div class="cBoxText">
 										<p class="cText" style="color: var(--secondary)">
 											{group.name}
@@ -162,7 +162,7 @@
 							{/each}
 						{:else}
 							<div class="contactBox">
-								<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+								<div class="i"><i class="fa fa-hashtag  LogoButton" /></div>
 								<div class="cBoxText">
 									<p class="cText" style="color: var(--secondary)">No Group Found</p>
 								</div>

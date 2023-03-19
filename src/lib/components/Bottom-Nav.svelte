@@ -1,5 +1,5 @@
 <script>
-	import { debounce } from '$lib/debounce'
+	import { debounce } from '$lib/bigFunctions/debounce'
 	import { nature } from '$lib/stores/nature'
 	import { onDestroy, onMount } from 'svelte'
 

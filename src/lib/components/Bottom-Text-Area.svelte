@@ -3,12 +3,12 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { applyMessageYoMe, applyNavDataMessage } from '$lib/applyTextMessage'
+	import { applyMessageYoMe, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 
 	import { autoresize } from 'svelte-textarea-autoresize'
 	import sendButtonLogo from '$lib/assets/sendButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
-	import { timeSince } from '$lib/timeFormat'
+	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	// import { timeSince } from '$lib/timeFormat'
 
 	function handleKeyDown(event: KeyboardEvent) {
@@ -81,12 +81,12 @@
 	}
 
 	textarea {
-		color: var(--secondaryThemeInverted);
+		color: var(--primaryThemeInverted);
 		font-family: ULight;
 		/* box-shadow: var(--boxInsetShadows); */
 	}
 	textarea::placeholder {
-		color: var(--tertiaryThemeInverted);
+		color: var(--disabled);
 		opacity: var(--extraDull);
 		font-family: UBold;
 	}

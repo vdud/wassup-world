@@ -11,7 +11,7 @@
 
 	import arrowButton from '$lib/assets/arrowButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
-	import { timeSince } from '$lib/timeFormat'
+	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { titleData } from '$lib/stores/titleData'
 	import { userName } from '$lib/stores/userName'
@@ -105,10 +105,10 @@
 		/* filter: invert() sepia() saturate(0) hue-rotate(0deg) brightness(1.2) contrast(1.2); */
 	}
 	.fa-bars {
-		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
+		text-shadow: 0 0 10px var(--secondary);
 	}
 	.fa-house {
-		text-shadow: var(--boxShadows), 0 0 10px var(--primary);
+		text-shadow: var(--textShadows), 0 0 10px var(--primary);
 	}
 	.absoluteBox {
 		display: flex;

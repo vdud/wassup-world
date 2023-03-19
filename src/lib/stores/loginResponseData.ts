@@ -1,4 +1,4 @@
-import { success } from '$lib/pusher'
+import { success } from '$lib/bigFunctions/pusher'
 import { writable } from 'svelte/store'
 
 export const loginResponseData = writable({

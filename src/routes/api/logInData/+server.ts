@@ -42,7 +42,7 @@ export const POST = (async ({ request }) => {
 				},
 				{
 					$sort: {
-						'allGroups.updatedAt': -1,
+						'allGroups.updatedAt': 1,
 					},
 				},
 				{

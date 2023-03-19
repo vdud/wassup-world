@@ -44,17 +44,28 @@ export const applyNavDataMessage = (data: any) => {
 	const latestMessage = document.getElementById(`LM?${data.groupId}`)
 	const latestMessageTime = document.getElementById(`LMT?${data.groupId}`)
 	const groupLocBox = document.getElementById(`locBox?${data.groupId}`)
+	const gName = document.getElementById(`gName?${data.groupId}`)
 
-	if (!senderWho || !latestMessage || !latestMessageTime || !groupLocBox) {
+	if (!senderWho || !latestMessage || !latestMessageTime || !groupLocBox || !gName) {
 		return
 	}
+	groupLocBox.style.order = '1'
 
 	if (data.nature === 'HASHTAGS') {
 		groupLocBox.classList.add('locBoxHashNotification')
+		senderWho.style.color = 'var(--primary)'
+		gName.style.color = 'var(--primary)'
+		latestMessageTime.style.color = 'var(--primary)'
 	} else if (data.nature === 'LOCATIONS') {
 		groupLocBox.classList.add('locBoxLocationNotification')
+		senderWho.style.color = 'var(--secOptDark)'
+		gName.style.color = 'var(--secOptDark)'
+		latestMessageTime.style.color = 'var(--secOptDark)'
 	} else if (data.nature === 'PUBLIC') {
 		groupLocBox.classList.add('locBoxPubNotification')
+		senderWho.style.color = 'var(--secondary)'
+		gName.style.color = 'var(--secondary)'
+		latestMessageTime.style.color = 'var(--secondary)'
 	}
 	// clear inner HTML
 	senderWho.innerHTML = ''

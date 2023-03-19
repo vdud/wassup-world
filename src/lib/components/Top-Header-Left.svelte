@@ -14,7 +14,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { searchData } from '$lib/stores/searchData'
 	import { canSend } from '$lib/stores/canSend'
-	import { debounce } from '$lib/debounce'
+	import { debounce } from '$lib/bigFunctions/debounce'
 
 	$: $searchInput = $searchInput
 		// .trim()
@@ -166,13 +166,13 @@
 		animation: zoomIn 100ms ease-in-out both;
 	}
 	.fa-couch {
-		text-shadow: var(--boxShadows), 0 0 10px var(--primary);
+		text-shadow: 0 0 10px var(--primary);
 	}
 	.fa-heart {
-		text-shadow: var(--boxShadows), 0 0 10px var(--secondary);
+		text-shadow: 0 0 10px var(--secondary);
 	}
 	.fa-globe {
-		text-shadow: var(--boxShadows), 0 0 10px var(--secOptDark);
+		text-shadow: 0 0 10px var(--secOptDark);
 		/* text-shadow: var(--boxShadows); */
 	}
 	.fa-couch,
@@ -198,7 +198,7 @@
 		border-radius: calc(var(--borderRadius) / 1);
 		/* margin-left: calc(var(--averageMargin) * -0.25); */
 
-		color: var(--tertiaryThemeInverted);
+		color: var(--primaryThemeInverted);
 		padding-top: 3px;
 		padding-bottom: 3px;
 		padding-left: var(--averageMargin);
@@ -254,6 +254,7 @@
 		color: var(--primary);
 		font-size: calc(var(--fontSize) * 1.2);
 		padding: calc(var(--averageMargin) + 3px);
+		/* text-shadow: 0 0 1.5px black; */
 	}
 
 	.topHeaderLeft {

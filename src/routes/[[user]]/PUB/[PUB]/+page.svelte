@@ -4,14 +4,14 @@
 	import { currentPage } from '$lib/stores/currentPage'
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { onDestroy, onMount } from 'svelte'
-	import { pusher } from '$lib/pusher'
+	import { pusher } from '$lib/functions/pusher'
 	import type { PageData } from './$types'
 	import { isFlex } from '$lib/stores/isFlex'
-	import { timeSince } from '$lib/timeFormat'
+	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
-	import { debounce } from '$lib/debounce'
-	import { applyMessageLeft, applyNavDataMessage } from '$lib/applyTextMessage'
+	import { debounce } from '$lib/bigFunctions/debounce'
+	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	export let data: PageData
 
 	onMount(() => {
