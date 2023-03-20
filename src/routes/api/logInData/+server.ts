@@ -61,7 +61,7 @@ export const POST = (async ({ request }) => {
 			if (formattedUserData.length === 0) {
 				return []
 			}
-			const publicData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'PUBLIC')
+			const publicData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'PUBLIC').sort((a: any, b: any) => b.updatedAt - a.updatedAt)
 			return publicData
 		}
 
@@ -69,7 +69,7 @@ export const POST = (async ({ request }) => {
 			if (formattedUserData.length === 0) {
 				return []
 			}
-			const hashtagsData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'HASHTAGS')
+			const hashtagsData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'HASHTAGS').sort((a: any, b: any) => b.updatedAt - a.updatedAt)
 			return hashtagsData
 		}
 
@@ -77,7 +77,7 @@ export const POST = (async ({ request }) => {
 			if (formattedUserData.length === 0) {
 				return []
 			}
-			const locData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'LOCATIONS')
+			const locData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'LOCATIONS').sort((a: any, b: any) => b.updatedAt - a.updatedAt)
 			return locData
 		}
 

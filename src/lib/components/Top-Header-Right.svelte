@@ -107,9 +107,6 @@
 	.fa-bars {
 		text-shadow: 0 0 10px var(--secondary);
 	}
-	.fa-house {
-		text-shadow: var(--textShadows), 0 0 10px var(--primary);
-	}
 	.absoluteBox {
 		display: flex;
 		justify-content: center;
@@ -165,17 +162,6 @@
 		box-shadow: var(--boxShadows);
 		border-radius: var(--borderRadius);
 	}
-	.arrow {
-		width: 24px;
-		height: 24px;
-		margin: 0;
-		padding: 0;
-		background-color: transparent;
-		/* transform: rotate(90deg); */
-		filter: invert(0.9);
-		transition: transform 0.3s ease-in-out;
-	}
-
 	.topHeaderRight {
 		position: relative;
 		height: 100%;
@@ -221,10 +207,6 @@
 			/* scale: 0.9; */
 			font-size: 0.75rem;
 			/* padding-top: 23px; */
-		}
-
-		.notRotate {
-			transform: rotate(90deg);
 		}
 	}
 

@@ -14,6 +14,8 @@
 
 		--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
 		--boxNeoShadowsInverted: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
+
+		--textShadows: 0px 0px 2px #1114, 0px 0px 4px #000;
 	}
 }
 @media (prefers-color-scheme: light) {
@@ -32,6 +34,8 @@
 
 		--boxNeoShadows: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
 		--boxNeoShadowsInverted: 1px 1px 2px #111111, -1px -1px 2px #414141;
+
+		--textShadows: 0px 0px 1px #0003, 0px 0px 2px #0005;
 	}
 }
 :root {
@@ -41,10 +45,8 @@
 	--boxShadowsBlur: 0px 0px 10px #1111, 0px 0px 8px #1118;
 	--boxInsetShadows: inset 0px 0px 6px #0006, inset 0px 0px 1px #111;
 
-	--textShadows: 0px 0px 1px #1114, 0px 0px 3px #1116;
-
 	--primary: #cd7b41;
-	--secondary: #529b59;
+	--secondary: #7fb785;
 	--optDark: #c63734;
 	--optLight: #ffeead;
 	--secOptDark: #b08daf;

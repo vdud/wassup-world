@@ -45,6 +45,10 @@
 
 	margin-right: var(--averageMargin);
 }
+#PUB {
+	display: flex;
+	flex-direction: column-reverse;
+}
 .locBox {
 	height: 90px;
 	overflow: hidden;
@@ -272,7 +276,8 @@
 	overflow: hidden;
 	background-color: var(--secondaryTheme);
 	display: flex;
-	flex-direction: column-reverse;
+	flex-direction: column;
+	justify-content: start;
 	/* align-items: center; */
 }
 .flexContact {

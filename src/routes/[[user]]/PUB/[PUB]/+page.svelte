@@ -22,7 +22,7 @@
 		$currentPage = 'PUBLIC'
 		$userGroup_id = JSON.parse(data.body.groupId)
 
-		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
+		pusher.subscribe($userGroup_id).bind('injectMessage', (data: any) => {
 			if (data.sender === $userName) {
 				return
 			} else {
@@ -31,6 +31,8 @@
 			}
 		})
 	})
+
+	console.log('data', data)
 
 	const scrolltoBottom = () => {
 		const middleScroll: any = document.getElementById('middleScroll')

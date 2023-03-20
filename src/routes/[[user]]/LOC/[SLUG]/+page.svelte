@@ -28,7 +28,7 @@
 		$currentPageHeaderData = data.body.groupName
 		$currentGroupCreatedAt = data.body.createdAt
 
-		pusher.subscribe($userGroup_id).bind('inserted_Put', (data: any) => {
+		pusher.subscribe($userGroup_id).bind('injectMessage', (data: any) => {
 			if (data.sender === $userName) {
 				return
 			} else {
