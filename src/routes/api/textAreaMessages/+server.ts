@@ -39,12 +39,14 @@ export const POST = (async ({ request }) => {
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id })
 		if (!findUserInGroup) {
-			await groups.updateOne({ _id: findGroup._id }, { $set: { name: `${$userName};${findGroup.name}`, lastMessage: message.slice(0, 48), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
+			await groups.updateOne({ _id: findGroup._id }, { $set: { name: `${$userName};${findGroup.name}`, lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
 			await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 		} else {
-			await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 48), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
+			await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
 			await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 		}
+		// const findGroupAgain = await groups.findOne({ _id: findGroup._id })
+		// if (findGroupAgain) {
 		const allUsers = findGroup.allUsers.filter((user: any) => String(user) !== String(findUser._id))
 		allUsers.forEach((user: any) => {
 			pusher.trigger(user.toString(), 'newPubMessage', {
@@ -54,11 +56,10 @@ export const POST = (async ({ request }) => {
 				groupId: $userGroup_id,
 				groupName: findGroup.name,
 			})
-
-			// console.log('user', user.toString())
 		})
+		// }
 	} else if (findGroup.nature === 'LOCATIONS' || findGroup.nature === 'HASHTAGS') {
-		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 48), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
+		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 	}
 

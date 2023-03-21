@@ -153,10 +153,11 @@ export const applyNewMessage = (data: any) => {
 	const PUB = document.getElementById('PUB')
 
 	if (PUB) {
-		const getButton = document.getElementById(`locBox?${data.groupId}`)
+		const contactButton = document.getElementById(`locBox?${data.groupId}`)
 
-		if (getButton) {
-			applyNavDataMessage(data)
+		if (contactButton) {
+			// applyNavDataMessage(data)
+			return
 		} else {
 			const button = document.createElement('button')
 			button.style.order = '-1'

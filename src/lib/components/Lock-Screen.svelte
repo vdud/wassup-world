@@ -62,8 +62,6 @@
 
 				pusher.subscribe($userName_id).bind('newPubMessage', (data: any) => {
 					applyNewMessage({ groupName: data.groupName, sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
-					console.log('$userName_id', $userName_id)
-					console.log('hello-newMessage', data)
 				})
 
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
