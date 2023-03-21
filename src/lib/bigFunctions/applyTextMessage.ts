@@ -158,6 +158,13 @@ export const applyNewMessage = (data: any) => {
 		if (contactButton) {
 			applyNavDataMessage(data)
 		} else {
+			const noMoreBox = document.getElementById('noMoreBox')
+			const noMoreText = document.getElementById('noMoreText')
+			if (noMoreBox && noMoreText) {
+				noMoreBox.style.display = 'none'
+				noMoreText.style.display = 'none'
+			}
+
 			const button = document.createElement('button')
 			button.style.order = '-1'
 

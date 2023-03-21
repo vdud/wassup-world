@@ -136,11 +136,11 @@
 			<div class="natureLogo"><i class="fa fa-user-o faUser" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions">
+					<div id="PUB" />
 					{#if $loginResponseData.success === false || $loginResponseData.data.formatedPUBLICdata === undefined || $loginResponseData.data.formatedPUBLICdata.length === 0}
-						<div class="noMoreBox" />
-						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
+						<div class="noMoreBox" id="noMoreBox" />
+						<div class="noMoreText" id="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
-						<div id="PUB" />
 						{#each $loginResponseData.data.formatedPUBLICdata as group, i}
 							<button on:click={togglePublic.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxPubNotification' : ''}">
 								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">

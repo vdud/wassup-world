@@ -45,19 +45,19 @@ export const POST = (async ({ request }) => {
 			await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
 			await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 		}
-		// const findGroupAgain = await groups.findOne({ _id: findGroup._id })
-		// if (findGroupAgain) {
-		const allUsers = findGroup.allUsers.filter((user: any) => String(user) !== String(findUser._id))
-		allUsers.forEach((user: any) => {
-			pusher.trigger(user.toString(), 'newPubMessage', {
-				sender: $userName,
-				message: message,
-				createdAt: new Date(),
-				groupId: $userGroup_id,
-				groupName: findGroup.name,
+		const findGroupAgain = await groups.findOne({ _id: findGroup._id })
+		if (findGroupAgain) {
+			const allUsers = findGroupAgain.allUsers.filter((user: any) => String(user) !== String(findUser._id))
+			allUsers.forEach((user: any) => {
+				pusher.trigger(user.toString(), 'newPubMessage', {
+					sender: $userName,
+					message: message,
+					createdAt: new Date(),
+					groupId: $userGroup_id,
+					groupName: findGroupAgain.name,
+				})
 			})
-		})
-		// }
+		}
 	} else if (findGroup.nature === 'LOCATIONS' || findGroup.nature === 'HASHTAGS') {
 		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true })
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
