@@ -44,6 +44,10 @@
 	})
 
 	export async function unLock() {
+		if ($userName.length < 3) {
+			alert('username must be atleast 3 characters long')
+			return
+		}
 		localStorage.setItem('formData', JSON.stringify({ $userName }))
 		$isLocked = false
 
@@ -109,19 +113,19 @@
 
 <div class="LockScreen">
 	<div class="locContainers top">
-		<h1 class="lockHeader">
+		<h1 class="lockHeader" style={$userName.length > 7 ? 'scale:.6;' : 'scale1;'}>
 			<span style="color:var(--secondary)">wassup</span>
 			<span style={$userName.length > 0 ? $userName + '' : 'opacity:var(--dull)'}>{$userName.length > 0 ? $userName + '!' : 'world!'}</span>
 		</h1>
 	</div>
 	<div class="locContainers middle">
-		<input type="text" spellcheck="false" oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" onkeypress="return event.charCode != 32" maxlength="18" class="loginInput" on:keydown={handleLockKeyDown} on:keyup={handleKeyUp} bind:value={$userName} placeholder="write-your-name..." />
+		<input type="text" spellcheck="false" style={$userName.length > 7 ? 'scale:1;' : 'scale:2;'} oninput="this.value=this.value.replace(/[^A-Za-z\s]/g,'');" onkeypress="return event.charCode != 32" maxlength="18" class="loginInput" on:keydown={handleLockKeyDown} on:keyup={handleKeyUp} bind:value={$userName} placeholder="write-your-name..." />
 
-		{#if $userName.length < 3}
+		<!-- {#if $userName.length < 3}
 			<button disabled class="fa fa-arrow-right arrow disabled" />
-		{:else}
-			<button class="fa fa-arrow-right arrow enabled" on:click={unLock} id="submit" />
-		{/if}
+		{:else} -->
+		<button class="fa fa-arrow-right arrow {$userName.length < 3 ? 'disabled' : 'enabled'}" on:click={unLock} id="submit" />
+		<!-- {/if} -->
 	</div>
 	<div class="locContainers bottom">
 		<!-- <button id="theme-toggle" on:click={toggleThemeButton}><span class="fa fa-adjust" /></button> -->
@@ -129,6 +133,21 @@
 </div>
 
 <style>
+	input {
+		font-family: Imprima;
+		scale: 1;
+		color: var(--primary);
+		/* lowercase font */
+		text-transform: lowercase;
+
+		transition: scale 200ms ease-in-out;
+	}
+	input::placeholder {
+		color: var(--primaryThemeInverted);
+		opacity: var(--extraDull);
+		font-family: ULight;
+		scale: 0.5;
+	}
 	.arrow {
 		background-color: transparent;
 		margin-top: calc(var(--averageMargin) * 2);
@@ -140,34 +159,17 @@
 		transition: all 200ms ease-in-out;
 	}
 	.disabled {
-		animation: loginOut 300ms both;
-
-		color: var(--primaryTheme);
-		box-shadow: none;
+		color: var(--tertiaryTheme);
+		box-shadow: var(--boxInsetShadows);
+		background-color: var(--primaryTheme);
 
 		pointer-events: none;
 	}
-	@keyframes loginOut {
-		0% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-		}
-	}
 	.enabled {
-		animation: loginUp 300ms both;
-
 		color: var(--primary);
-		box-shadow: var(--boxNeoShadows);
-	}
-	@keyframes loginUp {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
+		box-shadow: var(--boxShadows);
+		background-color: var(--tertiaryTheme);
+		text-shadow: var(--textShadows);
 	}
 	.loginInput {
 		width: 400px;
@@ -181,23 +183,11 @@
 		text-align: center;
 	}
 	.lockHeader {
-		font-size: calc(var(--fontSize) * 2);
+		font-size: calc(var(--fontSize) * 1.5);
 		padding: calc(var(--averageMargin) * 2) calc(var(--averageMargin) * 3);
 		color: var(--primary);
 		font-family: Imprima;
-	}
-	input {
-		font-family: Imprima;
-		scale: 2;
-		color: var(--primary);
-		/* lowercase font */
-		text-transform: lowercase;
-	}
-	input::placeholder {
-		color: var(--primaryThemeInverted);
-		opacity: var(--extraDull);
-		font-family: ULight;
-		scale: 0.5;
+		transition: scale 200ms ease-in-out;
 	}
 	.LockScreen {
 		height: 100%;
@@ -209,6 +199,8 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: space-between;
+
+		/* overflow: hidden; */
 	}
 	.top {
 		height: 200px;

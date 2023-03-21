@@ -82,7 +82,7 @@
 				<div class="text sender">
 					<p class="textShadows">
 						<span style="color:var(--primary)">{sender}; </span>
-						<span style="color:var(--secondaryThemeInverted)">{message}</span>
+						<span class="pageMessage">{message}</span>
 						<span class="spanFlexLeft">
 							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
 							<span class="timeSpan " style="margin-left: 10px;">{timeSince(createdAt)}</span>
@@ -93,7 +93,7 @@
 				<div class="text yoMe">
 					<p class="textShadows">
 						<span style="color:var(--secondary)">{sender}; </span>
-						<span style="color:var(--secondaryThemeInverted)">{message}</span>
+						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
 							<span class="timeSpan " style="margin-right: 10px;">{timeSince(createdAt)}</span>
 							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>

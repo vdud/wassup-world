@@ -37,7 +37,7 @@
 	color: var(--secondaryThemeInverted);
 
 	background-color: var(--tertiaryTheme);
-	border-radius: calc(var(--averageMargin) / 4);
+	border-radius: calc(var(--averageMargin) / 3);
 	font-family: ULight;
 	box-shadow: var(--boxInsetShadows);
 
