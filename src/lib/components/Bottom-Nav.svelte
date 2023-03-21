@@ -91,14 +91,14 @@
 		height: 140%;
 		border-radius: var(--smallerBorderRadius) var(--smallerBorderRadius) 0 0;
 		background-color: var(--primaryTheme);
-		border: 1px solid var(--secondaryTheme);
+		border: 1px solid var(--tertiaryThemeInverted);
 		border-bottom: 0;
 	}
 	.unselectedNav {
 		background-color: var(--secondaryTheme);
 		height: 100%;
 		border-radius: var(--smallerBorderRadius) var(--smallerBorderRadius) 0 0;
-		border: 1px solid var(--primaryTheme);
+		border: 1px solid var(--tertiaryThemeInverted);
 		border-bottom: 0;
 	}
 
