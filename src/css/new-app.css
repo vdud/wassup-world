@@ -41,7 +41,7 @@
 :root {
 	--fontSize: 16px;
 
-	--boxShadows: 0px 0px 2px #1116, 0px 0px 3px #1119;
+	--boxShadows: 0px 0px 2px #0006, 0px 0px 5px #0009;
 	--boxShadowsBlur: 0px 0px 10px #1111, 0px 0px 8px #1118;
 	--boxInsetShadows: inset 0px 0px 6px #0006, inset 0px 0px 1px #111;
 
