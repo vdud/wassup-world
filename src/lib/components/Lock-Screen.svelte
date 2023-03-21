@@ -202,7 +202,7 @@
 	.LockScreen {
 		height: 100%;
 		width: 100%;
-		/* background-color: var(--primaryTheme); */
+		background-color: var(--secondaryTheme);
 		border-radius: var(--borderRadius);
 
 		display: flex;

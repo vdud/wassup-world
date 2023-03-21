@@ -17,6 +17,11 @@
 
 		--textShadows: 0px 0px 2px #1114, 0px 0px 4px #000;
 	}
+
+	p,
+	h1 {
+		-webkit-text-stroke: 0.1px white;
+	}
 }
 @media (prefers-color-scheme: light) {
 	:root {
@@ -35,7 +40,11 @@
 		--boxNeoShadows: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
 		--boxNeoShadowsInverted: 1px 1px 2px #111111, -1px -1px 2px #414141;
 
-		--textShadows: 0px 0px 0.5px #000, 0px 0px 4px #0005;
+		--textShadows: 0px 0px 0.5px #000;
+	}
+	p,
+	h1 {
+		-webkit-text-stroke: 0.1px black;
 	}
 }
 :root {
@@ -120,6 +129,7 @@ p {
 	font-weight: 400;
 	margin: 0;
 	padding: 0;
+	color: var(--tertiaryThemeInverted);
 	text-shadow: var(--textShadows);
 }
 a {

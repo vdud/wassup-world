@@ -20,12 +20,12 @@
 .text2 {
 	height: 25px;
 	font-size: calc(var(--fontSize) / 1.5);
-	background-color: var(--secondaryTheme);
 	font-family: UBold;
 	border-radius: calc(var(--averageMargin) / 2);
 	box-shadow: var(--boxShadows);
 	overflow: auto;
 
+	background-color: var(--tertiaryTheme);
 	color: var(--secondaryThemeInverted);
 
 	margin-bottom: 5px;
@@ -36,7 +36,7 @@
 	font-size: calc(var(--fontSize) / 1.75);
 	color: var(--secondaryThemeInverted);
 
-	background-color: var(--secondaryTheme);
+	background-color: var(--tertiaryTheme);
 	border-radius: calc(var(--averageMargin) / 4);
 	font-family: ULight;
 	box-shadow: var(--boxInsetShadows);
@@ -60,7 +60,7 @@
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: space-between;
-	background-color: var(--primaryTheme);
+	background-color: var(--secondaryTheme);
 
 	transition: border-left 100ms ease-out;
 }
@@ -195,6 +195,7 @@
 }
 .latestMessage {
 	font-family: Imprima;
+	color: var(--tertiaryThemeInverted);
 	margin-left: 6px;
 	/* font-weight: 1000; */
 }
@@ -274,7 +275,7 @@
 	height: auto;
 
 	overflow: hidden;
-	background-color: var(--secondaryTheme);
+	background-color: var(--primaryTheme);
 	display: flex;
 	flex-direction: column;
 	justify-content: start;

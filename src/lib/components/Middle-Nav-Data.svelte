@@ -226,14 +226,13 @@
 		/* font-family: Imprima; */
 		width: max-content;
 		/* padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2); */
-		color: var(--secondaryThemeInverted);
 		/* background-color: var(--primaryThemeInverted); */
 		margin: var(--averageMargin);
 		scale: 0.9;
-		opacity: var(--extraDull);
+		opacity: var(--dull);
 	}
 	.fa-hand-middle-finger {
-		color: var(--primaryThemeInverted);
+		color: var(--tertiaryThemeInverted);
 	}
 	.locationPredictions {
 		border-bottom: 0.5px solid var(--tertiaryThemeInverted);
