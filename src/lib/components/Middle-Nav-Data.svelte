@@ -58,35 +58,37 @@
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedLOCdata as { _id, name, lastMessage, updatedAt, latestMessageSender }, i}
 							<!-- CONTACT BUTTON - START-->
-							<button on:click={toggleLoc.bind(globalThis, name)} id="locBox?{_id}" class="locBox {i === 0 ? 'locBoxLocationNotification' : ''}">
-								<!-- SENDER -->
-								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2" style={i === 0 ? 'color: var(--secOptDark)' : ''} id="gName?{_id}">{name.toUpperCase()}</p>
-								</div>
+							{#if i < 9}
+								<button on:click={toggleLoc.bind(globalThis, name)} id="locBox?{_id}" class="locBox {i === 0 ? 'locBoxLocationNotification' : ''}">
+									<!-- SENDER -->
+									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--secOptDark)' : ''} id="gName?{_id}">{name.toUpperCase()}</p>
+									</div>
 
-								<!-- LATEST MESSAGE -->
-								<div class="locBoxItems item2">
-									<p class="textLoc text1" style="font-size:var(--fontSize)">
-										{#if lastMessage === undefined}
-											<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--secOptDark)"> SEND MESSAGE </span></span>
-											<span id="LM?{_id}" class="latestMessage"><span style="background-color:var(--secOptDark)" class="fa fa-arrow-right sendArrow" /></span>
-										{:else}
-											<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender">
-												{latestMessageSender};
-											</span>
-											<span id="LM?{_id}" class="latestMessage">
-												{lastMessage}
-											</span>
-										{/if}
-									</p>
-								</div>
+									<!-- LATEST MESSAGE -->
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize)">
+											{#if lastMessage === undefined}
+												<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--secOptDark)"> SEND MESSAGE </span></span>
+												<span id="LM?{_id}" class="latestMessage"><span style="background-color:var(--secOptDark)" class="fa fa-arrow-right sendArrow" /></span>
+											{:else}
+												<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender">
+													{latestMessageSender};
+												</span>
+												<span id="LM?{_id}" class="latestMessage">
+													{lastMessage}
+												</span>
+											{/if}
+										</p>
+									</div>
 
-								<!-- TIME -->
-								<div class="locBoxItems item3">
-									<p id="LMT?{_id}" class="textLoc text3">{timeSince(updatedAt)}</p>
-								</div>
-							</button>
-							<!-- CONTACT BUTTON - END -->
+									<!-- TIME -->
+									<div class="locBoxItems item3">
+										<p id="LMT?{_id}" class="textLoc text3">{timeSince(updatedAt)}</p>
+									</div>
+								</button>
+								<!-- CONTACT BUTTON - END -->
+							{/if}
 						{/each}
 					{/if}
 				</div>
@@ -103,30 +105,32 @@
 						</div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedHASHTAGSdata as group, i}
-							<button on:click={toggleHashtag.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxHashNotification' : ''}">
-								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2" style={i === 0 ? 'color: var(--primary)' : ''} id="gName?{group._id}">#{group.name.toUpperCase()}</p>
-								</div>
-								<div class="locBoxItems item2">
-									<p class="textLoc text1" style="font-size:var(--fontSize)">
-										{#if group.lastMessage === undefined}
-											<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--primary)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--primary)"> SEND MESSAGE </span></span>
-											<span id="LM?{group._id}" class="latestMessage"><span style="background-color:var(--primary)" class="fa fa-arrow-right sendArrow" /></span>
-										{:else}
-											<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--primary)' : ''} class="latestMessageSender">
-												{group.latestMessageSender};
-											</span>
-											<span id="LM?{group._id}" class="latestMessage">
-												{group.lastMessage}
-											</span>
-										{/if}
-									</p>
-								</div>
+							{#if i < 9}
+								<button on:click={toggleHashtag.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxHashNotification' : ''}">
+									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--primary)' : ''} id="gName?{group._id}">#{group.name.toUpperCase()}</p>
+									</div>
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize)">
+											{#if group.lastMessage === undefined}
+												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--primary)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--primary)"> SEND MESSAGE </span></span>
+												<span id="LM?{group._id}" class="latestMessage"><span style="background-color:var(--primary)" class="fa fa-arrow-right sendArrow" /></span>
+											{:else}
+												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--primary)' : ''} class="latestMessageSender">
+													{group.latestMessageSender};
+												</span>
+												<span id="LM?{group._id}" class="latestMessage">
+													{group.lastMessage}
+												</span>
+											{/if}
+										</p>
+									</div>
 
-								<div class="locBoxItems item3">
-									<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>
-								</div>
-							</button>
+									<div class="locBoxItems item3">
+										<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>
+									</div>
+								</button>
+							{/if}
 						{/each}
 					{/if}
 				</div>
@@ -142,30 +146,32 @@
 						<div class="noMoreText" id="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
 						{#each $loginResponseData.data.formatedPUBLICdata as group, i}
-							<button on:click={togglePublic.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxPubNotification' : ''}">
-								<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-									<p class="textLoc text2" style={i === 0 ? 'color: var(--secondary)' : ''} id="gName?{group._id}">{group.name.toUpperCase()}</p>
-								</div>
-								<div class="locBoxItems item2">
-									<p class="textLoc text1" style="font-size:var(--fontSize); ">
-										{#if group.lastMessage === undefined}
-											<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--secondary)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--secondary)"> SEND MESSAGE </span></span>
-											<span id="LM?{group._id}" class="latestMessage"><span class="fa fa-arrow-right sendArrow" style="background-color:var(--secondary)" /></span>
-										{:else}
-											<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--secondary)' : ''} class="latestMessageSender">
-												{group.latestMessageSender};
-											</span>
-											<span id="LM?{group._id}" class="latestMessage">
-												{group.lastMessage}
-											</span>
-										{/if}
-									</p>
-								</div>
+							{#if i < 9}
+								<button on:click={togglePublic.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxPubNotification' : ''}">
+									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--secondary)' : ''} id="gName?{group._id}">{group.name.toUpperCase()}</p>
+									</div>
+									<div class="locBoxItems item2">
+										<p class="textLoc text1" style="font-size:var(--fontSize); ">
+											{#if group.lastMessage === undefined}
+												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--secondary)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--secondary)"> SEND MESSAGE </span></span>
+												<span id="LM?{group._id}" class="latestMessage"><span class="fa fa-arrow-right sendArrow" style="background-color:var(--secondary)" /></span>
+											{:else}
+												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--secondary)' : ''} class="latestMessageSender">
+													{group.latestMessageSender};
+												</span>
+												<span id="LM?{group._id}" class="latestMessage">
+													{group.lastMessage}
+												</span>
+											{/if}
+										</p>
+									</div>
 
-								<div class="locBoxItems item3">
-									<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>
-								</div>
-							</button>
+									<div class="locBoxItems item3">
+										<p id="LMT?{group._id}" class="textLoc text3">{timeSince(group.updatedAt)}</p>
+									</div>
+								</button>
+							{/if}
 						{/each}
 					{/if}
 				</div>

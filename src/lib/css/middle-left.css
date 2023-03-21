@@ -36,7 +36,7 @@
 	font-size: calc(var(--fontSize) / 1.75);
 	color: var(--secondaryThemeInverted);
 
-	background-color: var(--primaryTheme);
+	background-color: var(--secondaryTheme);
 	border-radius: calc(var(--averageMargin) / 4);
 	font-family: ULight;
 	box-shadow: var(--boxInsetShadows);
