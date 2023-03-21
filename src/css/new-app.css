@@ -18,10 +18,10 @@
 		--textShadows: 0px 0px 2px #1114, 0px 0px 4px #000;
 	}
 
-	p,
+	/* p,
 	h1 {
 		-webkit-text-stroke: 0.1px white;
-	}
+	} */
 }
 @media (prefers-color-scheme: light) {
 	:root {

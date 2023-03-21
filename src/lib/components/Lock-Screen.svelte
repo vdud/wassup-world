@@ -113,7 +113,7 @@
 
 <div class="LockScreen">
 	<div class="locContainers top">
-		<h1 class="lockHeader" style={$userName.length > 7 ? 'scale:.6;' : 'scale1;'}>
+		<h1 class="lockHeader" style={$userName.length > 7 ? 'scale:.9;' : 'scale1;'}>
 			<span style="color:var(--secondary)">wassup</span>
 			<span style={$userName.length > 0 ? $userName + '' : 'opacity:var(--dull)'}>{$userName.length > 0 ? $userName + '!' : 'world!'}</span>
 		</h1>
