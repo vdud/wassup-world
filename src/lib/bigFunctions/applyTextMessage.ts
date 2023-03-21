@@ -156,8 +156,7 @@ export const applyNewMessage = (data: any) => {
 		const contactButton = document.getElementById(`locBox?${data.groupId}`)
 
 		if (contactButton) {
-			// applyNavDataMessage(data)
-			return
+			applyNavDataMessage(data)
 		} else {
 			const button = document.createElement('button')
 			button.style.order = '-1'
