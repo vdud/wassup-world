@@ -28,8 +28,6 @@
 			return
 		} else {
 			applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
-			applyMessageYoMe({ sender: $userName, message, createdAt: new Date() })
-			// console.log('message', message)
 
 			const res = await fetch('/api/textAreaMessages', {
 				method: 'POST',
@@ -40,7 +38,7 @@
 			})
 
 			const response = await res.json()
-			console.log(response)
+			applyMessageYoMe({ sender: $userName, message, createdAt: new Date(), $userName_id, messageId: response.data.messageId, $userGroup_id })
 			if (!res.ok) {
 				alert(response.message)
 			}

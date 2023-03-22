@@ -19,7 +19,7 @@
 	import { isLocked } from '$lib/stores/isLocked'
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
-	import { likeThatMsg, likesabove10k } from '$lib/bigFunctions/likeThatMsg'
+	import { likeThatMsg, likesabove10k, incrementLikes } from '$lib/bigFunctions/likeThatMsg'
 
 	onMount(() => {
 		$isFlex = false
@@ -30,14 +30,23 @@
 		$currentPageHeaderData = data.body.groupName
 		$currentGroupCreatedAt = data.body.createdAt
 
-		pusher.subscribe($userGroup_id).bind('injectMessage', (data: any) => {
-			if (data.sender === $userName) {
-				return
-			} else {
-				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
-				applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt })
-			}
-		})
+		pusher
+			.subscribe($userGroup_id)
+			.bind('injectMessage', (data: any) => {
+				if (data.sender === $userName) {
+					return
+				} else {
+					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' })
+					applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id })
+				}
+			})
+			.bind('injectLike', (data: any) => {
+				if (data.sender === $userName) {
+					return
+				} else {
+					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes })
+				}
+			})
 	})
 
 	const scrolltoBottom = () => {
@@ -49,17 +58,15 @@
 	const parseScroll = () => {
 		const middleScroll: any = document.getElementById('middleScroll')
 		if (middleScroll.scrollTop < -69) {
-			console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = true
 		} else if (middleScroll.scrollTop > -69) {
-			console.log('middleScroll.scrollTop', middleScroll.scrollTop)
 			aboveSwitch = false
 		}
 	}
 	const debouncedScroll = debounce(parseScroll, 300)
 
 	const like = ({ _id, likes }: any) => {
-		likeThatMsg({ _id, $userName_id, likes })
+		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
 	}
 </script>
 

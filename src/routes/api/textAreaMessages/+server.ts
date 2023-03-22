@@ -15,13 +15,6 @@ const pusher = new Pusher({
 export const POST = (async ({ request }) => {
 	const { message, $userGroup_id, $userName, $userName_id } = await request.json()
 
-	pusher.trigger($userGroup_id, 'injectMessage', {
-		message: message,
-		sender: $userName,
-		createdAt: new Date(),
-		groupId: $userGroup_id,
-	})
-
 	const findUser = await mainUser.findOne({ _id: new ObjectId($userName_id) })
 	const findGroup = await groups.findOne({ _id: new ObjectId($userGroup_id) })
 
@@ -37,6 +30,17 @@ export const POST = (async ({ request }) => {
 		likedPeople: [],
 		likes: 0,
 	})
+	// .then((res) => {
+	pusher.trigger($userGroup_id, 'injectMessage', {
+		message: message,
+		sender: $userName,
+		createdAt: new Date(),
+		groupId: $userGroup_id,
+		messageId: newMessage.insertedId,
+	})
+
+	// console.log(newMessage.insertedId)
+	// })
 
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id })
@@ -65,5 +69,5 @@ export const POST = (async ({ request }) => {
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 	}
 
-	return json({ success: true })
+	return json({ success: true, data: { messageId: newMessage.insertedId } })
 }) satisfies RequestHandler
