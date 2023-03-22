@@ -39,7 +39,7 @@
 
 	let response: any
 	function handleDown(event: any) {
-		if (event.key === 'Tab') {
+		if (event.key === 'Tab' || event.key === 'Meta' || event.ctrlKey || event.key === 'Shift') {
 			event.preventDefault()
 		} else {
 			$locationPrediction = [
