@@ -14,6 +14,7 @@
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { userName_id } from '$lib/stores/userName_id'
 	import { likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
+	import { likesabove10k } from '$lib/bigFunctions/likesabove10k'
 
 	export let data: PageData
 
@@ -53,7 +54,7 @@
 	}
 	const debouncedScroll = debounce(parseScroll, 333)
 
-	const like = (_id: any) => {
+	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes })
 	}
 
@@ -86,9 +87,9 @@
 						<span style="color:var(--primary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexLeft">
-							<button on:click={like.bind(globalThis, _id, likes)}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 							<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
-							<button class="timeSpan " style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likes}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button class="timeSpan " style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 						</span>
 					</p>
 				</div>
@@ -98,9 +99,9 @@
 						<span style="color:var(--secondary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
-							<button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likes}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 							<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
-							<button on:click={like.bind(globalThis, _id, likes)}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 						</span>
 					</p>
 				</div>
