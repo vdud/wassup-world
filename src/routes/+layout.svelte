@@ -55,6 +55,27 @@
 		document.body.appendChild(PlacesApi)
 	})
 
+	const tilda = (e: KeyboardEvent) => {
+		if (e.key === 'Escape') {
+			e.preventDefault()
+			$isLocked = true
+		}
+		if (e.key === '`') {
+			e.preventDefault()
+			$isFlex = !$isFlex
+		}
+		if (e.key === 'Tab') {
+			e.preventDefault()
+			if ($nature === 'LOCATION') {
+				$nature = 'HASHTAG'
+			} else if ($nature === 'HASHTAG') {
+				$nature = 'PUBLIC'
+			} else if ($nature === 'PUBLIC') {
+				$nature = 'LOCATION'
+			}
+		}
+	}
+
 	onDestroy(() => {
 		pusher.disconnect()
 	})
@@ -92,6 +113,8 @@
 		</div>
 	</div>
 </div>
+
+<svelte:window on:keyup={tilda} />
 
 <style>
 	/* :root {

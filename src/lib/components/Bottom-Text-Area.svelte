@@ -20,7 +20,7 @@
 	}
 
 	const socketWorker = async () => {
-		const message = $user_message.slice(0, 999).trim()
+		const message = $user_message.slice(0, 999)
 		const groupId = $userGroup_id
 
 		$user_message = ''
@@ -108,7 +108,7 @@
 		align-items: center;
 
 		/* background-color: var(--secondaryTheme); */
-		border-radius: 6px;
+		border-radius: calc(var(--borderRadius) / 1.69);
 		box-shadow: var(--boxShadows);
 
 		right: 0.4rem;

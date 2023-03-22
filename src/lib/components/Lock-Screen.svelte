@@ -44,8 +44,8 @@
 	})
 
 	export async function unLock() {
-		if ($userName.length < 3) {
-			alert('username must be atleast 3 characters long')
+		if ($userName.length < 3 || $userName.length > 18 || $userName.toString().trim() == '' || $userName == ' ') {
+			// alert('username must be atleast 3 characters long')
 			return
 		}
 		localStorage.setItem('formData', JSON.stringify({ $userName }))

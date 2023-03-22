@@ -10,7 +10,15 @@
 	font-weight: 400;
 }
 .text1 {
-	height: 40px;
+	overflow: hidden;
+	display: flex;
+
+	align-items: flex-start;
+	justify-content: flex-start;
+	text-align: right;
+	height: 24px;
+	margin-bottom: 10px;
+	padding-top: 6px;
 	font-size: calc(var(--fontSize) * 1.2);
 	font-family: ULight;
 	margin-left: calc(var(--averageMargin) * -0.8);

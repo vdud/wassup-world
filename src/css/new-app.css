@@ -1,7 +1,7 @@
 @media (prefers-color-scheme: dark) {
 	:root {
-		--primaryTheme: #000;
-		--secondaryTheme: #111;
+		--primaryTheme: #111;
+		--secondaryTheme: #000;
 		--tertiaryTheme: #333;
 
 		--primaryThemeInverted: #fff;
@@ -243,7 +243,7 @@ body {
 }
 .timeSpan {
 	background-color: var(--primaryTheme);
-	color: var(--secondaryThemeInverted);
+	color: var(--tertiaryThemeInverted);
 	box-shadow: var(--boxInsetShadows);
 	font-size: calc(var(--fontSize) * 0.7);
 	padding: 0.2rem 0.6rem;

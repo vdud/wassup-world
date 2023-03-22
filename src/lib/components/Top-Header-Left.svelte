@@ -39,16 +39,20 @@
 
 	let response: any
 	function handleDown(event: any) {
-		$locationPrediction = [
-			{
-				description: '#',
-				structured_formatting: {
-					main_text: '',
-					secondary_text: 'LOADING...',
+		if (event.key === 'Tab') {
+			event.preventDefault()
+		} else {
+			$locationPrediction = [
+				{
+					description: '#',
+					structured_formatting: {
+						main_text: '',
+						secondary_text: 'LOADING...',
+					},
+					types: [],
 				},
-				types: [],
-			},
-		]
+			]
+		}
 	}
 
 	// //TypeScript DebounceFunction
