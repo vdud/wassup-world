@@ -61,7 +61,7 @@
 	const debouncedScroll = debounce(parseScroll, 333)
 
 	const like = ({ _id, likes }: any) => {
-		likeThatMsg({ _id, $userName_id, likes })
+		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
 	}
 
 	onDestroy(() => {

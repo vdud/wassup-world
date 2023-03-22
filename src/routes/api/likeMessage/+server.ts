@@ -33,7 +33,7 @@ export const POST = (async ({ request }) => {
 		pusher.trigger($userGroup_id, 'injectLike', {
 			messageId: messageId,
 			username_id: username_id,
-			likes: findLikedUser.likes - 1,
+			likes: findMessage.likes - 1,
 		})
 
 		return json({ success: true, isLiked: false, likes: findMessage.likes - 1 })

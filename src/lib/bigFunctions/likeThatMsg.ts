@@ -14,14 +14,14 @@ export const likeThatMsg = async (data: any) => {
 	})
 
 	const response = await res.json()
-	// if (response.isLiked === true) {
-	// 	LIKE.innerText = "love'd"
-	// 	const likes = data.likes + 1
-	// } else if (response.isLiked === false) {
-	// 	LIKE.innerText = 'love'
-	// 	const likes = data.likes - 1
-	// 	LIKE_NO.innerText = likesabove10k(likes).toString()
-	// }
+	if (response.isLiked === true) {
+		LIKE.innerText = "love'd"
+		// 	const likes = data.likes + 1
+	} else if (response.isLiked === false) {
+		LIKE.innerText = 'love'
+		// 	const likes = data.likes - 1
+		// 	LIKE_NO.innerText = likesabove10k(likes).toString()
+	}
 	LIKE_NO.innerText = likesabove10k(response.likes).toString()
 	if (!res.ok) {
 		alert(response.message)
