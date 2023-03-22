@@ -1,3 +1,4 @@
+import { likeThatMsg, likesabove10k } from './likeThatMsg'
 import { timeSince } from './timeFormat'
 import { togglePublic } from './toggleNavLocs'
 
@@ -24,15 +25,45 @@ export const applyMessageYoMe = (data: any) => {
 	span4.classList.add('timeSpan')
 	span4.innerText = timeSince(data.createdAt)
 
-	//LIKE BUTTON
-	const span5 = document.createElement('button')
-	span5.classList.add('timeSpan')
-	span5.classList.add('likeSPan')
-	span5.style.marginRight = '10px'
-	span5.innerText = '0'
-	// span3.append(span5) //not yet implemented the like button
-	span3.append(span4)
+	// const button1 = document.createElement('button')
+	// button1.classList.add('timeSpan')
+	// button1.classList.add('likeSPan')
 
+	// const span5 = document.createElement('span')
+	// span5.classList.add('optDark')
+	// span5.id = `LIKE_NO?${data._id}`
+
+	// const button2 = document.createElement('button')
+	// const span6 = document.createElement('span')
+	// span6.id = `LIKE?${data._id}`
+	// span6.classList.add('timeSpan')
+	// span6.classList.add('LikeSpan')
+	// span6.innerText = 'love'
+
+	// button2.onclick = () => {
+	// 	likeThatMsg(data)
+	// 	console.log('data', data)
+	// }
+
+	// span5.innerText = likesabove10k(data.likes)
+
+	// const i1 = document.createElement('i')
+	// i1.classList.add('fa-solid')
+	// i1.classList.add('fa-heart')
+	// i1.classList.add('optDark')
+	// i1.style.margin = '3px'
+
+	// button1.append(span5)
+	// button1.append(i1)
+	// span3.append(button1)
+	// button2.append(span6)
+	// span3.append(button2)
+
+	// button1.style.marginRight = '10px'
+	// button2.style.marginLeft = '10px'
+	// button1.innerText = '0'
+
+	span3.append(span4)
 	p.appendChild(span1)
 	p.appendChild(span2)
 	p.appendChild(span3)
@@ -40,10 +71,12 @@ export const applyMessageYoMe = (data: any) => {
 
 	textMessages.appendChild(div)
 }
+// <button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+// <button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 
-// <button on:click={like.bind(globalThis, _id)}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? 'liked' : 'like'}</span></button>
-// <span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
-// <span class="timeSpan LikeSpan" id="LIKE_NO?{_id}" style="margin-right: 10px;">{likes}</span>
+// const like = ({ _id, likes }: any) => {
+// 	likeThatMsg({ _id, $userName_id, likes })
+// }
 
 export const applyMessageLeft = (data: any) => {
 	const textMessages: any = document.getElementById('textMessages')
@@ -67,19 +100,49 @@ export const applyMessageLeft = (data: any) => {
 	span3.classList.add('spanFlexLeft')
 	const span4 = document.createElement('span')
 	span4.classList.add('timeSpan')
+	span4.innerText = timeSince(data.createdAt)
 
-	const span5 = document.createElement('button')
-	span5.classList.add('timeSpan')
-	span5.classList.add('likeSPan')
-	span5.style.marginLeft = '10px'
-	span5.innerText = '0'
+	// const button1 = document.createElement('button')
+	// button1.classList.add('timeSpan')
+	// button1.classList.add('likeSPan')
 
-	span3.append(span4)
+	// const span5 = document.createElement('span')
+	// span5.classList.add('optDark')
+	// span5.id = `LIKE_NO?${data._id}`
+
+	// const button2 = document.createElement('button')
+	// const span6 = document.createElement('span')
+	// span6.id = `LIKE?${data._id}`
+	// span6.classList.add('timeSpan')
+	// span6.classList.add('LikeSpan')
+	// span6.innerText = 'love'
+	// button2.append(span6)
+	// span3.append(button2)
+
+	// button2.onclick = () => {
+	// 	likeThatMsg({ _id: data._id, $userName_id: data._id, likes: data.likes })
+	// }
+
+	// span5.innerText = likesabove10k(data.likes)
+
+	// const i1 = document.createElement('i')
+	// i1.classList.add('fa-solid')
+	// i1.classList.add('fa-heart')
+	// i1.classList.add('optDark')
+	// i1.style.margin = '3px'
+
+	// button1.append(span5)
+	// button1.append(i1)
+	// span3.append(button1)
+
+	// button1.style.marginRight = '10px'
+	// button1.innerText = '0'
+
 	// span3.append(span5) //not yet implemented the like button
 
 	// span4.classList.add('timeSpanLeft')
-	span4.innerText = timeSince(data.createdAt)
 
+	span3.append(span4)
 	p.appendChild(span1)
 	p.appendChild(span2)
 	p.appendChild(span3)

@@ -1,6 +1,7 @@
 export const likeThatMsg = async (data: any) => {
 	const LIKE = document.getElementById(`LIKE?${data._id}`)
 	const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
+
 	if (!LIKE || !LIKE_NO) {
 		return
 	}
@@ -19,7 +20,6 @@ export const likeThatMsg = async (data: any) => {
 		LIKE_NO.innerText = likesabove10k(likes).toString()
 	} else if (response.isLiked === false) {
 		LIKE.innerText = 'love'
-
 		const likes = data.likes - 1
 		LIKE_NO.innerText = likesabove10k(likes).toString()
 	}
