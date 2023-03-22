@@ -7,10 +7,9 @@ import { groups, mainUser, massagesCreate } from '$db/collections'
 import { ObjectId } from 'mongodb'
 
 export const POST = (async ({ request }) => {
-	const { messageId, $userName_id } = await request.json()
-
+	const { messageId, username_id } = await request.json()
 	//
-	const user = await mainUser.findOne({ _id: new ObjectId($userName_id) })
+	const user = await mainUser.findOne({ _id: new ObjectId(username_id) })
 	// const message = await massagesCreate.findOne({ _id: new ObjectId(messageId) })
 	if (!user) {
 		return json({ success: false })

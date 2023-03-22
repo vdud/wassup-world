@@ -245,7 +245,7 @@ body {
 }
 .timeSpan {
 	background-color: var(--primaryTheme);
-	color: var(--tertiaryThemeInverted);
+	color: var(--tertiaryTheme);
 	box-shadow: var(--boxInsetShadows);
 	font-size: calc(var(--fontSize) * 0.7);
 	padding: 0.2rem 0.6rem;
@@ -262,17 +262,25 @@ body {
 .LikeSpan,
 .LikeSpan:active {
 	background-color: var(--tertiaryTheme);
-	cursor: pointer;
-	width: 300px;
+	overflow: visible;
+	/* width: 30px; */
 	text-align: center;
-	box-shadow: var(--boxShadowsBlur);
+	/* box-shadow: var(--boxShadows); */
 	transition: box-shadow 300ms ease-in-out, background-color 300ms ease-in-out;
 	/* margin-left: 10px; */
+	font-family: Imprima;
+	font-weight: 800;
+	color: var(--primary);
 }
 .LikeSpan:hover,
 .LikeSpan::selection {
 	background-color: var(--primaryTheme);
 	box-shadow: var(--boxInsetShadows);
+}
+.optDark {
+	color: var(--optDark);
+	opacity: var(--dull);
+	font-weight: 1000;
 }
 .sender {
 	place-self: start;
