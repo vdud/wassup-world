@@ -59,12 +59,10 @@
 		if (e.key === 'Escape') {
 			e.preventDefault()
 			$isLocked = true
-		}
-		if (e.key === '`') {
+		} else if (e.key === '`') {
 			e.preventDefault()
 			$isFlex = !$isFlex
-		}
-		if (e.key === 'Tab') {
+		} else if (e.key === 'Tab') {
 			e.preventDefault()
 			if ($nature === 'LOCATION') {
 				$nature = 'HASHTAG'
@@ -114,7 +112,7 @@
 	</div>
 </div>
 
-<svelte:window on:keyup={tilda} />
+<svelte:window on:keydown={tilda} />
 
 <style>
 	/* :root {

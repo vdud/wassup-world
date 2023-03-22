@@ -19,8 +19,7 @@
 	import { isLocked } from '$lib/stores/isLocked'
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
-	import { likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
-	import { likesabove10k } from '$lib/bigFunctions/likesabove10k'
+	import { likeThatMsg, likesabove10k } from '$lib/bigFunctions/likeThatMsg'
 
 	onMount(() => {
 		$isFlex = false

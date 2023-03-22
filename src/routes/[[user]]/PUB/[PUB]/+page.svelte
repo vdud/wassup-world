@@ -13,8 +13,7 @@
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
-	import { likesabove10k } from '$lib/bigFunctions/likesabove10k'
+	import { likeThatMsg, likesabove10k } from '$lib/bigFunctions/likeThatMsg'
 
 	export let data: PageData
 

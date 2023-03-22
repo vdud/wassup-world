@@ -1,5 +1,3 @@
-import { likesabove10k } from './likesabove10k'
-
 export const likeThatMsg = async (data: any) => {
 	const LIKE = document.getElementById(`LIKE?${data._id}`)
 	const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
@@ -27,5 +25,17 @@ export const likeThatMsg = async (data: any) => {
 	}
 	if (!res.ok) {
 		alert(response.message)
+	}
+}
+
+export const likesabove10k = (likes: any) => {
+	if (likes > 1000000) {
+		const afterLikes = likes / 1000000
+		return `${afterLikes.toFixed(2)}mil`
+	} else if (likes > 10000 && likes < 1000000) {
+		const afterLikes = likes / 1000
+		return `${afterLikes.toFixed(1)}k`
+	} else if (likes < 10000) {
+		return likes.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 	}
 }
