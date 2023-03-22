@@ -31,6 +31,8 @@ export const load = (async ({ params }) => {
 								message: 1,
 								createdAt: 1,
 								sender: 1,
+								likedPeople: 1,
+								likes: 1,
 							},
 						},
 					])
@@ -61,6 +63,8 @@ export const load = (async ({ params }) => {
 						message: 1,
 						createdAt: 1,
 						sender: 1,
+						likedPeople: 1,
+						likes: 1,
 					},
 				},
 			])

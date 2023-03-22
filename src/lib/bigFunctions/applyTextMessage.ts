@@ -23,14 +23,15 @@ export const applyMessageYoMe = (data: any) => {
 	const span4 = document.createElement('span')
 	span4.classList.add('timeSpan')
 	span4.innerText = timeSince(data.createdAt)
-	span3.append(span4)
 
 	//LIKE BUTTON
-	const span5 = document.createElement('span')
+	const span5 = document.createElement('button')
 	span5.classList.add('timeSpan')
 	span5.classList.add('likeSPan')
-	span5.style.marginLeft = '10px'
+	span5.style.marginRight = '10px'
+	span5.innerText = '0'
 	// span3.append(span5) //not yet implemented the like button
+	span3.append(span4)
 
 	p.appendChild(span1)
 	p.appendChild(span2)
@@ -39,6 +40,10 @@ export const applyMessageYoMe = (data: any) => {
 
 	textMessages.appendChild(div)
 }
+
+// <button on:click={like.bind(globalThis, _id)}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? 'liked' : 'like'}</span></button>
+// <span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
+// <span class="timeSpan LikeSpan" id="LIKE_NO?{_id}" style="margin-right: 10px;">{likes}</span>
 
 export const applyMessageLeft = (data: any) => {
 	const textMessages: any = document.getElementById('textMessages')
@@ -62,13 +67,15 @@ export const applyMessageLeft = (data: any) => {
 	span3.classList.add('spanFlexLeft')
 	const span4 = document.createElement('span')
 	span4.classList.add('timeSpan')
-	const span5 = document.createElement('span')
+
+	const span5 = document.createElement('button')
 	span5.classList.add('timeSpan')
 	span5.classList.add('likeSPan')
-	span5.style.marginRight = '10px'
+	span5.style.marginLeft = '10px'
+	span5.innerText = '0'
 
-	// span3.append(span5) //not yet implemented the like button
 	span3.append(span4)
+	// span3.append(span5) //not yet implemented the like button
 
 	// span4.classList.add('timeSpanLeft')
 	span4.innerText = timeSince(data.createdAt)

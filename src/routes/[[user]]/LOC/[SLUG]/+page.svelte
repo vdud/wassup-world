@@ -18,6 +18,7 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
+	import { likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
 
 	onMount(() => {
 		$isFlex = false
@@ -38,11 +39,6 @@
 		})
 	})
 
-	let isLiked = false
-	const like = () => {
-		isLiked = !isLiked
-	}
-
 	const scrolltoBottom = () => {
 		const middleScroll: any = document.getElementById('middleScroll')
 		middleScroll.scrollTop = middleScroll.scrollHeight
@@ -58,6 +54,10 @@
 		}
 	}
 	const debouncedScroll = debounce(parseScroll, 300)
+
+	const like = (_id: any) => {
+		likeThatMsg(_id, $userName_id)
+	}
 
 	onDestroy(() => {
 		$currentPage = ''
@@ -80,15 +80,16 @@
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		{#each JSON.parse(data.body.data) as { sender, message, createdAt }}
+		{#each JSON.parse(data.body.data) as { sender, message, createdAt, likedPeople, likes, _id }}
 			{#if sender !== $userName}
 				<div class="text sender">
 					<p>
 						<span style="color:var(--primary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexLeft">
-							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
+							<button on:click={like.bind(globalThis, _id)}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? 'liked' : 'like'}</span></button>
 							<span class="timeSpan " style="margin-left: 10px;">{timeSince(createdAt)}</span>
+							<span class="timeSpan LikeSpan" id="LIKE_NO?{_id}" style="margin-right: 10px;">{likes}</span>
 						</span>
 					</p>
 				</div>
@@ -98,8 +99,9 @@
 						<span style="color:var(--secondary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
+							<span class="timeSpan LikeSpan" id="LIKE_NO?{_id}" style="margin-right: 10px;">{likes}</span>
 							<span class="timeSpan " style="margin-right: 10px;">{timeSince(createdAt)}</span>
-							<span on:click={like} class="timeSpan LikeSpan" style={isLiked ? 'animation: zoomIn 133ms ease-in-out' : ''}>{isLiked ? 'liked' : 'like'}</span>
+							<button on:click={like.bind(globalThis, _id)}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? 'liked' : 'like'}</span></button>
 						</span>
 					</p>
 				</div>

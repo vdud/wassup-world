@@ -34,6 +34,8 @@ export const POST = (async ({ request }) => {
 		message: message,
 		group_id: findGroup._id,
 		createdAt: new Date(),
+		likedPeople: [],
+		likes: 0,
 	})
 
 	if (findGroup.nature === 'PUBLIC') {
