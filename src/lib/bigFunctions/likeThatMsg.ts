@@ -83,7 +83,7 @@ export const likesabove10k = (likes: any) => {
 	}
 }
 
-export const incrementLikes = async (data: any) => {
+export const incrementLikes = (data: any) => {
 	//put in await function
 	const likes = data.likes
 	// console.log('data', data)

@@ -30,8 +30,6 @@
 		$currentPageHeaderData = data.body.groupName
 		$currentGroupCreatedAt = data.body.createdAt
 
-		console.log('JSON.parse(data.body.topLikes)', JSON.parse(data.body.topLikes))
-		console.log('JSON.parse(data.body.data)', JSON.parse(data.body.data))
 		pusher
 			.subscribe($userGroup_id)
 			.bind('injectMessage', (data: any) => {
@@ -123,7 +121,7 @@
 				</div>
 			{/if}
 		{/each}
-		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1; margin-top:0' : 'scale: 0;margin-top:0;margin-bottom:-100px; opacity:0;'}><div class="infoData"><h1 class="comingSoon">I'm working with business owners to get the best deals for you!</h1></div></div>
+		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1; margin-top:0' : 'scale: 0;margin-top:0;margin-bottom:-100px; opacity:0;'}><div class="infoData"><h1 class="comingSoon">Working on the mechanics to make it the best social-app every designed/engineered.</h1></div></div>
 		<!-- Header for top Likes -->
 		{#if JSON.parse(data.body.topLikes).length > 0}
 			<div>
