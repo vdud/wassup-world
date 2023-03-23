@@ -11,70 +11,74 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 
 	const p = document.createElement('p')
 
+	//sender span
 	const span1 = document.createElement('span')
 	span1.style.color = isYoMe ? 'var(--secondary)' : 'var(--primary)'
 	span1.innerText = data.sender + '; '
 
+	//message span
 	const span2 = document.createElement('span')
 	span2.style.color = 'var(--tertiaryThemeInverted)'
 	span2.innerText = data.message
 
-	// LIKE BUTTON
+	//third span //data span
 	const span3 = document.createElement('span')
 	span3.classList.add(isYoMe ? 'spanFlexRight' : 'spanFlexLeft')
 
-	const span4 = document.createElement('span')
-	span4.classList.add('timeSpan')
-	span4.innerText = timeSince(data.createdAt)
-	span4.style.margin = '0 10px'
+	//time span
+	const timeSpan = document.createElement('span')
+	timeSpan.classList.add('timeSpan')
+	timeSpan.innerText = timeSince(data.createdAt)
+	timeSpan.style.margin = '0 10px'
+	timeSpan.classList.add('timeSpanLeft')
 
-	const button1 = document.createElement('button')
-	button1.classList.add('timeSpan')
-	button1.classList.add('likeSPan')
+	//like span
+	const likeNumberButton = document.createElement('button')
+	likeNumberButton.classList.add('timeSpan')
+	likeNumberButton.classList.add('likeSPan')
 
+	//like number span
 	const span5 = document.createElement('span')
 	span5.classList.add('optDark')
 	span5.id = `LIKE_NO?${data.messageId}`
 	span5.innerText = '0'
 
-	const button2 = document.createElement('button')
-	const span6 = document.createElement('span')
-	span6.id = `LIKE?${data.messageId}`
-	span6.classList.add('timeSpan')
-	span6.classList.add('LikeSpan')
-	span6.innerText = 'love'
-
-	button2.onclick = () => {
-		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
-	}
-
+	// hearts icon //fa-hearts
 	const i1 = document.createElement('i')
 	i1.classList.add('fa-solid')
 	i1.classList.add('fa-heart')
 	i1.classList.add('optDark')
 	i1.style.margin = '3px'
 
-	span4.style.margin = '0 10px'
-	if (isYoMe) {
-		span3.append(button1)
-		button2.append(span6)
-		span3.append(span4)
-		span3.append(button2)
-		button1.style.marginLeft = '10px'
-	} else if (!isYoMe) {
-		span3.append(button2)
-		button2.append(span6)
-		span3.append(span4)
-		span3.append(button1)
-		button1.style.marginRight = '10px'
+	//like button append
+	likeNumberButton.append(span5)
+	likeNumberButton.append(i1)
+
+	//love button
+	const loveButton = document.createElement('button')
+	const span6 = document.createElement('span')
+	span6.id = `LIKE?${data.messageId}`
+	span6.classList.add('timeSpan')
+	span6.classList.add('LikeSpan')
+	span6.innerText = 'love'
+	loveButton.append(span6)
+
+	loveButton.onclick = () => {
+		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
 	}
-	span5.innerText = '0'
 
-	button1.append(span5)
-	button1.append(i1)
-	// span3.append(span5) //not yet implemented the like button
-
-	span4.classList.add('timeSpanLeft')
+	timeSpan.style.margin = '0 10px'
+	if (isYoMe) {
+		span3.append(likeNumberButton)
+		span3.append(timeSpan)
+		span3.append(loveButton)
+		likeNumberButton.style.marginLeft = '10px'
+	} else if (!isYoMe) {
+		span3.append(loveButton)
+		span3.append(timeSpan)
+		span3.append(likeNumberButton)
+		likeNumberButton.style.marginRight = '10px'
+	}
 
 	p.appendChild(span1)
 	p.appendChild(span2)
@@ -122,7 +126,7 @@ export const applyNavDataMessage = (data: any) => {
 	latestMessageTime.innerText = timeSince(data.createdAt)
 }
 
-// apply new message to the chat
+// apply new message to the PUB chat
 export const applyNewMessage = (data: any) => {
 	const PUB = document.getElementById('PUB')
 
