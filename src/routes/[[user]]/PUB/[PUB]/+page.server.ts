@@ -90,7 +90,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ likes: -1 })
 				.limit(10)
-				.match({ likes: { $gt: 99 } })
+				.match({ likes: { $gt: 19 } })
 				.toArray()
 
 			return {
@@ -164,7 +164,7 @@ export const load = (async ({ params }) => {
 						},
 					},
 				])
-				.match({ likes: { $gt: 99 } })
+				.match({ likes: { $gt: 19 } })
 				.sort({ likes: -1 })
 				.limit(10)
 				.toArray()
@@ -240,7 +240,7 @@ export const load = (async ({ params }) => {
 					},
 				])
 				.sort({ likes: -1 })
-				.match({ likes: { $gt: 99 } })
+				.match({ likes: { $gt: 19 } })
 				.limit(10)
 				.toArray()
 
@@ -320,7 +320,7 @@ export const load = (async ({ params }) => {
 					},
 				])
 				.sort({ likes: -1 })
-				.match({ likes: { $gt: 99 } })
+				.match({ likes: { $gt: 19 } })
 				.limit(10)
 				.toArray()
 

@@ -55,8 +55,8 @@ export const load = (async ({ params }) => {
 							},
 						])
 						.sort({ likes: -1 })
-						.match({ likes: { $gt: 99 } })
 						.limit(10)
+						.match({ likes: { $gt: 19 } })
 						.toArray()
 
 					return {
@@ -91,7 +91,7 @@ export const load = (async ({ params }) => {
 				},
 			])
 			.sort({ createdAt: -1 })
-			.limit(99)
+			.limit(100)
 			.toArray()
 
 		const topLikes = await massagesCreate
@@ -108,7 +108,7 @@ export const load = (async ({ params }) => {
 					},
 				},
 			])
-			.match({ likes: { $gt: 99 } })
+			.match({ likes: { $gt: 19 } })
 			.sort({ likes: -1 })
 			// sort by likes greater than 100
 			.limit(10)

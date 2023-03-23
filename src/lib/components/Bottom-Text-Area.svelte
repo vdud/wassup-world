@@ -107,7 +107,6 @@
 		justify-content: center;
 		align-items: center;
 
-		/* background-color: var(--secondaryTheme); */
 		border-radius: calc(var(--borderRadius) / 1.69);
 		box-shadow: var(--boxShadows);
 
@@ -131,8 +130,8 @@
 		font-size: 1.2rem;
 		border-radius: calc(var(--borderRadius) / 3);
 
-		background-color: var(--primaryTheme);
 		box-shadow: var(--boxInsetShadows);
+		background-color: var(--secondaryTheme);
 
 		max-height: 100px;
 	}
