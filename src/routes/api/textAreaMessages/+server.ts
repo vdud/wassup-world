@@ -30,7 +30,7 @@ export const POST = (async ({ request }) => {
 		likedPeople: [],
 		likes: 0,
 		replies: [],
-		replyTo: null,
+		isReply: false,
 	})
 	// .then((res) => {
 	pusher.trigger($userGroup_id, 'injectMessage', {

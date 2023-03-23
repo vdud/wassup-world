@@ -19,7 +19,7 @@
 	import { isLocked } from '$lib/stores/isLocked'
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
-	import { likeThatMsg, likesabove10k, incrementLikes, likeTopMessage } from '$lib/bigFunctions/likeThatMsg'
+	import { likeThatMsg, likesabove10k, incrementLikes } from '$lib/bigFunctions/likeThatMsg'
 
 	onMount(() => {
 		$isFlex = false
@@ -70,9 +70,9 @@
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
 	}
-	const likeTop = ({ _id, likes }: any) => {
-		likeTopMessage({ _id, $userName_id, likes, $userGroup_id })
-	}
+	// const likeTop = ({ _id, likes }: any) => {
+	// 	likeTopMessage({ _id, $userName_id, likes, $userGroup_id })
+	// }
 </script>
 
 <svelte:head>
@@ -138,7 +138,7 @@
 							<span style="color:var(--primary)">{sender}; </span>
 							<span class="pageMessage">{message}</span>
 							<span class="spanFlexLeft">
-								<button on:click={likeTop.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+								<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 								<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
 								<!-- {#if likes > 0} -->
 								<button class="timeSpan " style="margin-left: 10px;">
@@ -157,7 +157,7 @@
 							<span class="spanFlexRight">
 								<button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 								<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
-								<button on:click={likeTop.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+								<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 							</span>
 						</p>
 					</div>
