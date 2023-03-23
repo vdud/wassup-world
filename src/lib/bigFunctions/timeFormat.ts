@@ -23,6 +23,10 @@ export function timeSince(timestamp: number) {
 	if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
 	if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`
 	if (diff < 172800) return 'Yesterday'
+	if (diff < 604800) return `${Math.floor(diff / 86400)}d ago`
+	if (diff < 2419200) return `${Math.floor(diff / 604800)}w ago`
+	// if (diff < 29030400) return `${Math.floor(diff / 2419200)}mo ago`
+	// return `${Math.floor(diff / 29030400)}y ago`
 	const date = new Date(timestamp)
 	return formatDateAmPm(date)
 }

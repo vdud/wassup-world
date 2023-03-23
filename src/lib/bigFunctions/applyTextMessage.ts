@@ -2,28 +2,31 @@ import { likeThatMsg, likesabove10k } from './likeThatMsg'
 import { timeSince } from './timeFormat'
 import { togglePublic } from './toggleNavLocs'
 
-export const applyMessageYoMe = (data: any) => {
-	// if (sender !== $userName) {
+export const applyMessage = (data: any, isYoMe: boolean) => {
 	const textMessages: any = document.getElementById('textMessages')
 
 	const div = document.createElement('div')
 	div.classList.add('text')
-	// div.classList.add('newText')
-	div.classList.add('yoMe')
+	div.classList.add(isYoMe ? 'yoMe' : 'sender')
+
 	const p = document.createElement('p')
+
 	const span1 = document.createElement('span')
-	span1.style.color = 'var(--secondary)'
+	span1.style.color = isYoMe ? 'var(--secondary)' : 'var(--primary)'
 	span1.innerText = data.sender + '; '
+
 	const span2 = document.createElement('span')
 	span2.style.color = 'var(--tertiaryThemeInverted)'
 	span2.innerText = data.message
 
+	// LIKE BUTTON
 	const span3 = document.createElement('span')
-	span3.classList.add('spanFlexRight')
+	span3.classList.add(isYoMe ? 'spanFlexRight' : 'spanFlexLeft')
 
 	const span4 = document.createElement('span')
 	span4.classList.add('timeSpan')
 	span4.innerText = timeSince(data.createdAt)
+	span4.style.margin = '0 10px'
 
 	const button1 = document.createElement('button')
 	button1.classList.add('timeSpan')
@@ -32,101 +35,39 @@ export const applyMessageYoMe = (data: any) => {
 	const span5 = document.createElement('span')
 	span5.classList.add('optDark')
 	span5.id = `LIKE_NO?${data.messageId}`
-
-	const button2 = document.createElement('button')
-
-	const span6 = document.createElement('span')
-	span6.id = `LIKE?${data.messageId}`
-	span6.classList.add('timeSpan')
-	span6.classList.add('LikeSpan')
-	span6.innerText = 'love'
-
-	button2.onclick = () => {
-		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
-	}
-
-	span5.innerText = likesabove10k(data.likes)
-
-	const i1 = document.createElement('i')
-	i1.classList.add('fa-solid')
-	i1.classList.add('fa-heart')
-	i1.classList.add('optDark')
-	i1.style.margin = '3px'
-
-	button1.append(span5)
-	button1.append(i1)
-	span3.append(button1)
-	span3.append(span4)
-	button2.append(span6)
-	span3.append(button2)
-
-	button1.style.marginRight = '10px'
-	button2.style.marginLeft = '10px'
 	span5.innerText = '0'
 
-	p.appendChild(span1)
-	p.appendChild(span2)
-	p.appendChild(span3)
-	div.appendChild(p)
-
-	textMessages.appendChild(div)
-}
-
-export const applyMessageLeft = (data: any) => {
-	const textMessages: any = document.getElementById('textMessages')
-
-	const div = document.createElement('div')
-	div.classList.add('text')
-	div.classList.add('sender')
-
-	const p = document.createElement('p')
-
-	const span1 = document.createElement('span')
-	span1.style.color = 'var(--primary)'
-	span1.innerText = data.sender + '; '
-
-	const span2 = document.createElement('span')
-	span2.style.color = 'var(--tertiaryThemeInverted)'
-	span2.innerText = data.message
-
-	//LIKE BUTTON
-	const span3 = document.createElement('span')
-	span3.classList.add('spanFlexLeft')
-	const span4 = document.createElement('span')
-	span4.classList.add('timeSpan')
-	span4.innerText = timeSince(data.createdAt)
-
-	const button1 = document.createElement('button')
-	button1.classList.add('timeSpan')
-	button1.classList.add('likeSPan')
-
-	const span5 = document.createElement('span')
-	span5.classList.add('optDark')
-	span5.id = `LIKE_NO?${data.messageId}`
-
 	const button2 = document.createElement('button')
 	const span6 = document.createElement('span')
 	span6.id = `LIKE?${data.messageId}`
 	span6.classList.add('timeSpan')
 	span6.classList.add('LikeSpan')
 	span6.innerText = 'love'
-	button2.append(span6)
-	span3.append(button2)
 
 	button2.onclick = () => {
 		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
 	}
+
 	const i1 = document.createElement('i')
 	i1.classList.add('fa-solid')
 	i1.classList.add('fa-heart')
 	i1.classList.add('optDark')
 	i1.style.margin = '3px'
 
-	span3.append(span4)
 	span4.style.margin = '0 10px'
-	span3.append(button1)
-
-	button1.style.marginRight = '10px'
+	if (isYoMe) {
+		span3.append(button1)
+		button2.append(span6)
+		span3.append(span4)
+		span3.append(button2)
+		button1.style.marginLeft = '10px'
+	} else if (!isYoMe) {
+		span3.append(button2)
+		button2.append(span6)
+		span3.append(span4)
+		span3.append(button1)
+		button1.style.marginRight = '10px'
+	}
 	span5.innerText = '0'
 
 	button1.append(span5)

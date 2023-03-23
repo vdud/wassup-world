@@ -18,7 +18,7 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { isLocked } from '$lib/stores/isLocked'
 	import { debounce } from '$lib/bigFunctions/debounce'
-	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
+	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { likeThatMsg, likesabove10k, incrementLikes } from '$lib/bigFunctions/likeThatMsg'
 
 	onMount(() => {
@@ -34,10 +34,14 @@
 			.subscribe($userGroup_id)
 			.bind('injectMessage', (data: any) => {
 				if (data.sender === $userName) {
-					return
+					// 	applyMessageYoMe({ sender: $userName, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id })
+					const isYoMe = true
+					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id }, isYoMe)
 				} else {
+					const isYoMe = false
+					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id }, isYoMe)
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' })
-					applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id })
+					// 	applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id })
 				}
 			})
 			.bind('injectLike', (data: any) => {

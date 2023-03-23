@@ -29,8 +29,10 @@ export const POST = (async ({ request }) => {
 		createdAt: new Date(),
 		likedPeople: [],
 		likes: 0,
+
 		replies: [],
 		isReply: false,
+		totalReplies: 0,
 	})
 	// .then((res) => {
 	pusher.trigger($userGroup_id, 'injectMessage', {
@@ -71,5 +73,5 @@ export const POST = (async ({ request }) => {
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 	}
 
-	return json({ success: true, data: { messageId: newMessage.insertedId } })
+	return json({ success: true })
 }) satisfies RequestHandler

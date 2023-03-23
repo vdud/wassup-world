@@ -3,7 +3,7 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { applyMessageYoMe, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
+	import { applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 
 	import { autoresize } from 'svelte-textarea-autoresize'
 	import sendButtonLogo from '$lib/assets/sendButton.svg'
@@ -38,7 +38,6 @@
 			})
 
 			const response = await res.json()
-			applyMessageYoMe({ sender: $userName, message, createdAt: new Date(), $userName_id, messageId: response.data.messageId, $userGroup_id })
 			if (!res.ok) {
 				alert(response.message)
 			}
