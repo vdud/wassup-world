@@ -19,7 +19,7 @@ export const likeThatMsg = async (data: any) => {
 
 	const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
 	if (LIKE_NO) {
-		LIKE_NO.innerText = likesabove10k(response.likes).toString()
+		LIKE_NO.innerHTML = likesabove10k(response.likes).toString()
 	}
 
 	const TOPLIKE = document.getElementById(`TopLike?${data._id}`)
@@ -54,7 +54,6 @@ export const likesabove10k = (likes: any) => {
 
 export const incrementLikes = (data: any) => {
 	const likes = data.likes
-
 	const awaitTOPLIKENO = () => {
 		const TOPLIKE_NO = document.getElementById(`TopLike_No?${data._id}`)
 		if (!TOPLIKE_NO) {

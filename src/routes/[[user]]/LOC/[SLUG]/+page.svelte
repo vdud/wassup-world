@@ -36,7 +36,7 @@
 					return
 				} else {
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' })
-					applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id })
+					applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id })
 				}
 			})
 			.bind('injectLike', (data: any) => {
@@ -102,7 +102,7 @@
 						<span class="spanFlexLeft">
 							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 							<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
-							<button class="timeSpan " style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 						</span>
 					</p>
 				</div>
@@ -112,7 +112,7 @@
 						<span style="color:var(--secondary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
-							<button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 							<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
 							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 						</span>
@@ -137,7 +137,7 @@
 								<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 								<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
 								<!-- {#if likes > 0} -->
-								<button class="timeSpan " style="margin-left: 10px;">
+								<button class="timeSpan" style="margin-left: 10px;">
 									<span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span>
 									<i class="fa-solid fa-heart optDark" style="margin:3px;" />
 								</button>
@@ -151,7 +151,7 @@
 							<span style="color:var(--secondary)">{sender}; </span>
 							<span class="pageMessage">{message}</span>
 							<span class="spanFlexRight">
-								<button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+								<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 								<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
 								<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 							</span>

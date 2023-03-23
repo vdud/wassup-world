@@ -114,7 +114,7 @@ export const applyMessageLeft = (data: any) => {
 	span3.append(button2)
 
 	button2.onclick = () => {
-		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0 })
+		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
 	}
 	const i1 = document.createElement('i')
 	i1.classList.add('fa-solid')
