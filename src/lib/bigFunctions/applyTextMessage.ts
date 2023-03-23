@@ -15,7 +15,7 @@ export const applyMessageYoMe = (data: any) => {
 	span1.style.color = 'var(--secondary)'
 	span1.innerText = data.sender + '; '
 	const span2 = document.createElement('span')
-	span2.style.color = 'var(--secondaryThemeInverted)'
+	span2.style.color = 'var(--tertiaryThemeInverted)'
 	span2.innerText = data.message
 
 	const span3 = document.createElement('span')
@@ -92,7 +92,7 @@ export const applyMessageLeft = (data: any) => {
 	span1.innerText = data.sender + '; '
 
 	const span2 = document.createElement('span')
-	span2.style.color = 'var(--secondaryThemeInverted)'
+	span2.style.color = 'var(--tertiaryThemeInverted)'
 	span2.innerText = data.message
 
 	//LIKE BUTTON

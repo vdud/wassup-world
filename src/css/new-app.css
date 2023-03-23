@@ -433,12 +433,12 @@ textarea:focus {
 	justify-content: center;
 }
 .comingSoon {
-	color: var(--secondaryThemeInverted);
+	color: var(--tertiaryThemeInverted);
 
 	font-family: Imprima;
 	font-size: 1rem;
 	text-align: center;
-	box-shadow: var(--boxShadows);
+	/* box-shadow: var(--boxShadows); */
 	border-radius: calc(var(--borderRadius) * 0.33);
 
 	margin: 0 2rem;
@@ -447,6 +447,18 @@ textarea:focus {
 }
 
 /* +page.svelte css */
+.topLikesHeader {
+	font-family: UBold;
+	font-weight: 1000;
+	background-color: var(--tertiaryTheme);
+	color: var(--tertiaryThemeInverted);
+	padding: 0.2rem 1rem;
+	border-radius: var(--borderRadius);
+	opacity: 0.4;
+	scale: 0.6;
+	box-shadow: var(--boxShadows);
+	text-shadow: none;
+}
 
 #textMessages {
 	width: 100%;

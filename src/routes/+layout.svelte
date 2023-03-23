@@ -8,6 +8,11 @@
 	import { currentPage } from '$lib/stores/currentPage'
 	import { searchInput } from '$lib/stores/searchInput'
 
+	import { userName } from '$lib/stores/userName'
+	import { userName_id } from '$lib/stores/userName_id'
+	import { userGroup_id } from '$lib/stores/userGroup_id'
+	import { loginResponseData } from '$lib/stores/loginResponseData'
+
 	// let rootElement: HTMLElement | null = null
 	// $: rootElement && rootElement.style.setProperty('--primaryTheme', $toggleTheme === 'dark' ? '#111' : '#fff')
 	// $: rootElement && rootElement.style.setProperty('--secondaryTheme', $toggleTheme === 'dark' ? '#222' : '#eee')
@@ -30,6 +35,7 @@
 	import { onDestroy, onMount } from 'svelte'
 	import { canSend } from '$lib/stores/canSend'
 	import BottomTextArea_2 from '$lib/components/Bottom-Text-Area.svelte'
+	import { unLockBby } from '$lib/bigFunctions/unLockBby'
 
 	let zIndex = 0
 
@@ -72,6 +78,10 @@
 				$nature = 'LOCATION'
 			}
 		}
+		// else if (e.key === 'Enter') {
+		// 	unLockBby({ $userName, $userName_id, $loginResponseData, $userGroup_id })
+		// 	$isLocked = false
+		// }
 	}
 
 	onDestroy(() => {

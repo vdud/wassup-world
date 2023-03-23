@@ -74,10 +74,30 @@ export const load = (async ({ params }) => {
 				.limit(100)
 				.toArray()
 
+			const topLikes = await massagesCreate
+				.aggregate([
+					{ $match: { group_id: newGroup.insertedId } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
+						},
+					},
+				])
+				.sort({ likes: -1 })
+				.limit(10)
+				.match({ likes: { $gt: 99 } })
+				.toArray()
+
 			return {
 				status: 200,
 				body: {
 					data: JSON.stringify(returnData[0]),
+					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(newGroup.insertedId),
 					groupName: `${userSender.name};${userReciever.name}`,
@@ -128,10 +148,32 @@ export const load = (async ({ params }) => {
 				.limit(100)
 				.toArray()
 
+			const topLikes = await massagesCreate
+
+				.aggregate([
+					{ $match: { group_id: findFirstGroup._id } },
+
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
+						},
+					},
+				])
+				.match({ likes: { $gt: 99 } })
+				.sort({ likes: -1 })
+				.limit(10)
+				.toArray()
+
 			return {
 				status: 200,
 				body: {
 					data: JSON.stringify(returnData[0]),
+					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findFirstGroup._id),
 					groupName: findFirstGroup.name,
@@ -182,10 +224,31 @@ export const load = (async ({ params }) => {
 				.limit(100)
 				.toArray()
 
+			const topLikes = await massagesCreate
+
+				.aggregate([
+					{ $match: { group_id: findSecondGroup._id } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
+						},
+					},
+				])
+				.sort({ likes: -1 })
+				.match({ likes: { $gt: 99 } })
+				.limit(10)
+				.toArray()
+
 			return {
 				status: 200,
 				body: {
 					data: JSON.stringify(returnData[0]),
+					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findSecondGroup._id),
 					groupName: findSecondGroup.name,
@@ -241,10 +304,31 @@ export const load = (async ({ params }) => {
 				.limit(100)
 				.toArray()
 
+			const topLikes = await massagesCreate
+
+				.aggregate([
+					{ $match: { group_id: findGroup._id } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
+						},
+					},
+				])
+				.sort({ likes: -1 })
+				.match({ likes: { $gt: 99 } })
+				.limit(10)
+				.toArray()
+
 			return {
 				status: 200,
 				body: {
 					data: JSON.stringify(returnData[0]),
+					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findGroup._id),
 					groupName: findGroup.name,

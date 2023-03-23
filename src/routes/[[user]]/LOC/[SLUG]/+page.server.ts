@@ -39,11 +39,32 @@ export const load = (async ({ params }) => {
 					.limit(100)
 					.toArray()
 
+				const topLikes = await massagesCreate
+					.aggregate([
+						{ $match: { group_id: findGroup._id } },
+						{
+							$project: {
+								_id: 1,
+								message: 1,
+								createdAt: 1,
+								sender: 1,
+								likedPeople: 1,
+								likes: 1,
+							},
+						},
+					])
+					.match({ likes: { $gt: 99 } })
+					.sort({ likes: 1 })
+					// sort by likes greater than 100
+					.limit(10)
+					.toArray()
+
 				return {
 					status: 200,
 					groupId: JSON.stringify(findGroup._id),
 					body: {
 						data: JSON.stringify(returnMsgData),
+						topLikes: JSON.stringify(topLikes),
 						groupName: findGroup.name,
 						createdAt: findGroup.createdAt,
 					},
@@ -71,11 +92,32 @@ export const load = (async ({ params }) => {
 			.limit(100)
 			.toArray()
 
+		const topLikes = await massagesCreate
+			.aggregate([
+				{ $match: { group_id: findGroup._id } },
+				{
+					$project: {
+						_id: 1,
+						message: 1,
+						createdAt: 1,
+						sender: 1,
+						likedPeople: 1,
+						likes: 1,
+					},
+				},
+			])
+			.match({ likes: { $gt: 99 } })
+			.sort({ likes: 1 })
+			// sort by likes greater than 100
+			.limit(10)
+			.toArray()
+
 		return {
 			status: 200,
 			groupId: JSON.stringify(findGroup._id),
 			body: {
 				data: JSON.stringify(returnMsgData),
+				topLikes: JSON.stringify(topLikes),
 				groupName: findGroup.name,
 				createdAt: findGroup.createdAt,
 			},

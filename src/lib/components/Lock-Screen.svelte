@@ -10,7 +10,6 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { canSend } from '$lib/stores/canSend'
 	import { canSendReciever } from '$lib/stores/canSendReciever'
-	$: if ($userName) $userName = $userName.toLowerCase().trim()
 
 	import { pusher } from '$lib/bigFunctions/pusher'
 	import Pusher from 'pusher-js'
@@ -19,7 +18,9 @@
 	import { isDarkMode } from '$lib/stores/isDarkMode'
 	import { applyNavDataMessage, applyNewMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { nature } from '$lib/stores/nature'
+	import { unLockBby } from '$lib/bigFunctions/unLockBby'
 
+	$: if ($userName) $userName = $userName.toLowerCase().trim()
 	const toggleThemeButton = () => {
 		$isDarkMode = !$isDarkMode
 	}
@@ -34,6 +35,7 @@
 				if (savedUserName != '') {
 					// button?.click()
 					$userName = savedUserName
+					// unLock({ $userName, $userName_id, $isLocked, $loginResponseData, $userGroup_id })
 					unLock()
 				}
 			} catch (err) {
@@ -43,14 +45,14 @@
 		}
 	})
 
-	export async function unLock() {
+	const unLock = async () => {
+		// unLockBby({ $userName, $userName_id, $loginResponseData, $userGroup_id })
+		$isLocked = false
 		if ($userName.length < 3 || $userName.length > 18 || $userName.toString().trim() == '' || $userName == ' ') {
 			// alert('username must be atleast 3 characters long')
 			return
 		}
 		localStorage.setItem('formData', JSON.stringify({ $userName }))
-		$isLocked = false
-
 		if ($userName != '') {
 			const res = await fetch('/api/logInData', {
 				method: 'POST',
@@ -63,12 +65,10 @@
 			if (res.ok) {
 				$loginResponseData = response
 				$userName_id = response.userName_id
-
 				pusher.subscribe($userName_id).bind('newPubMessage', (data: any) => {
 					applyNewMessage({ groupName: data.groupName, sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
 					// console.log('triggered')
 				})
-
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('injectMessage', (data: any) => {
@@ -83,7 +83,6 @@
 						})
 					}
 				})
-
 				$loginResponseData.data.formatedPUBLICdata.forEach((element: any) => {
 					if ($userGroup_id != element._id) {
 						pusher.subscribe(element._id).bind('injectMessage', (data: any) => {
@@ -107,6 +106,7 @@
 		}
 		if (event.key === 'Enter' && $userName.length > 2 && $userName.length < 19 && $userName.toString().trim() != '' && $userName != ' ') {
 			unLock()
+			// unLock({ $userName, $userName_id, $isLocked, $loginResponseData, $userGroup_id })
 		}
 	}
 </script>

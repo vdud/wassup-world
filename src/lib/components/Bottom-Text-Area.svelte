@@ -60,7 +60,9 @@
 	}
 	.textAreeaBox {
 		width: 100%;
-		height: calc(max-content + 10px);
+		height: 60%;
+		/* height: calc(max-content - 30px); */
+		/* margin-top: 100px; */
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
@@ -68,10 +70,10 @@
 		position: relative;
 		pointer-events: all;
 
-		/* background-color: var(--primaryTheme); */
+		background-color: var(--primaryTheme);
 
 		/* border: 1px solid var(--tertiaryTheme); */
-		background-image: linear-gradient(rgba(0, 0, 0, 0), var(--primaryTheme));
+		/* background-image: linear-gradient(rgba(0, 0, 0, 0), var(--primaryTheme)); */
 	}
 
 	::-webkit-scrollbar {
@@ -129,7 +131,7 @@
 		font-size: 1.2rem;
 		border-radius: calc(var(--borderRadius) / 3);
 
-		background-color: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 		box-shadow: var(--boxInsetShadows);
 
 		max-height: 100px;

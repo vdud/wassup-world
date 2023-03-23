@@ -29,6 +29,8 @@ export const POST = (async ({ request }) => {
 		createdAt: new Date(),
 		likedPeople: [],
 		likes: 0,
+		replies: [],
+		replyTo: null,
 	})
 	// .then((res) => {
 	pusher.trigger($userGroup_id, 'injectMessage', {

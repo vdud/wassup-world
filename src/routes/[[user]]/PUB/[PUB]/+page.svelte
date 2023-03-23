@@ -13,7 +13,7 @@
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessageLeft, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { likeThatMsg, likesabove10k, incrementLikes } from '$lib/bigFunctions/likeThatMsg'
+	import { likeThatMsg, likesabove10k, incrementLikes, likeTopMessage } from '$lib/bigFunctions/likeThatMsg'
 
 	export let data: PageData
 
@@ -62,6 +62,9 @@
 
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
+	}
+	const likeTop = ({ _id, likes }: any) => {
+		likeTopMessage({ _id, $userName_id, likes, $userGroup_id })
 	}
 
 	onDestroy(() => {
@@ -114,6 +117,47 @@
 			{/if}
 		{/each}
 		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-6rem; opacity:0;'}><div class="infoData"><h1 class="comingSoon">I'm working with business owners to get the best deals for you!</h1></div></div>
+		{#if JSON.parse(data.body.topLikes).length > 0}
+			<div>
+				<h1 class="topLikesHeader">
+					<span class="topLikesHeaderSpan">TOP-LIKES</span>
+				</h1>
+			</div>
+			<div class="hashMessagesContainer">
+				{#each JSON.parse(data.body.topLikes) as { sender, message, createdAt, _id, likedPeople, likes }}
+					{#if sender !== $userName}
+						<div class="text sender">
+							<p class="textShadows">
+								<span style="color:var(--primary)">{sender}; </span>
+								<span class="pageMessage">{message}</span>
+								<span class="spanFlexLeft">
+									<button on:click={likeTop.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+									<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
+									<!-- {#if likes > 0} -->
+									<button class="timeSpan " style="margin-left: 10px;">
+										<span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span>
+										<i class="fa-solid fa-heart optDark" style="margin:3px;" />
+									</button>
+									<!-- {/if} -->
+								</span>
+							</p>
+						</div>
+					{:else if sender === $userName}
+						<div class="text yoMe">
+							<p class="textShadows">
+								<span style="color:var(--secondary)">{sender}; </span>
+								<span class="pageMessage">{message}</span>
+								<span class="spanFlexRight">
+									<button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+									<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
+									<button on:click={likeTop.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+								</span>
+							</p>
+						</div>
+					{/if}
+				{/each}
+			</div>
+		{/if}
 	</div>
 	<div class="margins margin-top" />
 </div>
