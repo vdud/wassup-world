@@ -71,12 +71,6 @@ export const applyMessageYoMe = (data: any) => {
 
 	textMessages.appendChild(div)
 }
-// <button class="timeSpan " style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
-// <button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
-
-// const like = ({ _id, likes }: any) => {
-// 	likeThatMsg({ _id, $userName_id, likes })
-// }
 
 export const applyMessageLeft = (data: any) => {
 	const textMessages: any = document.getElementById('textMessages')
@@ -186,35 +180,6 @@ export const applyNavDataMessage = (data: any) => {
 	latestMessage.innerText = data.message
 	latestMessageTime.innerText = timeSince(data.createdAt)
 }
-
-// 	<button on:click={toggleLoc.bind(globalThis, name)} id="locBox?{_id}" class="locBox {i === 0 ? 'locBoxLocationNotification' : ''}">
-// 	<!-- SENDER -->
-// 	<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-// 		<p class="textLoc text2" style={i === 0 ? 'color: var(--secOptDark)' : ''} id="gName?{_id}">{name.toUpperCase()}</p>
-// 	</div>
-
-// 	<!-- LATEST MESSAGE -->
-// 	<div class="locBoxItems item2">
-// 		<p class="textLoc text1" style="font-size:var(--fontSize)">
-// 			{#if lastMessage === undefined}
-// 				<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender"><span class="sendBox" style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'}> SEND MESSAGE </span></span>
-// 				<span id="LM?{_id}" class="latestMessage"><span style={$nature === 'LOCATION' ? 'background-color:var(--secOptDark)' : 'background-color:var(--tertiaryThemeInverted )'} class="fa fa-arrow-right sendArrow" /></span>
-// 			{:else}
-// 				<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender">
-// 					{latestMessageSender};
-// 				</span>
-// 				<span id="LM?{_id}" class="latestMessage">
-// 					{lastMessage}
-// 				</span>
-// 			{/if}
-// 		</p>
-// 	</div>
-
-// 	<!-- TIME -->
-// 	<div class="locBoxItems item3">
-// 		<p id="LMT?{_id}" class="textLoc text3">{timeSince(updatedAt)}</p>
-// 	</div>
-// </button>
 
 // apply new message to the chat
 export const applyNewMessage = (data: any) => {

@@ -1,7 +1,4 @@
 export const likeThatMsg = async (data: any) => {
-	const LIKE = document.getElementById(`LIKE?${data._id}`)
-	const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
-
 	const res = await fetch('/api/likeMessage', {
 		method: 'POST',
 		headers: {
@@ -11,30 +8,29 @@ export const likeThatMsg = async (data: any) => {
 	})
 
 	const response = await res.json()
-	if (response.isLiked === true) {
-		if (LIKE) {
+	const LIKE = document.getElementById(`LIKE?${data._id}`)
+	if (LIKE) {
+		if (response.isLiked === true) {
 			LIKE.innerText = "love'd"
-		}
-	} else if (response.isLiked === false) {
-		if (LIKE) {
+		} else if (response.isLiked === false) {
 			LIKE.innerText = 'love'
 		}
 	}
+
+	const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
 	if (LIKE_NO) {
 		LIKE_NO.innerText = likesabove10k(response.likes).toString()
 	}
-	const TOPLIKE = document.getElementById(`TopLike?${data._id}`)
-	const TOPLIKE_NO = document.getElementById(`TopLike_No?${data._id}`)
 
-	if (response.isLiked === true) {
-		if (TOPLIKE) {
+	const TOPLIKE = document.getElementById(`TopLike?${data._id}`)
+	if (TOPLIKE) {
+		if (response.isLiked === true) {
 			TOPLIKE.innerText = "love'd"
-		}
-	} else if (response.isLiked === false) {
-		if (TOPLIKE) {
+		} else if (response.isLiked === false) {
 			TOPLIKE.innerText = 'love'
 		}
 	}
+	const TOPLIKE_NO = document.getElementById(`TopLike_No?${data._id}`)
 	if (TOPLIKE_NO) {
 		TOPLIKE_NO.innerText = likesabove10k(response.likes).toString()
 	}
@@ -43,33 +39,6 @@ export const likeThatMsg = async (data: any) => {
 		alert(response.message)
 	}
 }
-
-// export const likeTopMessage = async (data: any) => {
-// 	const TOPLIKE = document.getElementById(`TopLike?${data._id}`)
-// 	const TOPLIKE_NO = document.getElementById(`TopLike_No?${data._id}`)
-// 	if (TOPLIKE && TOPLIKE_NO) {
-// 		const res = await fetch('/api/likeMessage', {
-// 			method: 'POST',
-// 			headers: {
-// 				'Content-Type': 'application/json',
-// 			},
-// 			body: JSON.stringify({ username_id: data.$userName_id, messageId: data._id, $userGroup_id: data.$userGroup_id }),
-// 		})
-
-// 		const response = await res.json()
-// 		if (response.isLiked === true) {
-// 			TOPLIKE.innerText = "love'd"
-// 		} else if (response.isLiked === false) {
-// 			TOPLIKE.innerText = 'love'
-// 		}
-// 		TOPLIKE_NO.innerText = likesabove10k(response.likes).toString()
-// 		if (!res.ok) {
-// 			alert(response.message)
-// 		}
-// 	} else if (!TOPLIKE || !TOPLIKE_NO) {
-// 		return
-// 	}
-// }
 
 export const likesabove10k = (likes: any) => {
 	if (likes > 1000000) {
@@ -84,13 +53,10 @@ export const likesabove10k = (likes: any) => {
 }
 
 export const incrementLikes = (data: any) => {
-	//put in await function
 	const likes = data.likes
-	// console.log('data', data)
 
 	const awaitTOPLIKENO = () => {
 		const TOPLIKE_NO = document.getElementById(`TopLike_No?${data._id}`)
-		// console.log('TOPLIKE_NO', TOPLIKE_NO)
 		if (!TOPLIKE_NO) {
 			return
 		} else {
@@ -104,7 +70,6 @@ export const incrementLikes = (data: any) => {
 
 	const awaitLIKENO = () => {
 		const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
-		// console.log('LIKE_NO', LIKE_NO)
 		if (!LIKE_NO) {
 			return
 		} else {
@@ -118,26 +83,3 @@ export const incrementLikes = (data: any) => {
 
 	return awaitTOPLIKENO(), awaitLIKENO()
 }
-
-// export const incrementTopLikes = async (data: any) => {
-// 	const TOPLIKE_NO = document.getElementById(`TopLike_No?${data._id}`)
-// 	if (!TOPLIKE_NO) {
-// 		return
-// 	}
-// 	const likes = data.likes
-// 	if (likes === null) {
-// 		TOPLIKE_NO.innerText = '0'
-// 	} else {
-// 		TOPLIKE_NO.innerText = likesabove10k(likes)
-// 	}
-
-// 	const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
-// 	if (!LIKE_NO) {
-// 		return
-// 	}
-// 	if (likes === null) {
-// 		LIKE_NO.innerText = '0'
-// 	} else {
-// 		LIKE_NO.innerText = likesabove10k(likes)
-// 	}
-// }
