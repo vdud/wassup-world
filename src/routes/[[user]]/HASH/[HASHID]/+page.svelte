@@ -121,7 +121,7 @@
 				</div>
 			{/if}
 		{/each}
-		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1; margin-top:0' : 'scale: 0;margin-top:0;margin-bottom:-100px; opacity:0;'}><div class="infoData"><h1 class="comingSoon">Working on the mechanics to make it the best social-app every designed/engineered.</h1></div></div>
+		<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1; margin-top:0' : 'scale: 0;margin-top:0;margin-bottom:-100px; opacity:0;'}><div class="infoData"><h1 class="comingSoon">Working on the mechanics to make it the best social-app ever designed/engineered.</h1></div></div>
 		<!-- Header for top Likes -->
 		{#if JSON.parse(data.body.topLikes).length > 0}
 			<div>
