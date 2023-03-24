@@ -250,6 +250,7 @@ body {
 	font-size: calc(var(--fontSize) * 0.7);
 	padding: 0.2rem 0.6rem;
 	border-radius: calc(var(--borderRadius) / 3);
+	font-family: UBold;
 }
 .timeSpanRight {
 	left: 0;

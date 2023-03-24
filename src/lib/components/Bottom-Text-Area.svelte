@@ -9,6 +9,7 @@
 	import sendButtonLogo from '$lib/assets/sendButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { timeSince } from '$lib/bigFunctions/timeFormat'
+	import { messageId } from '$lib/stores/messageId'
 	// import { timeSince } from '$lib/timeFormat'
 
 	function handleKeyDown(event: KeyboardEvent) {
@@ -24,22 +25,44 @@
 		const groupId = $userGroup_id
 
 		$user_message = ''
-		if (message === '') {
-			return
+
+		if ($currentPage !== 'REPLIES') {
+			if (message === '') {
+				return
+			} else {
+				applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
+
+				const res = await fetch('/api/textAreaMessages', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+
+					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
+				})
+
+				const response = await res.json()
+				if (!res.ok) {
+					alert(response.message)
+				}
+			}
 		} else {
-			applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
-
-			const res = await fetch('/api/textAreaMessages', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
-			})
-
-			const response = await res.json()
-			if (!res.ok) {
-				alert(response.message)
+			if (message === '' && $messageId !== '') {
+				return
+			} else {
+				// applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
+				const res = await fetch('/api/replyMessages', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id, $messageId }),
+				})
+				const response = await res.json()
+				console.log('response', response)
+				if (!res.ok) {
+					alert(response.message)
+				}
 			}
 		}
 	}

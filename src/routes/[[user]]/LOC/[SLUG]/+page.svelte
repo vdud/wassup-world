@@ -112,7 +112,7 @@
 							<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
 							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
 							<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
-							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
+							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 						</span>
 					</p>
 				</div>
@@ -122,7 +122,7 @@
 						<span style="color:var(--secondary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
-							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
+							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 							<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 							<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
 							<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
@@ -150,7 +150,7 @@
 								<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
 								<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
 								<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
-								<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
+								<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 							</span>
 						</p>
 					</div>
@@ -160,7 +160,7 @@
 							<span style="color:var(--secondary)">{sender}; </span>
 							<span class="pageMessage">{message}</span>
 							<span class="spanFlexRight">
-								<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
+								<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 								<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 								<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
 								<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
