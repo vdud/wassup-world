@@ -252,6 +252,25 @@ body {
 	border-radius: calc(var(--borderRadius) / 3);
 	font-family: UBold;
 }
+
+.flexTime {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.totalRepliespText {
+	font-family: Imprima;
+	font-style: italic;
+	color: var(--tertiaryThemeInverted);
+	opacity: var(--dull);
+	text-shadow: none;
+
+	/* display: flex;
+	align-items: center;
+	justify-content: center; */
+}
+
 .timeSpanRight {
 	left: 0;
 	right: unset;
@@ -262,7 +281,7 @@ body {
 }
 .LikeSpan,
 .LikeSpan:active {
-	background-color: var(--tertiaryTheme);
+	/* background-color: var(--tertiaryTheme); */
 	overflow: visible;
 	/* width: 30px; */
 	text-align: center;
@@ -270,7 +289,7 @@ body {
 	transition: box-shadow 300ms ease-in-out, background-color 300ms ease-in-out;
 	/* margin-left: 10px; */
 	font-family: Imprima;
-	font-weight: 800;
+	/* font-weight: 800; */
 	color: var(--primary);
 }
 .LikeSpan:hover,
@@ -278,10 +297,16 @@ body {
 	background-color: var(--primaryTheme);
 	box-shadow: var(--boxInsetShadows);
 }
+
+.loved {
+	/* font-weight: 4000; */
+	/* font-family: UBold; */
+	font-style: italic;
+}
 .optDark {
 	color: var(--optDark);
 	opacity: var(--dull);
-	font-weight: 1000;
+	/* font-weight: 1000; */
 }
 .sender {
 	place-self: start;
@@ -498,7 +523,7 @@ textarea:focus {
 
 @media screen and (max-width: 768px) {
 	.text {
-		width: 75%;
+		width: 85%;
 	}
 }
 

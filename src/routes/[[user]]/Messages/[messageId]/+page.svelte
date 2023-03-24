@@ -14,34 +14,15 @@
 	export let data: PageData
 	const pageData = JSON.parse(data.body.data)
 
-	// console.log('data', JSON.parse(data.body.data))
-
 	onMount(() => {
 		$isFlex = false
 		$currentPage = 'REPLIES'
-		$userGroup_id = pageData.groupId
+		$userGroup_id = pageData.group_id
 		$messageId = pageData._id
+		console.log('$serGroup_id', $userGroup_id)
 
 		pusher.subscribe($messageId)
-		// .bind('injectMessage', (data: any) => {
-		// 	if (data.sender === $userName) {
-		// 		// 	applyMessageYoMe({ sender: $userName, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id })
-		// 		const isYoMe = true
-		// 		// applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id }, isYoMe)
-		// 	} else {
-		// 		const isYoMe = false
-		// 		// applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id }, isYoMe)
-		// 		// applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' })
-		// 		// 	applyMessageLeft({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id })
-		// 	}
-		// })
-		// .bind('injectLike', (data: any) => {
-		// 	if (data.sender === $userName) {
-		// 		return
-		// 	} else {
-		// 		incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes })
-		// 	}
-		// })
+		pusher.subscribe($userGroup_id)
 	})
 
 	const like = () => {
@@ -59,12 +40,12 @@
 
 <div class="body">
 	<div class="replyMainMsg">
-		<div class="flexBod">
+		<div class="flexBod paddingBottom">
 			<p class="mainMessage" style={pageData.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{pageData.sender}; </span> <span class="message">{pageData.message}</span></p>
 			<span class="bottomButtons">
 				<button on:click={like}><span id="LIKE?{pageData._id}" class="timeSpan LikeSpan">{pageData.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
-				<span class="timeSpan" style="margin-left: 10px;">{timeSince(pageData.createdAt)}</span>
-				<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(pageData.totalReplies)} Replies</span></p></button>
+				<span class="timeSpan flexTime" style="margin-left: 10px;">{timeSince(pageData.createdAt)}</span>
+				<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(pageData.totalReplies)} replies</span></p></button>
 				<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{pageData._id}">{likesabove10k(pageData.likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 			</span>
 		</div>
@@ -74,18 +55,24 @@
 			<div class="flexBodHeader">
 				<p class="h1Text">REPLIES</p>
 			</div>
-			{#each pageData.replies as reply}
-				<div class="flexReplyBod flexBod">
-					<p class="mainMessage">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat quo tenetur nesciunt at culpa voluptates voluptas est recusandae! Dignissimos nihil soluta mollitia quo repellat, illo magni perspiciatis aut nobis eveniet?</p>
-					<span class="bottomButtons">
-						<button on:click={like}><span id="LIKE?{reply._id}" class="timeSpan LikeSpan">{reply.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
-						<span class="timeSpan" style="margin-left: 10px;">{timeSince(reply.createdAt)}</span>
-						<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(reply.totalReplies)} Replies</span></p></button>
-						<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{reply._id}">{likesabove10k(reply.likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
-						<button on:click={goTo.bind(globalThis, reply._id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
-					</span>
+			{#if pageData.replies.length === 0}
+				<div class="flexBod flexReplyBod" id="removeBeforeSending">
+					<p class="mainMessage">No replies yet</p>
 				</div>
-			{/each}
+			{:else}
+				{#each pageData.replies as reply}
+					<div class="flexBod flexReplyBod paddingBottom">
+						<p class="mainMessage">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat quo tenetur nesciunt at culpa voluptates voluptas est recusandae! Dignissimos nihil soluta mollitia quo repellat, illo magni perspiciatis aut nobis eveniet?</p>
+						<span class="bottomButtons flexTime">
+							<button on:click={like}><span id="LIKE?{reply._id}" class="timeSpan LikeSpan">{reply.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+							<span class="timeSpan flexTime" style="margin-left: 10px;">{timeSince(reply.createdAt)}</span>
+							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(reply.totalReplies)} replies</span></p></button>
+							<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{reply._id}">{likesabove10k(reply.likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button on:click={goTo.bind(globalThis, reply._id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+						</span>
+					</div>
+				{/each}
+			{/if}
 		</div>
 	</div>
 
@@ -97,7 +84,7 @@
 		font-family: UBold;
 		color: var(--tertiaryThemeInverted);
 		text-align: center;
-		margin-bottom: 40px;
+		/* margin-bottom: 40px; */
 	}
 	.bottomTextSpace {
 		height: 45px;
@@ -132,13 +119,15 @@
 		margin: var(--averageMargin) calc(var(--averageMargin) * 3);
 		padding: calc(var(--averageMargin) * 3);
 
-		padding-bottom: calc(var(--averageMargin) * 9);
 		position: relative;
+		overflow: hidden;
 
 		/* background-image: linear-gradient(var(--secondaryTheme), var(--primaryTheme)); */
 		/* background-image: linear-gradient(var(--primaryTheme), var(--secondaryTheme)); */
 	}
-
+	.paddingBottom {
+		padding-bottom: calc(var(--averageMargin) * 9);
+	}
 	.flexReplyBod {
 		background-color: var(--primaryTheme);
 
@@ -154,8 +143,10 @@
 	}
 	.bottomButtons {
 		position: absolute;
-		width: max-content;
+		width: 100%;
 		bottom: calc(var(--averageMargin) * 3);
 		left: calc(var(--averageMargin) * 3);
+
+		display: flex;
 	}
 </style>

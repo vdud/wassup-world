@@ -28,6 +28,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	//time span
 	const timeSpan = document.createElement('span')
 	timeSpan.classList.add('timeSpan')
+	timeSpan.classList.add('flexTime')
 	timeSpan.innerText = timeSince(data.createdAt)
 	timeSpan.style.margin = '0 10px'
 	timeSpan.classList.add('timeSpanLeft')
@@ -61,22 +62,64 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	span6.classList.add('timeSpan')
 	span6.classList.add('LikeSpan')
 	span6.innerText = 'love'
+	span6.classList.add('loved')
 	loveButton.append(span6)
-
+	//
 	loveButton.onclick = () => {
 		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
 	}
 
+	//Got to reply button
+	const goToReplyButton = document.createElement('button')
+	goToReplyButton.classList.add('timeSpan')
+	goToReplyButton.classList.add('LikeSpan')
+	goToReplyButton.onclick = () => {
+		window.location.pathname = '/Messages/' + data.messageId
+	}
+	const totalRepliespText = document.createElement('p')
+	totalRepliespText.classList.add('totalRepliespText')
+	const span4 = document.createElement('span')
+	span4.innerText = 'REPLY'
+	span4.style.fontFamily = 'UBold'
+	span4.style.marginRight = '5px'
+	const span7 = document.createElement('span')
+	const i2 = document.createElement('i')
+	i2.classList.add('fa')
+	i2.classList.add('fa-square-up-right')
+	span7.append(i2)
+	totalRepliespText.append(span4)
+	totalRepliespText.append(span7)
+	goToReplyButton.append(totalRepliespText)
+
+	//total replies span
+	const buttonTotalReplies = document.createElement('button')
+	buttonTotalReplies.classList.add('timeSpan')
+	const totalRepliespText2 = document.createElement('p')
+	totalRepliespText2.classList.add('totalRepliespText')
+	const span8 = document.createElement('span')
+	span8.innerText = `${likesabove10k(0)} replies`
+	totalRepliespText2.append(span8)
+	buttonTotalReplies.append(totalRepliespText2)
+
+	//append to spans3
 	timeSpan.style.margin = '0 10px'
 	if (isYoMe) {
+		span3.append(goToReplyButton)
 		span3.append(likeNumberButton)
+		span3.append(buttonTotalReplies)
 		span3.append(timeSpan)
 		span3.append(loveButton)
+
+		buttonTotalReplies.style.marginLeft = '10px'
 		likeNumberButton.style.marginLeft = '10px'
 	} else if (!isYoMe) {
 		span3.append(loveButton)
 		span3.append(timeSpan)
+		span3.append(buttonTotalReplies)
 		span3.append(likeNumberButton)
+		span3.append(goToReplyButton)
+
+		buttonTotalReplies.style.marginRight = '10px'
 		likeNumberButton.style.marginRight = '10px'
 	}
 
@@ -87,6 +130,11 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 
 	textMessages.appendChild(div)
 }
+
+// <button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+// <button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+// <span class="timeSpan flexTime" style="margin-right: 10px;">{timeSince(createdAt)}</span>
+// <button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan loved">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 
 export const applyNavDataMessage = (data: any) => {
 	const groupLocBox = document.getElementById(`locBox?${data.groupId}`)

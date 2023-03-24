@@ -17,6 +17,7 @@ const pusher = new Pusher({
 export const POST = (async ({ request }) => {
 	// const data = await request.json()
 	const { messageId, username_id, $userGroup_id } = await request.json()
+	console.log('$userGroup_id', $userGroup_id)
 
 	const user = await mainUser.findOne({ _id: new ObjectId(username_id) })
 
