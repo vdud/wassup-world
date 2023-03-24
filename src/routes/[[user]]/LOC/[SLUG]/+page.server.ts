@@ -79,64 +79,124 @@ export const load = (async ({ params }) => {
 				}
 			}
 		}
-	}
-	const findGroup = await groups.findOne({ name: SLUG, nature: 'LOCATIONS' })
-	if (findGroup) {
-		const returnMsgData = await massagesCreate
-			.aggregate([
-				{ $match: { group_id: findGroup._id } },
-				{
-					$project: {
-						_id: 1,
-						message: 1,
-						createdAt: 1,
-						sender: 1,
-						likedPeople: 1,
-						likes: 1,
+	} else {
+		const findGroup = await groups.findOne({ name: SLUG, nature: 'LOCATIONS' })
+		if (findGroup) {
+			const returnMsgData = await massagesCreate
+				.aggregate([
+					{ $match: { group_id: findGroup._id } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
 
-						replies: 1,
-						isReply: 1,
-						totalReplies: 1,
+							replies: 1,
+							isReply: 1,
+							totalReplies: 1,
+						},
 					},
-				},
-			])
-			.sort({ createdAt: -1 })
-			.limit(100)
-			.toArray()
+				])
+				.sort({ createdAt: -1 })
+				.limit(100)
+				.toArray()
 
-		const topLikes = await massagesCreate
-			.aggregate([
-				{ $match: { group_id: findGroup._id } },
-				{
-					$project: {
-						_id: 1,
-						message: 1,
-						createdAt: 1,
-						sender: 1,
-						likedPeople: 1,
-						likes: 1,
+			const topLikes = await massagesCreate
+				.aggregate([
+					{ $match: { group_id: findGroup._id } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
 
-						replies: 1,
-						isReply: 1,
-						totalReplies: 1,
+							replies: 1,
+							isReply: 1,
+							totalReplies: 1,
+						},
 					},
-				},
-			])
-			.match({ likes: { $gt: 19 } })
-			.sort({ likes: 1 })
-			// sort by likes greater than 100
-			.limit(10)
-			.toArray()
+				])
+				.match({ likes: { $gt: 19 } })
+				.sort({ likes: 1 })
+				// sort by likes greater than 100
+				.limit(10)
+				.toArray()
 
-		return {
-			status: 200,
-			groupId: JSON.stringify(findGroup._id),
-			body: {
-				data: JSON.stringify(returnMsgData),
-				topLikes: JSON.stringify(topLikes),
-				groupName: findGroup.name,
-				createdAt: findGroup.createdAt,
-			},
+			return {
+				status: 200,
+				groupId: JSON.stringify(findGroup._id),
+				body: {
+					data: JSON.stringify(returnMsgData),
+					topLikes: JSON.stringify(topLikes),
+					groupName: findGroup.name,
+					createdAt: findGroup.createdAt,
+				},
+			}
+		}
+		const findGroupbyId = await groups.findOne({ _id: new ObjectId(SLUG) })
+		if (findGroupbyId) {
+			const returnMsgData = await massagesCreate
+				.aggregate([
+					{ $match: { group_id: findGroupbyId._id } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
+
+							replies: 1,
+							isReply: 1,
+							totalReplies: 1,
+						},
+					},
+				])
+				.sort({ createdAt: -1 })
+				.limit(100)
+				.toArray()
+
+			const topLikes = await massagesCreate
+				.aggregate([
+					{ $match: { group_id: findGroupbyId._id } },
+					{
+						$project: {
+							_id: 1,
+							message: 1,
+							createdAt: 1,
+							sender: 1,
+							likedPeople: 1,
+							likes: 1,
+
+							replies: 1,
+							isReply: 1,
+							totalReplies: 1,
+						},
+					},
+				])
+				.match({ likes: { $gt: 19 } })
+				.sort({ likes: 1 })
+				// sort by likes greater than 100
+				.limit(10)
+				.toArray()
+
+			return {
+				status: 200,
+				groupId: JSON.stringify(findGroupbyId._id),
+				body: {
+					data: JSON.stringify(returnMsgData),
+					topLikes: JSON.stringify(topLikes),
+					groupName: findGroupbyId.name,
+					createdAt: findGroupbyId.createdAt,
+				},
+			}
 		}
 	}
 }) as PageServerLoad

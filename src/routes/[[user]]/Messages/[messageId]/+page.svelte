@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { incrementLikes, likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
+	import { incrementLikes, incrementReplies, likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
 	import { pusher } from '$lib/bigFunctions/pusher'
 	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { currentPage } from '$lib/stores/currentPage'
@@ -10,23 +10,50 @@
 	import { onDestroy, onMount } from 'svelte'
 	import type { PageData } from './$types'
 	import { messageId } from '$lib/stores/messageId'
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 
 	export let data: PageData
-	const pageData = JSON.parse(data.body.data)
+
+	const messageData = JSON.parse(data.body.data)
+	const replyData = JSON.parse(data.body.replyData)
+
+	console.log('messageData', messageData)
+	console.log('replyData', replyData)
 
 	onMount(() => {
 		$isFlex = false
 		$currentPage = 'REPLIES'
-		$userGroup_id = pageData.group_id
-		$messageId = pageData._id
-		console.log('$serGroup_id', $userGroup_id)
+		$userGroup_id = messageData.group_id
+		$messageId = messageData._id
 
-		pusher.subscribe($messageId)
-		pusher.subscribe($userGroup_id)
+		console.log('$userGroup_id', $userGroup_id)
+
+		pusher.subscribe($messageId).bind('ReplyMessage', (data: any) => {
+			const replies = document.getElementById('replies')
+			const removeBeforeSending = document.getElementById('removeBeforeSending')
+
+			if (!replies) return console.log('error occured, please refresh the page')
+			if (removeBeforeSending) {
+				removeBeforeSending.remove()
+			}
+		})
+		pusher
+			.subscribe($userGroup_id)
+			.bind('injectLike', (data: any) => {
+				if (data.sender === $userName) {
+					return
+				} else {
+					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes })
+					// incrementTopLikes({ _id: data.messageId, $userName_id, likes: data.likes })
+				}
+			})
+			.bind('incrementReplies', (data: any) => {
+				incrementReplies({ _id: data.messageId, replies: data.totalReplies })
+			})
 	})
 
-	const like = () => {
-		likeThatMsg({ _id: pageData._id, $userName_id, $userGroup_id, likes: pageData.likes })
+	const like = (data: any) => {
+		likeThatMsg({ _id: data._id, $userName_id, $userGroup_id, likes: data.likes })
 	}
 
 	const goTo = (_id: any) => {
@@ -38,15 +65,15 @@
 	})
 </script>
 
-<div class="body">
+<div id="replyBody">
 	<div class="replyMainMsg">
 		<div class="flexBod paddingBottom">
-			<p class="mainMessage" style={pageData.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{pageData.sender}; </span> <span class="message">{pageData.message}</span></p>
+			<p class="mainMessage" style={messageData.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{messageData.sender}; </span> <span class="message">{messageData.message}</span></p>
 			<span class="bottomButtons">
-				<button on:click={like}><span id="LIKE?{pageData._id}" class="timeSpan LikeSpan">{pageData.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
-				<span class="timeSpan flexTime" style="margin-left: 10px;">{timeSince(pageData.createdAt)}</span>
-				<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(pageData.totalReplies)} replies</span></p></button>
-				<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{pageData._id}">{likesabove10k(pageData.likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+				<button on:click={like.bind(globalThis, { _id: messageData._id, likes: messageData.likes })}><span id="LIKE?{messageData._id}" class="timeSpan LikeSpan">{messageData.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+				<span class="timeSpan flexTime" style="margin-left: 10px;">{timeSince(messageData.createdAt)}</span>
+				<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{messageData._id}">{likesabove10k(messageData.totalReplies)} replies</span></p></button>
+				<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{messageData._id}">{likesabove10k(messageData.likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 			</span>
 		</div>
 	</div>
@@ -55,18 +82,18 @@
 			<div class="flexBodHeader">
 				<p class="h1Text">REPLIES</p>
 			</div>
-			{#if pageData.replies.length === 0}
+			{#if messageData.replies.length === 0}
 				<div class="flexBod flexReplyBod" id="removeBeforeSending">
 					<p class="mainMessage">No replies yet</p>
 				</div>
 			{:else}
-				{#each pageData.replies as reply}
+				{#each replyData as reply}
 					<div class="flexBod flexReplyBod paddingBottom">
-						<p class="mainMessage">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat quo tenetur nesciunt at culpa voluptates voluptas est recusandae! Dignissimos nihil soluta mollitia quo repellat, illo magni perspiciatis aut nobis eveniet?</p>
-						<span class="bottomButtons flexTime">
-							<button on:click={like}><span id="LIKE?{reply._id}" class="timeSpan LikeSpan">{reply.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+						<p class="mainMessage"><span class="sender" style="color: var(--primary)">{reply.sender}; </span><span class="message">{reply.message}</span></p>
+						<span class="bottomButtons">
+							<button on:click={like.bind(globalThis, { _id: reply._id, likes: reply.likes })}><span id="LIKE?{reply._id}" class="timeSpan LikeSpan">{reply.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 							<span class="timeSpan flexTime" style="margin-left: 10px;">{timeSince(reply.createdAt)}</span>
-							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(reply.totalReplies)} replies</span></p></button>
+							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{reply._id}">{likesabove10k(reply.totalReplies)} replies</span></p></button>
 							<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{reply._id}">{likesabove10k(reply.likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
 							<button on:click={goTo.bind(globalThis, reply._id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 						</span>
@@ -90,7 +117,7 @@
 		height: 45px;
 		width: 100%;
 	}
-	.body {
+	#replyBody {
 		height: 100%;
 		width: 100%;
 
@@ -112,12 +139,12 @@
 	}
 	.flexBod {
 		background-color: var(--secondaryTheme);
-		border-radius: calc(var(--borderRadius) / 1.3);
+		border-radius: 6px;
 		border: 0.3px solid var(--secondaryThemeInverted);
 		box-shadow: var(--boxShadows);
 
-		margin: var(--averageMargin) calc(var(--averageMargin) * 3);
-		padding: calc(var(--averageMargin) * 3);
+		margin: var(--averageMargin) calc(var(--averageMargin) * 1.3);
+		padding: calc(var(--averageMargin) * 1.3);
 
 		position: relative;
 		overflow: hidden;
@@ -126,7 +153,7 @@
 		/* background-image: linear-gradient(var(--primaryTheme), var(--secondaryTheme)); */
 	}
 	.paddingBottom {
-		padding-bottom: calc(var(--averageMargin) * 9);
+		padding-bottom: calc(var(--averageMargin) * 5);
 	}
 	.flexReplyBod {
 		background-color: var(--primaryTheme);
@@ -144,8 +171,8 @@
 	.bottomButtons {
 		position: absolute;
 		width: 100%;
-		bottom: calc(var(--averageMargin) * 3);
-		left: calc(var(--averageMargin) * 3);
+		bottom: calc(var(--averageMargin) * 1.3);
+		left: calc(var(--averageMargin) * 1.3);
 
 		display: flex;
 	}

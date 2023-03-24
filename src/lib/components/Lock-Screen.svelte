@@ -64,6 +64,7 @@
 			const response = await res.json()
 			if (res.ok) {
 				$loginResponseData = response
+				console.log('$loginResponseData', response)
 				$userName_id = response.userName_id
 				pusher.subscribe($userName_id).bind('newPubMessage', (data: any) => {
 					applyNewMessage({ groupName: data.groupName, sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })

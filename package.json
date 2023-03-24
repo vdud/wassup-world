@@ -37,7 +37,7 @@
 		"eslint": "^8.36.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte3": "^4.0.0",
-		"prettier": "^2.8.6",
+		"prettier": "^2.8.7",
 		"prettier-plugin-svelte": "^2.10.0",
 		"publint": "^0.1.11",
 		"svelte": "^3.57.0",
@@ -53,7 +53,7 @@
 	"dependencies": {
 		"mongodb": "^5.1.0",
 		"pusher": "^5.1.2",
-		"pusher-js": "^8.0.1",
+		"pusher-js": "^8.0.2",
 		"svelte-textarea-autoresize": "^1.0.0"
 	}
 }

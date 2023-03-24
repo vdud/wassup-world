@@ -82,3 +82,14 @@ export const incrementLikes = (data: any) => {
 
 	return awaitTOPLIKENO(), awaitLIKENO()
 }
+
+export const incrementReplies = (data: any) => {
+	const NormalReply = document.getElementById('Replies_No?' + data._id)
+	if (NormalReply) {
+		NormalReply.innerHTML = likesabove10k(data.replies) + ' replies'
+	}
+	const topReply = document.getElementById('topReplies_No?' + data._id)
+	if (topReply) {
+		topReply.innerHTML = likesabove10k(data.replies) + ' replies'
+	}
+}

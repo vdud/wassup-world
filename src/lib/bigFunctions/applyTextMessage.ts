@@ -64,7 +64,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	span6.innerText = 'love'
 	span6.classList.add('loved')
 	loveButton.append(span6)
-	//
+
 	loveButton.onclick = () => {
 		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
 	}
@@ -131,11 +131,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	textMessages.appendChild(div)
 }
 
-// <button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
-// <button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
-// <span class="timeSpan flexTime" style="margin-right: 10px;">{timeSince(createdAt)}</span>
-// <button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan loved">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
-
+//NAV-BAR Messages
 export const applyNavDataMessage = (data: any) => {
 	const groupLocBox = document.getElementById(`locBox?${data.groupId}`)
 	const senderWho = document.getElementById(`SENDER?${data.groupId}`)
@@ -174,7 +170,7 @@ export const applyNavDataMessage = (data: any) => {
 	latestMessageTime.innerText = timeSince(data.createdAt)
 }
 
-// apply new message to the PUB chat
+// apply new message to the PUB chat //NAV-BAR
 export const applyNewMessage = (data: any) => {
 	const PUB = document.getElementById('PUB')
 

@@ -9,22 +9,27 @@ export const load = (async ({ params }) => {
 	// if (!params.user) {
 	const findMessage = await massagesCreate.findOne({ _id: new ObjectId(params.messageId) })
 
-	if (findMessage) {
-		console.log('findMesage', findMessage)
-		findMessage.replies
-		return {
-			status: 200,
-			body: {
-				data: JSON.stringify(findMessage),
-			},
-		}
-	}
-	// }
+	const returnRepliesData = await massagesCreate
+		.find({ replyTo: new ObjectId(params.messageId) })
+		// .sort({ createdAt: -1 })
+		.sort({ likes: -1 })
+		.toArray()
 
+	//sort by likes
+
+	//aggregate
+	if (!findMessage || !returnRepliesData) {
+		return
+	}
+	console.log('returnMsgReplyData', returnRepliesData)
+	console.log('findMesage', findMessage)
 	return {
 		status: 200,
 		body: {
-			data: JSON.stringify(params),
+			data: JSON.stringify(findMessage),
+			replyData: JSON.stringify(returnRepliesData),
 		},
 	}
+
+	// }
 }) satisfies PageServerLoad
