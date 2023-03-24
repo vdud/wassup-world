@@ -33,6 +33,10 @@ export const load = (async ({ params }) => {
 									sender: 1,
 									likedPeople: 1,
 									likes: 1,
+
+									replies: 1,
+									isReply: 1,
+									totalReplies: 1,
 								},
 							},
 						])
@@ -51,6 +55,10 @@ export const load = (async ({ params }) => {
 									sender: 1,
 									likedPeople: 1,
 									likes: 1,
+
+									replies: 1,
+									isReply: 1,
+									totalReplies: 1,
 								},
 							},
 						])
@@ -87,6 +95,10 @@ export const load = (async ({ params }) => {
 						sender: 1,
 						likedPeople: 1,
 						likes: 1,
+
+						replies: 1,
+						isReply: 1,
+						totalReplies: 1,
 					},
 				},
 			])
@@ -105,6 +117,10 @@ export const load = (async ({ params }) => {
 						sender: 1,
 						likedPeople: 1,
 						likes: 1,
+
+						replies: 1,
+						isReply: 1,
+						totalReplies: 1,
 					},
 				},
 			])

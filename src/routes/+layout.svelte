@@ -117,7 +117,7 @@
 				<slot />
 				<!-- <div class="containerBottomTextArea"><BottomTextArea /></div> -->
 			</div>
-			<div class="windowContainers container3" style={$currentPage === '' ? 'opacity:0;' : ''}><BottomTextArea /></div>
+			<div class="windowContainers container3" style={$currentPage === '' ? 'display:none;' : ''}><BottomTextArea /></div>
 		</div>
 	</div>
 </div>

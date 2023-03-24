@@ -72,6 +72,11 @@
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
 	}
+
+	const goTo = (_id: any) => {
+		window.location.pathname = '/Messages/' + _id
+	}
+
 	// const likeTop = ({ _id, likes }: any) => {
 	// 	likeTopMessage({ _id, $userName_id, likes, $userGroup_id })
 	// }
@@ -93,7 +98,7 @@
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		{#each JSON.parse(data.body.data) as { sender, message, createdAt, _id, likedPeople, likes }}
+		{#each JSON.parse(data.body.data) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}
 			{#if sender !== $userName}
 				<div class="text sender">
 					<p class="textShadows">
@@ -102,12 +107,9 @@
 						<span class="spanFlexLeft">
 							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 							<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
-							<!-- {#if likes > 0} -->
-							<button class="timeSpan" style="margin-left: 10px;">
-								<span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span>
-								<i class="fa-solid fa-heart optDark" style="margin:3px;" />
-							</button>
-							<!-- {/if} -->
+							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
+							<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
 						</span>
 					</p>
 				</div>
@@ -117,7 +119,9 @@
 						<span style="color:var(--secondary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
+							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
 							<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
 							<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
 							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 						</span>
@@ -133,7 +137,7 @@
 					<span class="topLikesHeaderSpan">TOP-LIKES</span>
 				</h1>
 			</div>
-			{#each JSON.parse(data.body.topLikes) as { sender, message, createdAt, _id, likedPeople, likes }}
+			{#each JSON.parse(data.body.topLikes) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}
 				{#if sender !== $userName}
 					<div class="text sender">
 						<p class="textShadows">
@@ -142,12 +146,9 @@
 							<span class="spanFlexLeft">
 								<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 								<span class="timeSpan" style="margin-left: 10px;">{timeSince(createdAt)}</span>
-								<!-- {#if likes > 0} -->
-								<button class="timeSpan" style="margin-left: 10px;">
-									<span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span>
-									<i class="fa-solid fa-heart optDark" style="margin:3px;" />
-								</button>
-								<!-- {/if} -->
+								<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
+								<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+								<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
 							</span>
 						</p>
 					</div>
@@ -157,7 +158,9 @@
 							<span style="color:var(--secondary)">{sender}; </span>
 							<span class="pageMessage">{message}</span>
 							<span class="spanFlexRight">
+								<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText" style="color:var(--secondary)"><span style="font-family:UBold; margin-right: 5px">Go To</span><span><i class="fa fa-square-up-right" /></span></p></button>
 								<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+								<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span>{likesabove10k(totalReplies)} Replies</span></p></button>
 								<span class="timeSpan" style="margin-right: 10px;">{timeSince(createdAt)}</span>
 								<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
 							</span>
