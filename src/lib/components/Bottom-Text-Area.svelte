@@ -50,6 +50,8 @@
 			if (message === '' && $messageId !== '') {
 				return
 			} else {
+				console.log('message', message)
+				console.log('message', message)
 				// applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
 				const res = await fetch('/api/replyMessages', {
 					method: 'POST',
@@ -60,13 +62,16 @@
 				})
 				const response = await res.json()
 
-				const replyBody = document.getElementById('replyBody')
-				if (replyBody) {
-					replyBody.scrollTop = replyBody.scrollHeight
-				}
-
+				console.log('response', response)
 				if (!res.ok) {
 					alert(response.message)
+				}
+
+				const replyBody = document.getElementById('middleScroll')
+				if (replyBody) {
+					setTimeout(() => {
+						replyBody.scrollTop = replyBody.scrollHeight
+					}, 100)
 				}
 			}
 		}
@@ -75,7 +80,7 @@
 
 <div class="textAreeaBox">
 	<button class="button" on:click={socketWorker} style="{$currentPage === 'PUBLIC' ? 'background-color:var(--secondary)' : ''}{$currentPage === 'HASHTAGS' ? 'background-color:var(--primary)' : ''}{$currentPage === 'LOCATIONS' ? 'background-color:var(--secOptDark)' : ''}{$currentPage === 'REPLIES' ? 'background-color:var(--secOptLight)' : ''}"><img class="sendButtonLogo" src={sendButtonLogo} alt="sendbutton" /></button>
-	<textarea use:autoresize class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type your message..." />
+	<textarea use:autoresize id="textAreaId" class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type your message..." />
 </div>
 
 <style>

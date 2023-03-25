@@ -152,15 +152,16 @@
 		/* font-size: 0rem; */
 		text-align: center;
 		/* margin-left: 6rem; */
-		background-color: var(--secondaryTheme);
+		background-color: var(--optDark);
 
 		/* color: var(--primaryThemeInverted); */
 		/* opacity: var(--dull); */
 
 		padding: 0.2rem 1rem;
 		/* box-shadow: var(--boxInsetShadows); */
-		box-shadow: var(--boxShadows);
-		border-radius: var(--borderRadius);
+		/* box-shadow: var(--boxShadows); */
+		border-radius: calc(var(--borderRadius) * 2);
+		border: 4px solid var(--white);
 	}
 	.topHeaderRight {
 		position: relative;

@@ -17,12 +17,6 @@ export const load = (async ({ params }) => {
 
 	//sort by likes
 
-	//aggregate
-	if (!findMessage || !returnRepliesData) {
-		return
-	}
-	console.log('returnMsgReplyData', returnRepliesData)
-	console.log('findMesage', findMessage)
 	return {
 		status: 200,
 		body: {
@@ -30,6 +24,4 @@ export const load = (async ({ params }) => {
 			replyData: JSON.stringify(returnRepliesData),
 		},
 	}
-
-	// }
 }) satisfies PageServerLoad

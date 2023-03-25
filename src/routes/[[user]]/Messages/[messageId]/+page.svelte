@@ -11,12 +11,14 @@
 	import type { PageData } from './$types'
 	import { messageId } from '$lib/stores/messageId'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
+	import { isShowInfo } from '$lib/stores/isShowInfo'
 
 	export let data: PageData
 
 	const messageData = JSON.parse(data.body.data)
 	const replyData = JSON.parse(data.body.replyData)
 	const isReply = messageData.isReply
+	$: console.log('$messageId', $messageId)
 
 	const goBack = () => {
 		window.location.pathname = '/Messages/' + messageData.replyTo
@@ -25,13 +27,17 @@
 		window.location.pathname = '/' + messageData.group_id
 	}
 
-	console.log('messageData', messageData)
-	console.log('replyData', replyData)
+	const focusOnTextArea = () => {
+		const textAreaId = document.getElementById('textAreaId')
+		if (textAreaId) textAreaId.focus()
+	}
 
 	onMount(() => {
 		$isFlex = false
 		$currentPage = 'REPLIES'
 		$userGroup_id = messageData.group_id
+		$messageId = messageData.group_id
+		$currentPageHeaderData = messageData.sender + '; ' + messageData.message.slice(0, 20) + '...'
 		$messageId = messageData._id
 
 		console.log('$userGroup_id', $userGroup_id)
@@ -92,6 +98,7 @@
 				const FA_SOLIDi = document.createElement('i')
 				FA_SOLIDi.classList.add('fa-regular', 'fa-heart', 'optDark')
 				FA_SOLIDi.style.margin = '3px'
+				FA_SOLIDi.id = 'FA_SOLID?' + data._id
 
 				likeButton.appendChild(optDark)
 				likeButton.appendChild(FA_SOLIDi)
@@ -155,7 +162,7 @@
 	})
 </script>
 
-<div id="replyBody">
+<div id="middleScroll">
 	{#if isReply === true}
 		<!-- go back to previous message -->
 		<div class="goBackDiv">
@@ -168,10 +175,11 @@
 		<div class="goBackDiv">
 			<button class="goBack" on:click={goBackHome}>
 				<i class="fa fa-arrow-left" />
-				<p style="text-shadow:none;">GO BACK</p>
+				<p class="UBold">GO BACK</p>
 			</button>
 		</div>
 	{/if}
+
 	<div class="replyMainMsg">
 		<div class="flexBod paddingBottom">
 			<p class="mainMessage" style={messageData.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{messageData.sender}; </span> <span class="message">{messageData.message}</span></p>
@@ -182,6 +190,8 @@
 			</span>
 		</div>
 	</div>
+	<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-6rem; opacity:0;'}><div class="infoData"><h1 class="comingSoon">Working on the mechanics to make it the best social-app ever designed/engineered.</h1></div></div>
+
 	<div class="allReplies">
 		<div class="flexBod" id="replies">
 			<div class="flexBodHeader">
@@ -189,7 +199,10 @@
 			</div>
 			{#if messageData.replies.length === 0}
 				<div class="flexBod flexReplyBod" id="removeBeforeSending">
-					<p class="mainMessage">No replies yet</p>
+					<button on:click={focusOnTextArea} class="noReplyButton">
+						<p class="noMessage UBold">send-a-message</p>
+						<i class="fa fa-arrow-right noMessage" />
+					</button>
 				</div>
 			{:else}
 				{#each replyData as reply}
@@ -211,6 +224,34 @@
 </div>
 
 <style>
+	.UBold {
+		font-family: UBold;
+		text-shadow: none;
+	}
+	.noMessage {
+		width: max-content;
+		background-color: var(--tertiaryTheme);
+		box-shadow: var(--boxShadows);
+		padding: 0.5rem 1rem;
+		border-radius: var(--borderRadius);
+		color: var(--tertiaryThemeInverted);
+		margin-right: var(--averageMargin);
+
+		transition: all 0.2s ease-in-out;
+	}
+	.noMessage:hover,
+	.noMessage:active {
+		background-color: var(--tertiaryThemeInverted);
+		color: var(--tertiaryTheme);
+		box-shadow: var(--boxShadowsBlur);
+	}
+	.noReplyButton {
+		width: 100%;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		cursor: inherit;
+	}
 	.goBackDiv {
 		width: 100%;
 		height: 50px;
