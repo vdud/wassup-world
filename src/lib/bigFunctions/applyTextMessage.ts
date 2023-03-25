@@ -35,7 +35,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	//like span
 	const likeNumberButton = document.createElement('button')
 	likeNumberButton.classList.add('timeSpan')
-	likeNumberButton.classList.add('likeSPan')
+	likeNumberButton.classList.add('replyLikeButton')
 	likeNumberButton.onclick = () => {
 		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
 	}
@@ -80,6 +80,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	totalRepliespText.classList.add('totalRepliespText')
 	const span4 = document.createElement('span')
 	span4.innerText = 'REPLY'
+	totalRepliespText.classList.add('REPLY_TEXT')
 	span4.style.fontFamily = 'UBold'
 	span4.style.marginRight = '5px'
 	const span7 = document.createElement('span')

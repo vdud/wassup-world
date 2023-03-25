@@ -31,7 +31,7 @@
 
 		--primaryThemeInverted: #565656;
 		--secondaryThemeInverted: #fff;
-		--tertiaryThemeInverted: #797979bb;
+		--tertiaryThemeInverted: #797979;
 
 		/* --boxShadowsInverted: 0px 0px 8px #eee1, 0px 0px 1px #8e8e8e;
 		--boxShadowsBlurInverted: 0px 0px 25px #eee1, 0px 0px 8px #eee4;
@@ -260,15 +260,21 @@ body {
 }
 
 .totalRepliespText {
-	font-family: Imprima;
-	font-style: italic;
+	/* font-family: Imprima;
+	font-style: italic; */
 	color: var(--tertiaryThemeInverted);
 	opacity: var(--dull);
 	text-shadow: none;
 
+	font-family: UBold;
+
 	/* display: flex;
 	align-items: center;
 	justify-content: center; */
+}
+.REPLY_TEXT {
+	color: var(--secondaryThemeInverted);
+	opacity: 1;
 }
 
 .timeSpanRight {
@@ -286,16 +292,26 @@ body {
 	/* width: 30px; */
 	text-align: center;
 	/* box-shadow: var(--boxShadows); */
-	transition: box-shadow 300ms ease-in-out, background-color 300ms ease-in-out;
 	/* margin-left: 10px; */
 	font-family: Imprima;
 	/* font-weight: 800; */
 	color: var(--primary);
+	background-color: var(--tertiaryTheme);
+	box-shadow: var(--boxShadows);
 }
 .LikeSpan:hover,
 .LikeSpan::selection {
-	background-color: var(--primaryTheme);
 	box-shadow: var(--boxInsetShadows);
+	background-color: var(--tertiaryTheme);
+}
+.replyLikeButton {
+	background-color: var(--tertiaryTheme);
+	box-shadow: var(--boxShadows);
+}
+.replyLikeButton:hover,
+.replyLikeButton::selection {
+	box-shadow: var(--boxInsetShadows);
+	background-color: var(--tertiaryTheme);
 }
 
 .loved {
@@ -565,17 +581,15 @@ textarea:focus {
 .replyMainMsg {
 	/* width: 100%; */
 	height: auto;
-
-	margin-top: 113px;
 }
 .flexBod {
 	background-color: var(--secondaryTheme);
-	border-radius: calc(var(--borderRadius) / 1.3);
+	border-radius: 6px;
 	border: 0.3px solid var(--secondaryThemeInverted);
 	box-shadow: var(--boxShadows);
 
-	margin: var(--averageMargin) calc(var(--averageMargin) * 3);
-	padding: calc(var(--averageMargin) * 3);
+	margin: var(--averageMargin) calc(var(--averageMargin) * 1.3);
+	padding: calc(var(--averageMargin) * 1.3);
 
 	position: relative;
 	overflow: hidden;
@@ -584,7 +598,7 @@ textarea:focus {
 	/* background-image: linear-gradient(var(--primaryTheme), var(--secondaryTheme)); */
 }
 .paddingBottom {
-	padding-bottom: calc(var(--averageMargin) * 9);
+	padding-bottom: calc(var(--averageMargin) * 5);
 }
 .flexReplyBod {
 	background-color: var(--primaryTheme);
@@ -602,8 +616,8 @@ textarea:focus {
 .bottomButtons {
 	position: absolute;
 	width: 100%;
-	bottom: calc(var(--averageMargin) * 3);
-	left: calc(var(--averageMargin) * 3);
+	bottom: calc(var(--averageMargin) * 1.3);
+	left: calc(var(--averageMargin) * 1.3);
 
 	display: flex;
 }

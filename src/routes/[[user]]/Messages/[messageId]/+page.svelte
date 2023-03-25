@@ -16,6 +16,14 @@
 
 	const messageData = JSON.parse(data.body.data)
 	const replyData = JSON.parse(data.body.replyData)
+	const isReply = messageData.isReply
+
+	const goBack = () => {
+		window.location.pathname = '/Messages/' + messageData.replyTo
+	}
+	const goBackHome = () => {
+		window.location.pathname = '/' + messageData.group_id
+	}
 
 	console.log('messageData', messageData)
 	console.log('replyData', replyData)
@@ -32,9 +40,91 @@
 			const replies = document.getElementById('replies')
 			const removeBeforeSending = document.getElementById('removeBeforeSending')
 
-			if (!replies) return console.log('error occured, please refresh the page')
 			if (removeBeforeSending) {
 				removeBeforeSending.remove()
+			}
+			if (replies) {
+				const div = document.createElement('div')
+				div.classList.add('flexBod', 'flexReplyBod', 'paddingBottom')
+
+				const p = document.createElement('p')
+				p.classList.add('mainMessage')
+				const span = document.createElement('span')
+				span.classList.add('sender')
+				span.style.color = 'var(--primary)'
+				span.innerText = data.sender + '; '
+				const span2 = document.createElement('span')
+				span2.style.color = 'var(--tertiaryThemeInverted)'
+				span2.innerText = data.message
+
+				p.appendChild(span)
+				p.appendChild(span2)
+
+				const bottomButtons = document.createElement('span')
+				bottomButtons.classList.add('bottomButtons')
+
+				const timeSpan = document.createElement('span')
+				timeSpan.classList.add('timeSpan', 'flexTime')
+				timeSpan.innerText = timeSince(data.createdAt)
+
+				const totalRepliesButton = document.createElement('button')
+				totalRepliesButton.classList.add('timeSpan')
+				totalRepliesButton.style.marginLeft = '10px'
+				const totalRepliespText = document.createElement('p')
+				totalRepliespText.classList.add('totalRepliespText')
+				const totalRepliesSpan = document.createElement('span')
+				totalRepliesSpan.id = 'Replies_No?' + data._id
+				totalRepliesSpan.innerText = likesabove10k(data.totalReplies) + ' replies'
+
+				totalRepliespText.appendChild(totalRepliesSpan)
+				totalRepliesButton.appendChild(totalRepliespText)
+
+				const likeButton = document.createElement('button')
+				likeButton.classList.add('timeSpan', 'replyLikeButton')
+				likeButton.style.marginLeft = '10px'
+				likeButton.onclick = () => {
+					like({ _id: data._id, likes: data.likes })
+				}
+				const optDark = document.createElement('span')
+				optDark.classList.add('optDark')
+				optDark.id = 'LIKE_NO?' + data._id
+				optDark.innerText = '0'
+				const FA_SOLIDi = document.createElement('i')
+				FA_SOLIDi.classList.add('fa-regular', 'fa-heart', 'optDark')
+				FA_SOLIDi.style.margin = '3px'
+
+				likeButton.appendChild(optDark)
+				likeButton.appendChild(FA_SOLIDi)
+
+				const goToButton = document.createElement('button')
+				goToButton.classList.add('timeSpan', 'LikeSpan')
+				goToButton.style.marginLeft = '10px'
+				goToButton.onclick = () => {
+					window.location.pathname = '/Messages/' + data._id
+				}
+				const goToText = document.createElement('p')
+				goToText.classList.add('totalRepliespText', 'REPLY_TEXT')
+				const REPLYSPAN = document.createElement('span')
+				REPLYSPAN.innerText = 'REPLY'
+				REPLYSPAN.style.marginRight = '5px'
+				const FA_SQ_U_R = document.createElement('i')
+				FA_SQ_U_R.classList.add('fa', 'fa-square-up-right')
+
+				goToText.appendChild(REPLYSPAN)
+				goToText.appendChild(FA_SQ_U_R)
+
+				goToButton.appendChild(goToText)
+
+				bottomButtons.appendChild(timeSpan)
+				bottomButtons.appendChild(totalRepliesButton)
+				bottomButtons.appendChild(likeButton)
+				bottomButtons.appendChild(goToButton)
+
+				//append all
+
+				div.appendChild(p)
+				div.appendChild(bottomButtons)
+				replies.appendChild(div)
 			}
 		})
 		pusher
@@ -66,14 +156,29 @@
 </script>
 
 <div id="replyBody">
+	{#if isReply === true}
+		<!-- go back to previous message -->
+		<div class="goBackDiv">
+			<button class="goBack" on:click={goBack}>
+				<i class="fa fa-arrow-left" />
+				<p style="text-shadow:none;">GO BACK</p>
+			</button>
+		</div>
+	{:else}
+		<div class="goBackDiv">
+			<button class="goBack" on:click={goBackHome}>
+				<i class="fa fa-arrow-left" />
+				<p style="text-shadow:none;">GO BACK</p>
+			</button>
+		</div>
+	{/if}
 	<div class="replyMainMsg">
 		<div class="flexBod paddingBottom">
 			<p class="mainMessage" style={messageData.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{messageData.sender}; </span> <span class="message">{messageData.message}</span></p>
 			<span class="bottomButtons">
-				<!-- <button><span class="timeSpan LikeSpan">{messageData.likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button> -->
 				<span class="timeSpan flexTime">{timeSince(messageData.createdAt)}</span>
 				<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{messageData._id}">{likesabove10k(messageData.totalReplies)} replies</span></p></button>
-				<button on:click={like.bind(globalThis, { _id: messageData._id, likes: messageData.likes })} class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{messageData._id}">{likesabove10k(messageData.likes)}</span><i id="FA_SOLID?{messageData._id}" class="{messageData.likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
+				<button on:click={like.bind(globalThis, { _id: messageData._id, likes: messageData.likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{messageData._id}">{likesabove10k(messageData.likes)}</span><i id="FA_SOLID?{messageData._id}" class="{messageData.likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
 			</span>
 		</div>
 	</div>
@@ -89,13 +194,12 @@
 			{:else}
 				{#each replyData as reply}
 					<div class="flexBod flexReplyBod paddingBottom">
-						<p class="mainMessage"><span class="sender" style="color: var(--primary)">{reply.sender}; </span><span class="message">{reply.message}</span></p>
+						<p class="mainMessage"><span class="sender" style="color: var(--primary)">{reply.sender}; </span><span style="color: var(--tertiaryThemeInverted)">{reply.message}</span></p>
 						<span class="bottomButtons">
-							<!-- <button><span id="LIKE?{reply._id}" class="timeSpan LikeSpan"></span></button> -->
 							<span class="timeSpan flexTime">{timeSince(reply.createdAt)}</span>
 							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{reply._id}">{likesabove10k(reply.totalReplies)} replies</span></p></button>
-							<button on:click={like.bind(globalThis, { _id: reply._id, likes: reply.likes })} class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{reply._id}">{likesabove10k(reply.likes)}</span><i id="FA_SOLID?{reply._id}" class="{reply.likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
-							<button on:click={goTo.bind(globalThis, reply._id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+							<button on:click={like.bind(globalThis, { _id: reply._id, likes: reply.likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{reply._id}">{likesabove10k(reply.likes)}</span><i id="FA_SOLID?{reply._id}" class="{reply.likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
+							<button on:click={goTo.bind(globalThis, reply._id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style="margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 						</span>
 					</div>
 				{/each}
@@ -107,73 +211,32 @@
 </div>
 
 <style>
-	.h1Text {
-		font-family: UBold;
-		color: var(--tertiaryThemeInverted);
-		text-align: center;
-		/* margin-bottom: 40px; */
-	}
-	.bottomTextSpace {
-		height: 45px;
+	.goBackDiv {
 		width: 100%;
-	}
-	#replyBody {
-		height: 100%;
-		width: 100%;
+		height: 50px;
+		display: flex;
+		justify-content: left;
+		align-items: center;
 
-		overflow-y: scroll;
-	}
-	.sender {
-		color: var(--primary);
-	}
-	.mainMessage {
-		font-family: imprima;
-		color: var(--tertiaryThemeInverted);
-		word-break: break-all;
-	}
-	.replyMainMsg {
-		/* width: 100%; */
-		height: auto;
+		margin-left: calc(var(--averageMargin) * 1.3);
 
 		margin-top: 113px;
 	}
-	.flexBod {
-		background-color: var(--secondaryTheme);
-		border-radius: 6px;
-		border: 0.3px solid var(--secondaryThemeInverted);
+	.goBack {
+		color: var(--tertiaryThemeInverted);
+		display: flex;
+
+		background-color: var(--tertiaryTheme);
 		box-shadow: var(--boxShadows);
-
-		margin: var(--averageMargin) calc(var(--averageMargin) * 1.3);
-		padding: calc(var(--averageMargin) * 1.3);
-
-		position: relative;
-		overflow: hidden;
-
-		/* background-image: linear-gradient(var(--secondaryTheme), var(--primaryTheme)); */
-		/* background-image: linear-gradient(var(--primaryTheme), var(--secondaryTheme)); */
+		border-radius: var(--borderRadius);
+		padding: 0.4rem 1rem;
 	}
-	.paddingBottom {
-		padding-bottom: calc(var(--averageMargin) * 5);
-	}
-	.flexReplyBod {
-		background-color: var(--primaryTheme);
-
-		background-image: none;
+	.goBack:hover,
+	.goBack:focus,
+	.goBack:active {
 		box-shadow: var(--boxInsetShadows);
 	}
-	.startNewMsg {
-		margin-bottom: calc(var(--averageMargin) * -3);
-		text-align: center;
-		font-family: UBold;
-		margin-top: 20px;
-		opacity: var(--dull);
-	}
-	.bottomButtons {
-		position: absolute;
-		width: 100%;
-		bottom: calc(var(--averageMargin) * 1.3);
-		left: calc(var(--averageMargin) * 1.3);
-
-		display: flex;
+	.fa-arrow-left {
+		padding-right: 5px;
 	}
 </style>

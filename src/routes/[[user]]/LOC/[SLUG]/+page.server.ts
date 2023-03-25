@@ -23,7 +23,7 @@ export const load = (async ({ params }) => {
 
 				const returnMsgData = await massagesCreate
 					.aggregate([
-						{ $match: { group_id: new ObjectId(SLUG) } },
+						{ $match: { group_id: new ObjectId(SLUG), isReply: false } },
 						{
 							$project: {
 								_id: 1,
@@ -45,7 +45,7 @@ export const load = (async ({ params }) => {
 
 				const topLikes = await massagesCreate
 					.aggregate([
-						{ $match: { group_id: findGroup._id } },
+						{ $match: { group_id: findGroup._id, isReply: false } },
 						{
 							$project: {
 								_id: 1,
@@ -84,7 +84,7 @@ export const load = (async ({ params }) => {
 		if (findGroup) {
 			const returnMsgData = await massagesCreate
 				.aggregate([
-					{ $match: { group_id: findGroup._id } },
+					{ $match: { group_id: findGroup._id, isReply: false } },
 					{
 						$project: {
 							_id: 1,
@@ -106,7 +106,7 @@ export const load = (async ({ params }) => {
 
 			const topLikes = await massagesCreate
 				.aggregate([
-					{ $match: { group_id: findGroup._id } },
+					{ $match: { group_id: findGroup._id, isReply: false } },
 					{
 						$project: {
 							_id: 1,
@@ -143,7 +143,7 @@ export const load = (async ({ params }) => {
 		if (findGroupbyId) {
 			const returnMsgData = await massagesCreate
 				.aggregate([
-					{ $match: { group_id: findGroupbyId._id } },
+					{ $match: { group_id: findGroupbyId._id, isReply: false } },
 					{
 						$project: {
 							_id: 1,
@@ -165,7 +165,7 @@ export const load = (async ({ params }) => {
 
 			const topLikes = await massagesCreate
 				.aggregate([
-					{ $match: { group_id: findGroupbyId._id } },
+					{ $match: { group_id: findGroupbyId._id, isReply: false } },
 					{
 						$project: {
 							_id: 1,

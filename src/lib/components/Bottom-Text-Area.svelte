@@ -59,7 +59,12 @@
 					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id, $messageId }),
 				})
 				const response = await res.json()
-				console.log('response', response)
+
+				const replyBody = document.getElementById('replyBody')
+				if (replyBody) {
+					replyBody.scrollTop = replyBody.scrollHeight
+				}
+
 				if (!res.ok) {
 					alert(response.message)
 				}

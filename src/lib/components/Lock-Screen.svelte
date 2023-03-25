@@ -62,6 +62,7 @@
 				body: JSON.stringify({ data: $userName }),
 			})
 			const response = await res.json()
+			console.log('response', response)
 			if (res.ok) {
 				$loginResponseData = response
 				console.log('$loginResponseData', response)
