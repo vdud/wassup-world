@@ -15,14 +15,9 @@ const pusher = new Pusher({
 export const POST = (async ({ request }) => {
 	const { message, $userGroup_id, $userName, $userName_id, $messageId } = await request.json()
 
-	console.log('message, $userGroup_id, $userName, $userName_id, $messageId ', message, $userGroup_id, $userName, $userName_id, $messageId)
-
 	const findGroup = await groups.findOne({ _id: new ObjectId($userGroup_id) })
 	const findUser = await mainUser.findOne({ _id: new ObjectId($userName_id) })
 	const findMessage = await massagesCreate.findOne({ _id: new ObjectId($messageId) })
-	console.log('findGroup', findGroup)
-	console.log('findUser', findUser)
-	console.log('findMessage', findMessage)
 
 	if (!findUser || !findGroup || !findMessage) {
 		return json({ success: false })

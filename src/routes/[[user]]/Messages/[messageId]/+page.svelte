@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { incrementLikes, incrementReplies, likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
 	import { pusher } from '$lib/bigFunctions/pusher'
-	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { userName_id } from '$lib/stores/userName_id'
 	import { userName } from '$lib/stores/userName'
+	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { onDestroy, onMount } from 'svelte'
 	import type { PageData } from './$types'
 	import { messageId } from '$lib/stores/messageId'
@@ -14,11 +14,10 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 
 	export let data: PageData
+	const messageData = JSON.parse(data.body.message)
 
-	const messageData = JSON.parse(data.body.data)
 	const replyData = JSON.parse(data.body.replyData)
 	const isReply = messageData.isReply
-	$: console.log('$messageId', $messageId)
 
 	const goBack = () => {
 		window.location.pathname = '/Messages/' + messageData.replyTo
@@ -36,11 +35,8 @@
 		$isFlex = false
 		$currentPage = 'REPLIES'
 		$userGroup_id = messageData.group_id
-		$messageId = messageData.group_id
 		$currentPageHeaderData = messageData.sender + '; ' + messageData.message.slice(0, 20) + '...'
 		$messageId = messageData._id
-
-		console.log('$userGroup_id', $userGroup_id)
 
 		pusher.subscribe($messageId).bind('ReplyMessage', (data: any) => {
 			const replies = document.getElementById('replies')

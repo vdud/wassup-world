@@ -14,15 +14,16 @@
 		$isShowInfo = !$isShowInfo
 	}
 
+	let xScroll = 0
+	let yScroll = 0
+
 	onMount(() => {
 		$currentPage = ''
 
 		$currentPageHeaderData = 'HOME'
+
 		$currentGroupCreatedAt = 0
 	})
-
-	let xScroll = 0
-	let yScroll = 0
 </script>
 
 <svelte:head>

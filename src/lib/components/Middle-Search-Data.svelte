@@ -12,8 +12,6 @@
 	import { userName_id } from '$lib/stores/userName_id'
 	import { publicReciever_Id } from '$lib/stores/publicReciever_Id'
 
-	// $: console.log($locationPrediction)
-
 	const toggleTranslation = async (loc: any) => {
 		$fullDisplay = 'nonHidden'
 
@@ -52,7 +50,7 @@
 <div class="middleData">
 	<div class="gradient" />
 	<div class="paddedData">
-		<div class="natureBox " style={$nature === 'PUBLIC' ? 'order:1' : 'order:2'}>
+		<div class="natureBox" style={$nature === 'PUBLIC' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-user faUser" /></div>
 
 			{#if hasSpace($searchInput) === false && $searchInput.length < 19}
@@ -72,7 +70,7 @@
 											}, 600)
 										}}
 										class="contactBox">
-										<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+										<div class="i"><i class="fa fa-user-o LogoButton" /></div>
 										<div class="cBoxText">
 											<p class="cText" style="color: var(--secondary)">
 												{user.name}
@@ -82,7 +80,7 @@
 								{/each}
 							{:else}
 								<div class="contactBox">
-									<div class="i"><i class="fa fa-user-o  LogoButton" /></div>
+									<div class="i"><i class="fa fa-user-o LogoButton" /></div>
 									<div class="cBoxText">
 										<p class="cText" style="color: var(--secondary)">No User Found</p>
 									</div>
@@ -115,8 +113,8 @@
 								}, 600)
 							}}>
 							<p class="hashMsg">
-								<span class="fa fa-arrow-right  fontBox arrow" />
-								<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
+								<span class="fa fa-arrow-right fontBox arrow" />
+								<span class="BOLD fontBox" style="color:var(--secondaryThemeInverted)">Message </span>
 								<span class="BOLD fontBox" style="color:var(--secondary)">;{$searchInput}</span>
 							</p>
 						</button>
@@ -126,15 +124,15 @@
 				<div class="natureDataBox">
 					<button class="sendMsgBox">
 						<p class="hashMsg">
-							<span class="fa fa-arrow-right  fontBox arrow" />
-							<span class="BOLD fontBox " style="color:var(--secondaryThemeInverted)">Message </span>
+							<span class="fa fa-arrow-right fontBox arrow" />
+							<span class="BOLD fontBox" style="color:var(--secondaryThemeInverted)">Message </span>
 							<span class="BOLD fontBox" style="color:var(--secondary)">Noone's here 🤭</span>
 						</p>
 					</button>
 				</div>
 			{/if}
 		</div>
-		<div class="natureBox " style={$nature === 'HASHTAG' ? 'order:1' : 'order:2'}>
+		<div class="natureBox" style={$nature === 'HASHTAG' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-hashtag faHash" /></div>
 			<div class="natureDataBox">
 				<div class="contact">
@@ -152,7 +150,7 @@
 										}, 600)
 									}}
 									class="contactBox">
-									<div class="i"><i class="fa fa-hashtag  LogoButton" /></div>
+									<div class="i"><i class="fa fa-hashtag LogoButton" /></div>
 									<div class="cBoxText">
 										<p class="cText" style="color: var(--secondary)">
 											{group.name}
@@ -162,7 +160,7 @@
 							{/each}
 						{:else}
 							<div class="contactBox">
-								<div class="i"><i class="fa fa-hashtag  LogoButton" /></div>
+								<div class="i"><i class="fa fa-hashtag LogoButton" /></div>
 								<div class="cBoxText">
 									<p class="cText" style="color: var(--secondary)">No Group Found</p>
 								</div>
@@ -194,14 +192,14 @@
 						}, 600)
 					}}
 					><p class="hashMsg">
-						<span class="fa fa-arrow-right  fontBox arrow" />
-						<span class=" fontBox " style="color:var(--secondaryThemeInverted)">Go To </span>
+						<span class="fa fa-arrow-right fontBox arrow" />
+						<span class=" fontBox" style="color:var(--secondaryThemeInverted)">Go To </span>
 						<span class=" fontBox cText" style="color:var(--primary)"> #{$searchInput}</span>
 					</p>
 				</button>
 			</div>
 		</div>
-		<div class="natureBox " style={$nature === 'LOCATION' ? 'order:1' : 'order:2'}>
+		<div class="natureBox" style={$nature === 'LOCATION' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-location-pin faLoc" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions" id="locationPredictions">

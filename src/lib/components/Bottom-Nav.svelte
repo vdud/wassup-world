@@ -6,7 +6,6 @@
 	//setlocalStorage
 	const setlocalStorage = () => {
 		localStorage.setItem('nature', JSON.stringify({ $nature }))
-		// console.log('registered')
 	}
 	const debouncedSetlocalStorage = debounce(setlocalStorage, 300)
 </script>
@@ -20,12 +19,12 @@
 				const middleData = document.querySelector('.middleData')
 				middleData?.scrollTo(0, 0)
 			}}
-			class="fa fa-user-o navContainer "
+			class="fa fa-user-o navContainer"
 			style={$nature === 'PUBLIC' ? '' : 'color:var(--primaryTheme'}
 			><div class="childLine {$nature === 'PUBLIC' ? 'childTranslated' : ''}" />
 		</button>
 	</div>
-	<div class="nav nav2  {$nature === 'HASHTAG' ? 'selectedNav' : 'unselectedNav'}">
+	<div class="nav nav2 {$nature === 'HASHTAG' ? 'selectedNav' : 'unselectedNav'}">
 		<button
 			on:click={() => {
 				$nature = 'HASHTAG'
@@ -46,7 +45,7 @@
 				const middleData = document.querySelector('.middleData')
 				middleData?.scrollTo(0, 0)
 			}}
-			class="fa fa-location-pin navContainer "
+			class="fa fa-location-pin navContainer"
 			style={$nature === 'LOCATION' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'LOCATION' ? 'childTranslated' : ''}" /></button>
 	</div>
 </div>

@@ -8,8 +8,6 @@
 	import { onMount } from 'svelte'
 	import { toggleLoc, toggleHashtag, togglePublic } from '$lib/bigFunctions/toggleNavLocs'
 
-	// console.log($loginResponseData)
-
 	// const toggleLoc = (groupName: any) => {
 	// 	localStorage.setItem('nature', JSON.stringify({ $nature: 'LOCATION' }))
 	// 	window.location.pathname = '/LOC/' + groupName
@@ -48,7 +46,7 @@
 			</div>
 		</div> -->
 
-		<div class="natureBox " style={$nature === 'LOCATION' ? 'order:1' : 'order:2'}>
+		<div class="natureBox" style={$nature === 'LOCATION' ? 'order:1' : 'order:2'}>
 			<div class="natureLogo"><i class="fa fa-location-pin faLoc" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions">
@@ -94,7 +92,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="natureBox " style={$nature === 'HASHTAG' ? 'order:1' : 'order:3'}>
+		<div class="natureBox" style={$nature === 'HASHTAG' ? 'order:1' : 'order:3'}>
 			<div class="natureLogo"><i class="fa fa-hashtag faHash" /></div>
 			<div class="natureDataBox">
 				<div class="locationPredictions">
@@ -136,7 +134,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="natureBox " style={$nature === 'PUBLIC' ? 'order:1' : 'order:4'}>
+		<div class="natureBox" style={$nature === 'PUBLIC' ? 'order:1' : 'order:4'}>
 			<div class="natureLogo"><i class="fa fa-user-o faUser" /></div>
 			<div class="natureDataBox">
 				<div class=" locationPredictions">

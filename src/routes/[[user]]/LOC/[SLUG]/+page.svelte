@@ -18,7 +18,7 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
-	import { likeThatMsg, likesabove10k, incrementLikes } from '$lib/bigFunctions/likeThatMsg'
+	import { likeThatMsg, likesabove10k, incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
 
 	onMount(() => {
 		$isFlex = false
@@ -50,6 +50,9 @@
 					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes })
 					// incrementTopLikes({ _id: data.messageId, $userName_id, likes: data.likes })
 				}
+			})
+			.bind('incrementReplies', (data: any) => {
+				incrementReplies({ _id: data.messageId, replies: data.totalReplies })
 			})
 	})
 

@@ -30,7 +30,6 @@
 
 	// import type { LayoutData } from './$types'
 	// export let data: LayoutData
-	// console.log(data)
 
 	import { onDestroy, onMount } from 'svelte'
 	import { canSend } from '$lib/stores/canSend'

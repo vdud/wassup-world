@@ -62,14 +62,11 @@
 				body: JSON.stringify({ data: $userName }),
 			})
 			const response = await res.json()
-			console.log('response', response)
 			if (res.ok) {
 				$loginResponseData = response
-				console.log('$loginResponseData', response)
 				$userName_id = response.userName_id
 				pusher.subscribe($userName_id).bind('newPubMessage', (data: any) => {
 					applyNewMessage({ groupName: data.groupName, sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
-					// console.log('triggered')
 				})
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
 					if ($userGroup_id != element._id) {

@@ -50,8 +50,6 @@
 			if (message === '' && $messageId !== '') {
 				return
 			} else {
-				console.log('message', message)
-				console.log('message', message)
 				// applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
 				const res = await fetch('/api/replyMessages', {
 					method: 'POST',
@@ -62,7 +60,6 @@
 				})
 				const response = await res.json()
 
-				console.log('response', response)
 				if (!res.ok) {
 					alert(response.message)
 				}
