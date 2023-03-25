@@ -8,12 +8,15 @@ export const likeThatMsg = async (data: any) => {
 	})
 
 	const response = await res.json()
-	const LIKE = document.getElementById(`LIKE?${data._id}`)
+	const LIKE = document.getElementById(`FA_SOLID?${data._id}`)
 	if (LIKE) {
+		LIKE.classList.remove('fa-solid')
+		LIKE.classList.remove('fa-regular')
+
 		if (response.isLiked === true) {
-			LIKE.innerText = "love'd"
+			LIKE.classList.add('fa-solid')
 		} else if (response.isLiked === false) {
-			LIKE.innerText = 'love'
+			LIKE.classList.add('fa-regular')
 		}
 	}
 
@@ -22,14 +25,18 @@ export const likeThatMsg = async (data: any) => {
 		LIKE_NO.innerHTML = likesabove10k(response.likes).toString()
 	}
 
-	const TOPLIKE = document.getElementById(`TopLike?${data._id}`)
-	if (TOPLIKE) {
+	const FA_SOLID_TOP = document.getElementById(`FA_SOLID_TOP?${data._id}`)
+	if (FA_SOLID_TOP) {
+		FA_SOLID_TOP.classList.remove('fa-solid')
+		FA_SOLID_TOP.classList.remove('fa-regular')
+
 		if (response.isLiked === true) {
-			TOPLIKE.innerText = "love'd"
+			FA_SOLID_TOP.classList.add('fa-solid')
 		} else if (response.isLiked === false) {
-			TOPLIKE.innerText = 'love'
+			FA_SOLID_TOP.classList.add('fa-regular')
 		}
 	}
+
 	const TOPLIKE_NO = document.getElementById(`TopLike_No?${data._id}`)
 	if (TOPLIKE_NO) {
 		TOPLIKE_NO.innerText = likesabove10k(response.likes).toString()

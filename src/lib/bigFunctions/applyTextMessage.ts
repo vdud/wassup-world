@@ -30,13 +30,15 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	timeSpan.classList.add('timeSpan')
 	timeSpan.classList.add('flexTime')
 	timeSpan.innerText = timeSince(data.createdAt)
-	timeSpan.style.margin = '0 10px'
 	timeSpan.classList.add('timeSpanLeft')
 
 	//like span
 	const likeNumberButton = document.createElement('button')
 	likeNumberButton.classList.add('timeSpan')
 	likeNumberButton.classList.add('likeSPan')
+	likeNumberButton.onclick = () => {
+		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
+	}
 
 	//like number span
 	const span5 = document.createElement('span')
@@ -46,7 +48,9 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 
 	// hearts icon //fa-hearts
 	const i1 = document.createElement('i')
-	i1.classList.add('fa-solid')
+	i1.id = `FA_SOLID?${data.messageId}`
+	// i1.classList.add('fa-solid')
+	i1.classList.add('fa-regular')
 	i1.classList.add('fa-heart')
 	i1.classList.add('optDark')
 	i1.style.margin = '3px'
@@ -64,10 +68,6 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	span6.innerText = 'love'
 	span6.classList.add('loved')
 	loveButton.append(span6)
-
-	loveButton.onclick = () => {
-		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
-	}
 
 	//Got to reply button
 	const goToReplyButton = document.createElement('button')
@@ -98,29 +98,32 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 	totalRepliespText2.classList.add('totalRepliespText')
 	const span8 = document.createElement('span')
 	span8.innerText = `${likesabove10k(0)} replies`
+	span8.id = `Replies_No?${data.messageId}`
 	totalRepliespText2.append(span8)
 	buttonTotalReplies.append(totalRepliespText2)
 
 	//append to spans3
-	timeSpan.style.margin = '0 10px'
+	// timeSpan.style.margin = '0 10px'
 	if (isYoMe) {
 		span3.append(goToReplyButton)
 		span3.append(likeNumberButton)
 		span3.append(buttonTotalReplies)
 		span3.append(timeSpan)
-		span3.append(loveButton)
+		// span3.append(loveButton)
 
-		buttonTotalReplies.style.marginLeft = '10px'
-		likeNumberButton.style.marginLeft = '10px'
+		goToReplyButton.style.marginRight = '10px'
+		buttonTotalReplies.style.marginRight = '10px'
+		likeNumberButton.style.marginRight = '10px'
 	} else if (!isYoMe) {
-		span3.append(loveButton)
+		// span3.append(loveButton)
 		span3.append(timeSpan)
 		span3.append(buttonTotalReplies)
 		span3.append(likeNumberButton)
 		span3.append(goToReplyButton)
 
-		buttonTotalReplies.style.marginRight = '10px'
-		likeNumberButton.style.marginRight = '10px'
+		buttonTotalReplies.style.marginLeft = '10px'
+		likeNumberButton.style.marginLeft = '10px'
+		goToReplyButton.style.marginLeft = '10px'
 	}
 
 	p.appendChild(span1)

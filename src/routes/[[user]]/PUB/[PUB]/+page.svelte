@@ -122,10 +122,9 @@
 						<span style="color:var(--primary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexLeft">
-							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan loved">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
-							<span class="timeSpan flexTime" style="margin-left: 10px;">{timeSince(createdAt)}</span>
+							<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
 							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
-							<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
 							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 						</span>
 					</p>
@@ -137,10 +136,9 @@
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
 							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
-							<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+							<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
 							<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
-							<span class="timeSpan flexTime" style="margin-right: 10px;">{timeSince(createdAt)}</span>
-							<button on:click={like.bind(globalThis, { _id, likes })}><span id="LIKE?{_id}" class="timeSpan LikeSpan loved">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+							<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
 						</span>
 					</p>
 				</div>
@@ -161,10 +159,9 @@
 								<span style="color:var(--primary)">{sender}; </span>
 								<span class="pageMessage">{message}</span>
 								<span class="spanFlexLeft">
-									<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan loved">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
-									<span class="timeSpan flexTime" style="margin-left: 10px;">{timeSince(createdAt)}</span>
-									<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="topReplies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
-									<button class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
+									<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
+									<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
+									<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan" style="margin-left: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID_TOP?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
 									<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 								</span>
 							</p>
@@ -176,10 +173,9 @@
 								<span class="pageMessage">{message}</span>
 								<span class="spanFlexRight">
 									<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span style="font-family:UBold; margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
-									<button class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i class="fa-solid fa-heart optDark" style="margin:3px;" /></button>
-									<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span id="topReplies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
-									<span class="timeSpan flexTime" style="margin-right: 10px;">{timeSince(createdAt)}</span>
-									<button on:click={like.bind(globalThis, { _id, likes })}><span id="TopLike?{_id}" class="timeSpan LikeSpan loved">{likedPeople.includes($userName_id) ? "love'd" : 'love'}</span></button>
+									<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID_TOP?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
+									<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
+									<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
 								</span>
 							</p>
 						</div>
