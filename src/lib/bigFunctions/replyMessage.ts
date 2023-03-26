@@ -1,3 +1,6 @@
+import { likesabove10k } from './likeThatMsg'
+import { timeSince } from './timeFormat'
+
 export const replyMessage = async (data: any) => {
 	const replies = document.getElementById('replies')
 	const removeBeforeSending = document.getElementById('removeBeforeSending')

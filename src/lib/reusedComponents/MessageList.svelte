@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 
-	export let dataBodyMessages: any[]
 	export let userName = ''
 	export let userName_id = ''
 	export let isShowInfo = false

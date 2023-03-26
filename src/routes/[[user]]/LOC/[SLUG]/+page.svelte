@@ -77,6 +77,7 @@
 		likeThatMsg({ _id, $userName_id, $userGroup_id, likes })
 	}
 	const goTo = (_id: any) => {
+		$isFlex = true
 		window.location.pathname = '/Messages/' + _id
 	}
 
@@ -105,7 +106,7 @@
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		<MessageList dataBodyMessages={JSON.parse(data.body.messages)} userName={$userName} userName_id={$userName_id} isShowInfo={$isShowInfo} {data} {goTo} {like} {timeSince} {likesabove10k} />
+		<MessageList userName={$userName} userName_id={$userName_id} isShowInfo={$isShowInfo} {data} {goTo} {like} {timeSince} {likesabove10k} />
 	</div>
 	<div class="margins margin-top" />
 </div>

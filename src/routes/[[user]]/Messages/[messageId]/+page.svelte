@@ -21,9 +21,11 @@
 	const isReply = messageData.isReply
 
 	const goBack = () => {
+		$isFlex = true
 		window.location.pathname = '/Messages/' + messageData.replyTo
 	}
 	const goBackHome = () => {
+		$isFlex = true
 		window.location.pathname = '/' + messageData.group_id
 	}
 
