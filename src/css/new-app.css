@@ -5,12 +5,8 @@
 		--tertiaryTheme: #333;
 
 		--primaryThemeInverted: #fff;
-		--secondaryThemeInverted: rgba(94, 94, 94, 0.787);
+		--secondaryThemeInverted: #aaa;
 		--tertiaryThemeInverted: #999;
-
-		/* --boxShadowsInverted: 0px 0px 8px #1119, 0px 0px 1px #111;
-		--boxShadowsBlurInverted: 0px 0px 20px #1119, 0px 0px 8px #1118;
-		--boxInsetShadowsInverted: inset 0px 0px 6px #fff1, inset 0px 0px 3px #ccc3; */
 
 		--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
 		--boxNeoShadowsInverted: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
@@ -29,13 +25,9 @@
 		--secondaryTheme: #ddd;
 		--tertiaryTheme: #3a3a3a;
 
-		--primaryThemeInverted: #565656;
-		--secondaryThemeInverted: #fff;
-		--tertiaryThemeInverted: #797979;
-
-		/* --boxShadowsInverted: 0px 0px 8px #eee1, 0px 0px 1px #8e8e8e;
-		--boxShadowsBlurInverted: 0px 0px 25px #eee1, 0px 0px 8px #eee4;
-		--boxInsetShadowsInverted: inset 0px 0px 6px #fff1, inset 0px 0px 1px #eee; */
+		--primaryThemeInverted: #fff;
+		--secondaryThemeInverted: #898989;
+		--tertiaryThemeInverted: #0f0f0f;
 
 		--boxNeoShadows: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
 		--boxNeoShadowsInverted: 1px 1px 2px #111111, -1px -1px 2px #414141;
@@ -559,7 +551,6 @@ textarea:focus {
 	font-family: UBold;
 	color: var(--tertiaryThemeInverted);
 	text-align: center;
-	/* margin-bottom: 40px; */
 }
 .bottomTextSpace {
 	height: 45px;

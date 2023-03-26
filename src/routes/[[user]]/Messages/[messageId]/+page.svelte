@@ -12,6 +12,7 @@
 	import { messageId } from '$lib/stores/messageId'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
+	import { replyMessage } from '$lib/bigFunctions/replyMessage'
 
 	export let data: PageData
 	const messageData = JSON.parse(data.body.message)
@@ -39,96 +40,7 @@
 		$messageId = messageData._id
 
 		pusher.subscribe($messageId).bind('ReplyMessage', (data: any) => {
-			const replies = document.getElementById('replies')
-			const removeBeforeSending = document.getElementById('removeBeforeSending')
-
-			if (removeBeforeSending) {
-				removeBeforeSending.remove()
-			}
-			if (replies) {
-				const div = document.createElement('div')
-				div.classList.add('flexBod', 'flexReplyBod', 'paddingBottom')
-
-				const p = document.createElement('p')
-				p.classList.add('mainMessage')
-				const span = document.createElement('span')
-				span.classList.add('sender')
-				span.style.color = 'var(--primary)'
-				span.innerText = data.sender + '; '
-				const span2 = document.createElement('span')
-				span2.style.color = 'var(--tertiaryThemeInverted)'
-				span2.innerText = data.message
-
-				p.appendChild(span)
-				p.appendChild(span2)
-
-				const bottomButtons = document.createElement('span')
-				bottomButtons.classList.add('bottomButtons')
-
-				const timeSpan = document.createElement('span')
-				timeSpan.classList.add('timeSpan', 'flexTime')
-				timeSpan.innerText = timeSince(data.createdAt)
-
-				const totalRepliesButton = document.createElement('button')
-				totalRepliesButton.classList.add('timeSpan')
-				totalRepliesButton.style.marginLeft = '10px'
-				const totalRepliespText = document.createElement('p')
-				totalRepliespText.classList.add('totalRepliespText')
-				const totalRepliesSpan = document.createElement('span')
-				totalRepliesSpan.id = 'Replies_No?' + data._id
-				totalRepliesSpan.innerText = likesabove10k(data.totalReplies) + ' replies'
-
-				totalRepliespText.appendChild(totalRepliesSpan)
-				totalRepliesButton.appendChild(totalRepliespText)
-
-				const likeButton = document.createElement('button')
-				likeButton.classList.add('timeSpan', 'replyLikeButton')
-				likeButton.style.marginLeft = '10px'
-				likeButton.onclick = () => {
-					like({ _id: data._id, likes: data.likes })
-				}
-				const optDark = document.createElement('span')
-				optDark.classList.add('optDark')
-				optDark.id = 'LIKE_NO?' + data._id
-				optDark.innerText = '0'
-				const FA_SOLIDi = document.createElement('i')
-				FA_SOLIDi.classList.add('fa-regular', 'fa-heart', 'optDark')
-				FA_SOLIDi.style.margin = '3px'
-				FA_SOLIDi.id = 'FA_SOLID?' + data._id
-
-				likeButton.appendChild(optDark)
-				likeButton.appendChild(FA_SOLIDi)
-
-				const goToButton = document.createElement('button')
-				goToButton.classList.add('timeSpan', 'LikeSpan')
-				goToButton.style.marginLeft = '10px'
-				goToButton.onclick = () => {
-					window.location.pathname = '/Messages/' + data._id
-				}
-				const goToText = document.createElement('p')
-				goToText.classList.add('totalRepliespText', 'REPLY_TEXT')
-				const REPLYSPAN = document.createElement('span')
-				REPLYSPAN.innerText = 'REPLY'
-				REPLYSPAN.style.marginRight = '5px'
-				const FA_SQ_U_R = document.createElement('i')
-				FA_SQ_U_R.classList.add('fa', 'fa-square-up-right')
-
-				goToText.appendChild(REPLYSPAN)
-				goToText.appendChild(FA_SQ_U_R)
-
-				goToButton.appendChild(goToText)
-
-				bottomButtons.appendChild(timeSpan)
-				bottomButtons.appendChild(totalRepliesButton)
-				bottomButtons.appendChild(likeButton)
-				bottomButtons.appendChild(goToButton)
-
-				//append all
-
-				div.appendChild(p)
-				div.appendChild(bottomButtons)
-				replies.appendChild(div)
-			}
+			replyMessage(data)
 		})
 		pusher
 			.subscribe($userGroup_id)
@@ -201,14 +113,14 @@
 					</button>
 				</div>
 			{:else}
-				{#each replyData as reply}
+				{#each replyData as { _id, sender, message, createdAt, likes, likedPeople, totalReplies }}
 					<div class="flexBod flexReplyBod paddingBottom">
-						<p class="mainMessage"><span class="sender" style="color: var(--primary)">{reply.sender}; </span><span style="color: var(--tertiaryThemeInverted)">{reply.message}</span></p>
+						<p class="mainMessage"><span class="sender" style="color: var(--primary)">{sender}; </span><span style="color: var(--tertiaryThemeInverted)">{message}</span></p>
 						<span class="bottomButtons">
-							<span class="timeSpan flexTime">{timeSince(reply.createdAt)}</span>
-							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{reply._id}">{likesabove10k(reply.totalReplies)} replies</span></p></button>
-							<button on:click={like.bind(globalThis, { _id: reply._id, likes: reply.likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{reply._id}">{likesabove10k(reply.likes)}</span><i id="FA_SOLID?{reply._id}" class="{reply.likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
-							<button on:click={goTo.bind(globalThis, reply._id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style="margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+							<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
+							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
+							<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
+							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style="margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
 						</span>
 					</div>
 				{/each}
