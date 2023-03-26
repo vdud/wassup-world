@@ -132,7 +132,7 @@
 	}
 	.chatPText {
 		font-family: UBold;
-		color: var(--secondaryThemeInverted);
+		color: var(--primaryThemeInverted);
 		background-color: var(--primaryTheme);
 		font-size: 0.6rem;
 		margin: 0;
@@ -145,7 +145,7 @@
 	.chatHeaderText {
 		height: max-content;
 		font-family: UBold;
-		color: var(--secondaryThemeInverted);
+		color: var(--primaryThemeInverted);
 
 		margin-top: 12px;
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));

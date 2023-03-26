@@ -44,7 +44,6 @@ export const POST = (async ({ request }) => {
 		messageId: newMessage.insertedId,
 	})
 
-	// console.log(newMessage.insertedId)
 	// })
 
 	if (findGroup.nature === 'PUBLIC') {
