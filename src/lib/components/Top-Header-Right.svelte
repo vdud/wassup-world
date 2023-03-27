@@ -15,6 +15,8 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { titleData } from '$lib/stores/titleData'
 	import { userName } from '$lib/stores/userName'
+	import { middleScroll } from '$lib/stores/middleScroll'
+	import { interChangableMessage } from '$lib/stores/interChangableMessage'
 
 	let groupName = 'world'
 
@@ -38,10 +40,14 @@
 			middleScroll.scrollTop = middleScroll.scrollHeight * -1
 		}, 10)
 	}
+	const headToTop = () => {
+		const middleScroll: any = document.getElementById('middleScroll')
+		middleScroll.scrollTop = middleScroll.scrollHeight * -1
+	}
 </script>
 
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5);'}>
-	<div class="headerTextBox">
+	<button on:click={headToTop} class="headerTextBox">
 		<h1 class="chatHeaderText">
 			{#if $currentPage !== ''}
 				<span>
@@ -73,14 +79,9 @@
 		</div>
 		<!-- {#if $currentPage !== '' && $currentGroupCreatedAt !== 0} -->
 		<div class="pFlex">
-			{#if $currentPage !== ''}
-				<p class="chatPText">CreatedAt</p>
-				<p class="chatPText">{timeSince($currentGroupCreatedAt)}</p>
-			{:else}
-				<p class="chatPText" style="font-family: Imprima;">wassup {$userName}!</p>
-			{/if}
+			<p class="chatPText" style="font-family: Imprima;">{$interChangableMessage}</p>
 		</div>
-	</div>
+	</button>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 	<!-- <button class="absoluteBox boxLeft2" on:click={togglehRef}><i class="fa-solid fa-house" style="color: var(--primary);scale:1.4;" /></button> -->
 
@@ -133,14 +134,13 @@
 	.chatPText {
 		font-family: UBold;
 		color: var(--primaryThemeInverted);
-		background-color: var(--primaryTheme);
+		background-color: var(--tertiaryThemeInverted);
 		font-size: 0.6rem;
 		margin: 0;
 		padding: 4px 10px;
-		border-radius: var(--borderRadius);
+		border-radius: calc(var(--borderRadius) / 3);
 		box-shadow: var(--boxInsetShadows);
 		width: max-content;
-		margin-right: 10px;
 	}
 	.chatHeaderText {
 		height: max-content;

@@ -35,10 +35,12 @@
 	import { canSend } from '$lib/stores/canSend'
 	import BottomTextArea_2 from '$lib/components/Bottom-Text-Area.svelte'
 	import { unLockBby } from '$lib/bigFunctions/unLockBby'
+	import { interChangableMessage } from '$lib/stores/interChangableMessage'
 
 	let zIndex = 0
 
 	onMount(() => {
+		$interChangableMessage = `wassup ${$userName}`
 		const savedNatureDataString = localStorage.getItem('nature')
 		if (savedNatureDataString) {
 			try {

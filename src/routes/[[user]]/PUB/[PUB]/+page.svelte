@@ -66,22 +66,6 @@
 			})
 	})
 
-	const scrolltoBottom = () => {
-		const middleScroll: any = document.getElementById('middleScroll')
-		middleScroll.scrollTop = middleScroll.scrollHeight
-	}
-
-	let aboveSwitch = false
-	const parseScroll = () => {
-		const middleScroll: any = document.getElementById('middleScroll')
-		if (middleScroll.scrollTop < -69) {
-			aboveSwitch = true
-		} else if (middleScroll.scrollTop > -69) {
-			aboveSwitch = false
-		}
-	}
-	const debouncedScroll = debounce(parseScroll, 333)
-
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
 	}
@@ -101,22 +85,7 @@
 	<meta name="description" content="This is a simple discourse on location:{data.body.groupName} as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
 </svelte:head>
 
-<div class="hashContainer" id="middleScroll" on:scroll={debouncedScroll}>
-	<div class="gradient" />
-
-	<div class="scrollToBottom">
-		{#if aboveSwitch === true}
-			<button class="scrollButton" on:click={scrolltoBottom}><i class="fa fa-arrow-down" /></button>
-		{/if}
-	</div>
-
-	<div class="margins margin-bottom" />
-	<div id="textMessages" />
-	<div class="hashMessagesContainer">
-		<AllGroupMessages userName={$userName} userName_id={$userName_id} isShowInfo={$isShowInfo} {data} {goTo} {like} {timeSince} {likesabove10k} />
-	</div>
-	<div class="margins margin-top" />
-</div>
+<AllGroupMessages userName={$userName} userName_id={$userName_id} isShowInfo={$isShowInfo} {data} {goTo} {like} {timeSince} {likesabove10k} />
 
 <style>
 	/* shifted to new-app.css */

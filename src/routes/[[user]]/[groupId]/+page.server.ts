@@ -64,5 +64,7 @@ export const load = (async ({ params }) => {
 				nature: findGroupbyId.nature,
 			},
 		}
+	} else {
+		return
 	}
 }) satisfies PageServerLoad
