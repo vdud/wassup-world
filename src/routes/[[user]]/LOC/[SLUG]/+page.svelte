@@ -19,7 +19,6 @@
 		$currentPage = 'LOCATIONS'
 		$userGroup_id = JSON.parse(data.groupId)
 		$currentPageHeaderData = data.body.groupName
-		$currentGroupCreatedAt = data.body.createdAt
 
 		pusher
 			.subscribe($userGroup_id)
