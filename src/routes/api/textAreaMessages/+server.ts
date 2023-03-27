@@ -35,7 +35,6 @@ export const POST = (async ({ request }) => {
 		totalReplies: 0,
 		replyTo: null,
 	})
-	// .then((res) => {
 	pusher.trigger($userGroup_id, 'injectMessage', {
 		message: message,
 		sender: $userName,
@@ -43,8 +42,6 @@ export const POST = (async ({ request }) => {
 		groupId: $userGroup_id,
 		messageId: newMessage.insertedId,
 	})
-
-	// })
 
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id })

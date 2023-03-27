@@ -9,15 +9,6 @@
 	import { searchInput } from '$lib/stores/searchInput'
 
 	import { userName } from '$lib/stores/userName'
-	import { userName_id } from '$lib/stores/userName_id'
-	import { userGroup_id } from '$lib/stores/userGroup_id'
-	import { loginResponseData } from '$lib/stores/loginResponseData'
-
-	// let rootElement: HTMLElement | null = null
-	// $: rootElement && rootElement.style.setProperty('--primaryTheme', $toggleTheme === 'dark' ? '#111' : '#fff')
-	// $: rootElement && rootElement.style.setProperty('--secondaryTheme', $toggleTheme === 'dark' ? '#222' : '#eee')
-	// $: rootElement && rootElement.style.setProperty('--tertiaryTheme', $toggleTheme === 'dark' ? '#333' : '#eee5')
-
 	import { pusher } from '$lib/bigFunctions/pusher'
 
 	import TopHeaderLeft from '$lib/components/Top-Header-Left.svelte'
@@ -28,13 +19,7 @@
 	import MiddleNavData from '$lib/components/Middle-Nav-Data.svelte'
 	import LockScreen from '$lib/components/Lock-Screen.svelte'
 
-	// import type { LayoutData } from './$types'
-	// export let data: LayoutData
-
 	import { onDestroy, onMount } from 'svelte'
-	import { canSend } from '$lib/stores/canSend'
-	import BottomTextArea_2 from '$lib/components/Bottom-Text-Area.svelte'
-	import { unLockBby } from '$lib/bigFunctions/unLockBby'
 	import { interChangableMessage } from '$lib/stores/interChangableMessage'
 
 	let zIndex = 0
@@ -79,10 +64,6 @@
 				$nature = 'LOCATION'
 			}
 		}
-		// else if (e.key === 'Enter') {
-		// 	unLockBby({ $userName, $userName_id, $loginResponseData, $userGroup_id })
-		// 	$isLocked = false
-		// }
 	}
 
 	onDestroy(() => {
@@ -116,7 +97,6 @@
 			</div>
 			<div class="windowContainers container2">
 				<slot />
-				<!-- <div class="containerBottomTextArea"><BottomTextArea /></div> -->
 			</div>
 			<div class="windowContainers container3" style={$currentPage === '' ? 'display:none;' : ''}><BottomTextArea /></div>
 		</div>
@@ -126,11 +106,6 @@
 <svelte:window on:keydown={tilda} />
 
 <style>
-	/* :root {
-		--primaryTheme: #1f1f1f;
-		--secondaryTheme: #2a2a2a;
-		--tertiaryTheme: #3a3a3a55;
-	} */
 	.absoluteFirstWindow {
 		top: 0;
 		left: 0;
@@ -139,11 +114,9 @@
 		z-index: 2;
 		position: absolute;
 		border-radius: calc(var(--borderRadius) / 2);
-		/* border-radius: var(--borderRadius); */
 	}
 	.lockScreen {
 		background-color: var(--primaryTheme);
-		/* background-color: var(--red); */
 	}
 	.leftMargin {
 		margin-left: calc(var(--averageMargin) / 2);
@@ -187,14 +160,7 @@
 		top: 0;
 
 		z-index: 1;
-
-		/* background-color: var(--secondaryTheme); */
-
-		/* box-shadow: 0 0 10px red; */
-		/* border: 1px solid var(--primary); */
 		overflow: hidden;
-		/* border-bottom-right-radius: var(--borderRadius);
-		border-bottom-left-radius: var(--borderRadius); */
 		border-top-left-radius: calc(var(--borderRadius) / 2);
 	}
 	.container2 {
@@ -219,7 +185,6 @@
 		background-color: transparent;
 
 		pointer-events: none;
-		/* cursor: auto; */
 	}
 	.main {
 		position: relative;
@@ -234,9 +199,6 @@
 
 		overflow: hidden;
 
-		/* background-color: var(--secondaryTheme); */
-		/* box-shadow: var(--boxInsetShadows); */
-
 		width: 100%;
 		height: 100%;
 	}
@@ -249,7 +211,6 @@
 
 		height: 100%;
 		width: clamp(300px, 100%, 1450px);
-		/* border-top-left-radius: var(--borderRadius); */
 
 		overflow: hidden;
 		box-shadow: var(--boxShadowsBlur);
@@ -314,7 +275,6 @@
 		.main {
 			bottom: 0;
 			right: 0;
-			/* top: 0; */
 			left: 0;
 			position: absolute;
 			height: 100%;
@@ -357,7 +317,6 @@
 		.container1 {
 			margin-top: calc(var(--averageMargin) / 2);
 			border-radius: var(--borderRadius);
-			/* border: 1px solid var(--optDark); */
 		}
 		.leftMargin {
 			border-radius: var(--borderRadius) 0 0 var(--borderRadius);
@@ -369,11 +328,9 @@
 			border-bottom-right-radius: var(--borderRadius);
 		}
 		.window {
-			/* border-radius: calc(var(--borderRadius)); */
 			height: 98%;
 			margin: 10px;
 			border: 1px solid var(--tertiaryTheme);
-			/* background-color: var(--tertiaryTheme); */
 
 			overflow: hidden;
 
@@ -383,8 +340,6 @@
 		.windows {
 			border-radius: calc(var(--borderRadius) / 2);
 			overflow: hidden;
-
-			/* background: var(--secondaryTheme); */
 		}
 
 		.overMargin {

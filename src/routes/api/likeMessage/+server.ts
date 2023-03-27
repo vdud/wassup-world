@@ -3,7 +3,7 @@
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 
-import { groups, mainUser, massagesCreate } from '$db/collections'
+import { mainUser, massagesCreate } from '$db/collections'
 import { ObjectId } from 'mongodb'
 
 import Pusher from 'pusher'
@@ -15,7 +15,6 @@ const pusher = new Pusher({
 })
 
 export const POST = (async ({ request }) => {
-	// const data = await request.json()
 	const { messageId, username_id, $userGroup_id } = await request.json()
 
 	const user = await mainUser.findOne({ _id: new ObjectId(username_id) })
@@ -24,7 +23,6 @@ export const POST = (async ({ request }) => {
 		return json({ success: false })
 	}
 	const findMessage = await massagesCreate.findOne({ _id: new ObjectId(messageId) })
-	// const findLikedUser = await massagesCreate.findOne({ _id: new ObjectId(messageId), likedPeople: user._id })
 	if (!findMessage) {
 		return json({ success: false })
 	}

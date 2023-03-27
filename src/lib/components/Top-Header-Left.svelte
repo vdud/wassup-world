@@ -10,14 +10,11 @@
 	import { searchInput } from '$lib/stores/searchInput'
 	import { locationPrediction } from '$lib/stores/locationPrediction'
 	import { json } from '@sveltejs/kit'
-	// import { searchGET } from '$lib/stores/pusher'
 	import { onDestroy, onMount } from 'svelte'
 	import { searchData } from '$lib/stores/searchData'
-	import { canSend } from '$lib/stores/canSend'
 	import { debounce } from '$lib/bigFunctions/debounce'
 
 	$: $searchInput = $searchInput
-		// .trim()
 		.replace(/\s/g, '-')
 		.replace(/[^a-zA-Z0-9-]/g, '')
 		.toLowerCase()
@@ -26,13 +23,11 @@
 	let name = 'world'
 
 	const toggle = () => {
-		$canSend = false
 		$fullDisplay = 'nonHidden'
 
 		$isFlex = !$isFlex
 
 		setTimeout(() => {
-			// $user_message = ''
 			$fullDisplay = 'hidden'
 		}, 600)
 	}
@@ -55,12 +50,9 @@
 		}
 	}
 
-	//DebouncedSearchData
 	const debouncedHandleClick = debounce(handleClick, 1000)
 
-	//Main Function
 	async function handleClick(event: any) {
-		//Location-Google-Services-Prediction
 		const service = new google.maps.places.AutocompleteService()
 
 		try {
@@ -71,7 +63,6 @@
 			console.log(e)
 		}
 
-		// search-Data-GET
 		const searchInputData: any = $searchInput.trim()
 		if ($searchInput != '') {
 			const res = await fetch('/api/searchData', {
@@ -129,7 +120,6 @@
 			</button>
 		{/if}
 	</div>
-	<!-- <div class="absoluteBox"> -->
 	<button class="absoluteBox icon" on:click={toggle}>
 		{#if $nature === 'PUBLIC'}
 			<i class="fa-regular fa-heart" style="color:var(--secondary)" />
@@ -138,15 +128,7 @@
 		{:else if $nature === 'LOCATION'}
 			<i class="fa-solid fa-globe" style="color:var(--secOptDark)" />
 		{/if}
-		<!-- {#if $nature === 'PUBLIC'}
-			<i class="fa fa-user-o pad" />
-		{:else if $nature === 'HASHTAG'}
-			<i class="fa fa-hashtag" />
-		{:else if $nature === 'LOCATION'}
-			<i class="fa fa-location-pin pad" />
-		{/if} -->
 	</button>
-	<!-- </div> -->
 </div>
 
 <style>
@@ -162,7 +144,6 @@
 	}
 	.fa-globe {
 		text-shadow: 0 0 10px var(--secOptDark);
-		/* text-shadow: var(--boxShadows); */
 	}
 	.fa-couch,
 	.fa-heart,
@@ -180,19 +161,14 @@
 		background-color: var(--primaryTheme);
 		box-shadow: var(--boxInsetShadows);
 
-		/* padding: 2px 6px; */
-
 		height: 20px;
 
 		border-radius: calc(var(--borderRadius) / 1);
-		/* margin-left: calc(var(--averageMargin) * -0.25); */
 
 		color: var(--primaryThemeInverted);
 		padding-top: 3px;
 		padding-bottom: 3px;
 		padding-left: var(--averageMargin);
-		/* padding: 1rem; */
-		/* padding-left: calc(var(--averageMargin) * 1); */
 
 		font-family: UBold;
 		transition: border-radius 300ms ease-in-out;
@@ -221,8 +197,6 @@
 
 		height: 20px;
 		width: 100%;
-
-		/* margin-left: calc(var(--averageMargin) * -0.5); */
 	}
 	.searchButton {
 		position: absolute;
@@ -243,7 +217,6 @@
 		color: var(--primary);
 		font-size: calc(var(--fontSize) * 1.2);
 		padding: calc(var(--averageMargin) + 3px);
-		/* text-shadow: 0 0 1.5px black; */
 	}
 
 	.topHeaderLeft {
@@ -255,16 +228,12 @@
 		border-bottom-left-radius: var(--borderRadius);
 		overflow: hidden;
 
-		/* box-shadow: var(--boxShadows); */
-
 		overflow: visible;
 
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: space-between;
-		/* box-shadow: var(--boxShadowsBlur); */
-		/* box-shadow: 10px 0px 10px var(--green); */
 	}
 	.textBox {
 		width: max-content;

@@ -5,14 +5,11 @@ import { mainUser, groups } from '$db/collections'
 export const POST = (async ({ request }) => {
 	const { searchInputData } = await request.json()
 	console.log(searchInputData)
-	// const searchUserData = {}
-	// const searchGroupData = {}
 
 	const searchUserData = await mainUser
 		.aggregate([
 			{
 				$match: {
-					//starts with searchInputData
 					$or: [{ name: { $regex: '^' + searchInputData, $options: 'i' } }, { username: { $regex: '^' + searchInputData, $options: 'i' } }],
 				},
 			},
@@ -32,7 +29,6 @@ export const POST = (async ({ request }) => {
 		.aggregate([
 			{
 				$match: {
-					//starts with searchInputData
 					name: { $regex: '^' + searchInputData, $options: 'i' },
 					nature: 'HASHTAGS',
 				},

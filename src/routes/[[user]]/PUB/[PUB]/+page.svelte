@@ -7,13 +7,10 @@
 	import { pusher } from '$lib/bigFunctions/pusher'
 	import type { PageData } from './$types'
 	import { isFlex } from '$lib/stores/isFlex'
-	import { timeSince } from '$lib/bigFunctions/timeFormat'
-	import { isShowInfo } from '$lib/stores/isShowInfo'
-	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
-	import { debounce } from '$lib/bigFunctions/debounce'
+	import { currentGroupCreatedAt } from '$lib/stores copy/currentGroupCreatedAt'
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { likesabove10k, incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
+	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
 	import AllGroupMessages from '$lib/reusedComponents/AllGroupMessages.svelte'
 
 	export let data: PageData
@@ -61,7 +58,3 @@
 </svelte:head>
 
 <AllGroupMessages {data} />
-
-<style>
-	/* shifted to new-app.css */
-</style>

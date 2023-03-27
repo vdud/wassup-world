@@ -1,16 +1,13 @@
 <script lang="ts">
-	import { userName } from '$lib/stores/userName'
 	import { user_message } from '$lib/stores/user_message'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { fullDisplay } from '$lib/stores/fullDisplay'
 
 	import { locationPrediction } from '$lib/stores/locationPrediction'
 	import { nature } from '$lib/stores/nature'
-	import { json } from '@sveltejs/kit'
 	import { searchInput } from '$lib/stores/searchInput'
 	import { searchData } from '$lib/stores/searchData'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { publicReciever_Id } from '$lib/stores/publicReciever_Id'
 
 	const toggleTranslation = async (loc: any) => {
 		$fullDisplay = 'nonHidden'

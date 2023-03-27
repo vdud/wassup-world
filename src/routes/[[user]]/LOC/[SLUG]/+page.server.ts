@@ -13,11 +13,9 @@ export const load = (async ({ params }) => {
 		if (findUser) {
 			const findGroup = await groups.findOne({ _id: new ObjectId(SLUG) })
 			if (findGroup) {
-				// const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: findGroup._id })
 				const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: { $in: [findGroup._id] } })
 
 				if (!findUserLink) {
-					// await mainUser.updateOne({ _id: findUser._id }, { $push: { allGroups: findGroup._id } })
 					await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 				}
 
@@ -63,7 +61,6 @@ export const load = (async ({ params }) => {
 					])
 					.match({ likes: { $gt: 19 } })
 					.sort({ likes: 1 })
-					// sort by likes greater than 100
 					.limit(10)
 					.toArray()
 
@@ -124,7 +121,6 @@ export const load = (async ({ params }) => {
 				])
 				.match({ likes: { $gt: 19 } })
 				.sort({ likes: 1 })
-				// sort by likes greater than 100
 				.limit(10)
 				.toArray()
 
@@ -183,7 +179,6 @@ export const load = (async ({ params }) => {
 				])
 				.match({ likes: { $gt: 19 } })
 				.sort({ likes: 1 })
-				// sort by likes greater than 100
 				.limit(10)
 				.toArray()
 

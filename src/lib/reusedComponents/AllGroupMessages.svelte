@@ -10,6 +10,7 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 	import { isFlex } from '$lib/stores/isFlex'
+	import AboutGroup from './AboutGroup.svelte'
 
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
@@ -82,7 +83,7 @@
 			{/if}
 		{/each}
 
-		<div class="infoBox" style={isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-6rem; opacity:0;'}><div class="infoData"><h1 class="comingSoon">Working on the mechanics to make it the best social-app ever designed/engineered.</h1></div></div>
+		<AboutGroup />
 		{#if JSON.parse(data.body.topLikes).length > 0}
 			<div>
 				<h1 class="topLikesHeader">

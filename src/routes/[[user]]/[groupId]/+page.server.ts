@@ -49,7 +49,6 @@ export const load = (async ({ params }) => {
 			])
 			.match({ likes: { $gt: 19 } })
 			.sort({ likes: 1 })
-			// sort by likes greater than 100
 			.limit(10)
 			.toArray()
 

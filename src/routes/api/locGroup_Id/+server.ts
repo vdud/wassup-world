@@ -1,5 +1,3 @@
-// $searchInput
-
 import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 
@@ -15,7 +13,6 @@ export const POST = (async ({ request }) => {
 		const hashGroup = await groups.findOne({ name: loc, nature: 'LOCATIONS' })
 
 		if (!hashGroup) {
-			// const newGroup = await groups.insertOne({ name: loc, allUsers: [userName._id], nature: 'LOCATIONS', createdAt: new Date(), updatedAt: new Date() })
 			const newGroup = await groups.insertOne({ name: loc, allUsers: [mainUserFind._id], nature: 'LOCATIONS', createdAt: new Date(), updatedAt: new Date() })
 
 			return json({ success: true, locGroup_Id: newGroup.insertedId })

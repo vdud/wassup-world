@@ -51,7 +51,6 @@
 					return
 				} else {
 					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes })
-					// incrementTopLikes({ _id: data.messageId, $userName_id, likes: data.likes })
 				}
 			})
 			.bind('incrementReplies', (data: any) => {
@@ -74,7 +73,6 @@
 
 <div id="middleScroll" class="scroll">
 	{#if isReply === true}
-		<!-- go back to previous message -->
 		<div class="goBackDiv">
 			<button class="goBack" on:click={goBack}>
 				<i class="fa fa-arrow-left pageMessage" />

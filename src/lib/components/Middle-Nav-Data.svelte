@@ -1,25 +1,8 @@
 <script lang="ts">
-	import { locationPrediction } from '$lib/stores/locationPrediction'
 	import { loginResponseData } from '$lib/stores/loginResponseData'
 	import { nature } from '$lib/stores/nature'
-	import { json } from '@sveltejs/kit'
 	import { timeSince } from '$lib/bigFunctions/timeFormat'
-	import { applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
-	import { onMount } from 'svelte'
 	import { toggleLoc, toggleHashtag, togglePublic } from '$lib/bigFunctions/toggleNavLocs'
-
-	// const toggleLoc = (groupName: any) => {
-	// 	localStorage.setItem('nature', JSON.stringify({ $nature: 'LOCATION' }))
-	// 	window.location.pathname = '/LOC/' + groupName
-	// }
-	// const toggleHashtag = (groupName: any) => {
-	// 	localStorage.setItem('nature', JSON.stringify({ $nature: 'HASHTAG' }))
-	// 	window.location.pathname = '/HASH/' + groupName
-	// }
-	// const togglePublic = (groupName: any) => {
-	// 	localStorage.setItem('nature', JSON.stringify({ $nature: 'PUBLIC' }))
-	// 	window.location.pathname = '/PUB/' + groupName
-	// }
 </script>
 
 <div class="middleData">
@@ -187,15 +170,9 @@
 		border-radius: calc(var(--borderRadius) / 3);
 		color: var(--primaryTheme);
 		box-shadow: var(--boxShadows);
-		/* margin: calc(var(--averageMargin) * -0.5); */
-		/* margin-left: calc(var(--averageMargin) * 0.5); */
-		/* scale: 20; */
 
 		transition: all 200ms ease-in-out;
 		text-shadow: none;
-
-		/* background-size: 2; */
-		/* margin-left: 1px; */
 	}
 	.sendArrow {
 		color: var(--primaryTheme);
@@ -221,10 +198,7 @@
 	}
 	.noText {
 		font-size: calc(var(--fontSize) * 0.9);
-		/* font-family: Imprima; */
 		width: max-content;
-		/* padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2); */
-		/* background-color: var(--primaryThemeInverted); */
 		margin: var(--averageMargin);
 		scale: 0.9;
 		opacity: var(--dull);

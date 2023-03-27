@@ -2,27 +2,19 @@
 	import { currentPage } from '$lib/stores/currentPage'
 	import { userName } from '$lib/stores/userName'
 	import { onMount } from 'svelte'
-	import { autoresize } from 'svelte-textarea-autoresize'
 
 	import imageLogoSrc from '$lib/assets/fknLatest.png'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
-	import { titleData } from '$lib/stores/titleData'
-	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
 
 	function showInfo() {
 		$isShowInfo = !$isShowInfo
 	}
 
-	let xScroll = 0
-	let yScroll = 0
-
 	onMount(() => {
 		$currentPage = ''
 
 		$currentPageHeaderData = 'HOME'
-
-		$currentGroupCreatedAt = 0
 	})
 </script>
 
@@ -35,10 +27,6 @@
 	<meta property="og:url" content="https://wassup.world" />
 	<meta property="og:type" content="website" />
 	<meta property="og:site_name" content="Wassup.World" />
-	<!-- <meta name="twitter:title" content="Wassup.World - Location-Based Chat App" />
-	<meta name="twitter:description" content="Wassup.World is a location-based chat app that connects you with people nearby. Join conversations, make new friends, and discover what's happening in your area." />
-	<meta name="twitter:image" content="https://example.com/twitter-image.png" />
-	<meta name="twitter:card" content="summary_large_image" /> -->
 </svelte:head>
 
 <div class="middleScroll">
@@ -58,24 +46,6 @@
 				<br />
 				<p class="pWidth">With its user-friendly interface and diverse range of features, Wassup.World is the perfect app for anyone looking to connect with people in their local community or around the world. So why wait? Download Wassup.World today and start chatting!</p>
 				<br />
-				<!-- <ul class="pWidth" style="margin-left: -20px;">
-					<li><span style="font-weight: bold;">Location-based chat app:</span> Wassup.World allows users to connect with others in their local community in real-time.</li>
-					<br />
-					<li><span style="font-weight: bold;">Barcode system:</span> Users can easily join chat rooms specific to restaurants by scanning barcodes.</li>
-					<br />
-					<li><span style="font-weight: bold;">Hashtag system:</span> Users can create and discover discussions on a wide range of topics using hashtags.</li>
-					<br />
-					<li><span style="font-weight: bold;">Private conversations:</span> Users can have private conversations with each other, allowing for more intimate and personalized interactions.</li>
-					<br />
-					<li><span style="font-weight: bold;">User-friendly interface:</span> The app has a user-friendly interface that is easy to use and navigate.</li>
-					<br />
-					<li><span style="font-weight: bold;">Diverse range of features:</span> Wassup.World has a range of features, from foodie chat rooms to fitness discussions, making it suitable for a wide range of interests.</li>
-					<br />
-					<li><span style="font-weight: bold;">Connecting with like-minded individuals:</span> The app allows users to connect with others who share similar interests and passions, creating a sense of community.</li>
-					<br />
-					<li><span style="font-weight: bold;">Available worldwide:</span> Wassup.World can be used by people around the world, making it a great tool for connecting with people from different cultures and backgrounds.</li>
-					<br />
-				</ul> -->
 			</div>
 		</div>
 	</div>
@@ -109,28 +79,6 @@
 		margin-top: 1rem;
 	}
 
-	/* .Info {
-		transition: scale 333ms ease-in-out, padding 266ms ease-in-out, margin-top 266ms ease-in-out, opacity 266ms ease-in-out;
-		width: 80%;
-		height: fit-content;
-
-		background: var(--secondaryTheme);
-		box-shadow: var(--boxInsetShadowsInverted), var(--boxShadows);
-		border: var(--primaryTheme);
-		padding: 1rem;
-		margin-top: 1rem;
-		margin-bottom: 1rem;
-
-		border-radius: var(--borderRadius);
-
-		display: flex;
-		flex-direction: column;
-		justify-content: start;
-		align-items: center;
-
-		overflow: hidden;
-		z-index: 1;
-	} */
 	.logo {
 		scale: 0.21;
 	}
@@ -145,8 +93,6 @@
 		background-color: var(--secondaryTheme);
 		margin-top: var(--averageMargin);
 		padding: 0;
-
-		/* background-color: var(--red); */
 
 		display: flex;
 		justify-content: center;
@@ -175,7 +121,6 @@
 	}
 
 	.slot {
-		/* height: 100%; */
 		margin-bottom: var(--averageMargin);
 		width: 100%;
 		display: flex;
@@ -184,10 +129,6 @@
 		flex-direction: column;
 
 		margin-top: calc(var(--averageMargin) * 9);
-
-		/* position: absolute;
-		bottom: 0;
-		left: 0; */
 
 		padding: 1rem 0;
 	}

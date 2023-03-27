@@ -3,7 +3,6 @@
 	import { nature } from '$lib/stores/nature'
 	import { onDestroy, onMount } from 'svelte'
 
-	//setlocalStorage
 	const setlocalStorage = () => {
 		localStorage.setItem('nature', JSON.stringify({ $nature }))
 	}
@@ -62,9 +61,7 @@
 	}
 
 	.fa {
-		/* font-size: clamp(calc(var(--FontSize) * 1.5), 10vw, calc(var(--FontSize) * 3)); */
 		font-size: clamp(1rem, 6vw, 1.5rem);
-		/* font-size: 10rem; */
 	}
 	.navBoxy {
 		height: 100%;

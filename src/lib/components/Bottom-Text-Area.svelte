@@ -8,9 +8,7 @@
 	import { autoresize } from 'svelte-textarea-autoresize'
 	import sendButtonLogo from '$lib/assets/sendButton.svg'
 	import { currentPage } from '$lib/stores/currentPage'
-	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { messageId } from '$lib/stores/messageId'
-	// import { timeSince } from '$lib/timeFormat'
 
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !event.shiftKey) {
@@ -82,16 +80,14 @@
 
 <style>
 	.sendButtonLogo {
-		width: 20px;
-		height: 20px;
+		width: var(--buttonHW);
+		height: var(--buttonHW);
 		margin: 0;
 		padding: 0;
 	}
 	.textAreeaBox {
 		width: 100%;
-		height: 60%;
-		/* height: calc(max-content - 30px); */
-		/* margin-top: 100px; */
+		height: 80%;
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
@@ -99,20 +95,19 @@
 		position: relative;
 		pointer-events: all;
 
-		background-color: var(--primaryTheme);
-
-		/* border: 1px solid var(--tertiaryTheme); */
-		/* background-image: linear-gradient(rgba(0, 0, 0, 0), var(--primaryTheme)); */
+		background-color: var(--secondaryTheme);
 	}
 
 	::-webkit-scrollbar {
 		display: none;
 	}
+	.textArea {
+		background-color: var(--red);
+	}
 
 	textarea {
 		color: var(--primaryThemeInverted);
 		font-family: ULight;
-		/* box-shadow: var(--boxInsetShadows); */
 	}
 	textarea::placeholder {
 		color: var(--disabled);
@@ -142,7 +137,6 @@
 		right: 0.4rem;
 		bottom: 0.4rem;
 		transition: box-shadow 0.2s ease-in-out;
-		/* margin: 10px; */
 	}
 	.button:active {
 		box-shadow: var(--boxInsetShadows);
@@ -151,16 +145,17 @@
 		width: 100%;
 		height: 100%;
 		margin: 6px;
-		margin-right: 3.4rem;
-		padding: 8px;
+		height: 100%;
+		margin-right: calc(var(--buttonHW) + 30px);
+		padding: 14px;
 		border: none;
 		outline: none;
 		resize: none;
 		font-size: 1.2rem;
-		border-radius: calc(var(--borderRadius) / 3);
+		border-radius: var(--borderRadius);
 
 		box-shadow: var(--boxInsetShadows);
-		background-color: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 
 		max-height: 100px;
 	}
