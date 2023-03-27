@@ -10,16 +10,11 @@
 	import { isPUBLIC } from '$lib/stores/isPUBLIC'
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { json } from '@sveltejs/kit'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 	import { isFlex } from '$lib/stores/isFlex'
-	import { timeSince } from '$lib/bigFunctions/timeFormat'
 	import { currentGroupCreatedAt } from '$lib/stores/currentGroupCreatedAt'
-	import { isShowInfo } from '$lib/stores/isShowInfo'
-	import { isLocked } from '$lib/stores/isLocked'
-	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
-	import { likeThatMsg, likesabove10k, incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
+	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
 	import AllGroupMessages from '$lib/reusedComponents/AllGroupMessages.svelte'
 
 	onMount(() => {
@@ -56,34 +51,6 @@
 				incrementReplies({ _id: data.messageId, replies: data.totalReplies })
 			})
 	})
-
-	// const scrolltoBottom = () => {
-	// 	const middleScroll: any = document.getElementById('middleScroll')
-	// 	middleScroll.scrollTop = middleScroll.scrollHeight
-	// }
-
-	// let aboveSwitch = false
-	// const parseScroll = () => {
-	// 	const middleScroll: any = document.getElementById('middleScroll')
-	// 	if (middleScroll.scrollTop < -69) {
-	// 		aboveSwitch = true
-	// 	} else if (middleScroll.scrollTop > -69) {
-	// 		aboveSwitch = false
-	// 	}
-	// }
-	// const debouncedScroll = debounce(parseScroll, 300)
-
-	const like = ({ _id, likes }: any) => {
-		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
-	}
-
-	const goTo = (_id: any) => {
-		window.location.pathname = '/Messages/' + _id
-	}
-
-	// const likeTop = ({ _id, likes }: any) => {
-	// 	likeTopMessage({ _id, $userName_id, likes, $userGroup_id })
-	// }
 </script>
 
 <svelte:head>
@@ -91,7 +58,7 @@
 	<meta name="description" content="This is a simple discourse on hashtag : {data.body.groupName}, as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
 </svelte:head>
 
-<AllGroupMessages userName={$userName} userName_id={$userName_id} isShowInfo={$isShowInfo} {data} {goTo} {like} {timeSince} {likesabove10k} />
+<AllGroupMessages {data} />
 
 <style>
 	/* shifted to new-app.css */

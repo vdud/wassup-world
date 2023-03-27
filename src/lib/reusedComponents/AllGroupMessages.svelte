@@ -1,15 +1,26 @@
 <script lang="ts">
-	import { debounce } from '$lib/bigFunctions/debounce'
 	import { onMount } from 'svelte'
 
-	export let userName = ''
-	export let userName_id = ''
-	export let isShowInfo = false
+	import { debounce } from '$lib/bigFunctions/debounce'
+	import { timeSince } from '$lib/bigFunctions/timeFormat'
+	import { likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
+
+	import { userName } from '$lib/stores/userName'
+	import { userName_id } from '$lib/stores/userName_id'
+	import { userGroup_id } from '$lib/stores/userGroup_id'
+	import { isShowInfo } from '$lib/stores/isShowInfo'
+	import { isFlex } from '$lib/stores/isFlex'
+
+	const like = ({ _id, likes }: any) => {
+		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
+	}
+
+	const goTo = (_id: any) => {
+		$isFlex = true
+		window.location.pathname = '/Messages/' + _id
+	}
+
 	export let data = {}
-	export let goTo: any
-	export let like: any
-	export let timeSince: any
-	export let likesabove10k: any
 
 	onMount(() => {})
 
