@@ -540,13 +540,9 @@ textarea:focus {
 @media screen and (min-width: 1410px) {
 }
 
-/* +page.svelte css */
-
 .pageMessage {
 	color: var(--primaryThemeInverted);
 }
-
-/* messageReplies */
 
 .h1Text {
 	font-family: UBold;
@@ -572,7 +568,6 @@ textarea:focus {
 	word-break: break-all;
 }
 .replyMainMsg {
-	/* width: 100%; */
 	height: auto;
 }
 .flexBod {
@@ -586,9 +581,6 @@ textarea:focus {
 
 	position: relative;
 	overflow: hidden;
-
-	/* background-image: linear-gradient(var(--secondaryTheme), var(--primaryTheme)); */
-	/* background-image: linear-gradient(var(--primaryTheme), var(--secondaryTheme)); */
 }
 .paddingBottom {
 	padding-bottom: calc(var(--averageMargin) * 5);
