@@ -7,7 +7,6 @@
 	import { pusher } from '$lib/bigFunctions/pusher'
 	import type { PageData } from './$types'
 	import { isFlex } from '$lib/stores/isFlex'
-	import { currentGroupCreatedAt } from '$lib/stores copy/currentGroupCreatedAt'
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { userName_id } from '$lib/stores/userName_id'
 	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
@@ -18,7 +17,6 @@
 	onMount(() => {
 		$isFlex = false
 		$currentPageHeaderData = data.body.groupName
-		$currentGroupCreatedAt = data.body.createdAt
 
 		$currentPage = 'PUBLIC'
 		$userGroup_id = JSON.parse(data.body.groupId)

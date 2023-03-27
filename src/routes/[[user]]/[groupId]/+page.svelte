@@ -10,7 +10,6 @@
 	import { userName_id } from '$lib/stores/userName_id'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 	import { isFlex } from '$lib/stores/isFlex'
-	import { currentGroupCreatedAt } from '$lib/stores copy/currentGroupCreatedAt'
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
 	import AllGroupMessages from '$lib/reusedComponents/AllGroupMessages.svelte'
@@ -20,7 +19,6 @@
 		$currentPage = data.body.nature
 		$userGroup_id = JSON.parse(data.groupId)
 		$currentPageHeaderData = data.body.groupName
-		$currentGroupCreatedAt = data.body.createdAt
 
 		pusher
 			.subscribe($userGroup_id)

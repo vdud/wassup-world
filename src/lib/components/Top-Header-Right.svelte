@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { currentLayoutPage } from '$lib/stores/currentLayoutPage'
 	import { fullDisplay } from '$lib/stores/fullDisplay'
 	import { isFlex } from '$lib/stores/isFlex'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
