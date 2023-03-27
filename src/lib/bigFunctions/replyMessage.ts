@@ -1,4 +1,4 @@
-import { likesabove10k } from './likeThatMsg'
+import { likeThatMsg, likesabove10k } from './likeThatMsg'
 import { timeSince } from './timeFormat'
 
 export const replyMessage = async (data: any) => {
@@ -17,10 +17,10 @@ export const replyMessage = async (data: any) => {
 		const span = document.createElement('span')
 		span.classList.add('sender')
 		span.style.color = 'var(--primary)'
-		span.innerText = data.sender + '; '
+		span.innerText = data.data.sender + '; '
 		const span2 = document.createElement('span')
-		span2.style.color = 'var(--tertiaryThemeInverted)'
-		span2.innerText = data.message
+		span2.style.color = 'var(--primaryThemeInverted)'
+		span2.innerText = data.data.message
 
 		p.appendChild(span)
 		p.appendChild(span2)
@@ -30,7 +30,7 @@ export const replyMessage = async (data: any) => {
 
 		const timeSpan = document.createElement('span')
 		timeSpan.classList.add('timeSpan', 'flexTime')
-		timeSpan.innerText = timeSince(data.createdAt)
+		timeSpan.innerText = timeSince(data.data.createdAt)
 
 		const totalRepliesButton = document.createElement('button')
 		totalRepliesButton.classList.add('timeSpan')
@@ -38,8 +38,8 @@ export const replyMessage = async (data: any) => {
 		const totalRepliespText = document.createElement('p')
 		totalRepliespText.classList.add('totalRepliespText')
 		const totalRepliesSpan = document.createElement('span')
-		totalRepliesSpan.id = 'Replies_No?' + data._id
-		totalRepliesSpan.innerText = likesabove10k(data.totalReplies) + ' replies'
+		totalRepliesSpan.id = 'Replies_No?' + data.data._id
+		totalRepliesSpan.innerText = likesabove10k(data.data.totalReplies) + ' replies'
 
 		totalRepliespText.appendChild(totalRepliesSpan)
 		totalRepliesButton.appendChild(totalRepliespText)
@@ -48,16 +48,16 @@ export const replyMessage = async (data: any) => {
 		likeButton.classList.add('timeSpan', 'replyLikeButton')
 		likeButton.style.marginLeft = '10px'
 		likeButton.onclick = () => {
-			like({ _id: data._id, likes: data.likes })
+			likeThatMsg({ _id: data.data._id, likes: 0, $userName_id: data.$userName_id, $userGroup_id: data.$userGroup_id })
 		}
 		const optDark = document.createElement('span')
 		optDark.classList.add('optDark')
-		optDark.id = 'LIKE_NO?' + data._id
+		optDark.id = 'LIKE_NO?' + data.data._id
 		optDark.innerText = '0'
 		const FA_SOLIDi = document.createElement('i')
 		FA_SOLIDi.classList.add('fa-regular', 'fa-heart', 'optDark')
 		FA_SOLIDi.style.margin = '3px'
-		FA_SOLIDi.id = 'FA_SOLID?' + data._id
+		FA_SOLIDi.id = 'FA_SOLID?' + data.data._id
 
 		likeButton.appendChild(optDark)
 		likeButton.appendChild(FA_SOLIDi)
@@ -66,7 +66,7 @@ export const replyMessage = async (data: any) => {
 		goToButton.classList.add('timeSpan', 'LikeSpan')
 		goToButton.style.marginLeft = '10px'
 		goToButton.onclick = () => {
-			window.location.pathname = '/Messages/' + data._id
+			window.location.pathname = '/Messages/' + data.data._id
 		}
 		const goToText = document.createElement('p')
 		goToText.classList.add('totalRepliespText', 'REPLY_TEXT')

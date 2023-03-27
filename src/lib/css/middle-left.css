@@ -23,7 +23,7 @@
 	font-family: ULight;
 	margin-left: calc(var(--averageMargin) * -0.8);
 
-	color: var(--secondaryThemeInverted);
+	color: var(--primaryThemeInverted);
 }
 .text2 {
 	height: 25px;
@@ -34,7 +34,7 @@
 	overflow: auto;
 
 	background-color: var(--tertiaryTheme);
-	color: var(--secondaryThemeInverted);
+	color: var(--primaryThemeInverted);
 
 	margin-bottom: 5px;
 }
@@ -42,7 +42,7 @@
 	height: 15px;
 
 	font-size: calc(var(--fontSize) / 1.75);
-	color: var(--secondaryThemeInverted);
+	color: var(--primaryThemeInverted);
 
 	background-color: var(--tertiaryTheme);
 	border-radius: calc(var(--averageMargin) / 3);
@@ -106,7 +106,7 @@
 	padding-left: var(--averageMargin);
 }
 .LogoButton {
-	background-color: var(--secondaryThemeInverted);
+	background-color: var(--primaryThemeInverted);
 	scale: 0.6;
 	padding: calc(var(--averageMargin) / 2) var(--averageMargin);
 
@@ -127,7 +127,7 @@
 	width: max-content;
 }
 .arrow {
-	background-color: var(--secondaryThemeInverted);
+	background-color: var(--primaryThemeInverted);
 	color: var(--primaryTheme);
 	text-shadow: none;
 	padding: calc(var(--averageMargin));

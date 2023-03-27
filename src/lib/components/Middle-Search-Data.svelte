@@ -114,7 +114,7 @@
 							}}>
 							<p class="hashMsg">
 								<span class="fa fa-arrow-right fontBox arrow" />
-								<span class="BOLD fontBox" style="color:var(--secondaryThemeInverted)">Message </span>
+								<span class="BOLD fontBox" style="color:var(--primaryThemeInverted)">Message </span>
 								<span class="BOLD fontBox" style="color:var(--secondary)">;{$searchInput}</span>
 							</p>
 						</button>
@@ -125,7 +125,7 @@
 					<button class="sendMsgBox">
 						<p class="hashMsg">
 							<span class="fa fa-arrow-right fontBox arrow" />
-							<span class="BOLD fontBox" style="color:var(--secondaryThemeInverted)">Message </span>
+							<span class="BOLD fontBox" style="color:var(--primaryThemeInverted)">Message </span>
 							<span class="BOLD fontBox" style="color:var(--secondary)">Noone's here 🤭</span>
 						</p>
 					</button>
@@ -152,7 +152,7 @@
 									class="contactBox">
 									<div class="i"><i class="fa fa-hashtag LogoButton" /></div>
 									<div class="cBoxText">
-										<p class="cText" style="color: var(--secondary)">
+										<p class="cText" style="color: var(--primary)">
 											{group.name}
 										</p>
 									</div>
@@ -162,7 +162,7 @@
 							<div class="contactBox">
 								<div class="i"><i class="fa fa-hashtag LogoButton" /></div>
 								<div class="cBoxText">
-									<p class="cText" style="color: var(--secondary)">No Group Found</p>
+									<p class="cText" style="color: var(--primary)">No Group Found</p>
 								</div>
 							</div>
 						{/if}
@@ -193,7 +193,7 @@
 					}}
 					><p class="hashMsg">
 						<span class="fa fa-arrow-right fontBox arrow" />
-						<span class=" fontBox" style="color:var(--secondaryThemeInverted)">Go To </span>
+						<span class=" fontBox" style="color:var(--primaryThemeInverted)">Go To </span>
 						<span class=" fontBox cText" style="color:var(--primary)"> #{$searchInput}</span>
 					</p>
 				</button>

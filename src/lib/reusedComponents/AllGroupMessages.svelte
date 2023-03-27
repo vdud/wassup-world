@@ -10,9 +10,7 @@
 	export let timeSince: any
 	export let likesabove10k: any
 
-	onMount(() => {
-		// console.log(dataBodyMessages)
-	})
+	onMount(() => {})
 </script>
 
 {#each JSON.parse(data.body.messages) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}

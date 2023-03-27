@@ -31,6 +31,8 @@ export const load = (async ({ params }) => {
 					},
 				}
 			}
+		} else {
+			return
 		}
 	}
 }) satisfies PageServerLoad

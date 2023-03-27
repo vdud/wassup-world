@@ -42,7 +42,7 @@
 		$messageId = messageData._id
 
 		pusher.subscribe($messageId).bind('ReplyMessage', (data: any) => {
-			replyMessage(data)
+			replyMessage({ data, $userGroup_id, $userName_id })
 		})
 		pusher
 			.subscribe($userGroup_id)
@@ -72,30 +72,30 @@
 	})
 </script>
 
-<div id="middleScroll">
+<div id="middleScroll" class="scroll">
 	{#if isReply === true}
 		<!-- go back to previous message -->
 		<div class="goBackDiv">
 			<button class="goBack" on:click={goBack}>
-				<i class="fa fa-arrow-left" />
-				<p style="text-shadow:none;">GO BACK</p>
+				<i class="fa fa-arrow-left pageMessage" />
+				<p style="text-shadow:none;" class="pageMessage">GO BACK</p>
 			</button>
 		</div>
 	{:else}
 		<div class="goBackDiv">
 			<button class="goBack" on:click={goBackHome}>
-				<i class="fa fa-arrow-left" />
-				<p class="UBold">GO BACK</p>
+				<i class="fa fa-arrow-left pageMessage" />
+				<p class="UBold pageMessage">GO BACK</p>
 			</button>
 		</div>
 	{/if}
 
 	<div class="replyMainMsg">
 		<div class="flexBod paddingBottom">
-			<p class="mainMessage" style={messageData.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{messageData.sender}; </span> <span class="message">{messageData.message}</span></p>
+			<p class="mainMessage" style={messageData.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{messageData.sender}; </span> <span class="pageMessage">{messageData.message}</span></p>
 			<span class="bottomButtons">
 				<span class="timeSpan flexTime">{timeSince(messageData.createdAt)}</span>
-				<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{messageData._id}">{likesabove10k(messageData.totalReplies)} replies</span></p></button>
+				<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{messageData._id}">{likesabove10k(messageData.totalReplies.toString())} replies</span></p></button>
 				<button on:click={like.bind(globalThis, { _id: messageData._id, likes: messageData.likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{messageData._id}">{likesabove10k(messageData.likes)}</span><i id="FA_SOLID?{messageData._id}" class="{messageData.likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
 			</span>
 		</div>
@@ -110,14 +110,14 @@
 			{#if messageData.replies.length === 0}
 				<div class="flexBod flexReplyBod" id="removeBeforeSending">
 					<button on:click={focusOnTextArea} class="noReplyButton">
-						<p class="noMessage UBold">send-a-message</p>
+						<p class="noMessage UBold pageMessage">send-a-message</p>
 						<i class="fa fa-arrow-right noMessage" />
 					</button>
 				</div>
 			{:else}
 				{#each replyData as { _id, sender, message, createdAt, likes, likedPeople, totalReplies }}
 					<div class="flexBod flexReplyBod paddingBottom">
-						<p class="mainMessage"><span class="sender" style="color: var(--primary)">{sender}; </span><span style="color: var(--tertiaryThemeInverted)">{message}</span></p>
+						<p class="mainMessage"><span class="sender" style="color: var(--primary)">{sender}; </span><span style="color: var(--primaryThemeInverted)">{message}</span></p>
 						<span class="bottomButtons">
 							<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
 							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
@@ -134,6 +134,10 @@
 </div>
 
 <style>
+	.scroll {
+		height: 100%;
+		overflow: auto;
+	}
 	.UBold {
 		font-family: UBold;
 		text-shadow: none;
@@ -144,7 +148,7 @@
 		box-shadow: var(--boxShadows);
 		padding: 0.5rem 1rem;
 		border-radius: var(--borderRadius);
-		color: var(--tertiaryThemeInverted);
+		color: var(--primaryThemeInverted);
 		margin-right: var(--averageMargin);
 
 		transition: all 0.2s ease-in-out;
@@ -152,7 +156,7 @@
 	.noMessage:hover,
 	.noMessage:active {
 		background-color: var(--tertiaryThemeInverted);
-		color: var(--tertiaryTheme);
+		color: var(--primaryTheme);
 		box-shadow: var(--boxShadowsBlur);
 	}
 	.noReplyButton {

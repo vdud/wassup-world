@@ -60,7 +60,7 @@
 								<button on:click={toggleLoc.bind(globalThis, name)} id="locBox?{_id}" class="locBox {i === 0 ? 'locBoxLocationNotification' : ''}">
 									<!-- SENDER -->
 									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2" style={i === 0 ? 'color: var(--secOptDark)' : ''} id="gName?{_id}">{name.toUpperCase()}</p>
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--secOptDark); -webkit-text-stroke: .2px black; text-shadow: 0 0 1.4px black' : ''} id="gName?{_id}">{name.toUpperCase()}</p>
 									</div>
 
 									<!-- LATEST MESSAGE -->
@@ -73,7 +73,7 @@
 												<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender">
 													{latestMessageSender};
 												</span>
-												<span id="LM?{_id}" class="latestMessage">
+												<span id="LM?{_id}" class="latestMessage pageMessage">
 													{lastMessage}
 												</span>
 											{/if}
@@ -106,7 +106,7 @@
 							{#if i < 9}
 								<button on:click={toggleHashtag.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxHashNotification' : ''}">
 									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2" style={i === 0 ? 'color: var(--primary)' : ''} id="gName?{group._id}">#{group.name.toUpperCase()}</p>
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--primary) ; -webkit-text-stroke: .2px black; text-shadow: 0 0 1.4px black' : ''} id="gName?{group._id}">#{group.name.toUpperCase()}</p>
 									</div>
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize)">
@@ -117,7 +117,7 @@
 												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--primary)' : ''} class="latestMessageSender">
 													{group.latestMessageSender};
 												</span>
-												<span id="LM?{group._id}" class="latestMessage">
+												<span id="LM?{group._id}" class="latestMessage pageMessage">
 													{group.lastMessage}
 												</span>
 											{/if}
@@ -147,7 +147,7 @@
 							{#if i < 9}
 								<button on:click={togglePublic.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxPubNotification' : ''}">
 									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2" style={i === 0 ? 'color: var(--secondary)' : ''} id="gName?{group._id}">{group.name.toUpperCase()}</p>
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--secondary); -webkit-text-stroke: .2px black; text-shadow: 0 0 1.4px black' : ''} id="gName?{group._id}">{group.name.toUpperCase()}</p>
 									</div>
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize); ">
@@ -158,7 +158,7 @@
 												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--secondary)' : ''} class="latestMessageSender">
 													{group.latestMessageSender};
 												</span>
-												<span id="LM?{group._id}" class="latestMessage">
+												<span id="LM?{group._id}" class="latestMessage pageMessage">
 													{group.lastMessage}
 												</span>
 											{/if}

@@ -19,7 +19,7 @@
 	import { debounce } from '$lib/bigFunctions/debounce'
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { likeThatMsg, likesabove10k, incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
-	import MessageList from '$lib/reusedComponents/MessageList.svelte'
+	import AllGroupMessages from '$lib/reusedComponents/AllGroupMessages.svelte'
 
 	onMount(() => {
 		$isFlex = false
@@ -106,7 +106,7 @@
 	<div class="margins margin-bottom" />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
-		<MessageList userName={$userName} userName_id={$userName_id} isShowInfo={$isShowInfo} {data} {goTo} {like} {timeSince} {likesabove10k} />
+		<AllGroupMessages userName={$userName} userName_id={$userName_id} isShowInfo={$isShowInfo} {data} {goTo} {like} {timeSince} {likesabove10k} />
 	</div>
 	<div class="margins margin-top" />
 </div>

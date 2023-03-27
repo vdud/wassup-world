@@ -5,8 +5,8 @@
 		--tertiaryTheme: #333;
 
 		--primaryThemeInverted: #fff;
-		--secondaryThemeInverted: #aaa;
-		--tertiaryThemeInverted: #999;
+		--secondaryThemeInverted: #aaaaaaa1;
+		--tertiaryThemeInverted: #7c7c7c63;
 
 		--boxNeoShadows: 1px 1px 2px #111111, -1px -1px 2px #414141;
 		--boxNeoShadowsInverted: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
@@ -23,20 +23,21 @@
 	:root {
 		--primaryTheme: #bbb;
 		--secondaryTheme: #ddd;
-		--tertiaryTheme: #3a3a3a;
+		--tertiaryTheme: #999;
 
-		--primaryThemeInverted: #fff;
-		--secondaryThemeInverted: #898989;
-		--tertiaryThemeInverted: #0f0f0f;
+		--primaryThemeInverted: #000000;
+		--secondaryThemeInverted: #505050;
+		--tertiaryThemeInverted: #555555;
 
 		--boxNeoShadows: 1px 1px 2px #adadad, -1px -1px 2px #e0e0e0;
 		--boxNeoShadowsInverted: 1px 1px 2px #111111, -1px -1px 2px #414141;
 
-		--textShadows: 0px 0px 0.5px #000;
+		--textShadows: 0px 0px 2px #9992, 0px 0px 4px #9994;
+		/* --textShadows: 0px 0px 0.5px #000; */
 	}
 	/* p,
 	h1 {
-		-webkit-text-stroke: 0.1px black;
+		-webkit-text-stroke: 01px black;
 	} */
 }
 :root {
@@ -542,7 +543,7 @@ textarea:focus {
 /* +page.svelte css */
 
 .pageMessage {
-	color: var(--tertiaryThemeInverted);
+	color: var(--primaryThemeInverted);
 }
 
 /* messageReplies */

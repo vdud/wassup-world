@@ -22,7 +22,7 @@ export const likeThatMsg = async (data: any) => {
 
 	const LIKE_NO = document.getElementById(`LIKE_NO?${data._id}`)
 	if (LIKE_NO) {
-		LIKE_NO.innerHTML = likesabove10k(response.likes).toString()
+		LIKE_NO.innerHTML = likesabove10k(response.likes)
 	}
 
 	const FA_SOLID_TOP = document.getElementById(`FA_SOLID_TOP?${data._id}`)
