@@ -6,7 +6,7 @@
 	import { applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 
 	import { autoresize } from 'svelte-textarea-autoresize'
-	import sendButtonLogo from '$lib/assets/sendButton.svg'
+	import sendButtonLogo from '$lib/assets/sendBtn.png'
 	import { currentPage } from '$lib/stores/currentPage'
 	import { messageId } from '$lib/stores/messageId'
 
@@ -84,6 +84,8 @@
 		height: var(--buttonHW);
 		margin: 0;
 		padding: 0;
+
+		scale: 3;
 	}
 	.textAreeaBox {
 		width: 100%;
@@ -131,12 +133,14 @@
 		justify-content: center;
 		align-items: center;
 
-		border-radius: calc(var(--borderRadius) / 1.69);
+		/* border-radius: calc(var(--borderRadius) / 1.69); */
 		box-shadow: var(--boxShadows);
 
 		right: 0.4rem;
 		bottom: 0.4rem;
 		transition: box-shadow 0.2s ease-in-out;
+
+		overflow: hidden;
 	}
 	.button:active {
 		box-shadow: var(--boxInsetShadows);

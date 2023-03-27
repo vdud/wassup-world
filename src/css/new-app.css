@@ -506,7 +506,7 @@ textarea:focus {
 }
 
 .margin-bottom {
-	height: 4rem;
+	padding: 2rem;
 }
 .margin-top {
 	padding: 4rem;
