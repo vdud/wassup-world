@@ -26,17 +26,21 @@
 		}, 600)
 	}
 	const togglehRef = () => {
-		const middleScroll: any = document.getElementById('middleScroll')
 		$isShowInfo = !$isShowInfo
+		const middleScroll: any = document.getElementById('middleScroll')
+		if (middleScroll) {
+			setTimeout(() => {
+				middleScroll.scrollTop = middleScroll.scrollHeight * -1
+			}, 10)
+		}
 		// if (middleScroll.scrollTop === scrollTop) {
 		// }
-		setTimeout(() => {
-			middleScroll.scrollTop = middleScroll.scrollHeight * -1
-		}, 10)
 	}
 	const headToTop = () => {
 		const middleScroll: any = document.getElementById('middleScroll')
-		middleScroll.scrollTop = middleScroll.scrollHeight * -1
+		if (middleScroll) {
+			middleScroll.scrollTop = middleScroll.scrollHeight * -1
+		}
 	}
 </script>
 
@@ -146,7 +150,7 @@
 		position: relative;
 		height: 100%;
 		width: 100%;
-		background: var(--secondaryTheme);
+		background-color: var(--secondaryTheme);
 
 		border-bottom-right-radius: var(--borderRadius);
 	}

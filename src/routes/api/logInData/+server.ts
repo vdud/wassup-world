@@ -1,7 +1,30 @@
 import { json } from '@sveltejs/kit'
+
 import type { RequestHandler } from './$types'
 
 import { mainUser } from '$db/collections'
+
+// import PusherPushNotifications from '@pusher/push-notifications-web'
+// const beamsClient = new PusherPushNotifications.Client({
+// 	instanceId: 'c9d50f68-33d2-4426-8a8d-2e82f0b778e7',
+// })
+
+// beamsClient
+// 	.start()
+// 	.then(() => beamsClient.addDeviceInterest('hello'))
+// 	.then(() => console.log('Successfully registered and subscribed!'))
+// 	.catch(console.error)
+// const beamsClient = new PusherPushNotifications.Client({
+// 	instanceId: 'c9d50f68-33d2-4426-8a8d-2e82f0b778e7',
+// })
+
+// beamsClient
+// 	.start()
+// 	.then(() => beamsClient.addDeviceInterest('hello'))
+// 	.then(() => console.log('Successfully registered and subscribed!'))
+// 	.catch(console.error)
+
+// console.log('PusherPushNotifications', PusherPushNotifications)
 
 export const POST = (async ({ request }) => {
 	const { data } = await request.json()
@@ -9,9 +32,10 @@ export const POST = (async ({ request }) => {
 
 	const findUser = await mainUser.findOne({ name: userName })
 	if (!findUser) {
-		const newUser = await mainUser.insertOne({ name: userName, allGroups: [] })
+		const newUser = await mainUser.insertOne({ name: userName, allGroups: [], lastLoggedIn: new Date() })
 		return json({ success: true, userName_id: newUser.insertedId, data: { formatedPUBLICdata: [], formatedHASHTAGSdata: [], formatedLOCdata: [] } })
 	} else {
+		mainUser.updateOne({ _id: findUser._id }, { $set: { lastLoggedIn: new Date() } })
 		const formattedUserData = await mainUser
 			.aggregate([
 				{ $match: { _id: findUser._id } },

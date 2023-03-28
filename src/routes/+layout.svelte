@@ -1,4 +1,6 @@
 <script lang="ts">
+	// import PusherPushNotifications = require('@pusher/push-notifications-web')
+
 	import '$lib/css/middle-left.css'
 	import '../css/new-app.css'
 
@@ -19,12 +21,35 @@
 	import MiddleNavData from '$lib/components/Middle-Nav-Data.svelte'
 	import LockScreen from '$lib/components/Lock-Screen.svelte'
 
+	// import * as PusherPushNotifications from '@pusher/push-notifications-web'
+	// import { Client, RegistrationState, TokenProvider } from '@pusher/push-notifications-web'
+	// import Pusher from 'pusher-js';
+	// import Pusher from 'pusher'
+
 	import { onDestroy, onMount } from 'svelte'
 	import { interChangableMessage } from '$lib/stores/interChangableMessage'
 
-	let zIndex = 0
-
 	onMount(() => {
+		// if ('serviceWorker' in navigator) {
+		// 	navigator.serviceWorker.register('/service-worker.js').catch((error) => {
+		// 		console.error('Error registering service worker:', error)
+		// 	})
+		// }
+		// const findPusherBeam = async () => {
+		// 	console.log('Hello')
+		// 	const pusherModule = (await import('@pusher/push-notifications-web')).default
+		// 	console.log('pusherModule', pusherModule)
+		// 	console.log('Hello')
+		// 	// const Pusher = (await import('@pusher/push-notifications-web/dist/push-notifications-cjs')).default
+
+		// 	// const beamsClient = new Client({
+		// 	// 	instanceId: 'd0e1c1e0-0b1f-4b1f-9c1f-0b1f4b1f9c1f',
+		// 	// })
+		// 	console.log('Hello')
+		// 	// console.log('beamsClient', beamsClient)
+		// }
+		// findPusherBeam()
+
 		$interChangableMessage = `wassup ${$userName}`
 		const savedNatureDataString = localStorage.getItem('nature')
 		if (savedNatureDataString) {
@@ -46,6 +71,18 @@
 		PlacesApi.defer = true
 		document.body.appendChild(PlacesApi)
 	})
+
+	// const enableNotifications = () => {
+	// 	const beamsClient = new Client({
+	// 		instanceId: 'd0e1c1e0-0b1f-4b1f-9c1f-0b1f4b1f9c1f',
+	// 	})
+
+	// 	beamsClient
+	// 		.start()
+	// 		.then(() => beamsClient.addDeviceInterest('hello'))
+	// 		.then(() => console.log('Successfully registered and subscribed!'))
+	// 		.catch(console.error)
+	// }
 
 	const tilda = (e: KeyboardEvent) => {
 		if (e.key === 'Escape') {
@@ -70,6 +107,8 @@
 		pusher.disconnect()
 	})
 </script>
+
+<!-- <button on:click={enableNotifications}>Enable Notifications</button> -->
 
 <div class="main">
 	<div class="window">

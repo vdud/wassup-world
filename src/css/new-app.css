@@ -13,11 +13,6 @@
 
 		--textShadows: 0px 0px 2px #1114, 0px 0px 4px #000;
 	}
-
-	/* p,
-	h1 {
-		-webkit-text-stroke: 0.1px white;
-	} */
 }
 @media (prefers-color-scheme: light) {
 	:root {
@@ -35,10 +30,6 @@
 		--textShadows: 0px 0px 2px #9992, 0px 0px 4px #9994;
 		/* --textShadows: 0px 0px 0.5px #000; */
 	}
-	/* p,
-	h1 {
-		-webkit-text-stroke: 01px black;
-	} */
 }
 :root {
 	--fontSize: 16px;
@@ -173,9 +164,9 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: var(--tertiaryTheme);
+	background: var(--optDark);
 	/* background-color: transparent; */
-	border-radius: 2px;
+	border-radius: var(--borderRadius);
 }
 
 /* Handle on hover */
@@ -448,26 +439,6 @@ textarea:focus {
 	}
 }
 
-.infoBox {
-	width: 100%;
-	height: max-content;
-	margin-right: -6px;
-}
-.infoData {
-	height: 100px;
-	width: calc(100%-1rem);
-	background-color: var(--secondaryTheme);
-	box-shadow: var(--boxShadows);
-	border: 0.3px solid var(--secondaryThemeInverted);
-
-	border-radius: var(--borderRadius);
-
-	margin: var(--averageMargin);
-
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
 .comingSoon {
 	color: var(--tertiaryThemeInverted);
 
@@ -522,6 +493,8 @@ textarea:focus {
 	overflow-y: scroll;
 
 	pointer-events: all;
+
+	background-color: var(--primaryTheme);
 }
 .hashMessagesContainer {
 	display: flex;
@@ -607,4 +580,12 @@ textarea:focus {
 	left: calc(var(--averageMargin) * 1.3);
 
 	display: flex;
+}
+
+.pText {
+	padding: var(--averageMargin) 0;
+}
+
+.replySender {
+	font-family: UBold;
 }

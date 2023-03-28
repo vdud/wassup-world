@@ -10,6 +10,7 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { isFlex } from '$lib/stores/isFlex'
 	import AboutGroup from './AboutGroup.svelte'
+	import GroupAd from './GroupAd.svelte'
 
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
@@ -49,26 +50,27 @@
 <div class="hashContainer" id="middleScroll" on:scroll={debouncedScroll}>
 	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
+	<GroupAd />
 	<div id="textMessages" />
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.messages) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}
 			{#if sender !== $userName}
 				<div class="text sender">
-					<p class="textShadows">
-						<span style="color:var(--primary)">{sender}; </span>
+					<p class="pText textShadows">
+						<span class="replySender" style="color:var(--primary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
-						<span class="spanFlexLeft">
-							<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
-							<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
-							<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
-							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
-						</span>
 					</p>
+					<span class="spanFlexLeft">
+						<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
+						<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
+						<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
+						<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+					</span>
 				</div>
 			{:else if sender === $userName}
 				<div class="text yoMe">
-					<p class="textShadows">
-						<span style="color:var(--secondary)">{sender}; </span>
+					<p class="pText textShadows">
+						<span class="replySender" style="color:var(--secondary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>
 						<span class="spanFlexRight">
 							<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
@@ -93,8 +95,8 @@
 				{#each JSON.parse(data.body.topLikes) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}
 					{#if sender !== $userName}
 						<div class="text sender">
-							<p class="textShadows">
-								<span style="color:var(--primary)">{sender}; </span>
+							<p class="pText textShadows">
+								<span class="replySender" style="color:var(--primary)">{sender}; </span>
 								<span class="pageMessage">{message}</span>
 								<span class="spanFlexLeft">
 									<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
@@ -106,8 +108,8 @@
 						</div>
 					{:else if sender === $userName}
 						<div class="text yoMe">
-							<p class="textShadows">
-								<span style="color:var(--secondary)">{sender}; </span>
+							<p class="pText textShadows">
+								<span class="senderReply" style="color:var(--secondary)">{sender}; </span>
 								<span class="pageMessage">{message}</span>
 								<span class="spanFlexRight">
 									<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
@@ -124,3 +126,6 @@
 	</div>
 	<div class="margins margin-top" />
 </div>
+
+<style>
+</style>
