@@ -385,9 +385,9 @@
 			width: 99%;
 		}
 	}
-	@media screen and (min-width: 1810px) {
+	/* @media screen and (min-width: 1810px) {
 		.window {
 			width: 1800px;
 		}
-	}
+	} */
 </style>

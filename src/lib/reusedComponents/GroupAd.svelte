@@ -1,6 +1,6 @@
 <script>
-	export let imgSrc = 'https://thumbs.dreamstime.com/b/hourglass-time-banner-background-format-wood-54533019.jpg'
-	export let images = ['https://thumbs.dreamstime.com/b/hourglass-time-banner-background-format-wood-54533019.jpg', 'https://thumbs.dreamstime.com/b/hourglass-time-banner-background-format-wood-54533019.jpg']
+	import imgSource from '$lib/assets/pageLabels.png'
+	export let images = [imgSource, imgSource]
 	export let active = 0
 	let i = 0
 
@@ -9,7 +9,6 @@
 	onMount(() => {
 		const interval = setInterval(() => {
 			active = (active + 1) % images.length
-			imgSrc = images[active]
 			i++
 		}, 3000)
 
@@ -21,11 +20,29 @@
 	<div class="replyBox">
 		{#each images as image, i}
 			<img src={image} alt="image {active + 1}" class="image" />
+			{#if i === 0}
+				<div class="overlayImg" />
+			{/if}
 		{/each}
 	</div>
 </div>
 
 <style>
+	.overlayImg {
+		/* background-color: yellow; */
+		margin: 0 3rem;
+
+		width: calc(100% - 7.6rem);
+		/* height: calc(100% - 4rem); */
+		height: 100%;
+
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		/* scale: 0.989; */
+		/* z-index: -1; */
+	}
 	.image {
 		width: 100%;
 	}
@@ -35,7 +52,7 @@
 		align-items: center;
 
 		width: 100%;
-		height: 100px;
+		height: clamp(100px, 100%, 176px);
 
 		padding: calc(var(--averageMargin) * 1.2) 0;
 	}
@@ -55,6 +72,7 @@
 		justify-content: start;
 
 		overflow-x: scroll;
+		position: relative;
 	}
 
 	@keyframes slide {
