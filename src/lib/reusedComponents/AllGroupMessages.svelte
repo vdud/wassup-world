@@ -57,7 +57,7 @@
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.messages) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}
 			{#if sender !== $userName}
-				<div class="text sender">
+				<div class="text sendermain">
 					<p class="pText textShadows">
 						<span class="replySender" style="color:var(--primary)">{sender}; </span>
 						<span class="pageMessage">{message}</span>

@@ -13,9 +13,6 @@
 
 		--textShadows: 0px 0px 2px #1114, 0px 0px 4px #000;
 	}
-	button {
-		border-radius: 0px;
-	}
 }
 @media (prefers-color-scheme: light) {
 	:root {
@@ -33,7 +30,7 @@
 		--textShadows: 0px 0px 2px #9992, 0px 0px 4px #9994;
 		/* --textShadows: 0px 0px 0.5px #000; */
 	}
-	button {
+	.button {
 		border-radius: var(--borderRadius);
 	}
 }
@@ -154,7 +151,7 @@ body {
 	height: 100%;
 	position: fixed;
 
-	background-color: var(--secondaryTheme);
+	background-color: var(--optDark);
 }
 
 /* Designing for scroll-bar */
@@ -315,10 +312,12 @@ body {
 	/* font-weight: 1000; */
 }
 .sender {
+	font-family: UBold;
+}
+.sendermain {
 	place-self: start;
 	border-top-left-radius: calc(var(--borderRadius) / 4);
 	text-align: left;
-	font-family: UBold;
 }
 .yoMe {
 	text-align: right;

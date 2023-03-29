@@ -135,7 +135,7 @@
 	.chatHeaderText {
 		height: max-content;
 		font-family: UBold;
-		color: var(--primaryThemeInverted);
+		color: var(--white);
 
 		margin-top: 12px;
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));
