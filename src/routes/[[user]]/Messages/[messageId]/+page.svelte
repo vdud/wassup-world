@@ -72,6 +72,11 @@
 	})
 </script>
 
+<svelte:head>
+	<title>💬{messageData.sender}; {messageData.message.slice(0, 19)}</title>
+	<meta name="description" content="Hey check out this message from {messageData.sender} let me give you a gist: {messageData.message.slice(0, 3)}..." />
+</svelte:head>
+
 <div id="middleScroll" class="scroll">
 	{#if isReply === true}
 		<div class="goBackDiv">

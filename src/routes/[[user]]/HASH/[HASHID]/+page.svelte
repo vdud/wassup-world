@@ -46,8 +46,9 @@
 </script>
 
 <svelte:head>
-	<title>#{data.body.groupName}</title>
-	<meta name="description" content="This is a simple discourse on hashtag : #️⃣{data.body.groupName}, as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
+	<!-- <title>#️⃣{data.body.groupName}</title> -->
+	<title>🌟 #️⃣{data.body.groupName} - Chat & Connect on Wassup.World 🤝</title>
+	<meta name="description" content="Join the upbeat convo at #️⃣{data.body.groupName} on wassup.world, a lively open chat room to connect with others, anonymously or with your name! 😄🎉" />
 </svelte:head>
 
 <AllGroupMessages {data} />

@@ -318,6 +318,7 @@ body {
 	place-self: start;
 	border-top-left-radius: calc(var(--borderRadius) / 4);
 	text-align: left;
+	font-family: UBold;
 }
 .yoMe {
 	text-align: right;

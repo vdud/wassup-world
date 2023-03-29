@@ -50,8 +50,9 @@
 </script>
 
 <svelte:head>
-	<title>📍{data.body.groupName}</title>
-	<meta name="description" content="This is a simple discourse on location:{data.body.groupName} as wassup.world is just a open chat room, where you can talk to any person anonymously or just using your name." />
+	<!-- <title>📍{data.body.groupName}</title> -->
+	<title>🎉 📍{data.body.groupName} - Socialize & Engage on Our App 🌐</title>
+	<meta name="description" content="📍:{data.body.groupName} - Join wassup.world's open chat, chat anonymously or with your name, and connect with others frankly!" />
 </svelte:head>
 
 <AllGroupMessages {data} />
