@@ -84,7 +84,6 @@
 		height: var(--buttonHW);
 		margin: 0;
 		padding: 0;
-
 		scale: 3;
 	}
 	.textAreeaBox {
@@ -122,6 +121,7 @@
 		background-color: transparent;
 		width: auto;
 		margin: 0;
+		overflow: hidden;
 	}
 
 	.button {
@@ -139,8 +139,6 @@
 		right: 0.4rem;
 		bottom: 0.4rem;
 		transition: box-shadow 0.2s ease-in-out;
-
-		overflow: hidden;
 	}
 	.button:active {
 		box-shadow: var(--boxInsetShadows);

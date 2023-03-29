@@ -132,11 +132,11 @@
 <style>
 	.gradientBtm {
 		width: 100%;
-		height: 80px;
-		background: linear-gradient(0deg, var(--secondaryTheme) 60%, #0000 100%);
+		height: 60px;
+		background: linear-gradient(0deg, var(--red) 60%, #0000 100%);
 		/* background-color: var(--red); */
 		position: absolute;
-		z-index: 10000;
+		z-index: 2;
 		bottom: 0;
 		right: 0;
 

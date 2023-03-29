@@ -13,6 +13,9 @@
 
 		--textShadows: 0px 0px 2px #1114, 0px 0px 4px #000;
 	}
+	button {
+		border-radius: 0px;
+	}
 }
 @media (prefers-color-scheme: light) {
 	:root {
@@ -29,6 +32,9 @@
 
 		--textShadows: 0px 0px 2px #9992, 0px 0px 4px #9994;
 		/* --textShadows: 0px 0px 0.5px #000; */
+	}
+	button {
+		border-radius: var(--borderRadius);
 	}
 }
 :root {
@@ -413,11 +419,12 @@ textarea:focus {
 	animation: fadeIn 300ms both ease-in-out;
 	position: absolute;
 
-	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--primaryTheme));
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--secondaryTheme));
 
 	bottom: 40px;
 	width: 100%;
 	height: 3rem;
+	margin-bottom: 15px;
 
 	display: flex;
 	align-items: center;
@@ -541,7 +548,10 @@ textarea:focus {
 	word-break: break-all;
 }
 .replyMainMsg {
-	height: auto;
+	width: 100%;
+}
+.allReplies {
+	width: 100%;
 }
 .flexBod {
 	background-color: var(--secondaryTheme);
