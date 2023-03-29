@@ -208,6 +208,7 @@
 		z-index: 0;
 
 		padding-bottom: 0rem;
+		background-color: var(--secondaryTheme);
 	}
 	.container3 {
 		height: 75px;

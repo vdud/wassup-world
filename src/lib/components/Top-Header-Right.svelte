@@ -150,7 +150,7 @@
 		position: relative;
 		height: 100%;
 		width: 100%;
-		background-color: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 
 		border-bottom-right-radius: var(--borderRadius);
 	}

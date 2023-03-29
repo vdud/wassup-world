@@ -48,6 +48,8 @@
 {/if}
 
 <div class="hashContainer" id="middleScroll" on:scroll={debouncedScroll}>
+	<div class="gradient" />
+	<div class="gradientBtm" />
 	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
 	<!-- <GroupAd /> -->
@@ -128,4 +130,16 @@
 </div>
 
 <style>
+	.gradientBtm {
+		width: 100%;
+		height: 80px;
+		background: linear-gradient(0deg, var(--secondaryTheme) 60%, #0000 100%);
+		/* background-color: var(--red); */
+		position: absolute;
+		z-index: 10000;
+		bottom: 0;
+		right: 0;
+
+		pointer-events: none;
+	}
 </style>

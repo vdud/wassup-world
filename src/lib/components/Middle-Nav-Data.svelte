@@ -209,4 +209,7 @@
 	.locationPredictions {
 		border-bottom: 0.5px solid var(--tertiaryThemeInverted);
 	}
+	.natureLogo {
+		background-color: var(--primaryTheme);
+	}
 </style>

@@ -223,7 +223,7 @@
 		position: relative;
 		height: 100%;
 		width: 100%;
-		background: var(--secondaryTheme);
+		background-color: var(--primaryTheme);
 
 		border-bottom-left-radius: var(--borderRadius);
 		overflow: hidden;
