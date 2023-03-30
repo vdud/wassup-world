@@ -21,9 +21,6 @@
 	const socketWorker = async () => {
 		const message = $user_message.slice(0, 999)
 		const groupId = $userGroup_id
-
-		//give some break
-
 		$user_message = ''
 
 		if ($currentPage !== 'REPLIES') {
@@ -51,7 +48,7 @@
 			if (message === '' && $messageId !== '') {
 				return
 			} else {
-				freshReplyMessage({ sender: $userName, message, createdAt: new Date(), messageId: $messageId })
+				freshReplyMessage({ sender: $userName, message, createdAt: new Date() })
 				const res = await fetch('/api/replyMessages', {
 					method: 'POST',
 					headers: {

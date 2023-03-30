@@ -42,10 +42,10 @@ export const applyNewMessageFresh = (data: any) => {
 	}
 }
 
-export const applyMessage = (data: any, isYoMe: boolean) => {
+export const applyMessage = (data: any) => {
 	const textMessages: any = document.getElementById('textMessages')
 	if (textMessages) {
-		if (isYoMe) {
+		if (data.isYoMe) {
 			const freshText: any = document.getElementById('freshText')
 			if (freshText) {
 				freshText.remove()
@@ -55,7 +55,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 		const div = document.createElement('div')
 		div.classList.add('text')
 
-		div.classList.add(isYoMe ? 'yoMe' : 'sendermain')
+		div.classList.add(data.isYoMe ? 'yoMe' : 'sendermain')
 
 		const p = document.createElement('p')
 		p.classList.add('pText')
@@ -63,7 +63,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 
 		//sender span
 		const span1 = document.createElement('span')
-		span1.style.color = isYoMe ? 'var(--secondary)' : 'var(--primary)'
+		span1.style.color = data.isYoMe ? 'var(--secondary)' : 'var(--primary)'
 		span1.innerText = data.sender + '; '
 
 		//message span
@@ -73,7 +73,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 
 		//third span //data span
 		const span3 = document.createElement('span')
-		span3.classList.add(isYoMe ? 'spanFlexRight' : 'spanFlexLeft')
+		span3.classList.add(data.isYoMe ? 'spanFlexRight' : 'spanFlexLeft')
 
 		//time span
 		const timeSpan = document.createElement('span')
@@ -155,7 +155,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 
 		//append to spans3
 		// timeSpan.style.margin = '0 10px'
-		if (isYoMe) {
+		if (data.isYoMe) {
 			span3.append(goToReplyButton)
 			span3.append(likeNumberButton)
 			span3.append(buttonTotalReplies)
@@ -165,7 +165,7 @@ export const applyMessage = (data: any, isYoMe: boolean) => {
 			goToReplyButton.style.marginRight = '10px'
 			buttonTotalReplies.style.marginRight = '10px'
 			likeNumberButton.style.marginRight = '10px'
-		} else if (!isYoMe) {
+		} else if (!data.isYoMe) {
 			// span3.append(loveButton)
 			span3.append(timeSpan)
 			span3.append(buttonTotalReplies)
