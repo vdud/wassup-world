@@ -25,6 +25,7 @@
 		$user_message = ''
 
 		if ($currentPage !== 'REPLIES') {
+			console.log('sockerWorker')
 			if (message === '') {
 				return
 			} else {
@@ -44,7 +45,8 @@
 					alert(response.message)
 				}
 			}
-		} else {
+		} else if ($currentPage === 'REPLIES') {
+			console.log('sockerWorkerReplies')
 			if (message === '' && $messageId !== '') {
 				return
 			} else {

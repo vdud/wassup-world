@@ -53,7 +53,7 @@
 	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
 	<GroupAd />
-	<div id="textMessages" />
+	<div id="textMessages"><div class="blank" /></div>
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.messages) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}
 			{#if sender !== $userName}
