@@ -17,7 +17,7 @@
 				</div>
 			</div>
 			<div class="flex flex2">
-				<div class="textBoxH"><p>GroupMembers;</p></div>
+				<div class="textBoxH"><p>Members 👽</p></div>
 				<div class="peopleList">
 					<div class="color" />
 					<div class="color" />
@@ -49,7 +49,6 @@
 	.colored {
 		width: 100%;
 		height: 100%;
-		background-color: var(--secondaryTheme);
 	}
 	p {
 		font-family: UBold;
