@@ -35,10 +35,6 @@
 {/if}
 
 <style>
-	/* .imageMain {
-		pointer-events: none;
-		cursor: none;
-	} */
 	.fullWindow {
 		width: 100%;
 		height: 100%;
@@ -52,24 +48,9 @@
 
 		background-color: #000;
 	}
-	.overlayImg {
-		/* background-color: yellow; */
-		margin: 0 3rem;
-
-		width: calc(100% - 7.6rem);
-		/* height: calc(100% - 4rem); */
-		height: 100%;
-
-		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: space-around;
-		/* scale: 0.989; */
-		/* z-index: -1; */
-	}
 	.image {
 		width: 100%;
-		transform: translateY(-50%);
+		transform: translateY(-13%);
 	}
 	.pTextAdContainer {
 		display: flex;
@@ -99,7 +80,6 @@
 		align-items: start;
 		justify-content: start;
 
-		/* overflow-x: scroll; */
 		position: relative;
 	}
 
