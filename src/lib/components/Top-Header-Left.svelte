@@ -217,6 +217,10 @@
 		color: var(--primary);
 		font-size: calc(var(--fontSize) * 1.2);
 		padding: calc(var(--averageMargin) + 3px);
+		/* text-shadow: var(--textShadows); */
+		/* text-shadow: 0 0 3px var(--secondaryThemeInverted); */
+		/* TEXT STROKE */
+		-webkit-text-stroke: 0.1px black;
 	}
 
 	.topHeaderLeft {

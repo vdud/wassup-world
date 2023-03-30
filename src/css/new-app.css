@@ -151,7 +151,8 @@ body {
 	height: 100%;
 	position: fixed;
 
-	background-color: var(--optDark);
+	background-color: var(--primaryTheme);
+	/* background-color: var(--optDark); */
 }
 
 /* Designing for scroll-bar */

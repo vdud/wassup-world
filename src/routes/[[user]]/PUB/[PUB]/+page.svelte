@@ -51,7 +51,7 @@
 </script>
 
 <svelte:head>
-	<title>{data.body.groupName}</title>
+	<title>💬 {data.body.groupName}</title>
 	<meta name="description" content="See what's happening!" />
 </svelte:head>
 

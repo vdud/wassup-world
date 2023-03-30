@@ -73,7 +73,7 @@
 </script>
 
 <svelte:head>
-	<title>💬{messageData.sender}; {messageData.message.slice(0, 19)}</title>
+	<title>💬{messageData.sender}; {messageData.message.slice(0, 8)}...</title>
 	<meta name="description" content="Hey check out this message from {messageData.sender} let me give you a gist: {messageData.message.slice(0, 3)}..." />
 </svelte:head>
 

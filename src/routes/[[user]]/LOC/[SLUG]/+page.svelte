@@ -51,7 +51,7 @@
 
 <svelte:head>
 	<!-- <title>📍{data.body.groupName}</title> -->
-	<title>🎉 📍{data.body.groupName} - Socialize & Engage on Our App 🌐</title>
+	<title>📍{data.body.groupName} - Socialize & Engage on Our App 🌐 🎉</title>
 	<meta name="description" content="📍:{data.body.groupName} - Join wassup.world's open chat, chat anonymously or with your name, and connect with others frankly!" />
 </svelte:head>
 
