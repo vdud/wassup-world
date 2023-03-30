@@ -48,6 +48,10 @@
 
 		background-color: #000;
 	}
+	.imageMain {
+		width: 100%;
+		transform: translateY(9%);
+	}
 	.image {
 		width: 100%;
 		transform: translateY(-13%);
