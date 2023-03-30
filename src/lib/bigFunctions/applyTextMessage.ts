@@ -4,135 +4,139 @@ import { togglePublic } from './toggleNavLocs'
 
 export const applyMessage = (data: any, isYoMe: boolean) => {
 	const textMessages: any = document.getElementById('textMessages')
+	if (textMessages) {
+		const div = document.createElement('div')
+		div.classList.add('text')
 
-	const div = document.createElement('div')
-	div.classList.add('text')
-	div.classList.add(isYoMe ? 'yoMe' : 'sender')
+		div.classList.add(isYoMe ? 'yoMe' : 'sendermain')
 
-	const p = document.createElement('p')
+		const p = document.createElement('p')
+		p.classList.add('pText')
+		p.classList.add('textShadows')
 
-	//sender span
-	const span1 = document.createElement('span')
-	span1.style.color = isYoMe ? 'var(--secondary)' : 'var(--primary)'
-	span1.innerText = data.sender + '; '
+		//sender span
+		const span1 = document.createElement('span')
+		span1.style.color = isYoMe ? 'var(--secondary)' : 'var(--primary)'
+		span1.innerText = data.sender + '; '
 
-	//message span
-	const span2 = document.createElement('span')
-	span2.style.color = 'var(--primaryThemeInverted)'
-	span2.innerText = data.message
+		//message span
+		const span2 = document.createElement('span')
+		span2.style.color = 'var(--primaryThemeInverted)'
+		span2.innerText = data.message
 
-	//third span //data span
-	const span3 = document.createElement('span')
-	span3.classList.add(isYoMe ? 'spanFlexRight' : 'spanFlexLeft')
+		//third span //data span
+		const span3 = document.createElement('span')
+		span3.classList.add(isYoMe ? 'spanFlexRight' : 'spanFlexLeft')
 
-	//time span
-	const timeSpan = document.createElement('span')
-	timeSpan.classList.add('timeSpan')
-	timeSpan.classList.add('flexTime')
-	timeSpan.innerText = timeSince(data.createdAt)
-	timeSpan.classList.add('timeSpanLeft')
+		//time span
+		const timeSpan = document.createElement('span')
+		timeSpan.classList.add('timeSpan')
+		timeSpan.classList.add('flexTime')
+		timeSpan.innerText = timeSince(data.createdAt)
+		timeSpan.classList.add('timeSpanLeft')
 
-	//like span
-	const likeNumberButton = document.createElement('button')
-	likeNumberButton.classList.add('timeSpan')
-	likeNumberButton.classList.add('replyLikeButton')
-	likeNumberButton.onclick = () => {
-		likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
+		//like span
+		const likeNumberButton = document.createElement('button')
+		likeNumberButton.classList.add('timeSpan')
+		likeNumberButton.classList.add('replyLikeButton')
+		likeNumberButton.onclick = () => {
+			likeThatMsg({ _id: data.messageId, $userName_id: data.$userName_id, likes: 0, $userGroup_id: data.$userGroup_id })
+		}
+
+		//like number span
+		const span5 = document.createElement('span')
+		span5.classList.add('optDark')
+		span5.id = `LIKE_NO?${data.messageId}`
+		span5.innerText = '0'
+
+		// hearts icon //fa-hearts
+		const i1 = document.createElement('i')
+		i1.id = `FA_SOLID?${data.messageId}`
+		// i1.classList.add('fa-solid')
+		i1.classList.add('fa-regular')
+		i1.classList.add('fa-heart')
+		i1.classList.add('optDark')
+		i1.style.margin = '3px'
+
+		//like button append
+		likeNumberButton.append(span5)
+		likeNumberButton.append(i1)
+
+		//love button
+		const loveButton = document.createElement('button')
+		const span6 = document.createElement('span')
+		span6.id = `LIKE?${data.messageId}`
+		span6.classList.add('timeSpan')
+		span6.classList.add('LikeSpan')
+		span6.innerText = 'love'
+		span6.classList.add('loved')
+		loveButton.append(span6)
+
+		//Got to reply button
+		const goToReplyButton = document.createElement('button')
+		goToReplyButton.classList.add('timeSpan')
+		goToReplyButton.classList.add('LikeSpan')
+		goToReplyButton.onclick = () => {
+			window.location.pathname = '/Messages/' + data.messageId
+		}
+		const totalRepliespText = document.createElement('p')
+		totalRepliespText.classList.add('totalRepliespText')
+		const span4 = document.createElement('span')
+		span4.innerText = 'REPLY'
+		totalRepliespText.classList.add('REPLY_TEXT')
+		span4.style.fontFamily = 'UBold'
+		span4.style.marginRight = '5px'
+		const span7 = document.createElement('span')
+		const i2 = document.createElement('i')
+		i2.classList.add('fa')
+		i2.classList.add('fa-square-up-right')
+		span7.append(i2)
+		totalRepliespText.append(span4)
+		totalRepliespText.append(span7)
+		goToReplyButton.append(totalRepliespText)
+
+		//total replies span
+		const buttonTotalReplies = document.createElement('button')
+		buttonTotalReplies.classList.add('timeSpan')
+		const totalRepliespText2 = document.createElement('p')
+		totalRepliespText2.classList.add('totalRepliespText')
+		const span8 = document.createElement('span')
+		span8.innerText = `${likesabove10k(0)} replies`
+		span8.id = `Replies_No?${data.messageId}`
+		totalRepliespText2.append(span8)
+		buttonTotalReplies.append(totalRepliespText2)
+
+		//append to spans3
+		// timeSpan.style.margin = '0 10px'
+		if (isYoMe) {
+			span3.append(goToReplyButton)
+			span3.append(likeNumberButton)
+			span3.append(buttonTotalReplies)
+			span3.append(timeSpan)
+			// span3.append(loveButton)
+
+			goToReplyButton.style.marginRight = '10px'
+			buttonTotalReplies.style.marginRight = '10px'
+			likeNumberButton.style.marginRight = '10px'
+		} else if (!isYoMe) {
+			// span3.append(loveButton)
+			span3.append(timeSpan)
+			span3.append(buttonTotalReplies)
+			span3.append(likeNumberButton)
+			span3.append(goToReplyButton)
+
+			buttonTotalReplies.style.marginLeft = '10px'
+			likeNumberButton.style.marginLeft = '10px'
+			goToReplyButton.style.marginLeft = '10px'
+		}
+
+		p.appendChild(span1)
+		p.appendChild(span2)
+		p.appendChild(span3)
+		div.appendChild(p)
+
+		textMessages.appendChild(div)
 	}
-
-	//like number span
-	const span5 = document.createElement('span')
-	span5.classList.add('optDark')
-	span5.id = `LIKE_NO?${data.messageId}`
-	span5.innerText = '0'
-
-	// hearts icon //fa-hearts
-	const i1 = document.createElement('i')
-	i1.id = `FA_SOLID?${data.messageId}`
-	// i1.classList.add('fa-solid')
-	i1.classList.add('fa-regular')
-	i1.classList.add('fa-heart')
-	i1.classList.add('optDark')
-	i1.style.margin = '3px'
-
-	//like button append
-	likeNumberButton.append(span5)
-	likeNumberButton.append(i1)
-
-	//love button
-	const loveButton = document.createElement('button')
-	const span6 = document.createElement('span')
-	span6.id = `LIKE?${data.messageId}`
-	span6.classList.add('timeSpan')
-	span6.classList.add('LikeSpan')
-	span6.innerText = 'love'
-	span6.classList.add('loved')
-	loveButton.append(span6)
-
-	//Got to reply button
-	const goToReplyButton = document.createElement('button')
-	goToReplyButton.classList.add('timeSpan')
-	goToReplyButton.classList.add('LikeSpan')
-	goToReplyButton.onclick = () => {
-		window.location.pathname = '/Messages/' + data.messageId
-	}
-	const totalRepliespText = document.createElement('p')
-	totalRepliespText.classList.add('totalRepliespText')
-	const span4 = document.createElement('span')
-	span4.innerText = 'REPLY'
-	totalRepliespText.classList.add('REPLY_TEXT')
-	span4.style.fontFamily = 'UBold'
-	span4.style.marginRight = '5px'
-	const span7 = document.createElement('span')
-	const i2 = document.createElement('i')
-	i2.classList.add('fa')
-	i2.classList.add('fa-square-up-right')
-	span7.append(i2)
-	totalRepliespText.append(span4)
-	totalRepliespText.append(span7)
-	goToReplyButton.append(totalRepliespText)
-
-	//total replies span
-	const buttonTotalReplies = document.createElement('button')
-	buttonTotalReplies.classList.add('timeSpan')
-	const totalRepliespText2 = document.createElement('p')
-	totalRepliespText2.classList.add('totalRepliespText')
-	const span8 = document.createElement('span')
-	span8.innerText = `${likesabove10k(0)} replies`
-	span8.id = `Replies_No?${data.messageId}`
-	totalRepliespText2.append(span8)
-	buttonTotalReplies.append(totalRepliespText2)
-
-	//append to spans3
-	// timeSpan.style.margin = '0 10px'
-	if (isYoMe) {
-		span3.append(goToReplyButton)
-		span3.append(likeNumberButton)
-		span3.append(buttonTotalReplies)
-		span3.append(timeSpan)
-		// span3.append(loveButton)
-
-		goToReplyButton.style.marginRight = '10px'
-		buttonTotalReplies.style.marginRight = '10px'
-		likeNumberButton.style.marginRight = '10px'
-	} else if (!isYoMe) {
-		// span3.append(loveButton)
-		span3.append(timeSpan)
-		span3.append(buttonTotalReplies)
-		span3.append(likeNumberButton)
-		span3.append(goToReplyButton)
-
-		buttonTotalReplies.style.marginLeft = '10px'
-		likeNumberButton.style.marginLeft = '10px'
-		goToReplyButton.style.marginLeft = '10px'
-	}
-
-	p.appendChild(span1)
-	p.appendChild(span2)
-	p.appendChild(span3)
-	div.appendChild(p)
-
-	textMessages.appendChild(div)
 }
 
 //NAV-BAR Messages

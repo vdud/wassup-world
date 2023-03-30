@@ -480,8 +480,6 @@ textarea:focus {
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-
-	background-color: var(--primaryTheme);
 }
 
 .margin-bottom {
@@ -510,6 +508,9 @@ textarea:focus {
 	justify-content: center;
 	flex-direction: column-reverse;
 	flex-wrap: wrap;
+}
+.textMsgBG {
+	background-color: var(--secondaryTheme);
 }
 
 @media screen and (max-width: 768px) {
