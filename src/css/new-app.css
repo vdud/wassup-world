@@ -475,7 +475,7 @@ textarea:focus {
 	text-shadow: none;
 }
 
-#textMessages {
+.textMessages {
 	width: 100%;
 	display: flex;
 	flex-direction: column;

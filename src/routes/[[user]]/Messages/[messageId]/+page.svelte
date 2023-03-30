@@ -12,8 +12,8 @@
 	import { messageId } from '$lib/stores/messageId'
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
 	import { isShowInfo } from '$lib/stores/isShowInfo'
-	import { replyMessage } from '$lib/bigFunctions/replyMessage'
 	import AboutGroup from '$lib/reusedComponents/AboutGroup.svelte'
+	import { replyMessage } from '$lib/bigFunctions/applyTextMessage'
 
 	export let data: PageData
 	const messageData = JSON.parse(data.body.message)

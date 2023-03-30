@@ -3,7 +3,7 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id'
 	import { userName } from '$lib/stores/userName'
 	import { userName_id } from '$lib/stores/userName_id'
-	import { applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
+	import { applyNavDataMessage, applyNewMessageFresh, freshReplyMessage } from '$lib/bigFunctions/applyTextMessage'
 
 	import { autoresize } from 'svelte-textarea-autoresize'
 	import sendButtonLogo from '$lib/assets/sendBtn.png'
@@ -22,13 +22,15 @@
 		const message = $user_message.slice(0, 999)
 		const groupId = $userGroup_id
 
+		//give some break
+
 		$user_message = ''
 
 		if ($currentPage !== 'REPLIES') {
-			console.log('sockerWorker')
 			if (message === '') {
 				return
 			} else {
+				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: new Date() })
 				applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
 
 				const res = await fetch('/api/textAreaMessages', {
@@ -46,11 +48,10 @@
 				}
 			}
 		} else if ($currentPage === 'REPLIES') {
-			console.log('sockerWorkerReplies')
 			if (message === '' && $messageId !== '') {
 				return
 			} else {
-				// applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
+				freshReplyMessage({ sender: $userName, message, createdAt: new Date(), messageId: $messageId })
 				const res = await fetch('/api/replyMessages', {
 					method: 'POST',
 					headers: {

@@ -13,6 +13,7 @@
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage'
 	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg'
 	import AllGroupMessages from '$lib/reusedComponents/AllGroupMessages.svelte'
+	import { nature } from '$lib/stores/nature'
 
 	onMount(() => {
 		$isFlex = false
