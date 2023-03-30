@@ -69,7 +69,7 @@
 
 	--averageMargin: 10px;
 
-	--buttonHW: 30px;
+	--buttonHW: calc(var(--averageMargin) * 3);
 	--borderRadius: calc(var(--buttonHW) / 2);
 	--smallerBorderRadius: calc(var(--buttonHW) / 3);
 }

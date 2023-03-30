@@ -51,8 +51,6 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"@pusher/push-notifications-server": "^1.2.6",
-		"@pusher/push-notifications-web": "^1.1.0",
 		"mongodb": "^5.1.0",
 		"pusher": "^5.1.2",
 		"pusher-js": "^8.0.2",

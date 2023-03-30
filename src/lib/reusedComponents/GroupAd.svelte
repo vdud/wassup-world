@@ -1,6 +1,11 @@
 <script>
-	import imgSource from '$lib/assets/pageLabels.png'
+	import imgSource from '$lib/assets/menuItems.jpg'
+	import { currentPage } from '$lib/stores/currentPage'
+
 	export let images = [imgSource, imgSource]
+
+	let img1 = 'https://source.unsplash.com/U7HLzMO4SIY'
+	let img2 = 'https://source.unsplash.com/ukzHlkoz1IE'
 	export let active = 0
 	let i = 0
 
@@ -14,20 +19,39 @@
 
 		return () => clearInterval(interval)
 	})
+	let isShowMenu = false
+	const isShowMenuToggle = () => {
+		isShowMenu = !isShowMenu
+	}
 </script>
 
-<div class="pTextAdContainer">
-	<div class="replyBox">
-		{#each images as image, i}
-			<img src={image} alt="image {active + 1}" class="image" />
-			{#if i === 0}
-				<div class="overlayImg" />
-			{/if}
-		{/each}
+{#if $currentPage === 'LOCATIONS'}
+	<button on:click={isShowMenuToggle} class="fullWindow" style={isShowMenu ? '' : 'display:none'}><img src={img2} alt="image {active + 1}" class="imageMain" /></button>
+	<div class="pTextAdContainer">
+		<button on:click={isShowMenuToggle} class="replyBox">
+			<img src={img2} alt="image {active + 1}" class="image" />
+		</button>
 	</div>
-</div>
+{/if}
 
 <style>
+	/* .imageMain {
+		pointer-events: none;
+		cursor: none;
+	} */
+	.fullWindow {
+		width: 100%;
+		height: 100%;
+
+		position: absolute;
+		z-index: 100;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		background-color: #000;
+	}
 	.overlayImg {
 		/* background-color: yellow; */
 		margin: 0 3rem;
@@ -45,6 +69,7 @@
 	}
 	.image {
 		width: 100%;
+		transform: translateY(-50%);
 	}
 	.pTextAdContainer {
 		display: flex;
@@ -53,11 +78,14 @@
 
 		width: 100%;
 		height: clamp(100px, 100%, 176px);
+		/* height: 200px; */
 
 		padding: calc(var(--averageMargin) * 1.2) 0;
 	}
+
 	.replyBox {
 		color: var(--primaryThemeInverted);
+
 		font-size: 1rem;
 		opacity: 0.9;
 		border-radius: var(--averageMargin);
@@ -71,7 +99,7 @@
 		align-items: start;
 		justify-content: start;
 
-		overflow-x: scroll;
+		/* overflow-x: scroll; */
 		position: relative;
 	}
 
