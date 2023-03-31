@@ -111,7 +111,7 @@ export const load = (async ({ params }) => {
 		} else if (findFirstGroup) {
 			const returnData = await groups
 				.aggregate([
-					{ $match: { _id: findFirstGroup._id, isReply: false } },
+					{ $match: { _id: findFirstGroup._id } },
 					{
 						$lookup: {
 							from: 'user',
@@ -192,7 +192,7 @@ export const load = (async ({ params }) => {
 		} else if (findSecondGroup) {
 			const returnData = await groups
 				.aggregate([
-					{ $match: { _id: findSecondGroup._id, isReply: false } },
+					{ $match: { _id: findSecondGroup._id } },
 					{
 						$lookup: {
 							from: 'user',
@@ -277,7 +277,7 @@ export const load = (async ({ params }) => {
 		if (findGroup) {
 			const returnData = await groups
 				.aggregate([
-					{ $match: { _id: findGroup._id, isReply: false } },
+					{ $match: { _id: findGroup._id } },
 					{
 						$lookup: {
 							from: 'user',
@@ -361,7 +361,7 @@ export const load = (async ({ params }) => {
 		if (findGroupbyId) {
 			const returnData = await groups
 				.aggregate([
-					{ $match: { group_id: findGroupbyId._id, isReply: false } },
+					{ $match: { group_id: findGroupbyId._id } },
 					{
 						$lookup: {
 							from: 'user',
