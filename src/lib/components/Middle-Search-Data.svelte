@@ -95,7 +95,7 @@
 									headers: {
 										'Content-Type': 'application/json',
 									},
-									body: JSON.stringify({ data: $searchInput }),
+									body: JSON.stringify({ searchInput: $searchInput }),
 								})
 								const response = await res.json()
 								if (res.ok) {

@@ -601,3 +601,16 @@ textarea:focus {
 .replySender {
 	font-family: UBold;
 }
+
+.isShowMenu {
+	transform: translateY(100%);
+	animation: slideInMargin 5s ease-in-out;
+}
+@keyframes slideInMargin {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(0%);
+	}
+}
