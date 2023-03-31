@@ -102,7 +102,6 @@
 			}
 		}
 	}
-
 	onDestroy(() => {
 		pusher.disconnect()
 	})
@@ -166,7 +165,7 @@
 
 	.show {
 		transition: all 300ms ease-in-out;
-		width: 30%;
+		width: 36%;
 		z-index: 0;
 		opacity: 100%;
 	}
@@ -182,7 +181,7 @@
 		z-index: 1;
 	}
 	.notWide {
-		width: 70%;
+		width: 65%;
 		transition: width 300ms ease-in-out;
 		z-index: 1;
 	}

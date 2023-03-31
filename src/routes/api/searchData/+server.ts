@@ -4,7 +4,6 @@ import { mainUser, groups } from '$db/collections'
 
 export const POST = (async ({ request }) => {
 	const { searchInputData } = await request.json()
-	console.log(searchInputData)
 
 	const searchUserData = await mainUser
 		.aggregate([

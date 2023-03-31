@@ -12,8 +12,6 @@ import { mainUser } from '$db/collections'
 // beamsClient
 // 	.start()
 // 	.then(() => beamsClient.addDeviceInterest('hello'))
-// 	.then(() => console.log('Successfully registered and subscribed!'))
-// 	.catch(console.error)
 // const beamsClient = new PusherPushNotifications.Client({
 // 	instanceId: 'c9d50f68-33d2-4426-8a8d-2e82f0b778e7',
 // })
@@ -21,10 +19,6 @@ import { mainUser } from '$db/collections'
 // beamsClient
 // 	.start()
 // 	.then(() => beamsClient.addDeviceInterest('hello'))
-// 	.then(() => console.log('Successfully registered and subscribed!'))
-// 	.catch(console.error)
-
-// console.log('PusherPushNotifications', PusherPushNotifications)
 
 export const POST = (async ({ request }) => {
 	const { data } = await request.json()
