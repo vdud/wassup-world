@@ -102,10 +102,6 @@
 	::-webkit-scrollbar {
 		display: none;
 	}
-	.textArea {
-		background-color: var(--red);
-	}
-
 	textarea {
 		color: var(--primaryThemeInverted);
 		font-family: ULight;

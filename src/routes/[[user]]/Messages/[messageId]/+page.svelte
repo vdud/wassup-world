@@ -1,75 +1,77 @@
 <script lang="ts">
-	import { incrementLikes, incrementReplies, likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
-	import { pusher } from '$lib/bigFunctions/pusher'
-	import { currentPage } from '$lib/stores/currentPage'
-	import { isFlex } from '$lib/stores/isFlex'
-	import { userGroup_id } from '$lib/stores/userGroup_id'
-	import { userName_id } from '$lib/stores/userName_id'
-	import { userName } from '$lib/stores/userName'
-	import { timeSince } from '$lib/bigFunctions/timeFormat'
-	import { onDestroy, onMount } from 'svelte'
-	import type { PageData } from './$types'
-	import { messageId } from '$lib/stores/messageId'
-	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
-	import { isShowInfo } from '$lib/stores/isShowInfo'
-	import AboutGroup from '$lib/reusedComponents/AboutGroup.svelte'
-	import { replyMessage } from '$lib/bigFunctions/applyTextMessage'
+	import { incrementLikes, incrementReplies, likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg';
+	import { pusher } from '$lib/bigFunctions/pusher';
+	import { currentPage } from '$lib/stores/currentPage';
+	import { isFlex } from '$lib/stores/isFlex';
+	import { userGroup_id } from '$lib/stores/userGroup_id';
+	import { userName_id } from '$lib/stores/userName_id';
+	import { userName } from '$lib/stores/userName';
+	import { timeSince } from '$lib/bigFunctions/timeFormat';
+	import { onDestroy, onMount } from 'svelte';
+	import type { PageData } from './$types';
+	import { messageId } from '$lib/stores/messageId';
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
+	import { isShowInfo } from '$lib/stores/isShowInfo';
+	import AboutGroup from '$lib/reusedComponents/AboutGroup.svelte';
+	import { replyMessage } from '$lib/bigFunctions/applyTextMessage';
 
-	export let data: PageData
-	const messageData = JSON.parse(data.body.message)
+	export let data: PageData;
+	const messageData = JSON.parse(data.body.message);
 
-	const replyData = JSON.parse(data.body.replyData)
-	const isReply = messageData.isReply
+	const allUsers = JSON.parse(data.body.allUsers);
+
+	const replyData = JSON.parse(data.body.replyData);
+	const isReply = messageData.isReply;
 
 	const goBack = () => {
-		$isFlex = true
-		window.location.pathname = '/Messages/' + messageData.replyTo
-	}
+		$isFlex = true;
+		window.location.pathname = '/Messages/' + messageData.replyTo;
+	};
 	const goBackHome = () => {
-		$isFlex = true
-		window.location.pathname = '/' + messageData.group_id
-	}
+		$isFlex = true;
+		window.location.pathname = '/' + messageData.group_id;
+	};
 
 	const focusOnTextArea = () => {
-		const textAreaId = document.getElementById('textAreaId')
-		if (textAreaId) textAreaId.focus()
-	}
+		const textAreaId = document.getElementById('textAreaId');
+		if (textAreaId) textAreaId.focus();
+	};
 
 	onMount(() => {
-		$isFlex = false
-		$currentPage = 'REPLIES'
-		$userGroup_id = messageData.group_id
-		$currentPageHeaderData = messageData.sender + '; ' + messageData.message.slice(0, 20) + '...'
-		$messageId = messageData._id
+		$isFlex = false;
+		$currentPage = 'REPLIES';
+		$userGroup_id = messageData.group_id;
+		$currentPageHeaderData = messageData.sender + '; ' + messageData.message.slice(0, 20) + '...';
+		$messageId = messageData._id;
 
 		pusher.subscribe($messageId).bind('ReplyMessage', (data: any) => {
-			replyMessage({ data, $userGroup_id, $userName_id })
-		})
+			replyMessage({ data, $userGroup_id, $userName_id });
+		});
 		pusher
 			.subscribe($userGroup_id)
 			.bind('injectLike', (data: any) => {
 				if (data.sender === $userName) {
-					return
+					return;
 				} else {
-					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes })
+					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes });
 				}
 			})
 			.bind('incrementReplies', (data: any) => {
-				incrementReplies({ _id: data.messageId, replies: data.totalReplies })
-			})
-	})
+				incrementReplies({ _id: data.messageId, replies: data.totalReplies });
+			});
+	});
 
 	const like = (data: any) => {
-		likeThatMsg({ _id: data._id, $userName_id, $userGroup_id, likes: data.likes })
-	}
+		likeThatMsg({ _id: data._id, $userName_id, $userGroup_id, likes: data.likes });
+	};
 
 	const goTo = (_id: any) => {
-		window.location.pathname = '/Messages/' + _id
-	}
+		window.location.pathname = '/Messages/' + _id;
+	};
 
 	onDestroy(() => {
-		$messageId = ''
-	})
+		$messageId = '';
+	});
 </script>
 
 <svelte:head>
@@ -105,7 +107,7 @@
 		</div>
 	</div>
 
-	<AboutGroup />
+	<AboutGroup {allUsers} />
 
 	<div class="allReplies">
 		<div class="flexBod" id="replies">

@@ -96,7 +96,7 @@
 		margin-top: calc(var(--averageMargin) * 0.3);
 
 		transition: scale 239ms ease-in-out;
-		border-radius: 23%;
+		border-radius: var(--borderRadius);
 	}
 	.fa-bars {
 		text-shadow: 0 0 10px var(--secondary);

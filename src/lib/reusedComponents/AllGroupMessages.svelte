@@ -1,44 +1,45 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount } from 'svelte';
 
-	import { debounce } from '$lib/bigFunctions/debounce'
-	import { timeSince } from '$lib/bigFunctions/timeFormat'
-	import { likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg'
+	import { debounce } from '$lib/bigFunctions/debounce';
+	import { timeSince } from '$lib/bigFunctions/timeFormat';
+	import { likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg';
 
-	import { userName } from '$lib/stores/userName'
-	import { userName_id } from '$lib/stores/userName_id'
-	import { userGroup_id } from '$lib/stores/userGroup_id'
-	import { isFlex } from '$lib/stores/isFlex'
-	import AboutGroup from './AboutGroup.svelte'
-	import GroupAd from './GroupAd.svelte'
+	import { userName } from '$lib/stores/userName';
+	import { userName_id } from '$lib/stores/userName_id';
+	import { userGroup_id } from '$lib/stores/userGroup_id';
+	import { isFlex } from '$lib/stores/isFlex';
+	import AboutGroup from './AboutGroup.svelte';
+	import GroupAd from './GroupAd.svelte';
 
 	const like = ({ _id, likes }: any) => {
-		likeThatMsg({ _id, $userName_id, likes, $userGroup_id })
-	}
+		likeThatMsg({ _id, $userName_id, likes, $userGroup_id });
+	};
 
 	const goTo = (_id: any) => {
-		$isFlex = true
-		window.location.pathname = '/Messages/' + _id
-	}
+		$isFlex = true;
+		window.location.pathname = '/Messages/' + _id;
+	};
 
-	onMount(() => {})
-	export let data = {}
+	onMount(() => {});
+	export let data = {};
+	const allUsers = JSON.parse(data.body.allUsers);
 
 	const scrolltoBottom = () => {
-		const middleScroll: any = document.getElementById('middleScroll')
-		middleScroll.scrollTop = middleScroll.scrollHeight
-	}
+		const middleScroll: any = document.getElementById('middleScroll');
+		middleScroll.scrollTop = middleScroll.scrollHeight;
+	};
 
-	let aboveSwitch = false
+	let aboveSwitch = false;
 	const parseScroll = () => {
-		const middleScroll: any = document.getElementById('middleScroll')
+		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll.scrollTop < -69) {
-			aboveSwitch = true
+			aboveSwitch = true;
 		} else if (middleScroll.scrollTop > -69) {
-			aboveSwitch = false
+			aboveSwitch = false;
 		}
-	}
-	const debouncedScroll = debounce(parseScroll, 300)
+	};
+	const debouncedScroll = debounce(parseScroll, 300);
 </script>
 
 {#if aboveSwitch === true}
@@ -85,7 +86,7 @@
 			{/if}
 		{/each}
 
-		<AboutGroup />
+		<AboutGroup {allUsers} />
 
 		{#if JSON.parse(data.body.topLikes).length > 0}
 			<div>

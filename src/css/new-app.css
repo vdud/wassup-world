@@ -67,10 +67,10 @@
 	--dull: 90%;
 	--extraDull: 60%;
 
-	--averageMargin: 10px;
+	--averageMargin: 1rem;
+	--borderRadius: calc(var(--averageMargin) / 2);
 
-	--buttonHW: calc(var(--averageMargin) * 3);
-	--borderRadius: calc(var(--buttonHW) / 2);
+	--buttonHW: calc(var(--averageMargin) * 1.69);
 	--smallerBorderRadius: calc(var(--buttonHW) / 3);
 }
 

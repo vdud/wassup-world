@@ -1,42 +1,41 @@
 <script lang="ts">
-	import { isShowInfo } from '$lib/stores/isShowInfo'
+	import { currentPage } from '$lib/stores/currentPage';
+	import { isShowInfo } from '$lib/stores/isShowInfo';
+
+	export let allUsers: any;
 </script>
 
-<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-6rem; opacity:0;'}>
-	<div class="infoData">
-		<div class="flexInfo">
-			<div class="flex flex1">
-				<div class="textBoxH">
-					<p>Share 🔗</p>
+{#if $currentPage !== 'PUBLIC'}
+	<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-11rem; opacity:0;'}>
+		<div class="infoData">
+			<div class="flexInfo">
+				<div class="flex 🔗">
+					<div class="textBoxH">
+						<p>Share 🔗</p>
+					</div>
+					<div class="shareLogosContainer">
+						<div class="colored" />
+						<div class="colored" />
+						<div class="colored" />
+						<div class="colored" />
+					</div>
 				</div>
-				<div class="shareLogosContainer">
-					<div class="colored" />
-					<div class="colored" />
-					<div class="colored" />
-					<div class="colored" />
-				</div>
-			</div>
-			<div class="flex flex2">
-				<div class="textBoxH"><p>Members 👽</p></div>
-				<div class="peopleList">
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
-					<div class="color" />
+				<div class="flex 👽">
+					<div class="textBoxH"><p>Members 👽</p></div>
+					<div class="peopleList">
+						{#each allUsers as user}
+							<div class="memberOne">
+								<div class="flexItem flexItem1" />
+								<div class="flexItem flexItem2" />
+								<div class="flexItem flexItem3" />
+							</div>
+						{/each}
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+{/if}
 
 <style>
 	.shareLogosContainer {
@@ -65,12 +64,33 @@
 		width: 100%;
 		height: 100%;
 		overflow: scroll;
+		margin-bottom: -10px;
 	}
-	.color {
+	.memberOne {
 		width: 100%;
 		height: 2rem;
 		/* margin-bottom: 1px; */
 		border-bottom: 1px solid var(--secondaryThemeInverted);
+
+		display: flex;
+		justify-content: start;
+		align-items: center;
+	}
+	.flexItem {
+		height: 100%;
+		margin-right: 1px;
+	}
+	.flexItem1 {
+		background-color: var(--red);
+		width: 50%;
+	}
+	.flexItem2 {
+		background-color: var(--green);
+		width: 25%;
+	}
+	.flexItem3 {
+		background-color: var(--blue);
+		width: 25%;
 	}
 	.flex {
 		width: 100%;
@@ -91,12 +111,12 @@
 		align-items: center;
 	}
 
-	.flex1 {
+	.🔗 {
 		width: 33.3%;
 		height: 100%;
 		border-right: 0.1px solid var(--secondaryThemeInverted);
 	}
-	.flex2 {
+	.👽 {
 		width: 66.6%;
 		height: 100%;
 	}
@@ -120,5 +140,8 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+	::-webkit-scrollbar {
+		width: 0px;
 	}
 </style>
