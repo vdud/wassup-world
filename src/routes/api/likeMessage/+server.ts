@@ -29,6 +29,8 @@ export const POST = (async ({ request }) => {
 	const findLikedUser = findMessage.likedPeople.find((person: any) => String(person) === String(user._id))
 	if (findLikedUser) {
 		await massagesCreate.updateOne({ _id: new ObjectId(messageId) }, { $inc: { likes: -1 }, $pull: { likedPeople: user._id } }, { upsert: true })
+		//also increment replyto message likes
+
 		pusher.trigger($userGroup_id, 'injectLike', {
 			messageId: messageId,
 			username_id: username_id,

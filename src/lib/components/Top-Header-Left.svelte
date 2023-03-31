@@ -151,14 +151,14 @@
 		animation: zoomIn 100ms ease-in-out both;
 	}
 	.icon {
-		scale: 1.4;
+		scale: 1.33;
 	}
 
 	.searchInput {
 		width: 100%;
 		margin: var(--averageMargin);
 		height: 10px;
-		background-color: var(--primaryTheme);
+		background-color: var(--secondaryTheme);
 		box-shadow: var(--boxInsetShadows);
 
 		height: 20px;

@@ -7,6 +7,28 @@ export const load = (async ({ params }) => {
 
 	const findGroupbyId = await groups.findOne({ _id: new ObjectId(groupId) })
 	if (findGroupbyId) {
+		const groupUsers = await groups
+			.aggregate([
+				{ $match: { _id: findGroupbyId._id } },
+				{
+					$lookup: {
+						from: 'user',
+						localField: 'allUsers',
+						foreignField: '_id',
+						as: 'allUsers',
+					},
+				},
+				{
+					$project: {
+						allUsers: {
+							_id: 1,
+							name: 1,
+						},
+					},
+				},
+			])
+			.toArray()
+
 		const returnMsgData = await massagesCreate
 			.aggregate([
 				{ $match: { group_id: findGroupbyId._id, isReply: false } },
@@ -56,6 +78,7 @@ export const load = (async ({ params }) => {
 			status: 200,
 			groupId: JSON.stringify(findGroupbyId._id),
 			body: {
+				allUsers: JSON.stringify(groupUsers[0].allUsers),
 				messages: JSON.stringify(returnMsgData),
 				topLikes: JSON.stringify(topLikes),
 				groupName: findGroupbyId.name,

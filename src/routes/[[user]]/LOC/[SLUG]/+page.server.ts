@@ -18,10 +18,31 @@ export const load = (async ({ params }) => {
 				if (!findUserLink) {
 					await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
 				}
+				const groupUsers = await groups
+					.aggregate([
+						{ $match: { _id: findGroup._id } },
+						{
+							$lookup: {
+								from: 'user',
+								localField: 'allUsers',
+								foreignField: '_id',
+								as: 'allUsers',
+							},
+						},
+						{
+							$project: {
+								allUsers: {
+									_id: 1,
+									name: 1,
+								},
+							},
+						},
+					])
+					.toArray()
 
 				const returnMsgData = await massagesCreate
 					.aggregate([
-						{ $match: { group_id: new ObjectId(SLUG), isReply: false } },
+						{ $match: { group_id: findGroup._id, isReply: false } },
 						{
 							$project: {
 								_id: 1,
@@ -68,6 +89,7 @@ export const load = (async ({ params }) => {
 					status: 200,
 					groupId: JSON.stringify(findGroup._id),
 					body: {
+						allUsers: JSON.stringify(groupUsers[0].allUsers),
 						messages: JSON.stringify(returnMsgData),
 						topLikes: JSON.stringify(topLikes),
 						groupName: findGroup.name,
@@ -79,6 +101,28 @@ export const load = (async ({ params }) => {
 	} else {
 		const findGroup = await groups.findOne({ name: SLUG, nature: 'LOCATIONS' })
 		if (findGroup) {
+			const groupUsers = await groups
+				.aggregate([
+					{ $match: { _id: findGroup._id } },
+					{
+						$lookup: {
+							from: 'user',
+							localField: 'allUsers',
+							foreignField: '_id',
+							as: 'allUsers',
+						},
+					},
+					{
+						$project: {
+							allUsers: {
+								_id: 1,
+								name: 1,
+							},
+						},
+					},
+				])
+				.toArray()
+
 			const returnMsgData = await massagesCreate
 				.aggregate([
 					{ $match: { group_id: findGroup._id, isReply: false } },
@@ -128,6 +172,7 @@ export const load = (async ({ params }) => {
 				status: 200,
 				groupId: JSON.stringify(findGroup._id),
 				body: {
+					allUsers: JSON.stringify(groupUsers[0].allUsers),
 					messages: JSON.stringify(returnMsgData),
 					topLikes: JSON.stringify(topLikes),
 					groupName: findGroup.name,
@@ -182,10 +227,33 @@ export const load = (async ({ params }) => {
 				.limit(10)
 				.toArray()
 
+			const groupUsers = await groups
+				.aggregate([
+					{ $match: { _id: findGroupbyId._id } },
+					{
+						$lookup: {
+							from: 'user',
+							localField: 'allUsers',
+							foreignField: '_id',
+							as: 'allUsers',
+						},
+					},
+					{
+						$project: {
+							allUsers: {
+								_id: 1,
+								name: 1,
+							},
+						},
+					},
+				])
+				.toArray()
+
 			return {
 				status: 200,
 				groupId: JSON.stringify(findGroupbyId._id),
 				body: {
+					allUsers: JSON.stringify(groupUsers[0].allUsers),
 					messages: JSON.stringify(returnMsgData),
 					topLikes: JSON.stringify(topLikes),
 					groupName: findGroupbyId.name,

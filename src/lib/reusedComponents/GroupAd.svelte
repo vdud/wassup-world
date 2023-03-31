@@ -65,17 +65,6 @@
 	export let active = 0
 	let i = 0
 
-	import { onMount } from 'svelte'
-	import { prevent_default } from 'svelte/internal'
-
-	onMount(() => {
-		const interval = setInterval(() => {
-			active = (active + 1) % uSplashKeys.length
-			i++
-		}, 3000)
-
-		return () => clearInterval(interval)
-	})
 	let isShowMenu = false
 	const isShowMenuToggle = () => {
 		isShowMenu = !isShowMenu
@@ -124,6 +113,7 @@
 	}
 	.image {
 		width: 100%;
+		border-radius: var(--borderRadius);
 		transform: translateY(0%);
 		animation: slideInMargin 5s ease-in-out;
 	}

@@ -30,9 +30,9 @@ export const load = (async ({ params }) => {
 			await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: newGroup.insertedId } })
 			await mainUser.updateOne({ _id: userReciever._id }, { $push: { allGroups: newGroup.insertedId } })
 
-			const returnData = await groups
+			const allUsers = await groups
 				.aggregate([
-					{ $match: { _id: newGroup.insertedId, isReply: false } },
+					{ $match: { _id: newGroup.insertedId } },
 					{
 						$lookup: {
 							from: 'user',
@@ -43,9 +43,6 @@ export const load = (async ({ params }) => {
 					},
 					{
 						$project: {
-							_id: 1,
-							name: 1,
-							messages: 1,
 							allUsers: {
 								_id: 1,
 								name: 1,
@@ -103,7 +100,7 @@ export const load = (async ({ params }) => {
 			return {
 				status: 200,
 				body: {
-					data: JSON.stringify(returnData[0]),
+					allUsers: JSON.stringify(allUsers[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(newGroup.insertedId),
@@ -125,9 +122,6 @@ export const load = (async ({ params }) => {
 					},
 					{
 						$project: {
-							_id: 1,
-							name: 1,
-							messages: 1,
 							allUsers: {
 								_id: 1,
 								name: 1,
@@ -187,7 +181,7 @@ export const load = (async ({ params }) => {
 			return {
 				status: 200,
 				body: {
-					data: JSON.stringify(returnData[0]),
+					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findFirstGroup._id),
@@ -209,9 +203,6 @@ export const load = (async ({ params }) => {
 					},
 					{
 						$project: {
-							_id: 1,
-							name: 1,
-							messages: 1,
 							allUsers: {
 								_id: 1,
 								name: 1,
@@ -270,7 +261,7 @@ export const load = (async ({ params }) => {
 			return {
 				status: 200,
 				body: {
-					data: JSON.stringify(returnData[0]),
+					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findSecondGroup._id),
@@ -297,9 +288,6 @@ export const load = (async ({ params }) => {
 					},
 					{
 						$project: {
-							_id: 1,
-							name: 1,
-							messages: 1,
 							allUsers: {
 								_id: 1,
 								name: 1,
@@ -358,7 +346,7 @@ export const load = (async ({ params }) => {
 			return {
 				status: 200,
 				body: {
-					data: JSON.stringify(returnData[0]),
+					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findGroup._id),
@@ -384,9 +372,6 @@ export const load = (async ({ params }) => {
 					},
 					{
 						$project: {
-							_id: 1,
-							name: 1,
-							messages: 1,
 							allUsers: {
 								_id: 1,
 								name: 1,
@@ -444,7 +429,7 @@ export const load = (async ({ params }) => {
 			return {
 				status: 200,
 				body: {
-					data: JSON.stringify(returnData[0]),
+					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
 					groupId: JSON.stringify(findGroupbyId._id),

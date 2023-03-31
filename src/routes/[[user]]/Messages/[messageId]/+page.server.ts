@@ -10,6 +10,28 @@ export const load = (async ({ params }) => {
 		const findMessage = await massagesCreate.findOne({ _id: new ObjectId(messageId) })
 
 		if (findMessage) {
+			const groupUsers = await groups
+				.aggregate([
+					{ $match: { _id: findMessage.group_id } },
+					{
+						$lookup: {
+							from: 'user',
+							localField: 'allUsers',
+							foreignField: '_id',
+							as: 'allUsers',
+						},
+					},
+					{
+						$project: {
+							allUsers: {
+								_id: 1,
+								name: 1,
+							},
+						},
+					},
+				])
+				.toArray()
+
 			const returnRepliesData = await massagesCreate
 				.find({ replyTo: new ObjectId(messageId) })
 				.sort({ likes: -1 })
@@ -22,6 +44,7 @@ export const load = (async ({ params }) => {
 					body: {
 						message: JSON.stringify(findMessage),
 						replyData: JSON.stringify(returnRepliesData),
+						allUsers: JSON.stringify(groupUsers[0].allUsers),
 					},
 				}
 			}
