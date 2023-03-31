@@ -1,11 +1,11 @@
-import type { PageServerLoad } from './$types'
-import { mainUser, groups, massagesCreate } from '$db/collections'
-import { ObjectId } from 'mongodb'
+import type { PageServerLoad } from './$types';
+import { mainUser, groups, massagesCreate } from '$db/collections';
+import { ObjectId } from 'mongodb';
 
 export const load = (async ({ params }) => {
-	const { user, groupId } = params
+	const { user, groupId } = params;
 
-	const findGroupbyId = await groups.findOne({ _id: new ObjectId(groupId) })
+	const findGroupbyId = await groups.findOne({ _id: new ObjectId(groupId) });
 	if (findGroupbyId) {
 		const groupUsers = await groups
 			.aggregate([
@@ -23,11 +23,13 @@ export const load = (async ({ params }) => {
 						allUsers: {
 							_id: 1,
 							name: 1,
+							lastLoggedIn: 1,
 						},
 					},
 				},
 			])
-			.toArray()
+			.sort({ lastLoggedIn: 1 })
+			.toArray();
 
 		const returnMsgData = await massagesCreate
 			.aggregate([
@@ -49,7 +51,7 @@ export const load = (async ({ params }) => {
 			])
 			.sort({ createdAt: -1 })
 			.limit(100)
-			.toArray()
+			.toArray();
 
 		const topLikes = await massagesCreate
 			.aggregate([
@@ -72,7 +74,7 @@ export const load = (async ({ params }) => {
 			.match({ likes: { $gt: 19 } })
 			.sort({ likes: 1 })
 			.limit(10)
-			.toArray()
+			.toArray();
 
 		return {
 			status: 200,
@@ -85,8 +87,8 @@ export const load = (async ({ params }) => {
 				createdAt: findGroupbyId.createdAt,
 				nature: findGroupbyId.nature,
 			},
-		}
+		};
 	} else {
-		return
+		return;
 	}
-}) satisfies PageServerLoad
+}) satisfies PageServerLoad;

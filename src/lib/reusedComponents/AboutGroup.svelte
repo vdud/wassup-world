@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { timeSince } from '$lib/bigFunctions/timeFormat';
 	import { currentPage } from '$lib/stores/currentPage';
 	import { isShowInfo } from '$lib/stores/isShowInfo';
 
@@ -25,9 +26,9 @@
 					<div class="peopleList">
 						{#each allUsers as user}
 							<div class="memberOne">
-								<div class="flexItem flexItem1" />
-								<div class="flexItem flexItem2" />
-								<div class="flexItem flexItem3" />
+								<div class="flexItem flexItem1"><div class="flexLeft"><p class="pTextMember">{user.name}</p></div></div>
+								<div class="flexItem flexItem2"><div class="flexLeft"><p class="pTextMember">{timeSince(user.lastLoggedIn)}</p></div></div>
+								<div class="flexItem flexItem3"><div class="flexLeft"><p class="pTextMember">send-a-message</p></div></div>
 							</div>
 						{/each}
 					</div>
@@ -38,6 +39,17 @@
 {/if}
 
 <style>
+	.flexLeft {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		margin-left: 10px;
+	}
+	.pTextMember {
+		width: max-content;
+	}
 	.shareLogosContainer {
 		width: 100%;
 		height: 100%;
@@ -79,18 +91,17 @@
 	.flexItem {
 		height: 100%;
 		margin-right: 1px;
+		border-right: 0.1px solid var(--secondaryThemeInverted);
 	}
 	.flexItem1 {
-		background-color: var(--red);
 		width: 50%;
 	}
 	.flexItem2 {
-		background-color: var(--green);
 		width: 25%;
 	}
 	.flexItem3 {
-		background-color: var(--blue);
 		width: 25%;
+		border-right: none;
 	}
 	.flex {
 		width: 100%;

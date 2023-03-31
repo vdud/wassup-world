@@ -1,8 +1,8 @@
-import { json } from '@sveltejs/kit'
+import { json } from '@sveltejs/kit';
 
-import type { RequestHandler } from './$types'
+import type { RequestHandler } from './$types';
 
-import { mainUser } from '$db/collections'
+import { mainUser } from '$db/collections';
 
 // import PusherPushNotifications from '@pusher/push-notifications-web'
 // const beamsClient = new PusherPushNotifications.Client({
@@ -21,15 +21,15 @@ import { mainUser } from '$db/collections'
 // 	.then(() => beamsClient.addDeviceInterest('hello'))
 
 export const POST = (async ({ request }) => {
-	const { data } = await request.json()
-	const userName = data
+	const { data } = await request.json();
+	const userName = data;
 
-	const findUser = await mainUser.findOne({ name: userName })
+	const findUser = await mainUser.findOne({ name: userName });
 	if (!findUser) {
-		const newUser = await mainUser.insertOne({ name: userName, allGroups: [], lastLoggedIn: new Date() })
-		return json({ success: true, userName_id: newUser.insertedId, data: { formatedPUBLICdata: [], formatedHASHTAGSdata: [], formatedLOCdata: [] } })
+		const newUser = await mainUser.insertOne({ name: userName, allGroups: [], lastLoggedIn: new Date() });
+		return json({ success: true, userName_id: newUser.insertedId, data: { formatedPUBLICdata: [], formatedHASHTAGSdata: [], formatedLOCdata: [] } });
 	} else {
-		mainUser.updateOne({ _id: findUser._id }, { $set: { lastLoggedIn: new Date() } })
+		mainUser.updateOne({ _id: findUser._id }, { $set: { lastLoggedIn: new Date() } });
 		const formattedUserData = await mainUser
 			.aggregate([
 				{ $match: { _id: findUser._id } },
@@ -71,32 +71,32 @@ export const POST = (async ({ request }) => {
 					},
 				},
 			])
-			.toArray()
+			.toArray();
 
 		const formatedPUBLICdata = () => {
 			if (formattedUserData.length === 0) {
-				return []
+				return [];
 			}
-			const publicData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'PUBLIC').sort((a: any, b: any) => b.updatedAt - a.updatedAt)
-			return publicData
-		}
+			const publicData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'PUBLIC').sort((a: any, b: any) => b.updatedAt - a.updatedAt);
+			return publicData;
+		};
 
 		const formatedHASHTAGSdata = () => {
 			if (formattedUserData.length === 0) {
-				return []
+				return [];
 			}
-			const hashtagsData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'HASHTAGS').sort((a: any, b: any) => b.updatedAt - a.updatedAt)
-			return hashtagsData
-		}
+			const hashtagsData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'HASHTAGS').sort((a: any, b: any) => b.updatedAt - a.updatedAt);
+			return hashtagsData;
+		};
 
 		const formatedLOCdata = () => {
 			if (formattedUserData.length === 0) {
-				return []
+				return [];
 			}
-			const locData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'LOCATIONS').sort((a: any, b: any) => b.updatedAt - a.updatedAt)
-			return locData
-		}
+			const locData = formattedUserData[0].allGroups.filter((formatGroup: any) => formatGroup.nature === 'LOCATIONS').sort((a: any, b: any) => b.updatedAt - a.updatedAt);
+			return locData;
+		};
 
-		return json({ success: true, userName_id: findUser._id, data: { formatedPUBLICdata: formatedPUBLICdata(), formatedHASHTAGSdata: formatedHASHTAGSdata(), formatedLOCdata: formatedLOCdata() } })
+		return json({ success: true, userName_id: findUser._id, data: { formatedPUBLICdata: formatedPUBLICdata(), formatedHASHTAGSdata: formatedHASHTAGSdata(), formatedLOCdata: formatedLOCdata() } });
 	}
-}) satisfies RequestHandler
+}) satisfies RequestHandler;

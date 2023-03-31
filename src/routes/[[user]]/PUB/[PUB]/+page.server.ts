@@ -1,21 +1,21 @@
-import type { PageServerLoad } from './$types'
+import type { PageServerLoad } from './$types';
 
-import { mainUser, groups, massagesCreate } from '$db/collections'
-import { ObjectId } from 'mongodb'
+import { mainUser, groups, massagesCreate } from '$db/collections';
+import { ObjectId } from 'mongodb';
 
 export const load = (async ({ params }) => {
-	const { user, PUB } = params
+	const { user, PUB } = params;
 
 	if (user) {
-		const userSender = await mainUser.findOne({ _id: new ObjectId(user) })
-		const userReciever = await mainUser.findOne({ _id: new ObjectId(PUB) })
+		const userSender = await mainUser.findOne({ _id: new ObjectId(user) });
+		const userReciever = await mainUser.findOne({ _id: new ObjectId(PUB) });
 
 		if (!userSender || !userReciever) {
-			return
+			return;
 		}
 
-		const findFirstGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}`, nature: 'PUBLIC' })
-		const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}`, nature: 'PUBLIC' })
+		const findFirstGroup = await groups.findOne({ name: `${userSender.name};${userReciever.name}`, nature: 'PUBLIC' });
+		const findSecondGroup = await groups.findOne({ name: `${userReciever.name};${userSender.name}`, nature: 'PUBLIC' });
 
 		if (!findFirstGroup && !findSecondGroup) {
 			const newGroup = await groups.insertOne({
@@ -25,10 +25,10 @@ export const load = (async ({ params }) => {
 				createdAt: new Date(),
 				updatedAt: new Date(),
 				messages: [],
-			})
+			});
 
-			await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: newGroup.insertedId } })
-			await mainUser.updateOne({ _id: userReciever._id }, { $push: { allGroups: newGroup.insertedId } })
+			await mainUser.updateOne({ _id: userSender._id }, { $push: { allGroups: newGroup.insertedId } });
+			await mainUser.updateOne({ _id: userReciever._id }, { $push: { allGroups: newGroup.insertedId } });
 
 			const allUsers = await groups
 				.aggregate([
@@ -46,11 +46,13 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			const returnMsgData = await massagesCreate
 				.aggregate([
@@ -72,7 +74,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ createdAt: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			const topLikes = await massagesCreate
 				.aggregate([
@@ -95,7 +97,7 @@ export const load = (async ({ params }) => {
 				.sort({ likes: -1 })
 				.limit(10)
 				.match({ likes: { $gt: 19 } })
-				.toArray()
+				.toArray();
 
 			return {
 				status: 200,
@@ -107,7 +109,7 @@ export const load = (async ({ params }) => {
 					groupName: `${userSender.name};${userReciever.name}`,
 					createdAt: new Date(),
 				},
-			}
+			};
 		} else if (findFirstGroup) {
 			const returnData = await groups
 				.aggregate([
@@ -125,11 +127,13 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			const returnMsgData = await massagesCreate
 				.aggregate([
@@ -151,7 +155,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ createdAt: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			const topLikes = await massagesCreate
 
@@ -176,7 +180,7 @@ export const load = (async ({ params }) => {
 				.match({ likes: { $gt: 19 } })
 				.sort({ likes: -1 })
 				.limit(10)
-				.toArray()
+				.toArray();
 
 			return {
 				status: 200,
@@ -188,7 +192,7 @@ export const load = (async ({ params }) => {
 					groupName: findFirstGroup.name,
 					createdAt: findFirstGroup.createdAt,
 				},
-			}
+			};
 		} else if (findSecondGroup) {
 			const returnData = await groups
 				.aggregate([
@@ -206,11 +210,13 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			const returnMsgData = await massagesCreate
 				.aggregate([
@@ -232,7 +238,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ createdAt: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			const topLikes = await massagesCreate
 
@@ -256,7 +262,7 @@ export const load = (async ({ params }) => {
 				.sort({ likes: -1 })
 				.match({ likes: { $gt: 19 } })
 				.limit(10)
-				.toArray()
+				.toArray();
 
 			return {
 				status: 200,
@@ -268,11 +274,11 @@ export const load = (async ({ params }) => {
 					groupName: findSecondGroup.name,
 					createdAt: findSecondGroup.createdAt,
 				},
-			}
+			};
 		}
 	} else {
 		// if (!user) {
-		const findGroup = await groups.findOne({ name: PUB, nature: 'PUBLIC' })
+		const findGroup = await groups.findOne({ name: PUB, nature: 'PUBLIC' });
 
 		if (findGroup) {
 			const returnData = await groups
@@ -291,11 +297,13 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			const returnMsgData = await massagesCreate
 				.aggregate([
@@ -317,7 +325,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ createdAt: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			const topLikes = await massagesCreate
 
@@ -341,7 +349,7 @@ export const load = (async ({ params }) => {
 				.sort({ likes: -1 })
 				.match({ likes: { $gt: 19 } })
 				.limit(10)
-				.toArray()
+				.toArray();
 
 			return {
 				status: 200,
@@ -353,10 +361,10 @@ export const load = (async ({ params }) => {
 					groupName: findGroup.name,
 					createdAt: findGroup.createdAt,
 				},
-			}
+			};
 		}
 
-		const findGroupbyId = await groups.findOne({ _id: new ObjectId(PUB) })
+		const findGroupbyId = await groups.findOne({ _id: new ObjectId(PUB) });
 
 		if (findGroupbyId) {
 			const returnData = await groups
@@ -375,11 +383,13 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			const returnMsgData = await massagesCreate
 				.aggregate([
@@ -401,7 +411,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ createdAt: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			const topLikes = await massagesCreate
 				.aggregate([
@@ -424,7 +434,7 @@ export const load = (async ({ params }) => {
 				.sort({ likes: -1 })
 				.match({ likes: { $gt: 19 } })
 				.limit(10)
-				.toArray()
+				.toArray();
 
 			return {
 				status: 200,
@@ -436,7 +446,7 @@ export const load = (async ({ params }) => {
 					groupName: findGroupbyId.name,
 					createdAt: findGroupbyId.createdAt,
 				},
-			}
+			};
 		}
 	}
-}) as PageServerLoad
+}) as PageServerLoad;

@@ -1,13 +1,13 @@
-import { json } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types'
+import { json } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-import { mainUser, groups, massagesCreate } from '$db/collections'
-import { ObjectId } from 'mongodb'
+import { mainUser, groups, massagesCreate } from '$db/collections';
+import { ObjectId } from 'mongodb';
 
 export const load = (async ({ params }) => {
-	const { user, messageId } = params
+	const { user, messageId } = params;
 	if (messageId) {
-		const findMessage = await massagesCreate.findOne({ _id: new ObjectId(messageId) })
+		const findMessage = await massagesCreate.findOne({ _id: new ObjectId(messageId) });
 
 		if (findMessage) {
 			const groupUsers = await groups
@@ -26,17 +26,19 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			const returnRepliesData = await massagesCreate
 				.find({ replyTo: new ObjectId(messageId) })
 				.sort({ likes: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			if (returnRepliesData) {
 				return {
@@ -46,10 +48,10 @@ export const load = (async ({ params }) => {
 						replyData: JSON.stringify(returnRepliesData),
 						allUsers: JSON.stringify(groupUsers[0].allUsers),
 					},
-				}
+				};
 			}
 		} else {
-			return
+			return;
 		}
 	}
-}) satisfies PageServerLoad
+}) satisfies PageServerLoad;

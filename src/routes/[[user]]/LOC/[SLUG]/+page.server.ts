@@ -1,22 +1,22 @@
-import { json } from '@sveltejs/kit'
-import type { PageServerLoad } from './$types'
+import { json } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
 
-import { mainUser, groups, massagesCreate } from '$db/collections'
-import { ObjectId } from 'mongodb'
+import { mainUser, groups, massagesCreate } from '$db/collections';
+import { ObjectId } from 'mongodb';
 
 export const load = (async ({ params }) => {
-	const { user, SLUG } = params
-	const latestMessages: any = []
+	const { user, SLUG } = params;
+	const latestMessages: any = [];
 
 	if (user) {
-		const findUser = await mainUser.findOne({ _id: new ObjectId(user) })
+		const findUser = await mainUser.findOne({ _id: new ObjectId(user) });
 		if (findUser) {
-			const findGroup = await groups.findOne({ _id: new ObjectId(SLUG) })
+			const findGroup = await groups.findOne({ _id: new ObjectId(SLUG) });
 			if (findGroup) {
-				const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: { $in: [findGroup._id] } })
+				const findUserLink = await mainUser.findOne({ _id: findUser._id, allGroups: { $in: [findGroup._id] } });
 
 				if (!findUserLink) {
-					await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } })
+					await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 				}
 				const groupUsers = await groups
 					.aggregate([
@@ -34,11 +34,13 @@ export const load = (async ({ params }) => {
 								allUsers: {
 									_id: 1,
 									name: 1,
+									lastLoggedIn: 1,
 								},
 							},
 						},
 					])
-					.toArray()
+					.sort({ lastLoggedIn: -1 })
+					.toArray();
 
 				const returnMsgData = await massagesCreate
 					.aggregate([
@@ -60,7 +62,7 @@ export const load = (async ({ params }) => {
 					])
 					.sort({ createdAt: -1 })
 					.limit(100)
-					.toArray()
+					.toArray();
 
 				const topLikes = await massagesCreate
 					.aggregate([
@@ -83,7 +85,7 @@ export const load = (async ({ params }) => {
 					.match({ likes: { $gt: 19 } })
 					.sort({ likes: 1 })
 					.limit(10)
-					.toArray()
+					.toArray();
 
 				return {
 					status: 200,
@@ -95,11 +97,11 @@ export const load = (async ({ params }) => {
 						groupName: findGroup.name,
 						createdAt: findGroup.createdAt,
 					},
-				}
+				};
 			}
 		}
 	} else {
-		const findGroup = await groups.findOne({ name: SLUG, nature: 'LOCATIONS' })
+		const findGroup = await groups.findOne({ name: SLUG, nature: 'LOCATIONS' });
 		if (findGroup) {
 			const groupUsers = await groups
 				.aggregate([
@@ -117,11 +119,13 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			const returnMsgData = await massagesCreate
 				.aggregate([
@@ -143,7 +147,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ createdAt: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			const topLikes = await massagesCreate
 				.aggregate([
@@ -166,7 +170,7 @@ export const load = (async ({ params }) => {
 				.match({ likes: { $gt: 19 } })
 				.sort({ likes: 1 })
 				.limit(10)
-				.toArray()
+				.toArray();
 
 			return {
 				status: 200,
@@ -178,9 +182,9 @@ export const load = (async ({ params }) => {
 					groupName: findGroup.name,
 					createdAt: findGroup.createdAt,
 				},
-			}
+			};
 		}
-		const findGroupbyId = await groups.findOne({ _id: new ObjectId(SLUG) })
+		const findGroupbyId = await groups.findOne({ _id: new ObjectId(SLUG) });
 		if (findGroupbyId) {
 			const returnMsgData = await massagesCreate
 				.aggregate([
@@ -202,7 +206,7 @@ export const load = (async ({ params }) => {
 				])
 				.sort({ createdAt: -1 })
 				.limit(100)
-				.toArray()
+				.toArray();
 
 			const topLikes = await massagesCreate
 				.aggregate([
@@ -225,7 +229,7 @@ export const load = (async ({ params }) => {
 				.match({ likes: { $gt: 19 } })
 				.sort({ likes: 1 })
 				.limit(10)
-				.toArray()
+				.toArray();
 
 			const groupUsers = await groups
 				.aggregate([
@@ -243,11 +247,13 @@ export const load = (async ({ params }) => {
 							allUsers: {
 								_id: 1,
 								name: 1,
+								lastLoggedIn: 1,
 							},
 						},
 					},
 				])
-				.toArray()
+				.sort({ lastLoggedIn: -1 })
+				.toArray();
 
 			return {
 				status: 200,
@@ -259,7 +265,7 @@ export const load = (async ({ params }) => {
 					groupName: findGroupbyId.name,
 					createdAt: findGroupbyId.createdAt,
 				},
-			}
+			};
 		}
 	}
-}) as PageServerLoad
+}) as PageServerLoad;
