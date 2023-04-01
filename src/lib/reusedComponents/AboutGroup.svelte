@@ -28,19 +28,23 @@
 						<div class="memberOne">
 							<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText">Name</p></div></div>
 							<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">Last seen</p></div></div>
-							<div class="flexItem flexItem3"><button class="flexLeft"><p class="headerText">Chat</p></button></div>
+							<div class="flexItem flexItem3">
+								<button class="flexLeft"
+									><p class="headerText">Chat</p>
+									<i class="fa-solid fa-envelope msgDis" /></button>
+							</div>
 						</div>
 						{#each allUsers as user}
 							<div class="memberOne">
-								<div class="flexItem flexItem1"><div class="flexLeft"><p class="pTextMember memberName">@{user.name}</p></div></div>
-								<div class="flexItem flexItem2"><div class="flexLeft"><p class="pTextMember">{timeSince(user.lastLoggedIn)}</p></div></div>
+								<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText memberName">@{user.name}</p></div></div>
+								<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">{timeSince(user.lastLoggedIn)}</p></div></div>
 								<div class="flexItem flexItem3">
 									<button
 										class="flexLeft"
 										on:click={() => {
 											window.location.pathname = `${$userName_id}/PUB/${user._id}`;
 										}}
-										><p class="pTextMember sendAmsg">SEND-A-MESSAGE</p>
+										><p class="pTextMember sendAmsg">SEND</p>
 										<i class="fa-solid fa-envelope sendAmsg" /></button>
 								</div>
 							</div>
@@ -53,6 +57,12 @@
 {/if}
 
 <style>
+	.msgDis {
+		color: var(--secondaryThemeInverted);
+		margin-left: var(--lessAverageMargin);
+		opacity: var(--extraDull);
+		font-size: 0.7rem;
+	}
 	.memberName {
 		color: var(--secondary);
 	}
@@ -60,7 +70,7 @@
 		color: var(--secOptLight);
 		width: max-content;
 		border-radius: 5px;
-		margin: 3px var(--lessAverageMargin);
+		margin-right: var(--lessAverageMargin);
 
 		/* scale: 0.9; */
 	}
@@ -75,11 +85,16 @@
 	.pTextMember,
 	.headerText {
 		width: max-content;
+		/* width: 1000px; */
+		display: flex;
+		align-items: center;
+		justify-content: start;
 	}
 	.headerText {
 		font-family: UBold;
 		color: var(--secondaryThemeInverted);
 		opacity: var(--extraDull);
+		font-size: 0.7rem;
 	}
 	.shareLogosContainer {
 		width: 100%;
@@ -123,15 +138,16 @@
 		height: 100%;
 		margin-right: 1px;
 		border-right: 0.1px solid var(--secondaryThemeInverted);
+		overflow: hidden;
 	}
 	.flexItem1 {
 		width: 45%;
 	}
 	.flexItem2 {
-		width: 20%;
+		width: 25%;
 	}
 	.flexItem3 {
-		width: 35%;
+		width: 30%;
 		border-right: none;
 	}
 	.flex {

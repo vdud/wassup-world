@@ -213,7 +213,7 @@ body {
 	height: auto;
 	border-radius: calc(var(--borderRadius) * 0.75);
 	/* width: clamp(640px, 80%, 800px); */
-	width: clamp(520px, 80%, 800px);
+	width: clamp(400px, 75%, 800px);
 	margin: 2px var(--averageMargin);
 	/* background-color: var(--secondaryTheme); */
 

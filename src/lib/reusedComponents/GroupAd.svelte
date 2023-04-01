@@ -1,6 +1,6 @@
 <script>
-	import imgSource from '$lib/assets/menuItems.jpg'
-	import { currentPage } from '$lib/stores/currentPage'
+	import imgSource from '$lib/assets/menuItems.jpg';
+	import { currentPage } from '$lib/stores/currentPage';
 
 	const uSplashKeys = [
 		'U7HLzMO4SIY',
@@ -58,17 +58,17 @@
 		'7__6lSyuYeA',
 		'd30sszrW7Vw',
 		'6g9BxgCNQv4',
-	]
-	const randomKey = uSplashKeys[Math.floor(Math.random() * uSplashKeys.length)]
-	const imgUrl = 'https://source.unsplash.com/' + randomKey
+	];
+	const randomKey = uSplashKeys[Math.floor(Math.random() * uSplashKeys.length)];
+	const imgUrl = 'https://source.unsplash.com/' + randomKey;
 
-	export let active = 0
-	let i = 0
+	export let active = 0;
+	let i = 0;
 
-	let isShowMenu = false
+	let isShowMenu = false;
 	const isShowMenuToggle = () => {
-		isShowMenu = !isShowMenu
-	}
+		isShowMenu = !isShowMenu;
+	};
 </script>
 
 {#if $currentPage === 'LOCATIONS'}
@@ -105,7 +105,7 @@
 
 		overflow-y: scroll;
 
-		background-color: var(--secondaryTheme);
+		/* background-color: var(--secondaryTheme); */
 	}
 
 	::-webkit-scrollbar {
