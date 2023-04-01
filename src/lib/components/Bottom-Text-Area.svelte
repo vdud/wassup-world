@@ -22,13 +22,14 @@
 		const message = $user_message.slice(0, 999);
 		const groupId = $userGroup_id;
 		$user_message = '';
+		const time = new Date();
 
 		if ($currentPage !== 'REPLIES') {
 			if (message === '') {
 				return;
 			} else {
-				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: new Date() });
-				applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage });
+				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: time });
+				applyNavDataMessage({ sender: $userName, message, createdAt: time, groupId, nature: $currentPage });
 
 				const res = await fetch('/api/textAreaMessages', {
 					method: 'POST',
@@ -40,7 +41,7 @@
 				});
 
 				const response = await res.json();
-				applyMessage({ sender: $userName, message: message, createdAt: new Date(), messageId: response.messageId, $userName_id, $userGroup_id, isYoMe: true });
+				applyMessage({ sender: $userName, message: message, createdAt: time, messageId: response.messageId, $userName_id, $userGroup_id, isYoMe: true });
 				if (!res.ok) {
 					alert(response.message);
 				}
@@ -49,7 +50,7 @@
 			if (message === '' && $messageId !== '') {
 				return;
 			} else {
-				freshReplyMessage({ sender: $userName, message, createdAt: new Date() });
+				freshReplyMessage({ sender: $userName, message, createdAt: time });
 				const res = await fetch('/api/replyMessages', {
 					method: 'POST',
 					headers: {

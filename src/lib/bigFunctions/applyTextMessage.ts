@@ -8,7 +8,7 @@ export const applyNewMessageFresh = (data: any) => {
 		const div = document.createElement('div');
 		div.classList.add('text');
 		div.classList.add('yoMe');
-		div.id = `${data.sender}${data.message.length}`;
+		div.id = `${data.sender}${data.createdAt}`;
 
 		const p = document.createElement('p');
 		p.classList.add('pText');
@@ -46,7 +46,7 @@ export const applyMessage = (data: any) => {
 	const textMessages: any = document.getElementById('textMessages');
 	if (textMessages) {
 		if (data.isYoMe) {
-			const freshText: any = document.getElementById(`${data.sender}${data.message.length}`);
+			const freshText: any = document.getElementById(`${data.sender}${data.createdAt}`);
 			if (freshText) {
 				freshText.remove();
 			}
