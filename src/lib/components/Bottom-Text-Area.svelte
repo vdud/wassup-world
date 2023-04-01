@@ -1,34 +1,34 @@
 <script lang="ts">
-	import { user_message } from '$lib/stores/user_message'
-	import { userGroup_id } from '$lib/stores/userGroup_id'
-	import { userName } from '$lib/stores/userName'
-	import { userName_id } from '$lib/stores/userName_id'
-	import { applyNavDataMessage, applyNewMessageFresh, freshReplyMessage } from '$lib/bigFunctions/applyTextMessage'
+	import { user_message } from '$lib/stores/user_message';
+	import { userGroup_id } from '$lib/stores/userGroup_id';
+	import { userName } from '$lib/stores/userName';
+	import { userName_id } from '$lib/stores/userName_id';
+	import { applyMessage, applyNavDataMessage, applyNewMessageFresh, freshReplyMessage } from '$lib/bigFunctions/applyTextMessage';
 
-	import { autoresize } from 'svelte-textarea-autoresize'
-	import sendButtonLogo from '$lib/assets/sendBtn.png'
-	import { currentPage } from '$lib/stores/currentPage'
-	import { messageId } from '$lib/stores/messageId'
+	import { autoresize } from 'svelte-textarea-autoresize';
+	import sendButtonLogo from '$lib/assets/sendBtn.png';
+	import { currentPage } from '$lib/stores/currentPage';
+	import { messageId } from '$lib/stores/messageId';
 
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !event.shiftKey) {
-			event.preventDefault()
-			socketWorker()
-			$user_message = ''
+			event.preventDefault();
+			socketWorker();
+			$user_message = '';
 		}
 	}
 
 	const socketWorker = async () => {
-		const message = $user_message.slice(0, 999)
-		const groupId = $userGroup_id
-		$user_message = ''
+		const message = $user_message.slice(0, 999);
+		const groupId = $userGroup_id;
+		$user_message = '';
 
 		if ($currentPage !== 'REPLIES') {
 			if (message === '') {
-				return
+				return;
 			} else {
-				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: new Date() })
-				applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage })
+				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: new Date() });
+				applyNavDataMessage({ sender: $userName, message, createdAt: new Date(), groupId, nature: $currentPage });
 
 				const res = await fetch('/api/textAreaMessages', {
 					method: 'POST',
@@ -37,40 +37,41 @@
 					},
 
 					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
-				})
+				});
 
-				const response = await res.json()
+				const response = await res.json();
 				if (!res.ok) {
-					alert(response.message)
+					alert(response.message);
 				}
 			}
 		} else if ($currentPage === 'REPLIES') {
 			if (message === '' && $messageId !== '') {
-				return
+				return;
 			} else {
-				freshReplyMessage({ sender: $userName, message, createdAt: new Date() })
+				freshReplyMessage({ sender: $userName, message, createdAt: new Date() });
 				const res = await fetch('/api/replyMessages', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
 					},
 					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id, $messageId }),
-				})
-				const response = await res.json()
+				});
+				const response = await res.json();
+				// applyMessage({ sender: $userName, message: message, createdAt: new Date(), messageId: response.messageId, $userName_id, $userGroup_id, isYoMe: true });
 
 				if (!res.ok) {
-					alert(response.message)
+					alert(response.message);
 				}
 
-				const replyBody = document.getElementById('middleScroll')
+				const replyBody = document.getElementById('middleScroll');
 				if (replyBody) {
 					setTimeout(() => {
-						replyBody.scrollTop = replyBody.scrollHeight
-					}, 100)
+						replyBody.scrollTop = replyBody.scrollHeight;
+					}, 100);
 				}
 			}
 		}
-	}
+	};
 </script>
 
 <div class="textAreeaBox">
