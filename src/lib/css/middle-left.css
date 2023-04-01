@@ -220,9 +220,9 @@
 }
 .natureBox {
 	width: 100%;
-	border: 1px solid var(--tertiaryThemeInverted);
+	border: 0.5px solid var(--tertiaryThemeInverted);
 	margin-bottom: 1rem;
-	border-radius: calc(var(--borderRadius) / 2);
+	border-radius: var(--borderRadius);
 	overflow: hidden;
 	/* pointer-events: all; */
 }

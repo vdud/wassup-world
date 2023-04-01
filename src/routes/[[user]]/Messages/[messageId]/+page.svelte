@@ -19,6 +19,7 @@
 	const messageData = JSON.parse(data.body.message);
 
 	const allUsers = JSON.parse(data.body.allUsers);
+	const groupNature = JSON.parse(data.body.groupNature);
 
 	const replyData = JSON.parse(data.body.replyData);
 	const isReply = messageData.isReply;
@@ -107,8 +108,9 @@
 		</div>
 	</div>
 
-	<AboutGroup {allUsers} />
-
+	{#if groupNature !== 'PUBLIC'}
+		<AboutGroup {allUsers} />
+	{/if}
 	<div class="allReplies">
 		<div class="flexBod" id="replies">
 			<div class="flexBodHeader">

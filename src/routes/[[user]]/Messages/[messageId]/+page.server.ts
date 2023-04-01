@@ -23,6 +23,8 @@ export const load = (async ({ params }) => {
 					},
 					{
 						$project: {
+							_id: 1,
+							nature: 1,
 							allUsers: {
 								_id: 1,
 								name: 1,
@@ -30,8 +32,26 @@ export const load = (async ({ params }) => {
 							},
 						},
 					},
+					{
+						$unwind: '$allUsers',
+					},
+					{
+						$sort: {
+							'allUsers.lastLoggedIn': -1,
+						},
+					},
+					{
+						$group: {
+							_id: '$_id',
+							groupNature: {
+								$first: '$nature',
+							},
+							allUsers: {
+								$push: '$allUsers',
+							},
+						},
+					},
 				])
-				.sort({ lastLoggedIn: -1 })
 				.toArray();
 
 			const returnRepliesData = await massagesCreate
@@ -47,6 +67,7 @@ export const load = (async ({ params }) => {
 						message: JSON.stringify(findMessage),
 						replyData: JSON.stringify(returnRepliesData),
 						allUsers: JSON.stringify(groupUsers[0].allUsers),
+						groupNature: JSON.stringify(groupUsers[0].groupNature),
 					},
 				};
 			}

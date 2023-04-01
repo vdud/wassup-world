@@ -2,6 +2,7 @@
 	import { timeSince } from '$lib/bigFunctions/timeFormat';
 	import { currentPage } from '$lib/stores/currentPage';
 	import { isShowInfo } from '$lib/stores/isShowInfo';
+	import { userName_id } from '$lib/stores/userName_id';
 
 	export let allUsers: any;
 </script>
@@ -24,11 +25,24 @@
 				<div class="flex 👽">
 					<div class="textBoxH"><p>Members 👽</p></div>
 					<div class="peopleList">
+						<div class="memberOne">
+							<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText">Name</p></div></div>
+							<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">Last seen</p></div></div>
+							<div class="flexItem flexItem3"><button class="flexLeft"><p class="headerText">Chat</p></button></div>
+						</div>
 						{#each allUsers as user}
 							<div class="memberOne">
-								<div class="flexItem flexItem1"><div class="flexLeft"><p class="pTextMember">{user.name}</p></div></div>
+								<div class="flexItem flexItem1"><div class="flexLeft"><p class="pTextMember memberName">@{user.name}</p></div></div>
 								<div class="flexItem flexItem2"><div class="flexLeft"><p class="pTextMember">{timeSince(user.lastLoggedIn)}</p></div></div>
-								<div class="flexItem flexItem3"><div class="flexLeft"><p class="pTextMember">send-a-message</p></div></div>
+								<div class="flexItem flexItem3">
+									<button
+										class="flexLeft"
+										on:click={() => {
+											window.location.pathname = `${$userName_id}/PUB/${user._id}`;
+										}}
+										><p class="pTextMember sendAmsg">SEND-A-MESSAGE</p>
+										<i class="fa-solid fa-envelope sendAmsg" /></button>
+								</div>
 							</div>
 						{/each}
 					</div>
@@ -39,6 +53,17 @@
 {/if}
 
 <style>
+	.memberName {
+		color: var(--secondary);
+	}
+	.sendAmsg {
+		color: var(--secOptLight);
+		width: max-content;
+		border-radius: 5px;
+		margin: 3px var(--lessAverageMargin);
+
+		/* scale: 0.9; */
+	}
 	.flexLeft {
 		width: 100%;
 		height: 100%;
@@ -47,8 +72,14 @@
 		justify-content: start;
 		margin-left: 10px;
 	}
-	.pTextMember {
+	.pTextMember,
+	.headerText {
 		width: max-content;
+	}
+	.headerText {
+		font-family: UBold;
+		color: var(--secondaryThemeInverted);
+		opacity: var(--extraDull);
 	}
 	.shareLogosContainer {
 		width: 100%;
@@ -94,13 +125,13 @@
 		border-right: 0.1px solid var(--secondaryThemeInverted);
 	}
 	.flexItem1 {
-		width: 50%;
+		width: 45%;
 	}
 	.flexItem2 {
-		width: 25%;
+		width: 20%;
 	}
 	.flexItem3 {
-		width: 25%;
+		width: 35%;
 		border-right: none;
 	}
 	.flex {

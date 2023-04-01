@@ -38,8 +38,23 @@ export const load = (async ({ params }) => {
 								},
 							},
 						},
+						{
+							$unwind: '$allUsers',
+						},
+						{
+							$sort: {
+								'allUsers.lastLoggedIn': -1,
+							},
+						},
+						{
+							$group: {
+								_id: '$_id',
+								allUsers: {
+									$push: '$allUsers',
+								},
+							},
+						},
 					])
-					.sort({ lastLoggedIn: -1 })
 					.toArray();
 
 				const returnMsgData = await massagesCreate
@@ -123,8 +138,23 @@ export const load = (async ({ params }) => {
 							},
 						},
 					},
+					{
+						$unwind: '$allUsers',
+					},
+					{
+						$sort: {
+							'allUsers.lastLoggedIn': -1,
+						},
+					},
+					{
+						$group: {
+							_id: '$_id',
+							allUsers: {
+								$push: '$allUsers',
+							},
+						},
+					},
 				])
-				.sort({ lastLoggedIn: -1 })
 				.toArray();
 
 			const returnMsgData = await massagesCreate
@@ -251,8 +281,23 @@ export const load = (async ({ params }) => {
 							},
 						},
 					},
+					{
+						$unwind: '$allUsers',
+					},
+					{
+						$sort: {
+							'allUsers.lastLoggedIn': -1,
+						},
+					},
+					{
+						$group: {
+							_id: '$_id',
+							allUsers: {
+								$push: '$allUsers',
+							},
+						},
+					},
 				])
-				.sort({ lastLoggedIn: -1 })
 				.toArray();
 
 			return {
