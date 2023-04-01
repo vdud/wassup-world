@@ -40,6 +40,7 @@
 				});
 
 				const response = await res.json();
+				applyMessage({ sender: $userName, message: message, createdAt: new Date(), messageId: response.messageId, $userName_id, $userGroup_id, isYoMe: true });
 				if (!res.ok) {
 					alert(response.message);
 				}
@@ -57,7 +58,6 @@
 					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id, $messageId }),
 				});
 				const response = await res.json();
-				// applyMessage({ sender: $userName, message: message, createdAt: new Date(), messageId: response.messageId, $userName_id, $userGroup_id, isYoMe: true });
 
 				if (!res.ok) {
 					alert(response.message);
