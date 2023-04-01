@@ -120,7 +120,7 @@
 		color: var(--green);
 	}
 	.fa-comment-alt {
-		color: var(--yellow);
+		color: var(--blue);
 	}
 	.msgDis {
 		color: var(--secondaryThemeInverted);

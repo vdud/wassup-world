@@ -77,17 +77,50 @@
 			<img src={imgUrl} alt="image {active + 1}" class="image" />
 		</button>
 	</div>
+	<div class="aboutWallpaper">
+		<div class="gradient" />
+		<img src={imgUrl} alt="image {active + 1}" class="imgWallpaper" />
+	</div>
 {/if}
 
 <style>
-	.absoluteCross {
+	.gradient {
 		position: absolute;
-		bottom: 200px;
-		right: 0;
+		top: 0;
 		left: 0;
-		scale: 5;
-		z-index: 1;
-		color: var(--secondaryThemeInverted);
+		right: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 10000;
+		/* background-image: linear-gradient(to bottom, #0000, var(--secondaryTheme)); */
+		background-image: linear-gradient(0deg, var(--secondaryTheme) 33%, #0000 100%), linear-gradient(180deg, var(--secondaryTheme) 0%, #0000 40%);
+
+		pointer-events: none;
+	}
+	.imgWallpaper {
+		height: 100%;
+		/* filterBlur */
+		filter: blur(1px);
+		/* object-fit: cover; */
+	}
+	.aboutWallpaper {
+		position: absolute;
+		top: 90px;
+		left: 0;
+		right: 0;
+		height: 100%;
+		/* width: fit-content; */
+		z-index: 10000;
+		opacity: 0.33;
+		/* background-image: linear-gradient(to bottom, #000, red); */
+		/* foreground lineargradient */
+
+		pointer-events: none;
+		z-index: 0;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 	.fullWindow {
 		width: calc(100% - 2rem);
@@ -129,6 +162,7 @@
 		display: flex;
 		justify-content: start;
 		align-items: center;
+		z-index: 2;
 
 		width: 100%;
 		height: clamp(100px, 100%, 176px);
