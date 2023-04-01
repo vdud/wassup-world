@@ -11,7 +11,7 @@
 	<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-11rem; opacity:0;'}>
 		<div class="infoData">
 			<div class="flexInfo">
-				<div class="flex 🔗">
+				<!-- <div class="flex 🔗">
 					<div class="textBoxH">
 						<p>Share 🔗</p>
 					</div>
@@ -21,7 +21,7 @@
 						<div class="colored" />
 						<div class="colored" />
 					</div>
-				</div>
+				</div> -->
 				<div class="flex 👽">
 					<div class="textBoxH"><p>Members 👽</p></div>
 					<div class="peopleList">
@@ -78,7 +78,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: start;
-		margin-left: 10px;
+		margin-left: var(--averageMargin);
 	}
 	.flexCenter {
 		width: 100%;
@@ -105,7 +105,7 @@
 		color: var(--secondary);
 		opacity: 1;
 	}
-	.shareLogosContainer {
+	/* .shareLogosContainer {
 		width: 100%;
 		height: 100%;
 		display: grid;
@@ -115,7 +115,7 @@
 	.colored {
 		width: 100%;
 		height: 100%;
-	}
+	} */
 	p {
 		font-family: UBold;
 		color: var(--primaryThemeInverted);
@@ -149,7 +149,7 @@
 	}
 	.flexItem {
 		height: 100%;
-		margin-right: 1px;
+		/* margin-right: 1px; */
 		border-right: 0.1px solid var(--secondaryThemeInverted);
 		overflow: hidden;
 	}
@@ -182,13 +182,13 @@
 		align-items: center;
 	}
 
-	.🔗 {
+	/* .🔗 {`
 		width: 33.3%;
 		height: 100%;
 		border-right: 0.1px solid var(--secondaryThemeInverted);
-	}
+	}` */
 	.👽 {
-		width: 66.6%;
+		width: 100%;
 		height: 100%;
 	}
 	.infoBox {
