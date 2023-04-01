@@ -16,6 +16,7 @@ export const applyNewMessageFresh = (data: any) => {
 		p.classList.add('textShadows');
 
 		const span1 = document.createElement('span');
+		span1.classList.add('replySender');
 		span1.style.color = 'var(--secondary)';
 		span1.innerText = data.sender + '; ';
 
@@ -63,6 +64,7 @@ export const applyMessage = (data: any) => {
 
 		//sender span
 		const span1 = document.createElement('span');
+		span1.classList.add('replySender');
 		span1.style.color = data.isYoMe ? 'var(--secondary)' : 'var(--primary)';
 		span1.innerText = data.sender + '; ';
 

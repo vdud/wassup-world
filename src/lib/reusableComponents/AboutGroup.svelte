@@ -29,18 +29,18 @@
 							<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText">Name</p></div></div>
 							<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">Last seen</p></div></div>
 							<div class="flexItem flexItem3">
-								<button class="flexLeft"
+								<button class="flexCenter"
 									><p class="headerText">Chat</p>
 									<i class="fa-solid fa-envelope msgDis" /></button>
 							</div>
 						</div>
 						{#each allUsers as user}
 							<div class="memberOne">
-								<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText memberName">@{user.name}</p></div></div>
+								<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText memberName">;{user.name}</p></div></div>
 								<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">{timeSince(user.lastLoggedIn)}</p></div></div>
-								<div class="flexItem flexItem3">
+								<div class="flexItem flexItem3 sendMsgBtn">
 									<button
-										class="flexLeft"
+										class="flexCenter"
 										on:click={() => {
 											window.location.pathname = `${$userName_id}/PUB/${user._id}`;
 										}}
@@ -63,11 +63,9 @@
 		opacity: var(--extraDull);
 		font-size: 0.7rem;
 	}
-	.memberName {
-		color: var(--secondary);
-	}
 	.sendAmsg {
-		color: var(--secOptLight);
+		color: var(--primaryThemeInverted);
+		text-shadow: var(--textShadows);
 		width: max-content;
 		border-radius: 5px;
 		margin-right: var(--lessAverageMargin);
@@ -82,6 +80,13 @@
 		justify-content: start;
 		margin-left: 10px;
 	}
+	.flexCenter {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 	.pTextMember,
 	.headerText {
 		width: max-content;
@@ -95,6 +100,10 @@
 		color: var(--secondaryThemeInverted);
 		opacity: var(--extraDull);
 		font-size: 0.7rem;
+	}
+	.memberName {
+		color: var(--secondary);
+		opacity: 1;
 	}
 	.shareLogosContainer {
 		width: 100%;
@@ -121,8 +130,12 @@
 	.peopleList {
 		width: 100%;
 		height: 100%;
-		overflow: scroll;
-		margin-bottom: -10px;
+		overflow-y: scroll;
+		margin-bottom: -1px;
+		/* margin-bottom: -10px; */
+	}
+	.sendMsgBtn {
+		background-color: var(--primaryTheme);
 	}
 	.memberOne {
 		width: 100%;

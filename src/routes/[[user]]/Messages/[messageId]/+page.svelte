@@ -12,7 +12,7 @@
 	import { messageId } from '$lib/stores/messageId';
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
 	import { isShowInfo } from '$lib/stores/isShowInfo';
-	import AboutGroup from '$lib/reusedComponents/AboutGroup.svelte';
+	import AboutGroup from '$lib/reusableComponents/AboutGroup.svelte';
 	import { replyMessage } from '$lib/bigFunctions/applyTextMessage';
 
 	export let data: PageData;

@@ -12,7 +12,7 @@
 	import { isFlex } from '$lib/stores/isFlex';
 	import { applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage';
 	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg';
-	import AllGroupMessages from '$lib/reusedComponents/AllGroupMessages.svelte';
+	import AllGroupMessages from '$lib/reusableComponents/AllGroupMessages.svelte';
 	import { nature } from '$lib/stores/nature';
 
 	onMount(() => {
@@ -30,7 +30,7 @@
 				} else {
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
-					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: data.body.nature });
+					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: $currentPage });
 				}
 			})
 			.bind('injectLike', (data: any) => {

@@ -16,9 +16,9 @@
 }
 @media (prefers-color-scheme: light) {
 	:root {
-		--primaryTheme: #bbb;
-		--secondaryTheme: #ddd;
-		--tertiaryTheme: #999;
+		--primaryTheme: #ddd;
+		--secondaryTheme: #fff;
+		--tertiaryTheme: #cbcbcb85;
 
 		--primaryThemeInverted: #000000;
 		--secondaryThemeInverted: #505050;
@@ -234,7 +234,8 @@ body {
 }
 .timeSpan {
 	background-color: var(--primaryTheme);
-	color: var(--tertiaryTheme);
+	color: var(--secondaryThemeInverted);
+	opacity: var(--extraDull);
 	box-shadow: var(--boxInsetShadows);
 	font-size: calc(var(--fontSize) * 0.7);
 	padding: 0.2rem 0.6rem;
@@ -379,8 +380,8 @@ textarea:focus {
 
 .gradient {
 	width: 100%;
-	height: 135px;
-	background: linear-gradient(0deg, #2a2a2a00 0%, var(--secondaryTheme) 33%);
+	height: 300px;
+	background: linear-gradient(0deg, #0000 0%, var(--secondaryTheme) 100%);
 	/* background-color: var(--red); */
 	position: absolute;
 	z-index: 10000;
