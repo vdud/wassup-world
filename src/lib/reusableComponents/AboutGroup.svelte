@@ -5,27 +5,68 @@
 	import { userName_id } from '$lib/stores/userName_id';
 
 	export let allUsers: any;
+
+	function copyLink() {
+		navigator.clipboard.writeText(window.location.href);
+	}
+	function shareViaEmail() {
+		const subject = encodeURIComponent('Check out this link');
+		const body = encodeURIComponent(`I thought you might be interested in this: ${window.location.href}`);
+		window.open(`mailto:?subject=${subject}&body=${body}`);
+	}
+
+	function shareViaWhatsApp() {
+		const text = encodeURIComponent(`Wassup! check out this link of a group-chat on wassup.world, here; ${window.location.href}`);
+		window.open(`https://api.whatsapp.com/send?text=${text}`);
+	}
+
+	function shareViaMessageApp() {
+		const text = encodeURIComponent(`Wassup! check out this link of a group-chat on wassup.world, here; ${window.location.href}`);
+		const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+		if (isIOS) {
+			window.location.href = `sms:&body=${text}`;
+		} else {
+			window.open(`sms:?body=${text}`);
+		}
+	}
 </script>
 
 {#if $currentPage !== 'PUBLIC'}
 	<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-11rem; opacity:0;'}>
 		<div class="infoData">
 			<div class="flexInfo">
-				<!-- <div class="flex 🔗">
+				<div class="flex 🔗">
 					<div class="textBoxH">
 						<p>Share 🔗</p>
 					</div>
 					<div class="shareLogosContainer">
-						<div class="colored" />
-						<div class="colored" />
-						<div class="colored" />
-						<div class="colored" />
+						<div class="colored copyLink">
+							<button on:click={copyLink} class="faBtn">
+								<i class="faIcon fa-solid fa-link" />
+							</button>
+						</div>
+						<div class="colored email">
+							<button on:click={shareViaEmail} class="faBtn">
+								<i class="faIcon fa-solid fa-envelope" />
+							</button>
+						</div>
+						<div class="colored whatsapp">
+							<button on:click={shareViaWhatsApp} class="faBtn">
+								<i class="faIcon fa-brands fa-whatsapp" />
+							</button>
+						</div>
+						<div class="colored messageApp">
+							<button on:click={shareViaMessageApp} class="faBtn">
+								<i class="faIcon fa-solid fa-comment-alt" />
+							</button>
+						</div>
 					</div>
-				</div> -->
+				</div>
 				<div class="flex 👽">
 					<div class="textBoxH"><p>Members 👽</p></div>
 					<div class="peopleList">
-						<div class="memberOne">
+						<div class="membersColumn memberHeader">
 							<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText">Name</p></div></div>
 							<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">Last seen</p></div></div>
 							<div class="flexItem flexItem3">
@@ -35,7 +76,7 @@
 							</div>
 						</div>
 						{#each allUsers as user}
-							<div class="memberOne">
+							<div class="membersColumn">
 								<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText memberName">;{user.name}</p></div></div>
 								<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">{timeSince(user.lastLoggedIn)}</p></div></div>
 								<div class="flexItem flexItem3 sendMsgBtn">
@@ -57,6 +98,30 @@
 {/if}
 
 <style>
+	.faBtn {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.faIcon {
+		width: 100%;
+		scale: 2;
+		text-shadow: var(--textShadows);
+	}
+	.fa-link {
+		color: var(--primaryThemeInverted);
+	}
+	.fa-envelope {
+		color: var(--red);
+	}
+	.fa-whatsapp {
+		color: var(--green);
+	}
+	.fa-comment-alt {
+		color: var(--yellow);
+	}
 	.msgDis {
 		color: var(--secondaryThemeInverted);
 		margin-left: var(--lessAverageMargin);
@@ -105,17 +170,22 @@
 		color: var(--secondary);
 		opacity: 1;
 	}
-	/* .shareLogosContainer {
+	.shareLogosContainer {
 		width: 100%;
 		height: 100%;
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		grid-template-rows: repeat(2, 1fr);
+		background-color: var(--primaryTheme);
 	}
 	.colored {
+		overflow: hidden;
 		width: 100%;
 		height: 100%;
-	} */
+	}
+	.colored:hover {
+		background-color: var(--secondaryTheme);
+	}
 	p {
 		font-family: UBold;
 		color: var(--primaryThemeInverted);
@@ -137,15 +207,19 @@
 	.sendMsgBtn {
 		background-color: var(--primaryTheme);
 	}
-	.memberOne {
+	.membersColumn {
 		width: 100%;
 		height: 2rem;
 		/* margin-bottom: 1px; */
-		border-bottom: 1px solid var(--secondaryThemeInverted);
 
+		border-bottom: 1px solid var(--secondaryThemeInverted);
 		display: flex;
 		justify-content: start;
 		align-items: center;
+	}
+	.memberHeader {
+		border-top: 1px solid var(--secondaryThemeInverted);
+		margin-top: -1px;
 	}
 	.flexItem {
 		height: 100%;
@@ -182,11 +256,11 @@
 		align-items: center;
 	}
 
-	/* .🔗 {`
+	.🔗 {
 		width: 33.3%;
 		height: 100%;
 		border-right: 0.1px solid var(--secondaryThemeInverted);
-	}` */
+	}
 	.👽 {
 		width: 100%;
 		height: 100%;
