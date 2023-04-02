@@ -77,7 +77,7 @@
 			<img src={imgUrl} alt="image {active + 1}" class="image" />
 		</button>
 	</div>
-	<div class="aboutWallpaper">
+	<div class="aboutWallpaper" style={isShowMenu ? 'display:none;' : ''}>
 		<div class="gradient" />
 		<img src={imgUrl} alt="image {active + 1}" class="imgWallpaper" />
 	</div>
@@ -89,7 +89,7 @@
 		top: 0;
 		left: 0;
 		right: 0;
-		height: 100%;
+		height: 105%;
 		width: 100%;
 		z-index: 10000;
 		/* background-image: linear-gradient(to bottom, #0000, var(--secondaryTheme)); */
@@ -98,7 +98,8 @@
 		pointer-events: none;
 	}
 	.imgWallpaper {
-		height: 100%;
+		height: auto;
+		width: 100%;
 		/* filterBlur */
 		filter: blur(1px);
 		/* object-fit: cover; */
@@ -108,8 +109,8 @@
 		top: 90px;
 		left: 0;
 		right: 0;
-		height: 100%;
-		/* width: fit-content; */
+		height: max-content;
+		width: 100%;
 		z-index: 10000;
 		opacity: 0.33;
 		/* background-image: linear-gradient(to bottom, #000, red); */
@@ -119,7 +120,7 @@
 		z-index: 0;
 
 		display: flex;
-		align-items: center;
+		align-items: start;
 		justify-content: center;
 	}
 	.fullWindow {

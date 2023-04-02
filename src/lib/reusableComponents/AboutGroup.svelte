@@ -1,35 +1,11 @@
 <script lang="ts">
+	import { copyLink, shareViaEmail, shareViaMessageApp, shareViaWhatsApp } from '$lib/bigFunctions/socialsGroupAbt';
 	import { timeSince } from '$lib/bigFunctions/timeFormat';
 	import { currentPage } from '$lib/stores/currentPage';
 	import { isShowInfo } from '$lib/stores/isShowInfo';
 	import { userName_id } from '$lib/stores/userName_id';
 
 	export let allUsers: any;
-
-	function copyLink() {
-		navigator.clipboard.writeText(window.location.href);
-	}
-	function shareViaEmail() {
-		const subject = encodeURIComponent('Check out this link');
-		const body = encodeURIComponent(`I thought you might be interested in this: ${window.location.href}`);
-		window.open(`mailto:?subject=${subject}&body=${body}`);
-	}
-
-	function shareViaWhatsApp() {
-		const text = encodeURIComponent(`Wassup! check out this link of a group-chat on wassup.world, here; ${window.location.href}`);
-		window.open(`https://api.whatsapp.com/send?text=${text}`);
-	}
-
-	function shareViaMessageApp() {
-		const text = encodeURIComponent(`Wassup! check out this link of a group-chat on wassup.world, here; ${window.location.href}`);
-		const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-		if (isIOS) {
-			window.location.href = `sms:&body=${text}`;
-		} else {
-			window.open(`sms:?body=${text}`);
-		}
-	}
 </script>
 
 {#if $currentPage !== 'PUBLIC'}
