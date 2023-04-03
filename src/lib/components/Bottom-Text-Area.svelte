@@ -25,7 +25,11 @@
 		const time = new Date();
 
 		const middleScroll: any = document.getElementById('middleScroll');
-		middleScroll.scrollTop = middleScroll.scrollHeight;
+		if (middleScroll) {
+			setTimeout(() => {
+				middleScroll.scrollTop = middleScroll.scrollHeight;
+			}, 100);
+		}
 
 		if ($currentPage !== 'REPLIES') {
 			if (message === '') {
