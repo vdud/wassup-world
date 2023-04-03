@@ -232,7 +232,7 @@ body {
 .timeSpan {
 	background-color: var(--primaryTheme);
 	color: var(--secondaryThemeInverted);
-	opacity: var(--extraDull);
+	opacity: var(--dull);
 	box-shadow: var(--boxInsetShadows);
 	font-size: calc(var(--fontSize) * 0.7);
 	padding: 0.2rem 0.6rem;

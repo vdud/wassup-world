@@ -53,9 +53,8 @@ export const applyMessage = (data: any) => {
 		}
 
 		const div = document.createElement('div');
-		div.classList.add('text');
-
 		div.classList.add(data.isYoMe ? 'yoMe' : 'sendermain');
+		div.classList.add('text');
 
 		const p = document.createElement('p');
 		p.classList.add('pText');

@@ -171,7 +171,6 @@
 		z-index: 2;
 
 		width: 100%;
-		pointer-events: none;
 		height: clamp(0px, 100%, 176px);
 
 		/* height: fit-content; */
@@ -182,15 +181,15 @@
 	}
 
 	.replyBox {
+		border-radius: var(--borderRadius);
 		color: var(--primaryThemeInverted);
+		overflow: hidden;
 
 		font-size: 1rem;
 		opacity: 1;
-		border-radius: var(--averageMargin);
 		/* overflow: hidden; */
 		width: calc(100% - calc(var(--averageMargin) * 2));
 		margin: calc(var(--averageMargin) * 2) var(--averageMargin);
-		overflow: hidden;
 
 		height: 100%;
 		width: 100%;
