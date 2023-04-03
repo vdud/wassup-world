@@ -77,10 +77,12 @@
 			<img src={imgUrl} alt="image {active + 1}" class="image" />
 		</button>
 	</div>
-	<div class="aboutWallpaper" style={isShowMenu ? 'display:none;' : ''}>
-		<div class="gradient" />
-		<img src={imgUrl} alt="image {active + 1}" class="imgWallpaper" />
-	</div>
+	{#if !isShowMenu}
+		<div class="aboutWallpaper">
+			<div class="gradient" />
+			<img src={imgUrl} alt="image {active + 1}" class="imgWallpaper" />
+		</div>
+	{/if}
 {/if}
 
 <style>
@@ -124,22 +126,21 @@
 		justify-content: center;
 	}
 	.fullWindow {
-		width: calc(100% - 2rem);
-		height: calc(100% - 180px);
+		width: 100%;
+		height: calc(100% - 175px);
 		/* height: 100%; */
 		position: absolute;
-		top: 115px;
+		top: 100px;
 		z-index: 10000;
-		margin: 0 1rem;
-		border-radius: var(--borderRadius);
+		padding: 0 calc(var(--averageMargin) - 2px);
+
+		/* border-radius: var(--borderRadius); */
 
 		display: flex;
 		align-items: start;
 		justify-content: start;
 
 		overflow-y: scroll;
-
-		/* background-color: var(--secondaryTheme); */
 	}
 
 	::-webkit-scrollbar {
@@ -149,7 +150,11 @@
 		width: 100%;
 		border-radius: var(--borderRadius);
 		transform: translateY(0%);
+		margin-top: var(--borderRadius);
 		animation: slideInMargin 5s ease-in-out;
+		border: 1px solid var(--primaryTheme);
+		box-shadow: var(--boxShadows);
+		pointer-events: all;
 	}
 	@keyframes slideInMargin {
 		0% {
@@ -166,7 +171,11 @@
 		z-index: 2;
 
 		width: 100%;
-		height: clamp(100px, 100%, 176px);
+		pointer-events: none;
+		height: clamp(0px, 100%, 176px);
+
+		/* height: fit-content; */
+
 		/* height: 200px; */
 
 		padding: calc(var(--averageMargin) * 1.2) 0;
@@ -176,8 +185,9 @@
 		color: var(--primaryThemeInverted);
 
 		font-size: 1rem;
-		opacity: 0.9;
+		opacity: 1;
 		border-radius: var(--averageMargin);
+		/* overflow: hidden; */
 		width: calc(100% - calc(var(--averageMargin) * 2));
 		margin: calc(var(--averageMargin) * 2) var(--averageMargin);
 		overflow: hidden;

@@ -1,47 +1,47 @@
 <script lang="ts">
-	import { fullDisplay } from '$lib/stores/fullDisplay'
-	import { isFlex } from '$lib/stores/isFlex'
-	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
+	import { fullDisplay } from '$lib/stores/fullDisplay';
+	import { isFlex } from '$lib/stores/isFlex';
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
 
 	// import imageLogoSrc from '../../lib/assets/newL.svg'
-	import imageLogoSrc from '$lib/assets/fknLatest.png'
+	import imageLogoSrc from '$lib/assets/fknLatest.png';
 
-	import { currentPage } from '$lib/stores/currentPage'
-	import { isShowInfo } from '$lib/stores/isShowInfo'
-	import { interChangableMessage } from '$lib/stores/interChangableMessage'
+	import { currentPage } from '$lib/stores/currentPage';
+	import { isShowInfo } from '$lib/stores/isShowInfo';
+	import { interChangableMessage } from '$lib/stores/interChangableMessage';
 
-	let groupName = 'world'
+	let groupName = 'world';
 
-	const titleData = $currentPageHeaderData
+	const titleData = $currentPageHeaderData;
 
 	const toggle = () => {
-		$fullDisplay = 'nonHidden'
-		$isFlex = !$isFlex
+		$fullDisplay = 'nonHidden';
+		$isFlex = !$isFlex;
 		// window.location.pathname = '/'
 		// window.location.href = '/'
 
 		setTimeout(() => {
 			// $user_message = ''
-			$fullDisplay = 'hidden'
-		}, 600)
-	}
+			$fullDisplay = 'hidden';
+		}, 600);
+	};
 	const togglehRef = () => {
-		$isShowInfo = !$isShowInfo
-		const middleScroll: any = document.getElementById('middleScroll')
+		$isShowInfo = !$isShowInfo;
+		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
 			setTimeout(() => {
-				middleScroll.scrollTop = middleScroll.scrollHeight * -1
-			}, 10)
+				middleScroll.scrollTop = middleScroll.scrollHeight * -1;
+			}, 10);
 		}
 		// if (middleScroll.scrollTop === scrollTop) {
 		// }
-	}
+	};
 	const headToTop = () => {
-		const middleScroll: any = document.getElementById('middleScroll')
+		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
-			middleScroll.scrollTop = middleScroll.scrollHeight * -1
+			middleScroll.scrollTop = middleScroll.scrollHeight * -1;
 		}
-	}
+	};
 </script>
 
 <div class="topHeaderRight" style={$isFlex ? 'border-bottom-left-radius:0' : 'border-bottom-left-radius:var(--borderRadius);border-top-left-radius:calc(var(--borderRadius)*.5);'}>
@@ -92,8 +92,8 @@
 		margin-top: 5px;
 	}
 	.Logo {
-		scale: 0.08;
-		margin-top: calc(var(--averageMargin) * 0.3);
+		scale: 0.09;
+		margin-top: calc(var(--averageMargin) * 0.33);
 
 		transition: scale 239ms ease-in-out;
 		border-radius: var(--borderRadius);

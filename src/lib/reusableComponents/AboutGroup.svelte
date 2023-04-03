@@ -24,7 +24,7 @@
 						</div>
 						<div class="colored email">
 							<button on:click={shareViaEmail} class="faBtn">
-								<i class="faIcon fa-solid fa-envelope" />
+								<i class="faIcon fa-solid fa-envelope envoFa" />
 							</button>
 						</div>
 						<div class="colored whatsapp">
@@ -83,20 +83,28 @@
 	}
 	.faIcon {
 		width: 100%;
-		scale: 2;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		scale: 2.33;
 		text-shadow: var(--textShadows);
+		color: black;
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
 	}
 	.fa-link {
-		color: var(--primaryThemeInverted);
+		/* background-image: linear-gradient(33deg, var(--primaryThemeInverted), var(--tertiaryThemeInverted)); */
+		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--secOptDark) 55%);
 	}
-	.fa-envelope {
-		color: var(--red);
+	.envoFa {
+		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--red) 55%);
 	}
 	.fa-whatsapp {
-		color: var(--green);
+		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--green) 55%);
 	}
 	.fa-comment-alt {
-		color: var(--blue);
+		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--blue) 55%);
 	}
 	.msgDis {
 		color: var(--secondaryThemeInverted);
@@ -251,7 +259,7 @@
 		width: calc(100%-1rem);
 		background-color: var(--secondaryTheme);
 		box-shadow: var(--boxShadows);
-		border: 0.3px solid var(--secondaryThemeInverted);
+		border: 1px solid var(--secondaryThemeInverted);
 
 		border-radius: var(--borderRadius);
 		overflow: hidden;

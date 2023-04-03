@@ -1,41 +1,41 @@
 <script lang="ts">
-	import { currentLayoutPage } from '$lib/stores/currentLayoutPage'
-	import { fullDisplay } from '$lib/stores/fullDisplay'
-	import { isFlex } from '$lib/stores/isFlex'
-	import { isLocked } from '$lib/stores/isLocked'
-	import { userName } from '$lib/stores/userName'
-	import { user_message } from '$lib/stores/user_message'
+	import { currentLayoutPage } from '$lib/stores/currentLayoutPage';
+	import { fullDisplay } from '$lib/stores/fullDisplay';
+	import { isFlex } from '$lib/stores/isFlex';
+	import { isLocked } from '$lib/stores/isLocked';
+	import { userName } from '$lib/stores/userName';
+	import { user_message } from '$lib/stores/user_message';
 
-	import { nature } from '$lib/stores/nature'
-	import { searchInput } from '$lib/stores/searchInput'
-	import { locationPrediction } from '$lib/stores/locationPrediction'
-	import { json } from '@sveltejs/kit'
-	import { onDestroy, onMount } from 'svelte'
-	import { searchData } from '$lib/stores/searchData'
-	import { debounce } from '$lib/bigFunctions/debounce'
+	import { nature } from '$lib/stores/nature';
+	import { searchInput } from '$lib/stores/searchInput';
+	import { locationPrediction } from '$lib/stores/locationPrediction';
+	import { json } from '@sveltejs/kit';
+	import { onDestroy, onMount } from 'svelte';
+	import { searchData } from '$lib/stores/searchData';
+	import { debounce } from '$lib/bigFunctions/debounce';
 
 	$: $searchInput = $searchInput
 		.replace(/\s/g, '-')
 		.replace(/[^a-zA-Z0-9-]/g, '')
 		.toLowerCase()
-		.replace(/-+/g, '-')
+		.replace(/-+/g, '-');
 
-	let name = 'world'
+	let name = 'world';
 
 	const toggle = () => {
-		$fullDisplay = 'nonHidden'
+		$fullDisplay = 'nonHidden';
 
-		$isFlex = !$isFlex
+		$isFlex = !$isFlex;
 
 		setTimeout(() => {
-			$fullDisplay = 'hidden'
-		}, 600)
-	}
+			$fullDisplay = 'hidden';
+		}, 600);
+	};
 
-	let response: any
+	let response: any;
 	function handleDown(event: any) {
 		if (event.key === 'Tab' || event.key === 'Meta' || event.ctrlKey || event.key === 'Shift') {
-			event.preventDefault()
+			event.preventDefault();
 		} else {
 			$locationPrediction = [
 				{
@@ -46,24 +46,24 @@
 					},
 					types: [],
 				},
-			]
+			];
 		}
 	}
 
-	const debouncedHandleClick = debounce(handleClick, 1000)
+	const debouncedHandleClick = debounce(handleClick, 1000);
 
 	async function handleClick(event: any) {
-		const service = new google.maps.places.AutocompleteService()
+		const service = new google.maps.places.AutocompleteService();
 
 		try {
 			const predictions = service.getPlacePredictions({ input: $searchInput }).then((predictions: any) => {
-				$locationPrediction = predictions.predictions
-			})
+				$locationPrediction = predictions.predictions;
+			});
 		} catch (e) {
-			console.log(e)
+			console.log(e);
 		}
 
-		const searchInputData: any = $searchInput.trim()
+		const searchInputData: any = $searchInput.trim();
 		if ($searchInput != '') {
 			const res = await fetch('/api/searchData', {
 				method: 'POST',
@@ -71,13 +71,13 @@
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ searchInputData }),
-			})
-			const response = await res.json()
-			$searchData = response.data
+			});
+			const response = await res.json();
+			$searchData = response.data;
 
 			if (!res.ok) {
-				alert('failed to search data')
-				alert(response.message)
+				alert('failed to search data');
+				alert(response.message);
 			}
 		} else {
 			$locationPrediction = [
@@ -89,7 +89,7 @@
 					},
 					types: ['NOT FOUND'],
 				},
-			]
+			];
 		}
 	}
 </script>
@@ -100,7 +100,7 @@
 	<button
 		class="textBox"
 		on:click={() => {
-			$isLocked = !$isLocked
+			$isLocked = !$isLocked;
 		}}>
 		<h1 class="headerText">
 			<span style="color: var(--secondary)">wassup </span><span>{$userName}</span>{#if $userName != ''}<span>!</span>{/if}
@@ -151,7 +151,9 @@
 		animation: zoomIn 100ms ease-in-out both;
 	}
 	.icon {
-		scale: 1.33;
+		scale: 1.1;
+		padding: 01rem;
+		top: var(--averageMargin);
 	}
 
 	.searchInput {

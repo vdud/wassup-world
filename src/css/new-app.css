@@ -30,9 +30,6 @@
 		--textShadows: 0px 0px 2px #9992, 0px 0px 4px #9994;
 		/* --textShadows: 0px 0px 0.5px #000; */
 	}
-	.button {
-		border-radius: var(--borderRadius);
-	}
 }
 :root {
 	--fontSize: 16px;
@@ -67,11 +64,11 @@
 	--dull: 90%;
 	--extraDull: 60%;
 
-	--averageMargin: 10px;
+	--averageMargin: 0.75rem;
 	--lessAverageMargin: calc(var(--averageMargin) / 2);
 	--borderRadius: var(--averageMargin);
 
-	--buttonHW: calc(var(--averageMargin) * 3);
+	--buttonHW: var(--averageMargin);
 	--smallerBorderRadius: calc(var(--buttonHW) / 3);
 }
 

@@ -33,8 +33,9 @@
 	box-shadow: var(--boxShadows);
 	overflow: auto;
 
-	background-color: var(--tertiaryTheme);
-	color: var(--primaryThemeInverted);
+	background-color: var(--primaryThemeInverted);
+	color: var(--primaryTheme);
+	text-shadow: none;
 
 	margin-bottom: 5px;
 }
@@ -320,4 +321,9 @@
 .contactBox:active {
 	box-shadow: var(--boxInsetShadows);
 	background-color: var(--primaryTheme);
+}
+
+/* Designing for scroll-bar */
+::-webkit-scrollbar {
+	display: none;
 }

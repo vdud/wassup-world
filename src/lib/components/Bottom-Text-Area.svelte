@@ -86,13 +86,13 @@
 		height: var(--buttonHW);
 		margin: 0;
 		padding: 0;
-		scale: 3;
+		scale: 4;
 	}
 	.textAreeaBox {
 		width: 100%;
 		height: 80%;
 		display: flex;
-		justify-content: center;
+		justify-content: start;
 		align-items: flex-end;
 
 		position: relative;
@@ -107,6 +107,7 @@
 	textarea {
 		color: var(--primaryThemeInverted);
 		font-family: ULight;
+		box-shadow: var(--boxShadows), var(--boxInsetShadows);
 	}
 	textarea::placeholder {
 		color: var(--disabled);
@@ -125,28 +126,32 @@
 	.button {
 		position: absolute;
 		margin: 0;
-		padding: 0.56rem;
+		padding: 01rem;
+		scale: 1.55;
+
+		width: var(--buttonHW);
+		height: var(--buttonHW);
 
 		display: flex;
 		justify-content: center;
 		align-items: center;
 
-		/* border-radius: calc(var(--borderRadius) / 1.69); */
-		box-shadow: var(--boxShadows);
+		border-radius: calc(var(--borderRadius) / 1.55);
+		box-shadow: var(--boxShadows), var(--boxInsetShadows);
 
-		right: 0.4rem;
-		bottom: 0.4rem;
+		right: 01rem;
+		bottom: 01rem;
 		transition: box-shadow 0.2s ease-in-out;
 	}
 	.button:active {
 		box-shadow: var(--boxInsetShadows);
 	}
 	.textArea {
-		width: 100%;
+		width: calc(100% - var(--buttonHW) - 5.3rem);
 		height: 100%;
 		margin: 6px;
 		height: 100%;
-		margin-right: calc(var(--buttonHW) + 30px);
+		/* margin-right: calc(var(--buttonHW) + 30px); */
 		padding: 14px;
 		border: none;
 		outline: none;
@@ -154,7 +159,6 @@
 		font-size: 1.2rem;
 		border-radius: var(--borderRadius);
 
-		box-shadow: var(--boxInsetShadows);
 		background-color: var(--primaryTheme);
 
 		max-height: 100px;

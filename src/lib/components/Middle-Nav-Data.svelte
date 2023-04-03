@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { loginResponseData } from '$lib/stores/loginResponseData'
-	import { nature } from '$lib/stores/nature'
-	import { timeSince } from '$lib/bigFunctions/timeFormat'
-	import { toggleLoc, toggleHashtag, togglePublic } from '$lib/bigFunctions/toggleNavLocs'
+	import { loginResponseData } from '$lib/stores/loginResponseData';
+	import { nature } from '$lib/stores/nature';
+	import { timeSince } from '$lib/bigFunctions/timeFormat';
+	import { toggleLoc, toggleHashtag, togglePublic } from '$lib/bigFunctions/toggleNavLocs';
 </script>
 
 <div class="middleData">
@@ -43,17 +43,17 @@
 								<button on:click={toggleLoc.bind(globalThis, name)} id="locBox?{_id}" class="locBox {i === 0 ? 'locBoxLocationNotification' : ''}">
 									<!-- SENDER -->
 									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2" style={i === 0 ? 'color: var(--secOptDark);  text-shadow: 0 0 1.4px black' : ''} id="gName?{_id}">{name.toUpperCase()}</p>
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--secOptDark);' : ''} id="gName?{_id}">{name.toUpperCase()}</p>
 									</div>
 
 									<!-- LATEST MESSAGE -->
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize)">
 											{#if lastMessage === undefined}
-												<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--secOptDark)"> SEND MESSAGE </span></span>
+												<span id="SENDER?{_id}" class="latestMessageSender"><span class="sendBox" style="background-color:var(--secOptDark)"> SEND MESSAGE </span></span>
 												<span id="LM?{_id}" class="latestMessage"><span style="background-color:var(--secOptDark)" class="fa fa-arrow-right sendArrow" /></span>
 											{:else}
-												<span id="SENDER?{_id}" style={i === 0 ? 'color: var(--secOptDark)' : ''} class="latestMessageSender">
+												<span id="SENDER?{_id}" class="latestMessageSender">
 													{latestMessageSender};
 												</span>
 												<span id="LM?{_id}" class="latestMessage pageMessage">
@@ -89,15 +89,15 @@
 							{#if i < 9}
 								<button on:click={toggleHashtag.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxHashNotification' : ''}">
 									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2" style={i === 0 ? 'color: var(--primary) ;  text-shadow: 0 0 1.4px black' : ''} id="gName?{group._id}">#{group.name.toUpperCase()}</p>
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--primary) ;' : ''} id="gName?{group._id}">#{group.name.toUpperCase()}</p>
 									</div>
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize)">
 											{#if group.lastMessage === undefined}
-												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--primary)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--primary)"> SEND MESSAGE </span></span>
+												<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style="background-color:var(--primary)"> SEND MESSAGE </span></span>
 												<span id="LM?{group._id}" class="latestMessage"><span style="background-color:var(--primary)" class="fa fa-arrow-right sendArrow" /></span>
 											{:else}
-												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--primary)' : ''} class="latestMessageSender">
+												<span id="SENDER?{group._id}" class="latestMessageSender">
 													{group.latestMessageSender};
 												</span>
 												<span id="LM?{group._id}" class="latestMessage pageMessage">
@@ -130,15 +130,15 @@
 							{#if i < 9}
 								<button on:click={togglePublic.bind(globalThis, group.name)} id="locBox?{group._id}" class="locBox {i === 0 ? 'locBoxPubNotification' : ''}">
 									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
-										<p class="textLoc text2" style={i === 0 ? 'color: var(--secondary);  text-shadow: 0 0 1.4px black' : ''} id="gName?{group._id}">{group.name.toUpperCase()}</p>
+										<p class="textLoc text2" style={i === 0 ? 'color: var(--secondary);' : ''} id="gName?{group._id}">{group.name.toUpperCase()}</p>
 									</div>
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize); ">
 											{#if group.lastMessage === undefined}
-												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--secondary)' : ''} class="latestMessageSender"><span class="sendBox" style="background-color:var(--secondary)"> SEND MESSAGE </span></span>
+												<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style="background-color:var(--secondary)"> SEND MESSAGE </span></span>
 												<span id="LM?{group._id}" class="latestMessage"><span class="fa fa-arrow-right sendArrow" style="background-color:var(--secondary)" /></span>
 											{:else}
-												<span id="SENDER?{group._id}" style={i === 0 ? 'color: var(--secondary)' : ''} class="latestMessageSender">
+												<span id="SENDER?{group._id}" class="latestMessageSender">
 													{group.latestMessageSender};
 												</span>
 												<span id="LM?{group._id}" class="latestMessage pageMessage">
