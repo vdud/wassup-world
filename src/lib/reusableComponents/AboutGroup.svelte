@@ -88,8 +88,6 @@
 		align-items: center;
 		justify-content: center;
 		scale: 2.33;
-		text-shadow: var(--textShadows);
-		color: black;
 		-webkit-text-fill-color: transparent;
 		-webkit-background-clip: text;
 	}
