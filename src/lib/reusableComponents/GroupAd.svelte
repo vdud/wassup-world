@@ -69,23 +69,63 @@
 	const isShowMenuToggle = () => {
 		isShowMenu = !isShowMenu;
 	};
+	// const useGpay = () => {
+	// 	console.log('gPayed');
+	// };
 </script>
 
 {#if $currentPage === 'LOCATIONS'}
 	<div class="pTextAdContainer">
 		<button on:click={isShowMenuToggle} class={isShowMenu ? 'fullWindow' : 'replyBox'}>
 			<img src={imgUrl} alt="image {active + 1}" class="image" />
+			<!-- {#if isShowMenu}
+				<div class="paymentDiv">
+					<div class="payContainer">
+						<div class="payText">
+							<h1>Pay using Google Pay</h1>
+							<p>You can pay using Google Pay. You can also pay using your credit card by clicking the button below.</p>
+						</div>
+						<div class="payButton">
+							<buttonclass="payButton">Pay</button>
+						</div>
+					</div>
+				</div>
+			{/if} -->
 		</button>
 	</div>
 	{#if !isShowMenu}
 		<div class="aboutWallpaper">
 			<div class="gradient" />
 			<img src={imgUrl} alt="image {active + 1}" class="imgWallpaper" />
+			<div class="paddingBottom" />
 		</div>
 	{/if}
 {/if}
 
 <style>
+	.paymentDiv {
+		/* position: absolute; */
+		/* bottom: 0; */
+		/* z-index: 100001; */
+		/* height: calc(176px - calc(var(--averageMargin) * 2)); */
+		height: 100%;
+		width: 100%;
+		background-color: var(--primaryTheme);
+		margin-top: var(--averageMargin);
+		border-radius: var(--borderRadius);
+		/* overflow: hidden; */
+		box-shadow: var(--boxShadows);
+		/* width: calc(100% - calc(var(--averageMargin) * 2)); */
+	}
+	.payContainer {
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		height: 176px;
+		padding: 1rem;
+		width: calc(100% - calc(var(--averageMargin) * 3));
+		line-break: anywhere;
+	}
 	.gradient {
 		position: absolute;
 		top: 0;
@@ -108,6 +148,7 @@
 	}
 	.aboutWallpaper {
 		position: absolute;
+
 		top: 90px;
 		left: 0;
 		right: 0;
@@ -132,14 +173,18 @@
 		position: absolute;
 		top: 100px;
 		z-index: 10000;
-		padding: 0 calc(var(--averageMargin) - 2px);
+		padding: 0 calc(var(--averageMargin));
+		padding-bottom: var(--averageMargin);
+		padding-top: var(--averageMargin);
 
 		/* border-radius: var(--borderRadius); */
 
 		display: flex;
 		align-items: start;
 		justify-content: start;
+		flex-direction: column;
 
+		overflow: hidden;
 		overflow-y: scroll;
 	}
 
@@ -148,21 +193,10 @@
 	}
 	.image {
 		width: 100%;
+
 		border-radius: var(--borderRadius);
-		transform: translateY(0%);
-		margin-top: var(--borderRadius);
-		animation: slideInMargin 5s ease-in-out;
-		border: 1px solid var(--primaryTheme);
 		box-shadow: var(--boxShadows);
 		pointer-events: all;
-	}
-	@keyframes slideInMargin {
-		0% {
-			transform: translateY(-20%);
-		}
-		100% {
-			transform: translateY(0%);
-		}
 	}
 	.pTextAdContainer {
 		display: flex;
@@ -184,29 +218,32 @@
 		border-radius: var(--borderRadius);
 		color: var(--primaryThemeInverted);
 		overflow: hidden;
+		/* overflow-y: scroll; */
 
 		font-size: 1rem;
 		opacity: 1;
-		/* overflow: hidden; */
 		width: calc(100% - calc(var(--averageMargin) * 2));
 		margin: calc(var(--averageMargin) * 2) var(--averageMargin);
 
-		height: 100%;
 		width: 100%;
+		height: 176px;
+		background-color: var(--primaryTheme);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 
 		position: relative;
-		box-shadow: var(--boxShadows);
+		box-shadow: var(--boxShadowsBlur), var(--boxInsetShadows);
 	}
 
-	@keyframes slide {
-		0% {
-			transform: translateX(100%);
-		}
-		100% {
-			transform: translateX(-100%);
-		}
+	.box {
+		width: 100%;
+		/* margin: 0.5em; */
+		white-space: normal;
+		font-size: 1.5rem;
+	}
+
+	.auto {
+		line-break: auto;
 	}
 </style>

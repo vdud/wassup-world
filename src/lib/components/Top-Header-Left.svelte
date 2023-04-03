@@ -102,12 +102,12 @@
 		on:click={() => {
 			$isLocked = !$isLocked;
 		}}>
-		<h1 class="headerText">
+		<h1 class="headerText" style={$nature === 'LOCATION' ? 'color: var(--secOptDark)' : 'color: var(--primary);'}>
 			<span style="color: var(--secondary)">wassup </span><span>{$userName}</span>{#if $userName != ''}<span>!</span>{/if}
 		</h1>
 	</button>
 	<div class="searchBox">
-		<input class="searchInput" placeholder="SEARCH THE WORLD" bind:value={$searchInput} on:keyup={debouncedHandleClick} on:keydown={handleDown} />
+		<input class="searchInput" placeholder="SEARCH THE WORLD 👀" bind:value={$searchInput} on:keyup={debouncedHandleClick} on:keydown={handleDown} />
 		{#if $searchInput === ''}
 			<button class="searchButton" style={$isFlex === true ? 'opacity:var(--extraDull);' : 'opacity:0;'} disabled>
 				{#if $nature === 'PUBLIC'}
@@ -216,9 +216,9 @@
 	}
 	.headerText {
 		font-family: Imprima;
-		color: var(--primary);
 		font-size: calc(var(--fontSize) * 1.2);
 		padding: calc(var(--averageMargin) + 3px);
+		transition: color 300ms ease-in-out;
 		/* text-shadow: var(--textShadows); */
 		/* text-shadow: 0 0 3px var(--secondaryThemeInverted); */
 		/* TEXT STROKE */

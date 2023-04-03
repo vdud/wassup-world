@@ -124,7 +124,7 @@
 	.chatPText {
 		font-family: UBold;
 		color: var(--primaryThemeInverted);
-		background-color: var(--tertiaryThemeInverted);
+		background-color: var(--secondaryTheme);
 		font-size: 0.6rem;
 		margin: 0;
 		padding: 4px 10px;
