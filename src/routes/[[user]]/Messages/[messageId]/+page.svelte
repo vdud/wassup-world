@@ -143,6 +143,9 @@
 </div>
 
 <style>
+	.allReplies {
+		padding-bottom: 1rem;
+	}
 	.scroll {
 		height: 100%;
 		overflow: auto;

@@ -24,6 +24,9 @@
 		$user_message = '';
 		const time = new Date();
 
+		const middleScroll: any = document.getElementById('middleScroll');
+		middleScroll.scrollTop = middleScroll.scrollHeight;
+
 		if ($currentPage !== 'REPLIES') {
 			if (message === '') {
 				return;

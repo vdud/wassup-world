@@ -104,6 +104,13 @@
 	.fa-comment-alt {
 		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--blue) 55%);
 	}
+	.flexCenter {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 	.msgDis {
 		color: var(--secondaryThemeInverted);
 		margin-left: var(--lessAverageMargin);
@@ -112,10 +119,11 @@
 	}
 	.sendAmsg {
 		color: var(--primaryThemeInverted);
-		text-shadow: var(--textShadows);
+		/* text-shadow: var(--textShadows); */
 		width: max-content;
-		border-radius: 5px;
+		/* border-radius: 5px; */
 		margin-right: var(--lessAverageMargin);
+		/* background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--blue) 55%); */
 
 		/* scale: 0.9; */
 	}
@@ -126,13 +134,6 @@
 		align-items: center;
 		justify-content: start;
 		margin-left: var(--averageMargin);
-	}
-	.flexCenter {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 	.pTextMember,
 	.headerText {
@@ -175,7 +176,7 @@
 	}
 	.textBoxH {
 		padding: var(--averageMargin) calc(var(--averageMargin) * 1.33);
-		border-bottom: 1px solid var(--secondaryThemeInverted);
+		border-bottom: 0.1px solid var(--secondaryThemeInverted);
 		width: 100%;
 		background-color: var(--primaryTheme);
 	}
@@ -194,14 +195,16 @@
 		height: 2rem;
 		/* margin-bottom: 1px; */
 
-		border-bottom: 1px solid var(--secondaryThemeInverted);
 		display: flex;
 		justify-content: start;
 		align-items: center;
+		border-bottom: 0.1px solid var(--secondaryThemeInverted);
 	}
 	.memberHeader {
 		border-top: 1px solid var(--secondaryThemeInverted);
 		margin-top: -1px;
+		height: 20px;
+		background-color: var(--primaryTheme);
 	}
 	.flexItem {
 		height: 100%;
@@ -255,9 +258,10 @@
 	.infoData {
 		height: 169px;
 		width: calc(100%-1rem);
-		background-color: var(--secondaryTheme);
-		box-shadow: var(--boxShadows);
-		border: 1px solid var(--secondaryThemeInverted);
+		/* background-color: var(--secondaryTheme); */
+		/* background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--secOptDark) 55%); */
+		box-shadow: var(--boxShadowsBlur);
+		/* border: 1px solid var(--secondaryThemeInverted); */
 
 		border-radius: var(--borderRadius);
 		overflow: hidden;
