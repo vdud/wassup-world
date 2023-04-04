@@ -68,20 +68,20 @@
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
 					return;
 				} else {
-					const isYoMe = true;
+					// const isYoMe = true;
 
-					const checkIfInvader = () => {
-						if (!$invader) {
-							applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
-							alreadyApplied(data);
-						}
-					};
-					const debouncedCheck = debounce(checkIfInvader, 100);
+					// const checkIfInvader = () => {
+					// 	if (!$invader) {
+					// 		applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+					// 		alreadyApplied(data);
+					// 	}
+					// };
+					// const debouncedCheck = debounce(checkIfInvader, 100);
 
-					// checkIfInvader();
-					debouncedCheck();
+					// // checkIfInvader();
+					// debouncedCheck();
 
-					debouncedInvader();
+					// debouncedInvader();
 					return;
 				}
 			})
