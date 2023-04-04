@@ -63,14 +63,19 @@
 			.bind('injectMessage', (data: any) => {
 				if (data.sender === $userName) {
 					const isYoMe = true;
+
 					const checkIfInvader = () => {
 						if (!$invader) {
 							applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+							alreadyApplied(data);
 						}
 					};
-					checkIfInvader();
+					let debouncedCheck = debounce(checkIfInvader, 100);
+
+					// checkIfInvader();
+					debouncedCheck();
+
 					debouncedInvader();
-					alreadyApplied(data);
 					return;
 				} else if (data.sender !== $userName) {
 					const isYoMe = false;
@@ -84,12 +89,10 @@
 					return;
 				} else {
 					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes });
-					return;
 				}
 			})
 			.bind('incrementReplies', (data: any) => {
 				incrementReplies({ _id: data.messageId, replies: data.totalReplies });
-				return;
 			})
 			.bind('pingTyping', (data: any) => {
 				if (data.pinging === $userName) {
@@ -101,7 +104,6 @@
 						$isTypingData.message = '';
 						$isTypingData.isTyping = false;
 					}, 3000);
-					return;
 				}
 			});
 	});
