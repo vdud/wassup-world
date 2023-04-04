@@ -50,29 +50,7 @@
 			}, 100);
 		}
 
-		if ($currentPage !== 'REPLIES') {
-			if (message === '') {
-				return;
-			} else {
-				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: time });
-				applyNavDataMessage({ sender: $userName, message, createdAt: time, groupId, nature: $currentPage });
-
-				const res = await fetch('/api/textAreaMessages', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-
-					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
-				});
-
-				const response = await res.json();
-				applyMessage({ sender: $userName, message: message, createdAt: time, messageId: response.messageId, $userName_id, $userGroup_id, isYoMe: true });
-				if (!res.ok) {
-					alert(response.message);
-				}
-			}
-		} else if ($currentPage === 'REPLIES') {
+		if ($currentPage === 'REPLIES') {
 			if (message === '' && $messageId !== '') {
 				return;
 			} else {
@@ -95,6 +73,28 @@
 					setTimeout(() => {
 						replyBody.scrollTop = replyBody.scrollHeight;
 					}, 100);
+				}
+			}
+		} else {
+			if (message === '') {
+				return;
+			} else {
+				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: time });
+				applyNavDataMessage({ sender: $userName, message, createdAt: time, groupId, nature: $currentPage });
+
+				const res = await fetch('/api/textAreaMessages', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+
+					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
+				});
+
+				const response = await res.json();
+				applyMessage({ sender: $userName, message: message, createdAt: time, messageId: response.messageId, $userName_id, $userGroup_id, isYoMe: true });
+				if (!res.ok) {
+					alert(response.message);
 				}
 			}
 		}
