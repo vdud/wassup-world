@@ -61,7 +61,6 @@
 		pusher
 			.subscribe($userGroup_id)
 			.bind('injectMessage', (data: any) => {
-				console.log(data);
 				if (data.sender === $userName) {
 					const isYoMe = true;
 
@@ -79,7 +78,6 @@
 					debouncedInvader();
 					return;
 				} else {
-					console.log(data);
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
