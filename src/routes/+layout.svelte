@@ -63,9 +63,9 @@
 			}
 		}
 	};
-	onDestroy(() => {
-		pusher.disconnect();
-	});
+	// onDestroy(() => {
+	// 	pusher.disconnect();
+	// });
 </script>
 
 <div class="main">
