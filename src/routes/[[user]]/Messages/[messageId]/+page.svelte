@@ -13,8 +13,10 @@
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
 	import { isShowInfo } from '$lib/stores/isShowInfo';
 	import AboutGroup from '$lib/reusableComponents/AboutGroup.svelte';
-	import { replyMessage } from '$lib/bigFunctions/applyTextMessage';
+	import { alreadyApplied, applyMessage, replyMessage } from '$lib/bigFunctions/applyTextMessage';
 	import { isTypingData } from '$lib/stores/isTypingData';
+	import { debounce } from '$lib/bigFunctions/debounce';
+	import { invader } from '$lib/stores/invader';
 
 	export let data: PageData;
 	const messageData = JSON.parse(data.body.message);
@@ -49,11 +51,23 @@
 		pusher.subscribe($messageId).bind('ReplyMessage', (data: any) => {
 			replyMessage({ data, $userGroup_id, $userName_id });
 		});
+		const debouncedInvader = debounce(() => {
+			$invader = false;
+		}, 1000);
+
 		pusher
 			.subscribe($userGroup_id)
-			.bind('injectLike', (data: any) => {
+			.bind('injectMessage', (data: any) => {
 				if (data.sender === $userName) {
-					return;
+					const isYoMe = true;
+					const checkIfInvader = () => {
+						if (!$invader) {
+							applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+						}
+					};
+					checkIfInvader();
+					debouncedInvader();
+					alreadyApplied(data);
 				} else {
 					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes });
 				}

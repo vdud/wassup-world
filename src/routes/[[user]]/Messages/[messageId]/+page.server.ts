@@ -63,11 +63,13 @@ export const load = (async ({ params }) => {
 			if (returnRepliesData) {
 				return {
 					status: 200,
+					groupId: JSON.stringify(findMessage.group_id),
 					body: {
 						message: JSON.stringify(findMessage),
 						replyData: JSON.stringify(returnRepliesData),
 						allUsers: JSON.stringify(groupUsers[0].allUsers),
 						groupNature: JSON.stringify(groupUsers[0].groupNature),
+						nature: JSON.stringify(findMessage.nature),
 					},
 				};
 			}

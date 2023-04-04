@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { debounce } from '$lib/bigFunctions/debounce';
 	import { timeSince } from '$lib/bigFunctions/timeFormat';
-	import { likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg';
+	import { incrementLikes, incrementReplies, likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg';
 
 	import { userName } from '$lib/stores/userName';
 	import { userName_id } from '$lib/stores/userName_id';
@@ -10,6 +10,13 @@
 	import AboutGroup from './AboutGroup.svelte';
 	import GroupAd from './GroupAd.svelte';
 	import { fade } from 'svelte/transition';
+	import { onMount, onDestroy } from 'svelte';
+	import { currentPage } from '$lib/stores/currentPage';
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
+	import { invader } from '$lib/stores/invader';
+	import { pusher } from '$lib/bigFunctions/pusher';
+	import { alreadyApplied, applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage';
+	import { isTypingData } from '$lib/stores/isTypingData';
 
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id });
@@ -20,7 +27,7 @@
 		window.location.pathname = '/Messages/' + _id;
 	};
 
-	export let data = {};
+	export let data: any;
 	// onMount(() => {
 	// });
 	const allUsers = JSON.parse(data.body.allUsers);
@@ -40,6 +47,63 @@
 		}
 	};
 	const debouncedScroll = debounce(parseScroll, 30);
+
+	onMount(() => {
+		$isFlex = false;
+		$currentPage = data.body.nature;
+		$userGroup_id = JSON.parse(data.groupId);
+		$currentPageHeaderData = data.body.groupName;
+
+		const debouncedInvader = debounce(() => {
+			$invader = false;
+		}, 1000);
+
+		pusher
+			.subscribe($userGroup_id)
+			.bind('injectMessage', (data: any) => {
+				if (data.sender === $userName) {
+					const isYoMe = true;
+					const checkIfInvader = () => {
+						if (!$invader) {
+							applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+						}
+					};
+					checkIfInvader();
+					debouncedInvader();
+					alreadyApplied(data);
+				} else if (data.sender !== $userName) {
+					const isYoMe = false;
+					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
+				}
+			})
+			.bind('injectLike', (data: any) => {
+				if (data.sender === $userName) {
+					return;
+				} else {
+					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes });
+				}
+			})
+			.bind('incrementReplies', (data: any) => {
+				incrementReplies({ _id: data.messageId, replies: data.totalReplies });
+			})
+			.bind('pingTyping', (data: any) => {
+				if (data.pinging === $userName) {
+					return;
+				} else {
+					$isTypingData.message = data.pinging + ' is typing...';
+					$isTypingData.isTyping = true;
+					setTimeout(() => {
+						$isTypingData.message = '';
+						$isTypingData.isTyping = false;
+					}, 3000);
+				}
+			});
+	});
+
+	onDestroy(() => {
+		$currentPage = '';
+	});
 </script>
 
 {#if aboveSwitch === true}

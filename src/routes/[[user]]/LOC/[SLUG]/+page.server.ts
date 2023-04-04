@@ -111,6 +111,7 @@ export const load = (async ({ params }) => {
 						topLikes: JSON.stringify(topLikes),
 						groupName: findGroup.name,
 						createdAt: findGroup.createdAt,
+						nature: findGroup.nature,
 					},
 				};
 			}
@@ -211,6 +212,7 @@ export const load = (async ({ params }) => {
 					topLikes: JSON.stringify(topLikes),
 					groupName: findGroup.name,
 					createdAt: findGroup.createdAt,
+					nature: findGroup.nature,
 				},
 			};
 		}
@@ -309,6 +311,7 @@ export const load = (async ({ params }) => {
 					topLikes: JSON.stringify(topLikes),
 					groupName: findGroupbyId.name,
 					createdAt: findGroupbyId.createdAt,
+					nature: findGroupbyId.nature,
 				},
 			};
 		}

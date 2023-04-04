@@ -190,6 +190,21 @@ export const applyMessage = async (data: any) => {
 	}
 };
 
+export const alreadyApplied = (data: any) => {
+	const span3Data: any = document.getElementById(`span3Data?${data.messageId}`);
+	const alreadyMember = document.getElementById(`alreadyMember?${data.sender}${data.createdAt}`);
+
+	const alreadyReplied = document.createElement('span');
+	alreadyReplied.classList.add('timeSpan');
+	alreadyReplied.style.marginLeft = 'var(--averageMargin';
+	alreadyReplied.classList.add('alreadyReplied');
+	alreadyReplied.innerText = 'some snitch replied to this...';
+
+	if (span3Data && alreadyMember) {
+		span3Data.append(alreadyReplied);
+	}
+};
+
 //NAV-BAR Messages
 export const applyNavDataMessage = (data: any) => {
 	const groupLocBox = document.getElementById(`locBox?${data.groupId}`);
