@@ -15,6 +15,21 @@ const pusher = new Pusher({
 
 export const POST = (async ({ request }) => {
 	const { message, $userGroup_id, $userName, $userName_id } = await request.json();
+	const newTime = new Date();
+
+	pusher.trigger($userGroup_id, 'injectNav', {
+		message: message,
+		sender: $userName,
+		createdAt: newTime,
+		groupId: $userGroup_id,
+	});
+
+	pusher.trigger($userGroup_id, 'injectEmptyMessage', {
+		message: message,
+		sender: $userName,
+		createdAt: newTime,
+		groupId: $userGroup_id,
+	});
 
 	const findUser = await mainUser.findOne({ _id: new ObjectId($userName_id) });
 	const findGroup = await groups.findOne({ _id: new ObjectId($userGroup_id) });
@@ -27,7 +42,7 @@ export const POST = (async ({ request }) => {
 		sender: $userName,
 		message: message,
 		group_id: findGroup._id,
-		createdAt: new Date(),
+		createdAt: newTime,
 		likedPeople: [],
 		likes: 0,
 
@@ -36,18 +51,11 @@ export const POST = (async ({ request }) => {
 		totalReplies: 0,
 		replyTo: null,
 	});
+
 	pusher.trigger($userGroup_id, 'injectMessage', {
 		message: message,
 		sender: $userName,
-		createdAt: new Date(),
-		groupId: $userGroup_id,
-		messageId: newMessage.insertedId,
-	});
-
-	pusher.trigger($userGroup_id, 'injectNav', {
-		message: message,
-		sender: $userName,
-		createdAt: new Date(),
+		createdAt: newTime,
 		groupId: $userGroup_id,
 		messageId: newMessage.insertedId,
 	});
@@ -55,10 +63,10 @@ export const POST = (async ({ request }) => {
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
 		if (!findUserInGroup) {
-			await groups.updateOne({ _id: findGroup._id }, { $set: { name: `${$userName};${findGroup.name}`, lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
+			await groups.updateOne({ _id: findGroup._id }, { $set: { name: `${$userName};${findGroup.name}`, lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 			await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 		} else {
-			await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
+			await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 			await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 		}
 		const findGroupAgain = await groups.findOne({ _id: findGroup._id });
@@ -68,14 +76,14 @@ export const POST = (async ({ request }) => {
 				pusher.trigger(user.toString(), 'newPubMessage', {
 					sender: $userName,
 					message: message,
-					createdAt: new Date(),
+					createdAt: newTime,
 					groupId: $userGroup_id,
 					groupName: findGroupAgain.name,
 				});
 			});
 		}
 	} else if (findGroup.nature === 'LOCATIONS' || findGroup.nature === 'HASHTAGS') {
-		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: new Date() }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
+		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 	}
 

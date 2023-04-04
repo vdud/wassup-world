@@ -15,7 +15,7 @@
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
 	import { invader } from '$lib/stores/invader';
 	import { pusher } from '$lib/bigFunctions/pusher';
-	import { alreadyApplied, applyMessage, applyNavDataMessage } from '$lib/bigFunctions/applyTextMessage';
+	import { alreadyApplied, applyMessage, applyNavDataMessage, applyNewMessageFresh } from '$lib/bigFunctions/applyTextMessage';
 	import { isTypingData } from '$lib/stores/isTypingData';
 
 	const like = ({ _id, likes }: any) => {
@@ -60,28 +60,17 @@
 
 		pusher
 			.subscribe($userGroup_id)
+			.bind('injectEmptyMessage', (data: any) => {
+				if (data.sender !== $userName && data.groupId === $userGroup_id) {
+					applyNewMessageFresh({ sender: data.sender, message: data.message, createdAt: data.createdAt, isYoMe: false });
+				}
+			})
 			.bind('injectMessage', (data: any) => {
 				console.log('data', data);
-				if (data.sender !== $userName) {
+				if (data.sender !== $userName && data.groupId === $userGroup_id) {
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
-					return;
-				} else {
-					// const isYoMe = true;
-
-					// const checkIfInvader = () => {
-					// 	if (!$invader) {
-					// 		applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
-					// 		alreadyApplied(data);
-					// 	}
-					// };
-					// const debouncedCheck = debounce(checkIfInvader, 100);
-
-					// // checkIfInvader();
-					// debouncedCheck();
-
-					// debouncedInvader();
 					return;
 				}
 			})

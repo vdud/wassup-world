@@ -7,7 +7,8 @@ export const applyNewMessageFresh = (data: any) => {
 	if (textMessages) {
 		const div = document.createElement('div');
 		div.classList.add('text');
-		div.classList.add('yoMe');
+		// div.classList.add('yoMe');
+		div.classList.add(data.isYoMe ? 'yoMe' : 'sendermain');
 		div.id = `${data.sender}${data.createdAt}`;
 
 		const p = document.createElement('p');
@@ -16,15 +17,17 @@ export const applyNewMessageFresh = (data: any) => {
 
 		const span1 = document.createElement('span');
 		span1.classList.add('replySender');
-		span1.style.color = 'var(--secondary)';
+		// span1.style.color = 'var(--secondary)';
+		span1.style.color = data.isYoMe ? 'var(--secondary)' : 'var(--primary)';
 		span1.innerText = data.sender + '; ';
 
 		const span2 = document.createElement('span');
-		span2.style.color = 'var(--primaryThemeInverted)';
+		span2.classList.add('pageMessage');
 		span2.innerText = data.message;
 
 		const span3 = document.createElement('span');
-		span3.classList.add('spanFlexRight');
+		// span3.classList.add('spanFlexRight');
+		span3.classList.add(data.isYoMe ? 'spanFlexRight' : 'spanFlexLeft');
 
 		const timeSpan = document.createElement('span');
 		timeSpan.classList.add('timeSpan');
@@ -45,12 +48,12 @@ export const applyNewMessageFresh = (data: any) => {
 export const applyMessage = async (data: any) => {
 	const textMessages: any = document.getElementById('textMessages');
 	if (textMessages) {
-		if (data.isYoMe) {
-			const freshText: any = document.getElementById(`${data.sender}${data.createdAt}`);
-			if (freshText) {
-				freshText.remove();
-			}
+		// if (data.isYoMe) {
+		const freshText: any = document.getElementById(`${data.sender}${data.createdAt}`);
+		if (freshText) {
+			freshText.remove();
 		}
+		// }
 
 		const div = document.createElement('div');
 		div.classList.add(data.isYoMe ? 'yoMe' : 'sendermain');
