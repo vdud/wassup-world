@@ -69,7 +69,7 @@
 	--borderRadius: var(--averageMargin);
 
 	--buttonHW: var(--averageMargin);
-	--smallerBorderRadius: calc(var(--buttonHW) / 3);
+	--smallerBorderRadius: calc(var(--buttonHW) / 1.69);
 }
 
 @font-face {
@@ -416,7 +416,8 @@ textarea:focus {
 	/* padding: 0; */
 }
 .scrollToBottom {
-	animation: fadeIn 300ms both ease-in-out;
+	/* animation: fadeIn 300ms ease-in-out; */
+
 	position: absolute;
 
 	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--secondaryTheme));

@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-
 	import { debounce } from '$lib/bigFunctions/debounce';
 	import { timeSince } from '$lib/bigFunctions/timeFormat';
 	import { likesabove10k, likeThatMsg } from '$lib/bigFunctions/likeThatMsg';
@@ -11,6 +9,7 @@
 	import { isFlex } from '$lib/stores/isFlex';
 	import AboutGroup from './AboutGroup.svelte';
 	import GroupAd from './GroupAd.svelte';
+	import { fade } from 'svelte/transition';
 
 	const like = ({ _id, likes }: any) => {
 		likeThatMsg({ _id, $userName_id, likes, $userGroup_id });
@@ -21,8 +20,9 @@
 		window.location.pathname = '/Messages/' + _id;
 	};
 
-	onMount(() => {});
 	export let data = {};
+	// onMount(() => {
+	// });
 	const allUsers = JSON.parse(data.body.allUsers);
 
 	const scrolltoBottom = () => {
@@ -39,11 +39,11 @@
 			aboveSwitch = false;
 		}
 	};
-	const debouncedScroll = debounce(parseScroll, 300);
+	const debouncedScroll = debounce(parseScroll, 30);
 </script>
 
 {#if aboveSwitch === true}
-	<div class="scrollToBottom">
+	<div class="scrollToBottom" in:fade out:fade>
 		<button class="scrollButton" on:click={scrolltoBottom}><i class="fa fa-arrow-down" /></button>
 	</div>
 {/if}

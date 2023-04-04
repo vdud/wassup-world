@@ -101,11 +101,11 @@ export const load = (async ({ params }) => {
 
 			return {
 				status: 200,
+				groupId: JSON.stringify(newGroup.insertedId),
 				body: {
 					allUsers: JSON.stringify(allUsers[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
-					groupId: JSON.stringify(newGroup.insertedId),
 					groupName: `${userSender.name};${userReciever.name}`,
 					createdAt: new Date(),
 				},
@@ -184,11 +184,11 @@ export const load = (async ({ params }) => {
 
 			return {
 				status: 200,
+				groupId: JSON.stringify(findFirstGroup._id),
 				body: {
 					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
-					groupId: JSON.stringify(findFirstGroup._id),
 					groupName: findFirstGroup.name,
 					createdAt: findFirstGroup.createdAt,
 				},
@@ -266,11 +266,11 @@ export const load = (async ({ params }) => {
 
 			return {
 				status: 200,
+				groupId: JSON.stringify(findSecondGroup._id),
 				body: {
 					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
-					groupId: JSON.stringify(findSecondGroup._id),
 					groupName: findSecondGroup.name,
 					createdAt: findSecondGroup.createdAt,
 				},
@@ -368,11 +368,11 @@ export const load = (async ({ params }) => {
 
 			return {
 				status: 200,
+				groupId: JSON.stringify(findGroup._id),
 				body: {
 					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
-					groupId: JSON.stringify(findGroup._id),
 					groupName: findGroup.name,
 					createdAt: findGroup.createdAt,
 				},
@@ -468,11 +468,11 @@ export const load = (async ({ params }) => {
 
 			return {
 				status: 200,
+				groupId: JSON.stringify(findGroupbyId._id),
 				body: {
 					allUsers: JSON.stringify(returnData[0].allUsers),
 					topLikes: JSON.stringify(topLikes),
 					messages: JSON.stringify(returnMsgData),
-					groupId: JSON.stringify(findGroupbyId._id),
 					groupName: findGroupbyId.name,
 					createdAt: findGroupbyId.createdAt,
 				},

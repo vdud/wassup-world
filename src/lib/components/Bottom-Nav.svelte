@@ -1,22 +1,22 @@
 <script>
-	import { debounce } from '$lib/bigFunctions/debounce'
-	import { nature } from '$lib/stores/nature'
-	import { onDestroy, onMount } from 'svelte'
+	import { debounce } from '$lib/bigFunctions/debounce';
+	import { nature } from '$lib/stores/nature';
+	import { onDestroy, onMount } from 'svelte';
 
 	const setlocalStorage = () => {
-		localStorage.setItem('nature', JSON.stringify({ $nature }))
-	}
-	const debouncedSetlocalStorage = debounce(setlocalStorage, 300)
+		localStorage.setItem('nature', JSON.stringify({ $nature }));
+	};
+	const debouncedSetlocalStorage = debounce(setlocalStorage, 300);
 </script>
 
 <div class="navBoxy">
 	<div class="nav nav1 {$nature === 'PUBLIC' ? 'selectedNav' : 'unselectedNav'}">
 		<button
 			on:click={() => {
-				$nature = 'PUBLIC'
-				debouncedSetlocalStorage()
-				const middleData = document.querySelector('.middleData')
-				middleData?.scrollTo(0, 0)
+				$nature = 'PUBLIC';
+				debouncedSetlocalStorage();
+				const middleData = document.querySelector('.middleData');
+				middleData?.scrollTo(0, 0);
 			}}
 			class="fa fa-user-o navContainer"
 			style={$nature === 'PUBLIC' ? '' : 'color:var(--primaryTheme'}
@@ -26,11 +26,11 @@
 	<div class="nav nav2 {$nature === 'HASHTAG' ? 'selectedNav' : 'unselectedNav'}">
 		<button
 			on:click={() => {
-				$nature = 'HASHTAG'
-				debouncedSetlocalStorage()
+				$nature = 'HASHTAG';
+				debouncedSetlocalStorage();
 
-				const middleData = document.querySelector('.middleData')
-				middleData?.scrollTo(0, 0)
+				const middleData = document.querySelector('.middleData');
+				middleData?.scrollTo(0, 0);
 			}}
 			class="fa fa-hashtag navContainer"
 			style={$nature === 'HASHTAG' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'HASHTAG' ? 'childTranslated' : ''}" /></button>
@@ -38,11 +38,11 @@
 	<div class="nav nav3 {$nature === 'LOCATION' ? 'selectedNav' : 'unselectedNav'}">
 		<button
 			on:click={() => {
-				$nature = 'LOCATION'
-				debouncedSetlocalStorage()
+				$nature = 'LOCATION';
+				debouncedSetlocalStorage();
 
-				const middleData = document.querySelector('.middleData')
-				middleData?.scrollTo(0, 0)
+				const middleData = document.querySelector('.middleData');
+				middleData?.scrollTo(0, 0);
 			}}
 			class="fa fa-location-pin navContainer"
 			style={$nature === 'LOCATION' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'LOCATION' ? 'childTranslated' : ''}" /></button>

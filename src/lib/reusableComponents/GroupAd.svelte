@@ -69,28 +69,12 @@
 	const isShowMenuToggle = () => {
 		isShowMenu = !isShowMenu;
 	};
-	// const useGpay = () => {
-	// 	console.log('gPayed');
-	// };
 </script>
 
 {#if $currentPage === 'LOCATIONS'}
 	<div class="pTextAdContainer">
 		<button on:click={isShowMenuToggle} class={isShowMenu ? 'fullWindow' : 'replyBox'}>
 			<img src={imgUrl} alt="image {active + 1}" class="image" />
-			<!-- {#if isShowMenu}
-				<div class="paymentDiv">
-					<div class="payContainer">
-						<div class="payText">
-							<h1>Pay using Google Pay</h1>
-							<p>You can pay using Google Pay. You can also pay using your credit card by clicking the button below.</p>
-						</div>
-						<div class="payButton">
-							<buttonclass="payButton">Pay</button>
-						</div>
-					</div>
-				</div>
-			{/if} -->
 		</button>
 	</div>
 	{#if !isShowMenu}
@@ -103,29 +87,6 @@
 {/if}
 
 <style>
-	.paymentDiv {
-		/* position: absolute; */
-		/* bottom: 0; */
-		/* z-index: 100001; */
-		/* height: calc(176px - calc(var(--averageMargin) * 2)); */
-		height: 100%;
-		width: 100%;
-		background-color: var(--primaryTheme);
-		margin-top: var(--averageMargin);
-		border-radius: var(--borderRadius);
-		/* overflow: hidden; */
-		box-shadow: var(--boxShadows);
-		/* width: calc(100% - calc(var(--averageMargin) * 2)); */
-	}
-	.payContainer {
-		display: flex;
-		flex-direction: column;
-		justify-content: start;
-		height: 176px;
-		padding: 1rem;
-		width: calc(100% - calc(var(--averageMargin) * 3));
-		line-break: anywhere;
-	}
 	.gradient {
 		position: absolute;
 		top: 0;
@@ -134,7 +95,6 @@
 		height: 105%;
 		width: 100%;
 		z-index: 10000;
-		/* background-image: linear-gradient(to bottom, #0000, var(--secondaryTheme)); */
 		background-image: linear-gradient(0deg, var(--secondaryTheme) 33%, #0000 100%), linear-gradient(180deg, var(--secondaryTheme) 0%, #0000 40%);
 
 		pointer-events: none;
@@ -142,9 +102,7 @@
 	.imgWallpaper {
 		height: auto;
 		width: 100%;
-		/* filterBlur */
 		filter: blur(1px);
-		/* object-fit: cover; */
 	}
 	.aboutWallpaper {
 		position: absolute;
@@ -156,8 +114,6 @@
 		width: 100%;
 		z-index: 10000;
 		opacity: 0.33;
-		/* background-image: linear-gradient(to bottom, #000, red); */
-		/* foreground lineargradient */
 
 		pointer-events: none;
 		z-index: 0;
@@ -169,15 +125,12 @@
 	.fullWindow {
 		width: 100%;
 		height: calc(100% - 175px);
-		/* height: 100%; */
 		position: absolute;
 		top: 100px;
 		z-index: 10000;
 		padding: 0 calc(var(--averageMargin));
 		padding-bottom: var(--averageMargin);
 		padding-top: var(--averageMargin);
-
-		/* border-radius: var(--borderRadius); */
 
 		display: flex;
 		align-items: start;
@@ -207,10 +160,6 @@
 		width: 100%;
 		height: clamp(0px, 100%, 176px);
 
-		/* height: fit-content; */
-
-		/* height: 200px; */
-
 		padding: calc(var(--averageMargin) * 1.2) 0;
 	}
 
@@ -218,7 +167,6 @@
 		border-radius: var(--borderRadius);
 		color: var(--primaryThemeInverted);
 		overflow: hidden;
-		/* overflow-y: scroll; */
 
 		font-size: 1rem;
 		opacity: 1;
@@ -234,16 +182,5 @@
 
 		position: relative;
 		box-shadow: var(--boxShadowsBlur), var(--boxInsetShadows);
-	}
-
-	.box {
-		width: 100%;
-		/* margin: 0.5em; */
-		white-space: normal;
-		font-size: 1.5rem;
-	}
-
-	.auto {
-		line-break: auto;
 	}
 </style>

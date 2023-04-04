@@ -1,113 +1,72 @@
 <script lang="ts">
-	// import PusherPushNotifications = require('@pusher/push-notifications-web')
+	import '$lib/css/middle-left.css';
+	import '../css/new-app.css';
 
-	import '$lib/css/middle-left.css'
-	import '../css/new-app.css'
+	import { isFlex } from '$lib/stores/isFlex';
+	import { isLocked } from '$lib/stores/isLocked';
+	import { nature } from '$lib/stores/nature';
+	import { currentPage } from '$lib/stores/currentPage';
+	import { searchInput } from '$lib/stores/searchInput';
 
-	import { isFlex } from '$lib/stores/isFlex'
-	import { isLocked } from '$lib/stores/isLocked'
-	import { nature } from '$lib/stores/nature'
-	import { currentPage } from '$lib/stores/currentPage'
-	import { searchInput } from '$lib/stores/searchInput'
+	import { userName } from '$lib/stores/userName';
+	import { pusher } from '$lib/bigFunctions/pusher';
 
-	import { userName } from '$lib/stores/userName'
-	import { pusher } from '$lib/bigFunctions/pusher'
+	import TopHeaderLeft from '$lib/components/Top-Header-Left.svelte';
+	import TopHeaderRight from '$lib/components/Top-Header-Right.svelte';
+	import BottomNav from '$lib/components/Bottom-Nav.svelte';
+	import BottomTextArea from '$lib/components/Bottom-Text-Area.svelte';
+	import MiddleSearchData from '$lib/components/Middle-Search-Data.svelte';
+	import MiddleNavData from '$lib/components/Middle-Nav-Data.svelte';
+	import LockScreen from '$lib/components/Lock-Screen.svelte';
 
-	import TopHeaderLeft from '$lib/components/Top-Header-Left.svelte'
-	import TopHeaderRight from '$lib/components/Top-Header-Right.svelte'
-	import BottomNav from '$lib/components/Bottom-Nav.svelte'
-	import BottomTextArea from '$lib/components/Bottom-Text-Area.svelte'
-	import MiddleSearchData from '$lib/components/Middle-Search-Data.svelte'
-	import MiddleNavData from '$lib/components/Middle-Nav-Data.svelte'
-	import LockScreen from '$lib/components/Lock-Screen.svelte'
-
-	// import * as PusherPushNotifications from '@pusher/push-notifications-web'
-	// import { Client, RegistrationState, TokenProvider } from '@pusher/push-notifications-web'
-	// import Pusher from 'pusher-js';
-	// import Pusher from 'pusher'
-
-	import { onDestroy, onMount } from 'svelte'
-	import { interChangableMessage } from '$lib/stores/interChangableMessage'
+	import { onDestroy, onMount } from 'svelte';
+	import { interChangableMessage } from '$lib/stores/interChangableMessage';
 
 	onMount(() => {
-		// if ('serviceWorker' in navigator) {
-		// 	navigator.serviceWorker.register('/service-worker.js').catch((error) => {
-		// 		console.error('Error registering service worker:', error)
-		// 	})
-		// }
-		// const findPusherBeam = async () => {
-		// 	console.log('Hello')
-		// 	const pusherModule = (await import('@pusher/push-notifications-web')).default
-		// 	console.log('pusherModule', pusherModule)
-		// 	console.log('Hello')
-		// 	// const Pusher = (await import('@pusher/push-notifications-web/dist/push-notifications-cjs')).default
-
-		// 	// const beamsClient = new Client({
-		// 	// 	instanceId: 'd0e1c1e0-0b1f-4b1f-9c1f-0b1f4b1f9c1f',
-		// 	// })
-		// 	console.log('Hello')
-		// 	// console.log('beamsClient', beamsClient)
-		// }
-		// findPusherBeam()
-
-		$interChangableMessage = `wassup ${$userName}`
-		const savedNatureDataString = localStorage.getItem('nature')
+		$interChangableMessage = `wassup ${$userName}`;
+		const savedNatureDataString = localStorage.getItem('nature');
 		if (savedNatureDataString) {
 			try {
-				const { $nature: natureString } = JSON.parse(savedNatureDataString)
+				const { $nature: natureString } = JSON.parse(savedNatureDataString);
 				if (natureString != '') {
-					$nature = natureString
+					$nature = natureString;
 				}
 			} catch (err) {
-				console.error(err)
+				console.error(err);
 			}
 		} else {
-			$nature = 'LOCATION'
+			$nature = 'LOCATION';
 		}
 
-		const PlacesApi = document.createElement('script')
-		PlacesApi.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_ENV_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`
-		PlacesApi.async = true
-		PlacesApi.defer = true
-		document.body.appendChild(PlacesApi)
-	})
-
-	// const enableNotifications = () => {
-	// 	const beamsClient = new Client({
-	// 		instanceId: 'd0e1c1e0-0b1f-4b1f-9c1f-0b1f4b1f9c1f',
-	// 	})
-
-	// 	beamsClient
-	// 		.start()
-	// 		.then(() => beamsClient.addDeviceInterest('hello'))
-	// 		.then(() => console.log('Successfully registered and subscribed!'))
-	// 		.catch(console.error)
-	// }
+		const PlacesApi = document.createElement('script');
+		PlacesApi.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_ENV_GOOGLE_MAPS_API_KEY}&libraries=places&callback=initMap`;
+		PlacesApi.async = true;
+		PlacesApi.defer = true;
+		document.body.appendChild(PlacesApi);
+	});
 
 	const tilda = (e: KeyboardEvent) => {
 		if (e.key === 'Escape') {
-			e.preventDefault()
-			$isLocked = true
+			e.preventDefault();
+			$isLocked = true;
 		} else if (e.key === '`') {
-			e.preventDefault()
-			$isFlex = !$isFlex
+			e.preventDefault();
+			$isFlex = !$isFlex;
 		} else if (e.key === 'Tab') {
-			e.preventDefault()
+			e.preventDefault();
 			if ($nature === 'LOCATION') {
-				$nature = 'HASHTAG'
+				$nature = 'HASHTAG';
 			} else if ($nature === 'HASHTAG') {
-				$nature = 'PUBLIC'
+				$nature = 'PUBLIC';
 			} else if ($nature === 'PUBLIC') {
-				$nature = 'LOCATION'
+				$nature = 'LOCATION';
 			}
 		}
-	}
+	};
 	onDestroy(() => {
-		pusher.disconnect()
-	})
+		pusher.disconnect();
+	});
 </script>
-
-<!-- <button on:click={enableNotifications}>Enable Notifications</button> -->
 
 <div class="main">
 	<div class="window">

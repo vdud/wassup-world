@@ -9,13 +9,14 @@ export const copyLink = () => {
 		}
 	});
 };
+
 export const shareViaEmail = () => {
 	userName.subscribe((name) => {
 		if (name) {
 			currentPageHeaderData.subscribe((data) => {
 				if (data) {
 					const subject = encodeURIComponent(`Check out this group: ${data}`);
-					const body = encodeURIComponent(`Heyy! it's ${name.toUpperCase()}, I thought you might be interested in this group: ${data}: ${window.location.href}`);
+					const body = encodeURIComponent(`Heyy! it's ${name}, I thought you might be interested in this group: ${data}: ${window.location.href}`);
 					window.open(`mailto:?subject=${subject}&body=${body}`);
 				}
 			});
@@ -28,7 +29,7 @@ export const shareViaWhatsApp = () => {
 		if (name) {
 			currentPageHeaderData.subscribe((data) => {
 				if (data) {
-					const text = encodeURIComponent(`Wassup! It's ${name.toUpperCase()}!, check out this link of a group-chat at ${data} on wassup.world, here; ${window.location.href}`);
+					const text = encodeURIComponent(`Hello! It's ${name} here! Don't miss out on our exciting group chat at ${data} on Wassup World. Join us now by clicking this link: ${window.location.href}`);
 					window.open(`https://api.whatsapp.com/send?text=${text}`);
 				}
 			});
@@ -41,7 +42,7 @@ export const shareViaMessageApp = () => {
 		if (name) {
 			currentPageHeaderData.subscribe((data) => {
 				if (data) {
-					const text = encodeURIComponent(`Wassup! It's ${name.toUpperCase()}!, check out this link of a group-chat at ${data} on wassup.world, here; ${window.location.href}`);
+					const text = encodeURIComponent(`Hello! It's ${name} here! Don't miss out on our exciting group chat at ${data} on Wassup World. Join us now by clicking this link: ${window.location.href}`);
 					const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
 					if (isIOS) {

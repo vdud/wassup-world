@@ -13,20 +13,19 @@
 	import AllGroupMessages from '$lib/reusableComponents/AllGroupMessages.svelte';
 
 	export let data: PageData;
-
 	onMount(() => {
 		$isFlex = false;
 		$currentPageHeaderData = data.body.groupName;
 
 		$currentPage = 'PUBLIC';
-		$userGroup_id = JSON.parse(data.body.groupId);
+		$userGroup_id = JSON.parse(data.groupId);
 
 		pusher
 			.subscribe($userGroup_id)
 			.bind('injectMessage', (data: any) => {
 				if (data.sender === $userName) {
-					const isYoMe = true;
-					// applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+					// const isYoMe = true;
+					return;
 				} else {
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });

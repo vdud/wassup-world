@@ -8,70 +8,71 @@
 	export let allUsers: any;
 </script>
 
-{#if $currentPage !== 'PUBLIC'}
-	<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-11rem; opacity:0;'}>
-		<div class="infoData">
-			<div class="flexInfo">
-				<div class="flex 🔗">
-					<div class="textBoxH">
-						<p>Share 🔗</p>
+<!-- {#if $currentPage !== 'PUBLIC'} -->
+<div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-11rem; opacity:0;'}>
+	<div class="infoData">
+		<div class="flexInfo">
+			<div class="flex 🔗">
+				<div class="textBoxH">
+					<p>Share 🔗</p>
+				</div>
+				<div class="shareLogosContainer">
+					<div class="colored copyLink">
+						<button on:click={copyLink} class="faBtn">
+							<i class="faIcon fa-solid fa-link" />
+						</button>
 					</div>
-					<div class="shareLogosContainer">
-						<div class="colored copyLink">
-							<button on:click={copyLink} class="faBtn">
-								<i class="faIcon fa-solid fa-link" />
-							</button>
-						</div>
-						<div class="colored email">
-							<button on:click={shareViaEmail} class="faBtn">
-								<i class="faIcon fa-solid fa-envelope envoFa" />
-							</button>
-						</div>
-						<div class="colored whatsapp">
-							<button on:click={shareViaWhatsApp} class="faBtn">
-								<i class="faIcon fa-brands fa-whatsapp" />
-							</button>
-						</div>
-						<div class="colored messageApp">
-							<button on:click={shareViaMessageApp} class="faBtn">
-								<i class="faIcon fa-solid fa-comment-alt" />
-							</button>
-						</div>
+					<div class="colored email">
+						<button on:click={shareViaEmail} class="faBtn">
+							<i class="faIcon fa-solid fa-envelope envoFa" />
+						</button>
+					</div>
+					<div class="colored whatsapp">
+						<button on:click={shareViaWhatsApp} class="faBtn">
+							<i class="faIcon fa-brands fa-whatsapp" />
+						</button>
+					</div>
+					<div class="colored messageApp">
+						<button on:click={shareViaMessageApp} class="faBtn">
+							<i class="faIcon fa-solid fa-comment-sms" />
+						</button>
 					</div>
 				</div>
-				<div class="flex 👽">
-					<div class="textBoxH"><p>Members 👽</p></div>
-					<div class="peopleList">
-						<div class="membersColumn memberHeader">
-							<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText">Name</p></div></div>
-							<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">Last seen</p></div></div>
-							<div class="flexItem flexItem3">
-								<button class="flexCenter"
-									><p class="headerText">Chat</p>
-									<i class="fa-solid fa-envelope msgDis" /></button>
+			</div>
+			<div class="flex 👽">
+				<div class="textBoxH"><p>Members 👽</p></div>
+				<div class="peopleList">
+					<div class="membersColumn memberHeader">
+						<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText">Name</p></div></div>
+						<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">Last seen</p></div></div>
+						<div class="flexItem flexItem3">
+							<button class="flexCenter"
+								><p class="headerText">Chat</p>
+								<i class="fa-solid fa-envelope msgDis" /></button>
+						</div>
+					</div>
+					{#each allUsers as user}
+						<div class="membersColumn">
+							<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText memberName">;{user.name}</p></div></div>
+							<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">{timeSince(user.lastLoggedIn)}</p></div></div>
+							<div class="flexItem flexItem3 sendMsgBtn">
+								<button
+									class="flexCenter"
+									on:click={() => {
+										window.location.pathname = `${$userName_id}/PUB/${user._id}`;
+									}}
+									><p class="pTextMember sendAmsg">SEND</p>
+									<i class="fa-solid fa-envelope sendAmsg" /></button>
 							</div>
 						</div>
-						{#each allUsers as user}
-							<div class="membersColumn">
-								<div class="flexItem flexItem1"><div class="flexLeft"><p class="headerText memberName">;{user.name}</p></div></div>
-								<div class="flexItem flexItem2"><div class="flexLeft"><p class="headerText">{timeSince(user.lastLoggedIn)}</p></div></div>
-								<div class="flexItem flexItem3 sendMsgBtn">
-									<button
-										class="flexCenter"
-										on:click={() => {
-											window.location.pathname = `${$userName_id}/PUB/${user._id}`;
-										}}
-										><p class="pTextMember sendAmsg">SEND</p>
-										<i class="fa-solid fa-envelope sendAmsg" /></button>
-								</div>
-							</div>
-						{/each}
-					</div>
+					{/each}
 				</div>
 			</div>
 		</div>
 	</div>
-{/if}
+</div>
+
+<!-- {/if} -->
 
 <style>
 	.faBtn {
@@ -101,7 +102,7 @@
 	.fa-whatsapp {
 		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--green) 55%);
 	}
-	.fa-comment-alt {
+	.fa-comment-sms {
 		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--blue) 55%);
 	}
 	.flexCenter {
