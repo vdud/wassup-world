@@ -52,6 +52,9 @@ export const POST = (async ({ request }) => {
 		replyTo: null,
 	});
 	const findThatmsg = await massagesCreate.findOne({ _id: newMessage.insertedId });
+	if (!findThatmsg) {
+		return json({ success: false });
+	}
 
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
@@ -79,7 +82,6 @@ export const POST = (async ({ request }) => {
 		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: findThatmsg._id } }, { upsert: true });
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 	}
-
 	pusher.trigger($userGroup_id, 'injectMessage', {
 		message: message,
 		sender: $userName,
@@ -87,6 +89,5 @@ export const POST = (async ({ request }) => {
 		groupId: $userGroup_id,
 		messageId: findThatmsg._id,
 	});
-
 	return json({ success: true, messageId: findThatmsg._id });
 }) satisfies RequestHandler;
