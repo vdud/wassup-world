@@ -42,7 +42,7 @@ export const applyNewMessageFresh = (data: any) => {
 	}
 };
 
-export const applyMessage = (data: any) => {
+export const applyMessage = async (data: any) => {
 	const textMessages: any = document.getElementById('textMessages');
 	if (textMessages) {
 		if (data.isYoMe) {
@@ -75,6 +75,7 @@ export const applyMessage = (data: any) => {
 		//third span //data span
 		const span3 = document.createElement('span');
 		span3.classList.add(data.isYoMe ? 'spanFlexRight' : 'spanFlexLeft');
+		span3.id = `span3Data?${data.messageId}`;
 
 		//time span
 		const timeSpan = document.createElement('span');
@@ -162,6 +163,8 @@ export const applyMessage = (data: any) => {
 			span3.append(buttonTotalReplies);
 			span3.append(timeSpan);
 			// span3.append(loveButton)
+
+			div.id = `alreadyMember?${data.sender}${data.createdAt}`;
 
 			goToReplyButton.style.marginRight = '10px';
 			buttonTotalReplies.style.marginRight = '10px';

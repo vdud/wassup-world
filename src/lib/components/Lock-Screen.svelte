@@ -1,19 +1,3 @@
-<!-- <script context="module" src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js">
-	// import PusherPushNotifications from '@pusher/push-notifications-web'
-
-	// console.log('PusherPushNotifications', PusherPushNotifications)
-
-	// const beamsClient = new PusherPushNotifications.Client({
-	// 	instanceId: 'c9d50f68-33d2-4426-8a8d-2e82f0b778e7',
-	// })
-
-	// beamsClient
-	// 	.start()
-	// 	.then(() => beamsClient.addDeviceInterest('hello'))
-	// 	.then(() => console.log('Successfully registered and subscribed!'))
-	// 	.catch(console.error)
-</script> -->
-
 <script lang="ts">
 	import { userName } from '$lib/stores/userName';
 	import { loginResponseData } from '$lib/stores/loginResponseData';
@@ -105,7 +89,7 @@
 										LMT.innerHTML = data.pinging + ' is typing...';
 
 										setTimeout(() => {
-											LMT.innerHTML = data.pinging + ' was typing...';
+											LMT.innerHTML = data.pinging + ' was typing...😿';
 										}, 3000);
 									}
 								}

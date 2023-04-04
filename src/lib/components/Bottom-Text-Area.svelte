@@ -3,8 +3,9 @@
 	import { userGroup_id } from '$lib/stores/userGroup_id';
 	import { userName } from '$lib/stores/userName';
 	import { userName_id } from '$lib/stores/userName_id';
-	import { applyMessage, applyNavDataMessage, applyNewMessageFresh, freshReplyMessage } from '$lib/bigFunctions/applyTextMessage';
+	import { invader } from '$lib/stores/invader';
 
+	import { applyMessage, applyNavDataMessage, applyNewMessageFresh, freshReplyMessage } from '$lib/bigFunctions/applyTextMessage';
 	import { autoresize } from 'svelte-textarea-autoresize';
 	import sendButtonLogo from '$lib/assets/sendBtn.png';
 	import { currentPage } from '$lib/stores/currentPage';
@@ -40,6 +41,7 @@
 		const groupId = $userGroup_id;
 		$user_message = '';
 		const time = new Date();
+		$invader = true;
 
 		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {

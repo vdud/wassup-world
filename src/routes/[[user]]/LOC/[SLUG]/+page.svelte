@@ -14,6 +14,7 @@
 	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg';
 	import AllGroupMessages from '$lib/reusableComponents/AllGroupMessages.svelte';
 	import { isTypingData } from '$lib/stores/isTypingData';
+	import { invader } from '$lib/stores/invader';
 
 	onMount(() => {
 		$isFlex = false;
@@ -26,7 +27,22 @@
 			.bind('injectMessage', (data: any) => {
 				if (data.sender === $userName) {
 					const isYoMe = true;
-					// applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+					if (!$invader) {
+						applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+					}
+					const span3Data: any = document.getElementById(`span3Data?${data.messageId}`);
+
+					const alreadyReplied = document.createElement('span');
+					alreadyReplied.classList.add('timeSpan');
+					alreadyReplied.style.marginLeft = 'var(--averageMargin';
+					alreadyReplied.classList.add('alreadyReplied');
+					alreadyReplied.innerText = 'some snitch replied to this...';
+
+					if (span3Data && !$invader) {
+						// alreadyMembermsg.append(alreadyReplied);
+						span3Data.append(alreadyReplied);
+					}
+					$invader = false;
 				} else {
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
