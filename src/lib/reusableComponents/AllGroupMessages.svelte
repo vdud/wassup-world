@@ -77,7 +77,7 @@
 
 					debouncedInvader();
 					return;
-				} else if (data.sender !== $userName) {
+				} else {
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
