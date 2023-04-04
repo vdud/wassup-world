@@ -51,7 +51,7 @@ export const POST = (async ({ request }) => {
 		totalReplies: 0,
 		replyTo: null,
 	});
-	const findThatmsg = await massagesCreate.findOne({ _id: findThatmsg._id });
+	const findThatmsg = await massagesCreate.findOne({ _id: newMessage.insertedId });
 
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
