@@ -12,11 +12,13 @@ const pusher = new Pusher({
 	cluster: import.meta.env.VITE_APP_CLUSTER,
 	useTLS: true,
 });
-
 export const POST = (async ({ request }) => {
 	const { $userGroup_id, $userName } = await request.json();
 
 	pusher.trigger($userGroup_id, 'pingTyping', {
+		pinging: $userName,
+	});
+	pusher.trigger($userGroup_id, 'pingNavTyping', {
 		pinging: $userName,
 	});
 

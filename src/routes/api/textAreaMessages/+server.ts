@@ -44,6 +44,14 @@ export const POST = (async ({ request }) => {
 		messageId: newMessage.insertedId,
 	});
 
+	pusher.trigger($userGroup_id, 'injectNav', {
+		message: message,
+		sender: $userName,
+		createdAt: new Date(),
+		groupId: $userGroup_id,
+		messageId: newMessage.insertedId,
+	});
+
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
 		if (!findUserInGroup) {

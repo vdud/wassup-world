@@ -52,10 +52,10 @@
 					// if ($userGroup_id != element._id) {
 					pusher
 						.subscribe(element._id)
-						.bind('injectMessage', (data: any) => {
+						.bind('injectNav', (data: any) => {
 							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' });
 						})
-						.bind('pingTyping', (data: any) => {
+						.bind('pingNavTyping', (data: any) => {
 							if (data.pinging === $userName) {
 								return;
 							} else {
@@ -75,10 +75,10 @@
 					// if ($userGroup_id != element._id) {
 					pusher
 						.subscribe(element._id)
-						.bind('injectMessage', (data: any) => {
+						.bind('injectNav', (data: any) => {
 							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
 						})
-						.bind('pingTyping', (data: any) => {
+						.bind('pingNavTyping', (data: any) => {
 							if (data.pinging === $userName) {
 								return;
 							} else {
@@ -98,10 +98,10 @@
 					// if ($userGroup_id != element._id) {
 					pusher
 						.subscribe(element._id)
-						.bind('injectMessage', (data: any) => {
+						.bind('injectNav', (data: any) => {
 							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' });
 						})
-						.bind('pingTyping', (data: any) => {
+						.bind('pingNavTyping', (data: any) => {
 							if (data.pinging === $userName) {
 								return;
 							} else {
