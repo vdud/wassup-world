@@ -68,7 +68,8 @@ export const applyMessage = (data: any) => {
 
 		//message span
 		const span2 = document.createElement('span');
-		span2.style.color = 'var(--primaryThemeInverted)';
+		// span2.style.color = 'var(--primaryThemeInverted)';
+		span2.classList.add('pageMessage');
 		span2.innerText = data.message;
 
 		//third span //data span

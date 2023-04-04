@@ -20,10 +20,8 @@
 	import LockScreen from '$lib/components/Lock-Screen.svelte';
 
 	import { onDestroy, onMount } from 'svelte';
-	import { interChangableMessage } from '$lib/stores/interChangableMessage';
 
 	onMount(() => {
-		$interChangableMessage = `wassup ${$userName}`;
 		const savedNatureDataString = localStorage.getItem('nature');
 		if (savedNatureDataString) {
 			try {

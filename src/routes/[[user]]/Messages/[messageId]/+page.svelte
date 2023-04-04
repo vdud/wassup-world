@@ -14,6 +14,7 @@
 	import { isShowInfo } from '$lib/stores/isShowInfo';
 	import AboutGroup from '$lib/reusableComponents/AboutGroup.svelte';
 	import { replyMessage } from '$lib/bigFunctions/applyTextMessage';
+	import { isTypingData } from '$lib/stores/isTypingData';
 
 	export let data: PageData;
 	const messageData = JSON.parse(data.body.message);
@@ -59,6 +60,18 @@
 			})
 			.bind('incrementReplies', (data: any) => {
 				incrementReplies({ _id: data.messageId, replies: data.totalReplies });
+			})
+			.bind('pingTyping', (data: any) => {
+				if (data.pinging === $userName) {
+					return;
+				} else {
+					$isTypingData.message = data.pinging + ' is typing...';
+					$isTypingData.isTyping = true;
+					setTimeout(() => {
+						$isTypingData.message = '';
+						$isTypingData.isTyping = false;
+					}, 3000);
+				}
 			});
 	});
 

@@ -8,7 +8,8 @@
 
 	import { currentPage } from '$lib/stores/currentPage';
 	import { isShowInfo } from '$lib/stores/isShowInfo';
-	import { interChangableMessage } from '$lib/stores/interChangableMessage';
+	import { isTypingData } from '$lib/stores/isTypingData';
+	import { fade } from 'svelte/transition';
 
 	let groupName = 'world';
 
@@ -75,9 +76,11 @@
 				<p class="chatPText">{titleData}</p>
 			{/if}
 		</div>
-		<div class="pFlex">
-			<p class="chatPText" style="font-family: Imprima;">{$interChangableMessage}</p>
-		</div>
+		{#if $isTypingData.isTyping === true}
+			<div class="pFlex" in:fade out:fade>
+				<p class="chatPText" style="font-family: UBold;">{$isTypingData.message}</p>
+			</div>
+		{/if}
 	</button>
 	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 

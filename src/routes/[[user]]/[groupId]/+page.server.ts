@@ -72,23 +72,39 @@ export const load = (async ({ params }) => {
 				.aggregate([
 					{ $match: { group_id: findGroupbyId._id, isReply: false } },
 					{
+						$lookup: {
+							from: 'user',
+							localField: 'allUsers',
+							foreignField: '_id',
+							as: 'allUsers',
+						},
+					},
+					{
 						$project: {
-							_id: 1,
-							message: 1,
-							createdAt: 1,
-							sender: 1,
-							likedPeople: 1,
-							likes: 1,
-
-							replies: 1,
-							isReply: 1,
-							totalReplies: 1,
+							allUsers: {
+								_id: 1,
+								name: 1,
+								lastLoggedIn: 1,
+							},
+						},
+					},
+					{
+						$unwind: '$allUsers',
+					},
+					{
+						$sort: {
+							'allUsers.lastLoggedIn': -1,
+						},
+					},
+					{
+						$group: {
+							_id: '$_id',
+							allUsers: {
+								$push: '$allUsers',
+							},
 						},
 					},
 				])
-				.match({ likes: { $gt: 19 } })
-				.sort({ likes: 1 })
-				.limit(10)
 				.toArray();
 
 			return {

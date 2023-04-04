@@ -9,6 +9,7 @@
 	import sendButtonLogo from '$lib/assets/sendBtn.png';
 	import { currentPage } from '$lib/stores/currentPage';
 	import { messageId } from '$lib/stores/messageId';
+	import { debounce } from '$lib/bigFunctions/debounce';
 
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !event.shiftKey) {
@@ -17,6 +18,22 @@
 			$user_message = '';
 		}
 	}
+
+	function handleKeyUp(event: KeyboardEvent) {
+		debouncedPingTyping();
+	}
+
+	const pingTyping = async () => {
+		const res = await fetch('/api/typing', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ $userGroup_id, $userName }),
+		});
+	};
+
+	const debouncedPingTyping = debounce(pingTyping, 300);
 
 	const socketWorker = async () => {
 		const message = $user_message.slice(0, 999);
@@ -84,7 +101,7 @@
 
 <div class="textAreeaBox">
 	<button class="button" on:click={socketWorker} style="{$currentPage === 'PUBLIC' ? 'background-color:var(--secondary)' : ''}{$currentPage === 'HASHTAGS' ? 'background-color:var(--primary)' : ''}{$currentPage === 'LOCATIONS' ? 'background-color:var(--secOptDark)' : ''}{$currentPage === 'REPLIES' ? 'background-color:var(--secOptLight)' : ''}"><img class="sendButtonLogo" src={sendButtonLogo} alt="sendbutton" /></button>
-	<textarea use:autoresize id="textAreaId" class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} placeholder="Type your message..." />
+	<textarea use:autoresize id="textAreaId" class="textArea" bind:value={$user_message} on:keydown={handleKeyDown} on:keyup={handleKeyUp} placeholder="Type your message..." />
 </div>
 
 <style>

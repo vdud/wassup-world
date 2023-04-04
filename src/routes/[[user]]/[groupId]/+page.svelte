@@ -14,12 +14,14 @@
 	import { incrementLikes, incrementReplies } from '$lib/bigFunctions/likeThatMsg';
 	import AllGroupMessages from '$lib/reusableComponents/AllGroupMessages.svelte';
 	import { nature } from '$lib/stores/nature';
+	import { isTypingData } from '$lib/stores/isTypingData';
 
 	onMount(() => {
 		$isFlex = false;
 		$currentPage = data.body.nature;
 		$userGroup_id = JSON.parse(data.groupId);
 		$currentPageHeaderData = data.body.groupName;
+		$nature = $currentPage;
 
 		pusher
 			.subscribe($userGroup_id)
@@ -42,6 +44,18 @@
 			})
 			.bind('incrementReplies', (data: any) => {
 				incrementReplies({ _id: data.messageId, replies: data.totalReplies });
+			})
+			.bind('pingTyping', (data: any) => {
+				if (data.pinging === $userName) {
+					return;
+				} else {
+					$isTypingData.message = data.pinging + ' is typing...';
+					$isTypingData.isTyping = true;
+					setTimeout(() => {
+						$isTypingData.message = '';
+						$isTypingData.isTyping = false;
+					}, 3000);
+				}
 			});
 	});
 </script>

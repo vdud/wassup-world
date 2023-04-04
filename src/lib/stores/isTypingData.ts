@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const interChangableMessage = writable({
+export const isTypingData = writable({
 	message: '',
 	isTyping: false,
 });

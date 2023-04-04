@@ -15,40 +15,40 @@
 </script> -->
 
 <script lang="ts">
-	import { userName } from '$lib/stores/userName'
-	import { loginResponseData } from '$lib/stores/loginResponseData'
-	import { isLocked } from '$lib/stores/isLocked'
-	import { onMount } from 'svelte'
-	import { userName_id } from '$lib/stores/userName_id'
-	import { userGroup_id } from '$lib/stores/userGroup_id'
+	import { userName } from '$lib/stores/userName';
+	import { loginResponseData } from '$lib/stores/loginResponseData';
+	import { isLocked } from '$lib/stores/isLocked';
+	import { onMount } from 'svelte';
+	import { userName_id } from '$lib/stores/userName_id';
+	import { userGroup_id } from '$lib/stores/userGroup_id';
 
-	import { pusher } from '$lib/bigFunctions/pusher'
-	import { applyNavDataMessage, applyNewMessage } from '$lib/bigFunctions/applyTextMessage'
+	import { pusher } from '$lib/bigFunctions/pusher';
+	import { applyNavDataMessage, applyNewMessage } from '$lib/bigFunctions/applyTextMessage';
 
-	$: if ($userName) $userName = $userName.toLowerCase().trim()
+	$: if ($userName) $userName = $userName.toLowerCase().trim();
 
 	onMount(() => {
-		const savedDataString = localStorage.getItem('formData')
-		const button = document.getElementById('submit')
+		const savedDataString = localStorage.getItem('formData');
+		const button = document.getElementById('submit');
 		if (savedDataString) {
 			try {
-				const { $userName: savedUserName } = JSON.parse(savedDataString)
+				const { $userName: savedUserName } = JSON.parse(savedDataString);
 				if (savedUserName != '') {
-					$userName = savedUserName
-					unLock()
+					$userName = savedUserName;
+					unLock();
 				}
 			} catch (err) {
-				console.error(err)
+				console.error(err);
 			}
 		}
-	})
+	});
 
 	const unLock = async () => {
-		$isLocked = false
+		$isLocked = false;
 		if ($userName.length < 3 || $userName.length > 18 || $userName.toString().trim() == '' || $userName == ' ') {
-			return
+			return;
 		}
-		localStorage.setItem('formData', JSON.stringify({ $userName }))
+		localStorage.setItem('formData', JSON.stringify({ $userName }));
 		if ($userName != '') {
 			const res = await fetch('/api/logInData', {
 				method: 'POST',
@@ -56,51 +56,102 @@
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({ data: $userName }),
-			})
-			const response = await res.json()
+			});
+			const response = await res.json();
 			if (res.ok) {
-				$loginResponseData = response
-				$userName_id = response.userName_id
+				$loginResponseData = response;
+				$userName_id = response.userName_id;
 				pusher.subscribe($userName_id).bind('newPubMessage', (data: any) => {
-					applyNewMessage({ groupName: data.groupName, sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
-				})
+					applyNewMessage({ groupName: data.groupName, sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' });
+				});
 				$loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
 					if ($userGroup_id != element._id) {
-						pusher.subscribe(element._id).bind('injectMessage', (data: any) => {
-							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' })
-						})
+						pusher
+							.subscribe(element._id)
+							.bind('injectMessage', (data: any) => {
+								applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' });
+							})
+							.bind('pingTyping', (data: any) => {
+								if (data.pinging === $userName) {
+									return;
+								} else {
+									const LMT = document.getElementById('LMT?' + element._id);
+									console.log('LMT', LMT);
+									if (LMT) {
+										LMT.innerHTML = data.pinging + ' is typing...';
+
+										setTimeout(() => {
+											LMT.innerHTML = data.pinging + ' was typing...';
+										}, 3000);
+									}
+								}
+							});
 					}
-				})
+				});
 				$loginResponseData.data.formatedLOCdata.forEach((element: any) => {
 					if ($userGroup_id != element._id) {
-						pusher.subscribe(element._id).bind('injectMessage', (data: any) => {
-							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' })
-						})
+						pusher
+							.subscribe(element._id)
+							.bind('injectMessage', (data: any) => {
+								applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
+							})
+							.bind('pingTyping', (data: any) => {
+								if (data.pinging === $userName) {
+									return;
+								} else {
+									const LMT = document.getElementById('LMT?' + element._id);
+									console.log('LMT', LMT);
+									if (LMT) {
+										LMT.innerHTML = data.pinging + ' is typing...';
+
+										setTimeout(() => {
+											LMT.innerHTML = data.pinging + ' was typing...';
+										}, 3000);
+									}
+								}
+							});
 					}
-				})
+				});
 				$loginResponseData.data.formatedPUBLICdata.forEach((element: any) => {
 					if ($userGroup_id != element._id) {
-						pusher.subscribe(element._id).bind('injectMessage', (data: any) => {
-							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' })
-						})
+						pusher
+							.subscribe(element._id)
+							.bind('injectMessage', (data: any) => {
+								applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' });
+							})
+							.bind('pingTyping', (data: any) => {
+								if (data.pinging === $userName) {
+									return;
+								} else {
+									const LMT = document.getElementById('LMT?' + element._id);
+									console.log('LMT', LMT);
+									if (LMT) {
+										LMT.innerHTML = data.pinging + ' is typing...';
+
+										setTimeout(() => {
+											LMT.innerHTML = data.pinging + ' was typing...';
+										}, 3000);
+									}
+								}
+							});
 					}
-				})
+				});
 			} else if (!res.ok) {
-				alert(response.message)
+				alert(response.message);
 				// $canSend = false
 			}
 		}
-	}
+	};
 	function handleKeyUp(event: any) {
-		$userName = $userName.toLowerCase().replace(/\s/g, '')
+		$userName = $userName.toLowerCase().replace(/\s/g, '');
 	}
 
 	function handleLockKeyDown(event: any) {
 		if (event.key === 'Escape') {
-			$userName = ''
+			$userName = '';
 		}
 		if (event.key === 'Enter' && $userName.length > 2 && $userName.length < 19 && $userName.toString().trim() != '' && $userName != ' ') {
-			unLock()
+			unLock();
 		}
 	}
 </script>
