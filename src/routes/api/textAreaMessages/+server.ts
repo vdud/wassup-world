@@ -52,14 +52,6 @@ export const POST = (async ({ request }) => {
 		replyTo: null,
 	});
 
-	pusher.trigger($userGroup_id, 'injectMessage', {
-		message: message,
-		sender: $userName,
-		createdAt: newTime,
-		groupId: $userGroup_id,
-		messageId: newMessage.insertedId,
-	});
-
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
 		if (!findUserInGroup) {
@@ -86,6 +78,14 @@ export const POST = (async ({ request }) => {
 		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 	}
+
+	pusher.trigger($userGroup_id, 'injectMessage', {
+		message: message,
+		sender: $userName,
+		createdAt: newTime,
+		groupId: $userGroup_id,
+		messageId: newMessage.insertedId,
+	});
 
 	return json({ success: true, messageId: newMessage.insertedId });
 }) satisfies RequestHandler;
