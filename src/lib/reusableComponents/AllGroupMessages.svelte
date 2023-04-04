@@ -62,7 +62,12 @@
 			.subscribe($userGroup_id)
 			.bind('injectMessage', (data: any) => {
 				console.log('data', data);
-				if (data.sender === $userName) {
+				if (data.sender !== $userName) {
+					const isYoMe = false;
+					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
+					return;
+				} else {
 					const isYoMe = true;
 
 					const checkIfInvader = () => {
@@ -71,17 +76,12 @@
 							alreadyApplied(data);
 						}
 					};
-					let debouncedCheck = debounce(checkIfInvader, 100);
+					const debouncedCheck = debounce(checkIfInvader, 100);
 
 					// checkIfInvader();
 					debouncedCheck();
 
 					debouncedInvader();
-					return;
-				} else {
-					const isYoMe = false;
-					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
-					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
 					return;
 				}
 			})
