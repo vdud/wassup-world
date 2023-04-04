@@ -71,10 +71,12 @@
 					checkIfInvader();
 					debouncedInvader();
 					alreadyApplied(data);
+					return;
 				} else if (data.sender !== $userName) {
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
+					return;
 				}
 			})
 			.bind('injectLike', (data: any) => {
@@ -82,10 +84,12 @@
 					return;
 				} else {
 					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes });
+					return;
 				}
 			})
 			.bind('incrementReplies', (data: any) => {
 				incrementReplies({ _id: data.messageId, replies: data.totalReplies });
+				return;
 			})
 			.bind('pingTyping', (data: any) => {
 				if (data.pinging === $userName) {
@@ -97,6 +101,7 @@
 						$isTypingData.message = '';
 						$isTypingData.isTyping = false;
 					}, 3000);
+					return;
 				}
 			});
 	});
