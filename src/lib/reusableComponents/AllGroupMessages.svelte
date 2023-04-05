@@ -66,7 +66,6 @@
 				}
 			})
 			.bind('injectMessage', (data: any) => {
-				console.log('data', data);
 				if (data.sender !== $userName && data.groupId === $userGroup_id) {
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });

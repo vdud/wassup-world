@@ -41,7 +41,7 @@ export const POST = (async ({ request }) => {
 	const newMessage = await massagesCreate.insertOne({
 		sender: $userName,
 		message: message,
-		group_id: findGroup._id,
+		groupId: findGroup._id,
 		createdAt: newTime,
 		likedPeople: [],
 		likes: 0,
@@ -82,12 +82,14 @@ export const POST = (async ({ request }) => {
 		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: findThatmsg._id } }, { upsert: true });
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 	}
-	pusher.trigger($userGroup_id, 'injectMessage', {
+	await pusher.trigger(findThatmsg.groupId.toString(), 'injectMessage', {
 		message: message,
 		sender: $userName,
 		createdAt: newTime,
-		groupId: $userGroup_id,
+		groupId: findThatmsg.groupId,
 		messageId: findThatmsg._id,
 	});
-	return json({ success: true, messageId: findThatmsg._id });
+
+	const retunMessageId = JSON.stringify(findThatmsg._id);
+	return json({ success: true, messageId: retunMessageId });
 }) satisfies RequestHandler;
