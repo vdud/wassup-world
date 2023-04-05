@@ -51,7 +51,7 @@ export const POST = (async ({ request }) => {
 		totalReplies: 0,
 		replyTo: null,
 	});
-	const finNewestone = await massagesCreate.findOne({ _id: newMessage.insertedId }).then((res: any) => {
+	await massagesCreate.findOne({ _id: newMessage.insertedId }).then((res: any) => {
 		// if (finNewestone) {
 		// 	pusher.trigger(finNewestone.group_id.toString(), 'injectMessage', {
 		// 		message: message,

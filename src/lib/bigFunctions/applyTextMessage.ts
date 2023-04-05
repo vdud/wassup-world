@@ -49,10 +49,12 @@ export const applyMessage = async (data: any) => {
 	const textMessages: any = document.getElementById('textMessages');
 	if (textMessages) {
 		// if (data.isYoMe) {
-		const freshText: any = document.getElementById(`${data.sender}${data.createdAt}`);
-		if (freshText) {
-			freshText.remove();
-		}
+		setTimeout(() => {
+			const freshText: any = document.getElementById(`${data.sender}${data.createdAt}`);
+			if (freshText) {
+				freshText.remove();
+			}
+		}, 300);
 		// }
 
 		const div = document.createElement('div');

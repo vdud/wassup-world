@@ -58,50 +58,52 @@
 		// 	$invader = false;
 		// }, 1000);
 
-		pusher.subscribe($userGroup_id).bind('injectEmptyMessage', (data: any) => {
-			if (data.sender !== $userName && data.groupId === $userGroup_id) {
-				applyNewMessageFresh({ sender: data.sender, message: data.message, createdAt: data.createdAt, isYoMe: false });
-			}
-		});
+		pusher
+			.subscribe($userGroup_id)
+			.bind('injectEmptyMessage', (data: any) => {
+				if (data.sender !== $userName && data.groupId === $userGroup_id) {
+					applyNewMessageFresh({ sender: data.sender, message: data.message, createdAt: data.createdAt, isYoMe: false });
+				}
+			})
 
-		pusher.subscribe($userGroup_id).bind('injectMessage', (data: any) => {
-			// console.log('data', data);
-			if (data.sender === $userName) {
-				return;
-			} else {
+			.bind('injectMessage', (data: any) => {
 				// console.log('data', data);
+				if (data.sender === $userName) {
+					return;
+				} else {
+					// console.log('data', data);
 
-				const isYoMe = false;
-				applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
-				applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
-				return;
-			}
-		});
+					const isYoMe = false;
+					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
+					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
+					return;
+				}
+			})
 
-		pusher.subscribe($userGroup_id).bind('injectLike', (data: any) => {
-			if (data.sender === $userName) {
-				return;
-			} else {
-				incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes });
-			}
-		});
+			.bind('injectLike', (data: any) => {
+				if (data.sender === $userName) {
+					return;
+				} else {
+					incrementLikes({ _id: data.messageId, $userName_id, likes: data.likes });
+				}
+			})
 
-		pusher.subscribe($userGroup_id).bind('incrementReplies', (data: any) => {
-			incrementReplies({ _id: data.messageId, replies: data.totalReplies });
-		});
+			.bind('incrementReplies', (data: any) => {
+				incrementReplies({ _id: data.messageId, replies: data.totalReplies });
+			})
 
-		pusher.subscribe($userGroup_id).bind('pingTyping', (data: any) => {
-			if (data.pinging === $userName) {
-				return;
-			} else {
-				$isTypingData.message = data.pinging + ' is typing...';
-				$isTypingData.isTyping = true;
-				setTimeout(() => {
-					$isTypingData.message = '';
-					$isTypingData.isTyping = false;
-				}, 3000);
-			}
-		});
+			.bind('pingTyping', (data: any) => {
+				if (data.pinging === $userName) {
+					return;
+				} else {
+					$isTypingData.message = data.pinging + ' is typing...';
+					$isTypingData.isTyping = true;
+					setTimeout(() => {
+						$isTypingData.message = '';
+						$isTypingData.isTyping = false;
+					}, 3000);
+				}
+			});
 	});
 
 	onDestroy(() => {
