@@ -66,7 +66,9 @@
 
 		pusher.subscribe($userGroup_id).bind('injectMessage', (data: any) => {
 			console.log('data', data);
-			if (data.sender !== $userName) {
+			if (data.sender === $userName) {
+				return;
+			} else {
 				console.log('data', data);
 
 				const isYoMe = false;

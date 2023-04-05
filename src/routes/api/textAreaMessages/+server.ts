@@ -62,6 +62,7 @@ export const POST = (async ({ request }) => {
 	// 		messageId: finNewestone._id,
 	// 	});
 	// }
+	console.log('newMessage.insertedId', newMessage.insertedId);
 
 	setTimeout(() => {
 		pusher.trigger($userGroup_id, 'injectMessage', {
@@ -70,7 +71,7 @@ export const POST = (async ({ request }) => {
 			createdAt: newTime,
 			groupId: $userGroup_id,
 			// group_id: $userGroup_id,
-			messageId: newMessage.insertedId,
+			messageId: newMessage.insertedId.toString(),
 		});
 	}, 10);
 	if (findGroup.nature === 'PUBLIC') {
