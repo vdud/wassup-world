@@ -51,27 +51,6 @@ export const POST = (async ({ request }) => {
 		totalReplies: 0,
 		replyTo: null,
 	});
-	await massagesCreate.findOne({ _id: newMessage.insertedId }).then((res: any) => {
-		// if (finNewestone) {
-		// 	pusher.trigger(finNewestone.group_id.toString(), 'injectMessage', {
-		// 		message: message,
-		// 		sender: $userName,
-		// 		createdAt: newTime,
-		// 		groupId: finNewestone.group_id.toString(),
-		// 		// group_id: $userGroup_id,
-		// 		messageId: finNewestone._id,
-		// 	});
-		// }
-		pusher.trigger(res.group_id.toString(), 'injectMessage', {
-			message: message,
-			sender: $userName,
-			createdAt: newTime,
-			groupId: $userGroup_id,
-			// group_id: $userGroup_id,
-			messageId: newMessage.insertedId,
-		});
-	});
-	// }
 
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
@@ -99,6 +78,28 @@ export const POST = (async ({ request }) => {
 		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 	}
+
+	await massagesCreate.findOne({ _id: newMessage.insertedId }).then((res: any) => {
+		// if (finNewestone) {
+		// 	pusher.trigger(finNewestone.group_id.toString(), 'injectMessage', {
+		// 		message: message,
+		// 		sender: $userName,
+		// 		createdAt: newTime,
+		// 		groupId: finNewestone.group_id.toString(),
+		// 		// group_id: $userGroup_id,
+		// 		messageId: finNewestone._id,
+		// 	});
+		// }
+		pusher.trigger(res.group_id.toString(), 'injectMessage', {
+			message: message,
+			sender: $userName,
+			createdAt: newTime,
+			groupId: $userGroup_id,
+			// group_id: $userGroup_id,
+			messageId: newMessage.insertedId,
+		});
+	});
+	// }
 
 	// const retunMessageId = JSON.stringify(newMessage.insertedId);
 	return json({ success: true, messageId: newMessage.insertedId });
