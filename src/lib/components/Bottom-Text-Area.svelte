@@ -25,6 +25,9 @@
 	}
 
 	const pingTyping = async () => {
+		if ($user_message === '') {
+			return;
+		}
 		const res = await fetch('/api/typing', {
 			method: 'POST',
 			headers: {
