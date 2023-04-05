@@ -51,18 +51,17 @@ export const POST = (async ({ request }) => {
 		totalReplies: 0,
 		replyTo: null,
 	});
-	const findThatmsg = await massagesCreate.findOne({ _id: newMessage.insertedId });
-	if (findThatmsg) {
-		await pusher.trigger(findThatmsg.group_id.toString(), 'injectMessage', {
+	const finNewestone = await massagesCreate.findOne({ _id: newMessage.insertedId });
+	if (finNewestone) {
+		pusher.trigger(finNewestone.group_id.toString(), 'injectMessage', {
 			message: message,
 			sender: $userName,
 			createdAt: newTime,
-			groupId: findThatmsg.group_id.toString(),
+			groupId: finNewestone.group_id.toString(),
 			// group_id: $userGroup_id,
-			messageId: findThatmsg._id,
+			messageId: finNewestone._id,
 		});
 	}
-
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
 		if (!findUserInGroup) {
