@@ -63,7 +63,8 @@ export const POST = (async ({ request }) => {
 	// 	});
 	// }
 	await massagesCreate.findOne({ _id: newMessage.insertedId }).then((data: any) => {
-		pusher.trigger(data.group_id.toString(), 'injectMessage', {
+		console.log('data', data);
+		pusher.trigger($userGroup_id, 'injectMessage', {
 			message: message,
 			sender: $userName,
 			createdAt: newTime,
