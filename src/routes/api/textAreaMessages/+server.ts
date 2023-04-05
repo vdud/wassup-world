@@ -59,10 +59,10 @@ export const POST = (async ({ request }) => {
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
 		if (!findUserInGroup) {
-			await groups.updateOne({ _id: findGroup._id }, { $set: { name: `${$userName};${findGroup.name}`, lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: findThatmsg._id } }, { upsert: true });
+			await groups.updateOne({ _id: findGroup._id }, { $set: { name: `${$userName};${findGroup.name}`, lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 			await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 		} else {
-			await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: findThatmsg._id } }, { upsert: true });
+			await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 			await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 		}
 		const findGroupAgain = await groups.findOne({ _id: findGroup._id });
@@ -79,7 +79,7 @@ export const POST = (async ({ request }) => {
 			});
 		}
 	} else if (findGroup.nature === 'LOCATIONS' || findGroup.nature === 'HASHTAGS') {
-		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: findThatmsg._id } }, { upsert: true });
+		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 	}
 	await pusher.trigger(findThatmsg.groupId.toString(), 'injectMessage', {
