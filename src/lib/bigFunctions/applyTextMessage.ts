@@ -54,7 +54,7 @@ export const applyMessage = async (data: any) => {
 			if (freshText) {
 				freshText.remove();
 			}
-		}, 300);
+		}, 10);
 		// }
 
 		const div = document.createElement('div');
