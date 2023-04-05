@@ -41,7 +41,7 @@ export const POST = (async ({ request }) => {
 	const newMessage = await massagesCreate.insertOne({
 		sender: $userName,
 		message: message,
-		groupId: findGroup._id,
+		group_id: findGroup._id,
 		createdAt: newTime,
 		likedPeople: [],
 		likes: 0,
@@ -52,8 +52,15 @@ export const POST = (async ({ request }) => {
 		replyTo: null,
 	});
 	const findThatmsg = await massagesCreate.findOne({ _id: newMessage.insertedId });
-	if (!findThatmsg) {
-		return json({ success: false });
+	if (findThatmsg) {
+		await pusher.trigger(findThatmsg.group_id.toString(), 'injectMessage', {
+			message: message,
+			sender: $userName,
+			createdAt: newTime,
+			groupId: findThatmsg.group_id.toString(),
+			// group_id: $userGroup_id,
+			messageId: findThatmsg._id,
+		});
 	}
 
 	if (findGroup.nature === 'PUBLIC') {
@@ -82,14 +89,7 @@ export const POST = (async ({ request }) => {
 		await groups.updateOne({ _id: findGroup._id }, { $set: { lastMessage: message.slice(0, 69), latestMessageSender: $userName, updatedAt: newTime }, $addToSet: { allUsers: findUser._id, messages: newMessage.insertedId } }, { upsert: true });
 		await mainUser.updateOne({ _id: findUser._id }, { $addToSet: { allGroups: findGroup._id } });
 	}
-	await pusher.trigger(findThatmsg.groupId.toString(), 'injectMessage', {
-		message: message,
-		sender: $userName,
-		createdAt: newTime,
-		groupId: findThatmsg.groupId,
-		messageId: findThatmsg._id,
-	});
 
-	const retunMessageId = JSON.stringify(findThatmsg._id);
-	return json({ success: true, messageId: retunMessageId });
+	// const retunMessageId = JSON.stringify(newMessage.insertedId);
+	return json({ success: true, messageId: newMessage.insertedId });
 }) satisfies RequestHandler;
