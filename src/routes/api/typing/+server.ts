@@ -11,7 +11,7 @@ const pusher = new Pusher({
 	key: import.meta.env.VITE_APP_KEY,
 	secret: import.meta.env.VITE_APP_SECRET,
 	cluster: import.meta.env.VITE_APP_CLUSTER,
-	useTLS: true,
+	// useTLS: true,
 });
 export const POST = (async ({ request }) => {
 	const { $userGroup_id, $userName } = await request.json();
