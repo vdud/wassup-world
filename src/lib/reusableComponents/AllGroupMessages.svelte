@@ -60,11 +60,6 @@
 
 		pusher
 			.subscribe($userGroup_id)
-			.bind('injectEmptyMessage', (data: any) => {
-				if (data.sender !== $userName && data.groupId === $userGroup_id) {
-					applyNewMessageFresh({ sender: data.sender, message: data.message, createdAt: data.createdAt, isYoMe: false });
-				}
-			})
 
 			.bind('injectMessage', (data: any) => {
 				// console.log('data', data);
@@ -77,6 +72,12 @@
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
 					return;
+				}
+			})
+
+			.bind('injectEmptyMessage', (data: any) => {
+				if (data.sender !== $userName && data.groupId === $userGroup_id) {
+					applyNewMessageFresh({ sender: data.sender, message: data.message, createdAt: data.createdAt, isYoMe: false });
 				}
 			})
 
