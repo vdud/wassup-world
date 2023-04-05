@@ -51,8 +51,8 @@ export const POST = (async ({ request }) => {
 		totalReplies: 0,
 		replyTo: null,
 	});
-	const finNewestone = await massagesCreate.findOne({ _id: newMessage.insertedId });
-	if (finNewestone) {
+	const finNewestone = await massagesCreate.findOne({ _id: newMessage.insertedId }).then((res: any) => {
+		// if (finNewestone) {
 		// 	pusher.trigger(finNewestone.group_id.toString(), 'injectMessage', {
 		// 		message: message,
 		// 		sender: $userName,
@@ -62,16 +62,16 @@ export const POST = (async ({ request }) => {
 		// 		messageId: finNewestone._id,
 		// 	});
 		// }
-
-		pusher.trigger(finNewestone.group_id.toString(), 'injectMessage', {
+		pusher.trigger(res.group_id.toString(), 'injectMessage', {
 			message: message,
 			sender: $userName,
 			createdAt: newTime,
 			groupId: $userGroup_id,
 			// group_id: $userGroup_id,
-			messageId: newMessage.insertedId.toString(),
+			messageId: newMessage.insertedId,
 		});
-	}
+	});
+	// }
 
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
