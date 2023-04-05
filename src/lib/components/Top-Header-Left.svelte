@@ -25,10 +25,15 @@
 	const toggle = () => {
 		$fullDisplay = 'nonHidden';
 
-		$isFlex = !$isFlex;
+		if (window.location.pathname === '/') {
+			$isFlex = !$isFlex;
+			return;
+		}
 
+		// $isFlex = !$isFlex;
 		setTimeout(() => {
 			$fullDisplay = 'hidden';
+			window.location.pathname = '/';
 		}, 600);
 	};
 
@@ -154,6 +159,10 @@
 		scale: 1.1;
 		padding: 01rem;
 		top: var(--averageMargin);
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.searchInput {
@@ -207,7 +216,6 @@
 		top: 0;
 		height: 100%;
 		width: calc(var(--averageMargin) * 1.5);
-		background-color: transparent;
 		color: var(--secondaryThemeInverted);
 
 		pointer-events: none;

@@ -1,21 +1,23 @@
 <script>
-	import { currentPage } from '$lib/stores/currentPage'
-	import { userName } from '$lib/stores/userName'
-	import { onMount } from 'svelte'
+	import { currentPage } from '$lib/stores/currentPage';
+	import { userName } from '$lib/stores/userName';
+	import { onMount } from 'svelte';
 
-	import imageLogoSrc from '$lib/assets/fknLatest.png'
-	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData'
-	import { isShowInfo } from '$lib/stores/isShowInfo'
+	import imageLogoSrc from '$lib/assets/fknLatest.png';
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
+	import { isShowInfo } from '$lib/stores/isShowInfo';
+	import { isFlex } from '$lib/stores/isFlex';
 
 	function showInfo() {
-		$isShowInfo = !$isShowInfo
+		$isShowInfo = !$isShowInfo;
 	}
 
 	onMount(() => {
-		$currentPage = ''
+		$currentPage = '';
+		$isFlex = false;
 
-		$currentPageHeaderData = 'HOME'
-	})
+		$currentPageHeaderData = 'HOME';
+	});
 </script>
 
 <svelte:head>
