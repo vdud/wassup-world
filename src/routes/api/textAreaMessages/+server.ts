@@ -62,17 +62,17 @@ export const POST = (async ({ request }) => {
 	// 		messageId: finNewestone._id,
 	// 	});
 	// }
-	await massagesCreate.findOne({ _id: newMessage.insertedId }).then((data: any) => {
-		console.log('data', data);
+
+	setTimeout(() => {
 		pusher.trigger($userGroup_id, 'injectMessage', {
 			message: message,
 			sender: $userName,
 			createdAt: newTime,
-			groupId: data.group_id.toString(),
+			groupId: $userGroup_id,
 			// group_id: $userGroup_id,
-			messageId: data._id,
+			messageId: newMessage.insertedId,
 		});
-	});
+	}, 10);
 	if (findGroup.nature === 'PUBLIC') {
 		const findUserInGroup = await groups.findOne({ _id: findGroup._id, allUsers: findUser._id });
 		if (!findUserInGroup) {
