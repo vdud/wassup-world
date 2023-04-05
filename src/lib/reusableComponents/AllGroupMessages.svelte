@@ -15,7 +15,7 @@
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
 	import { invader } from '$lib/stores/invader';
 	import { pusher } from '$lib/bigFunctions/pusher';
-	import { alreadyApplied, applyMessage, applyNavDataMessage, applyNewMessageFresh } from '$lib/bigFunctions/applyTextMessage';
+	import { applyMessage, applyNavDataMessage, applyNewMessageFresh } from '$lib/bigFunctions/applyTextMessage';
 	import { isTypingData } from '$lib/stores/isTypingData';
 
 	const like = ({ _id, likes }: any) => {
