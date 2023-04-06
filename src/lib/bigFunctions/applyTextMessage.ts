@@ -49,17 +49,22 @@ export const applyMessage = async (data: any) => {
 	const textMessages: any = document.getElementById('textMessages');
 	if (textMessages) {
 		// if (data.isYoMe) {
-		setTimeout(() => {
-			const freshText: any = document.getElementById(`${data.sender}${data.createdAt}`);
-			if (freshText) {
-				freshText.remove();
-			}
-		}, 3);
+		// setTimeout(() => {
+		const freshText: any = document.getElementById(`${data.sender}${data.createdAt}`);
+		if (freshText) {
+			freshText.remove();
+		}
+		const senderMsgId: any = document.getElementById(`messageMain?${data.messageId}`);
+		if (senderMsgId) {
+			senderMsgId.remove();
+		}
+		// }, 3);
 		// }
 
 		const div = document.createElement('div');
-		div.classList.add(data.isYoMe ? 'yoMe' : 'sendermain');
+		div.id = `messageMain?${data.messageId}`;
 		div.classList.add('text');
+		div.classList.add(data.isYoMe ? 'yoMe' : 'sendermain');
 
 		const p = document.createElement('p');
 		p.classList.add('pText');
@@ -188,7 +193,7 @@ export const applyMessage = async (data: any) => {
 
 		p.appendChild(span1);
 		p.appendChild(span2);
-		p.appendChild(span3);
+		div.appendChild(span3);
 		div.appendChild(p);
 
 		textMessages.appendChild(div);

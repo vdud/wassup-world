@@ -31,6 +31,7 @@
 	// onMount(() => {
 	// });
 	const allUsers = JSON.parse(data.body.allUsers);
+	const groupAdData = JSON.parse(data.body.groupData);
 
 	const scrolltoBottom = () => {
 		const middleScroll: any = document.getElementById('middleScroll');
@@ -124,7 +125,7 @@
 	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
 	<div id="textMessages" class="textMessages" />
-	<GroupAd />
+	<GroupAd {groupAdData} />
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.messages) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}
 			{#if sender !== $userName}

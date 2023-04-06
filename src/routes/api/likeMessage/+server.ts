@@ -31,25 +31,25 @@ export const POST = (async ({ request }) => {
 	if (findLikedUser) {
 		await massagesCreate.updateOne({ _id: new ObjectId(messageId) }, { $inc: { likes: -1 }, $pull: { likedPeople: user._id } }, { upsert: true });
 		//also increment replyto message likes
-		// await groups.findOne({ _id: new ObjectId($userGroup_id) }).then((group: any) => {
-		// 	pusher.trigger(group._id.toString(), 'injectLike', {
-		// 		messageId: findMessage._id.toString(),
-		// 		username_id: user._id.toString(),
-		// 		likes: findMessage.likes - 1,
-		// 	});
-		// });
+		await groups.findOne({ _id: new ObjectId($userGroup_id) }).then((group: any) => {
+			pusher.trigger(group._id.toString(), 'injectLike', {
+				messageId: findMessage._id.toString(),
+				username_id: user._id.toString(),
+				likes: findMessage.likes - 1,
+			});
+		});
 
 		return json({ success: true, isLiked: false, likes: findMessage.likes - 1 });
 	} else {
 		await massagesCreate.updateOne({ _id: new ObjectId(messageId) }, { $inc: { likes: 1 }, $addToSet: { likedPeople: user._id } }, { upsert: true });
 
-		// await groups.findOne({ _id: new ObjectId($userGroup_id) }).then((group: any) => {
-		// 	pusher.trigger(group._id.toString(), 'injectLike', {
-		// 		messageId: findMessage._id.toString(),
-		// 		username_id: user._id.toString(),
-		// 		likes: findMessage.likes + 1,
-		// 	});
-		// });
+		await groups.findOne({ _id: new ObjectId($userGroup_id) }).then((group: any) => {
+			pusher.trigger(group._id.toString(), 'injectLike', {
+				messageId: findMessage._id.toString(),
+				username_id: user._id.toString(),
+				likes: findMessage.likes + 1,
+			});
+		});
 
 		return json({ success: true, isLiked: true, likes: findMessage.likes + 1 });
 	}

@@ -112,6 +112,7 @@ export const load = (async ({ params }) => {
 				groupId: JSON.stringify(findGroupbyId._id),
 				body: {
 					allUsers: JSON.stringify(groupUsers[0].allUsers),
+					groupData: JSON.stringify(findGroupbyId),
 					messages: JSON.stringify(returnMsgData),
 					topLikes: JSON.stringify(topLikes),
 					groupName: findGroupbyId.name,

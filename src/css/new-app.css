@@ -209,13 +209,10 @@ body {
 .text {
 	height: auto;
 	border-radius: calc(var(--borderRadius) * 0.75);
-	/* width: clamp(640px, 80%, 800px); */
 	width: clamp(400px, 75%, 800px);
 	margin: 2px var(--averageMargin);
-	/* background-color: var(--secondaryTheme); */
 
 	padding: 1rem 1rem;
-	padding-bottom: 2.6rem;
 
 	font-size: calc(var(--fontSize) * 1.2);
 	font-family: Imprima;
@@ -224,6 +221,9 @@ body {
 
 	position: relative;
 	overflow: hidden;
+	background-color: #0000;
+
+	padding-bottom: 2.6rem;
 }
 .text:hover {
 	box-shadow: var(--boxInsetShadows);
@@ -597,6 +597,7 @@ textarea:focus {
 
 .pText {
 	padding: var(--averageMargin) 0;
+	filter: drop-shadow(0px 0px 2px var(--black));
 }
 
 .replySender {

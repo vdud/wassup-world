@@ -109,6 +109,7 @@ export const load = (async ({ params }) => {
 					groupName: `${userSender.name};${userReciever.name}`,
 					createdAt: new Date(),
 					nature: 'PUBLIC',
+					groupData: JSON.stringify(newGroup.ops[0]),
 				},
 			};
 		} else if (findFirstGroup) {
@@ -193,6 +194,7 @@ export const load = (async ({ params }) => {
 					groupName: findFirstGroup.name,
 					createdAt: findFirstGroup.createdAt,
 					nature: findFirstGroup.nature,
+					groupData: JSON.stringify(findFirstGroup),
 				},
 			};
 		} else if (findSecondGroup) {
@@ -276,6 +278,7 @@ export const load = (async ({ params }) => {
 					groupName: findSecondGroup.name,
 					createdAt: findSecondGroup.createdAt,
 					nature: findSecondGroup.nature,
+					groupData: JSON.stringify(findSecondGroup),
 				},
 			};
 		}
@@ -379,6 +382,7 @@ export const load = (async ({ params }) => {
 					groupName: findGroup.name,
 					createdAt: findGroup.createdAt,
 					nature: findGroup.nature,
+					groupData: JSON.stringify(findGroup),
 				},
 			};
 		}
@@ -480,6 +484,7 @@ export const load = (async ({ params }) => {
 					groupName: findGroupbyId.name,
 					createdAt: findGroupbyId.createdAt,
 					nature: findGroupbyId.nature,
+					groupData: JSON.stringify(findGroupbyId),
 				},
 			};
 		}

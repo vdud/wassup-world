@@ -115,6 +115,7 @@ export const load = (async ({ params }) => {
 							groupName: findGroup.name,
 							createdAt: findGroup.createdAt,
 							nature: findGroup.nature,
+							groupData: JSON.stringify(findGroup),
 						},
 					};
 				}
@@ -212,6 +213,7 @@ export const load = (async ({ params }) => {
 				status: 200,
 				groupId: JSON.stringify(findGroup._id),
 				body: {
+					groupData: JSON.stringify(findGroup),
 					allUsers: JSON.stringify(groupUsers[0].allUsers),
 					messages: JSON.stringify(returnMsgData),
 					topLikes: JSON.stringify(topLikes),
@@ -296,6 +298,7 @@ export const load = (async ({ params }) => {
 				status: 200,
 				groupId: JSON.stringify(findGroupbyId._id),
 				body: {
+					groupData: JSON.stringify(findGroupbyId),
 					messages: JSON.stringify(returnMsgData),
 					topLikes: JSON.stringify(topLikes),
 					groupName: findGroupbyId.name,

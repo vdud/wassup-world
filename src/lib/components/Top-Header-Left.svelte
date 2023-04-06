@@ -22,7 +22,7 @@
 
 	let name = 'world';
 
-	const toggle = () => {
+	const toggle = (e: any) => {
 		$fullDisplay = 'nonHidden';
 
 		if (window.location.pathname === '/') {
@@ -30,10 +30,8 @@
 			return;
 		}
 
-		// $isFlex = !$isFlex;
 		setTimeout(() => {
 			$fullDisplay = 'hidden';
-			window.location.pathname = '/';
 		}, 600);
 	};
 
@@ -125,7 +123,8 @@
 			</button>
 		{/if}
 	</div>
-	<button class="absoluteBox icon" on:click={toggle}>
+	<!-- <button class="absoluteBox icon" on:click={toggle}> -->
+	<a href="/" class="absoluteBox icon" on:click={toggle}>
 		{#if $nature === 'PUBLIC'}
 			<i class="fa-regular fa-heart" style="color:var(--secondary)" />
 		{:else if $nature === 'HASHTAG'}
@@ -133,7 +132,7 @@
 		{:else if $nature === 'LOCATION'}
 			<i class="fa-solid fa-globe" style="color:var(--secOptDark)" />
 		{/if}
-	</button>
+	</a>
 </div>
 
 <style>
@@ -156,7 +155,7 @@
 		animation: zoomIn 100ms ease-in-out both;
 	}
 	.icon {
-		scale: 1.1;
+		scale: 0.9;
 		padding: 01rem;
 		top: var(--averageMargin);
 

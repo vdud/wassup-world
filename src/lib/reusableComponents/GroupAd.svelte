@@ -65,28 +65,180 @@
 	export let active = 0;
 	let i = 0;
 
+	export let groupAdData = {
+		isClient: false,
+		currentListing: [],
+	};
+	let currentListing = {};
+
+	if (groupAdData.isClient === true) {
+		$currentPage = 'LOCATIONS';
+		currentListing = groupAdData.clientListing[0].item;
+	}
+
 	let isShowMenu = false;
 	const isShowMenuToggle = () => {
 		isShowMenu = !isShowMenu;
 	};
 </script>
 
-{#if $currentPage === 'LOCATIONS'}
-	<div class="pTextAdContainer">
-		<button on:click={isShowMenuToggle} class={isShowMenu ? 'fullWindow' : 'replyBox'}>
-			<img src={imgUrl} alt="image {active + 1}" class="image" />
-		</button>
-	</div>
+{#if $currentPage === 'LOCATIONS' && groupAdData.isClient === true}
 	{#if !isShowMenu}
+		<div class="pTextAdContainer">
+			<button class="replyBox">
+				<!-- <img src={imgUrl} alt="image {active + 1}" class="image" /> -->
+				<div class="buttonWindowMng">
+					{#each groupAdData.clientListing as { item, itemImages }}
+						<button
+							on:click={() => {
+								isShowMenuToggle();
+								currentListing = { item };
+							}}
+							class="headerDiv">
+							<div class="gradient adBoxGrad" />
+							<h1 class="itemHeader">{item.toLowerCase()}</h1>
+							<img src={itemImages[Math.floor(Math.random() * itemImages.length)]} alt="image {active + 1}" class="absMenuClass" />
+						</button>
+					{/each}
+				</div>
+			</button>
+		</div>
 		<div class="aboutWallpaper">
 			<div class="gradient" />
-			<img src={imgUrl} alt="image {active + 1}" class="imgWallpaper" />
+			loc
+			<img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" />
+			<!-- <img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" /> -->
 			<div class="paddingBottom" />
+		</div>
+	{:else}
+		<div class="pTextAdContainer">
+			<button class="fullWindow">
+				<!-- <img src={imgUrl} alt="image {active + 1}" class="image" />
+				<img src={imgUrl} alt="image {active + 1}" class="image" /> -->
+				<div class="navHeader">
+					{#each groupAdData.clientListing as { item }}
+						<button
+							on:click={() => {
+								currentListing = { item };
+							}}
+							class="navItem">{item.toUpperCase()}</button>
+					{/each}
+				</div>
+				<button
+					on:click={() => {
+						isShowMenuToggle();
+					}}
+					class="navItemsList">
+					{#each groupAdData.clientListing as { item, itemImages }}
+						{#if item === currentListing.item}
+							{#each itemImages as img}
+								<img src={img} alt="image {active + 1}" class="image navItemsImg" />
+							{/each}
+						{/if}
+					{/each}
+				</button>
+				<div class="navHeader">
+					{#each groupAdData.clientListing as { item }}
+						<button
+							on:click={() => {
+								currentListing = { item };
+							}}
+							class="navItem">{item.toUpperCase()}</button>
+					{/each}
+				</div>
+			</button>
 		</div>
 	{/if}
 {/if}
 
 <style>
+	.navItemsList {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	.navItemsImg {
+		margin-bottom: var(--averageMargin);
+	}
+	.navHeader {
+		display: flex;
+		width: 100%;
+		height: 33px;
+		margin: var(--averageMargin) 0;
+		align-items: center;
+		justify-content: center;
+	}
+	.navItem {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: max-content;
+		height: 33px;
+		background-color: var(--primaryTheme);
+		border-radius: var(--borderRadius);
+		padding: 0 var(--averageMargin);
+		margin: 0 var(--averageMargin);
+
+		color: var(--primaryThemeInverted);
+		font-family: UBold;
+	}
+	.navItem:hover {
+		background-color: var(--primaryThemeInverted);
+		color: var(--primaryTheme);
+	}
+	.absMenuClass {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 0;
+
+		filter: blur(0.3px);
+	}
+	.itemHeader {
+		z-index: 400;
+		font-size: calc(var(--fontSize) * 1.69);
+		color: var(--secondaryTheme);
+		background-color: var(--primaryThemeInverted);
+		padding: 0 var(--averageMargin);
+		border-radius: calc(var(--borderRadius) / 2);
+		text-shadow: none;
+		filter: drop-shadow(0px 0px 2px var(--primaryTheme));
+		box-shadow: var(--boxShadows);
+		transition: all 0.2s ease-in-out;
+	}
+	.itemHeader:hover {
+		background-color: var(--primary);
+		color: var(--primaryThemeInverted);
+	}
+
+	.buttonWindowMng {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		margin-right: -1px;
+	}
+	.headerDiv {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+
+		z-index: 1;
+		font-family: UBold;
+		position: relative;
+		border-right: 1px solid var(--tertiaryThemeInverted);
+
+		box-shadow: 0px 0px 10000px 100px inset var(--secondaryTheme);
+	}
 	.gradient {
 		position: absolute;
 		top: 0;
@@ -99,10 +251,15 @@
 
 		pointer-events: none;
 	}
+	.adBoxGrad {
+		z-index: 2;
+		background-image: linear-gradient(33deg, var(--secondaryTheme) 00%, #0000 100%), linear-gradient(-147deg, var(--primaryTheme) 0%, #0000 100%);
+	}
 	.imgWallpaper {
 		height: auto;
 		width: 100%;
-		filter: blur(1px);
+		filter: blur(1.69px);
+		opacity: 0.69;
 	}
 	.aboutWallpaper {
 		position: absolute;
@@ -113,7 +270,6 @@
 		height: max-content;
 		width: 100%;
 		z-index: 10000;
-		opacity: 0.33;
 
 		pointer-events: none;
 		z-index: 0;
@@ -167,6 +323,7 @@
 		border-radius: var(--borderRadius);
 		color: var(--primaryThemeInverted);
 		overflow: hidden;
+		border: 01px solid var(--tertiaryThemeInverted);
 
 		font-size: 1rem;
 		opacity: 1;
