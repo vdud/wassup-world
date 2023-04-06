@@ -196,24 +196,27 @@
 		height: 100%;
 		object-fit: cover;
 		z-index: 0;
-
-		filter: blur(0.3px);
 	}
 	.itemHeader {
 		z-index: 400;
 		font-size: calc(var(--fontSize) * 1.69);
 		color: var(--secondaryTheme);
-		background-color: var(--primaryThemeInverted);
-		padding: 0 var(--averageMargin);
-		border-radius: calc(var(--borderRadius) / 2);
+		background-color: var(--optDark);
+		padding: var(--averageMargin) calc(var(--averageMargin) * 2);
+		border-radius: var(--borderRadius);
 		text-shadow: none;
 		filter: drop-shadow(0px 0px 2px var(--primaryTheme));
-		box-shadow: var(--boxShadows);
+		box-shadow: var(--boxShadowsBlur);
 		transition: all 0.2s ease-in-out;
+
+		filter: drop-shadow(0px 0px 69px var(--primaryTheme));
+		border: 1px solid var(--tertiaryTheme);
 	}
 	.itemHeader:hover {
-		background-color: var(--primary);
+		background-color: var(--secOptDark);
 		color: var(--primaryThemeInverted);
+		box-shadow: var(--boxInsetShadows);
+		border: 1px solid var(--tertiaryTheme);
 	}
 
 	.buttonWindowMng {
@@ -254,6 +257,7 @@
 	.adBoxGrad {
 		z-index: 2;
 		background-image: linear-gradient(33deg, var(--secondaryTheme) 00%, #0000 100%), linear-gradient(-147deg, var(--primaryTheme) 0%, #0000 100%);
+		opacity: 0.69;
 	}
 	.imgWallpaper {
 		height: auto;
