@@ -109,7 +109,7 @@ export const load = (async ({ params }) => {
 					groupName: `${userSender.name};${userReciever.name}`,
 					createdAt: new Date(),
 					nature: 'PUBLIC',
-					groupData: JSON.stringify(newGroup.ops[0]),
+					groupData: JSON.stringify(newGroup),
 				},
 			};
 		} else if (findFirstGroup) {
