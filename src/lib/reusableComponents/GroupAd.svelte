@@ -103,13 +103,6 @@
 				</div>
 			</button>
 		</div>
-		<div class="aboutWallpaper">
-			<div class="gradient" />
-			loc
-			<img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" />
-			<!-- <img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" /> -->
-			<div class="paddingBottom" />
-		</div>
 	{:else}
 		<div class="pTextAdContainer">
 			<button class="fullWindow">
@@ -149,6 +142,13 @@
 			</button>
 		</div>
 	{/if}
+
+	<div class="aboutWallpaper">
+		<div class="gradient" />
+		<img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" />
+		<!-- <img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" /> -->
+		<div class="paddingBottom" />
+	</div>
 {/if}
 
 <style>
@@ -156,6 +156,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		/* margin-top: var(--averageMargin); */
 	}
 	.navItemsImg {
 		margin-bottom: var(--averageMargin);
@@ -163,8 +164,9 @@
 	.navHeader {
 		display: flex;
 		width: 100%;
-		height: 33px;
+		height: 50px;
 		margin: var(--averageMargin) 0;
+		margin-top: var(--lessAverageMargin);
 		align-items: center;
 		justify-content: center;
 	}
@@ -173,14 +175,17 @@
 		align-items: center;
 		justify-content: center;
 		width: max-content;
-		height: 33px;
+		height: 45px;
 		background-color: var(--primaryTheme);
 		border-radius: var(--borderRadius);
-		padding: 0 var(--averageMargin);
-		margin: 0 var(--averageMargin);
+		padding: 30px 40px;
+		margin: var(--averageMargin);
+		/* margin-bottom: ; */
+		box-shadow: var(--boxShadows);
 
 		color: var(--primaryThemeInverted);
 		font-family: UBold;
+		font-size: 2rem;
 	}
 	.navItem:hover {
 		background-color: var(--primaryThemeInverted);
@@ -201,20 +206,20 @@
 		z-index: 400;
 		font-size: calc(var(--fontSize) * 1.69);
 		color: var(--secondaryTheme);
-		background-color: var(--optDark);
+		/* background-color: var(--optDark); */
 		padding: var(--averageMargin) calc(var(--averageMargin) * 2);
 		border-radius: var(--borderRadius);
 		text-shadow: none;
-		filter: drop-shadow(0px 0px 2px var(--primaryTheme));
-		box-shadow: var(--boxShadowsBlur);
+		/* filter: drop-shadow(0px 0px 2px var(--primaryTheme)); */
+		box-shadow: var(--boxShadowsBlur), var(--boxShadows);
 		transition: all 0.2s ease-in-out;
 
 		filter: drop-shadow(0px 0px 69px var(--primaryTheme));
-		border: 1px solid var(--tertiaryTheme);
+		border: 1px solid var(--secondaryTheme);
 	}
 	.itemHeader:hover {
-		background-color: var(--secOptDark);
 		color: var(--primaryThemeInverted);
+		background-color: #0007;
 		box-shadow: var(--boxInsetShadows);
 		border: 1px solid var(--tertiaryTheme);
 	}
@@ -262,7 +267,7 @@
 	.imgWallpaper {
 		height: auto;
 		width: 100%;
-		filter: blur(1.69px);
+		filter: blur(0.69px);
 		opacity: 0.69;
 	}
 	.aboutWallpaper {
