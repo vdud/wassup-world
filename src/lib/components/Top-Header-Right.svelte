@@ -55,7 +55,7 @@
 					{:else if $currentPage === 'LOCATIONS'}
 						📍
 					{/if}
-					{$currentPageHeaderData.toUpperCase().slice(0, 30)}
+					{$currentPageHeaderData.toUpperCase().slice(0, 29)}
 
 					{#if $currentPageHeaderData.length > 29}
 						...
@@ -65,7 +65,7 @@
 				<span>{$currentPageHeaderData.toUpperCase()}</span>
 			{/if}
 		</h1>
-		<div class="pFlex">
+		<!-- <div class="pFlex">
 			{#if $currentPage !== ''}
 				{#if $currentPageHeaderData.length > 29}
 					<p class="chatPText">
@@ -75,7 +75,7 @@
 			{:else}
 				<p class="chatPText">{titleData}</p>
 			{/if}
-		</div>
+		</div> -->
 		{#if $isTypingData.isTyping === true}
 			<div class="pFlex" in:fade out:fade>
 				<p class="chatPText" style="font-family: UBold;">{$isTypingData.message}</p>
@@ -138,16 +138,17 @@
 	.chatHeaderText {
 		height: max-content;
 		font-family: UBold;
-		color: var(--white);
+		color: var(--primaryThemeInverted);
 
 		margin-top: 12px;
 		font-size: clamp(calc(var(--fontSize) * 1.2), 1vw, calc(var(--fontSize) * 2));
 		text-align: center;
-		background-color: var(--optDark);
 
 		padding: 0.2rem 1rem;
-		border-radius: calc(var(--borderRadius) * 2);
-		border: 4px solid var(--white);
+		border-radius: var(--borderRadius);
+		border: 3px solid var(--tertiaryThemeInverted);
+		box-shadow: var(--boxInsetShadows);
+		filter: drop-shadow(0 0 0.5px var(--black));
 	}
 	.topHeaderRight {
 		position: relative;

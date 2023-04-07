@@ -156,6 +156,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		/* transform: translateY(-50%); */
+
 		/* margin-top: var(--averageMargin); */
 	}
 	.navItemsImg {
@@ -201,6 +203,7 @@
 		height: 100%;
 		object-fit: cover;
 		z-index: 0;
+		/* transform: translateY(-225%); */
 	}
 	.itemHeader {
 		z-index: 400;
@@ -267,7 +270,7 @@
 	.imgWallpaper {
 		height: auto;
 		width: 100%;
-		filter: blur(0.69px);
+		filter: blur(0.3px);
 		opacity: 0.69;
 	}
 	.aboutWallpaper {
