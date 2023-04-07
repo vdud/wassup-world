@@ -49,7 +49,7 @@
 		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
 			setTimeout(() => {
-				middleScroll.scrollTop = middleScroll.scrollHeight;
+				middleScroll.scrollTo({ top: middleScroll.scrollHeight, behavior: 'smooth' });
 			}, 100);
 		}
 
@@ -74,7 +74,7 @@
 				const replyBody = document.getElementById('middleScroll');
 				if (replyBody) {
 					setTimeout(() => {
-						replyBody.scrollTop = replyBody.scrollHeight;
+						replyBody.scrollTo({ top: replyBody.scrollHeight, behavior: 'smooth' });
 					}, 100);
 				}
 			}

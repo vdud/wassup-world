@@ -16,7 +16,8 @@
 				$nature = 'PUBLIC';
 				debouncedSetlocalStorage();
 				const middleData = document.querySelector('.middleData');
-				middleData?.scrollTo(0, 0);
+				// middleData?.scrollTo(0, 0);
+				middleData?.scrollTo({ top: 0, behavior: 'smooth' });
 			}}
 			class="fa fa-user-o navContainer"
 			style={$nature === 'PUBLIC' ? '' : 'color:var(--primaryTheme'}
@@ -30,7 +31,9 @@
 				debouncedSetlocalStorage();
 
 				const middleData = document.querySelector('.middleData');
-				middleData?.scrollTo(0, 0);
+				// middleData?.scrollTo(0, 0);
+				// with animation
+				middleData?.scrollTo({ top: 0, behavior: 'smooth' });
 			}}
 			class="fa fa-hashtag navContainer"
 			style={$nature === 'HASHTAG' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'HASHTAG' ? 'childTranslated' : ''}" /></button>
@@ -42,7 +45,8 @@
 				debouncedSetlocalStorage();
 
 				const middleData = document.querySelector('.middleData');
-				middleData?.scrollTo(0, 0);
+				// middleData?.scrollTo(0, 0);
+				middleData?.scrollTo({ top: 0, behavior: 'smooth' });
 			}}
 			class="fa fa-location-pin navContainer"
 			style={$nature === 'LOCATION' ? '' : 'color:var(--primaryTheme'}><div class="childLine {$nature === 'LOCATION' ? 'childTranslated' : ''}" /></button>

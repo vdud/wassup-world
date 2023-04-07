@@ -88,13 +88,15 @@
 			<button class="replyBox">
 				<!-- <img src={imgUrl} alt="image {active + 1}" class="image" /> -->
 				<div class="buttonWindowMng">
-					{#each groupAdData.clientListing as { item, itemImages }}
+					{#each groupAdData.clientListing as { item, itemImages }, i}
+						<!-- last header -->
 						<button
 							on:click={() => {
 								isShowMenuToggle();
 								currentListing = { item };
 							}}
-							class="headerDiv">
+							class="headerDiv"
+							style={i === groupAdData.clientListing.length - 1 ? 'border-right: none' : ''}>
 							<div class="gradient adBoxGrad" />
 							<h1 class="itemHeader">{item.toLowerCase()}</h1>
 							<img src={itemImages[Math.floor(Math.random() * itemImages.length)]} alt="image {active + 1}" class="absMenuClass" />
@@ -105,21 +107,29 @@
 		</div>
 	{:else}
 		<div class="pTextAdContainer">
-			<button class="fullWindow">
+			<div class="navHeader">
+				{#each groupAdData.clientListing as { item }}
+					<button
+						on:click={() => {
+							currentListing = { item };
+
+							const adWindow = document.getElementById('adWindow');
+							if (adWindow) {
+								setTimeout(() => {
+									adWindow.scrollTo({ top: 0, behavior: 'smooth' });
+								}, 100);
+							}
+						}}
+						class="navItem">{item.toUpperCase()}</button>
+				{/each}
+			</div>
+			<div class="fullWindow" id="adWindow">
 				<!-- <img src={imgUrl} alt="image {active + 1}" class="image" />
 				<img src={imgUrl} alt="image {active + 1}" class="image" /> -->
-				<div class="navHeader">
-					{#each groupAdData.clientListing as { item }}
-						<button
-							on:click={() => {
-								currentListing = { item };
-							}}
-							class="navItem">{item.toUpperCase()}</button>
-					{/each}
-				</div>
 				<button
 					on:click={() => {
 						isShowMenuToggle();
+						// scroll to top id: adWindow
 					}}
 					class="navItemsList">
 					{#each groupAdData.clientListing as { item, itemImages }}
@@ -129,8 +139,9 @@
 							{/each}
 						{/if}
 					{/each}
+					<div class="bottomNavSpace" />
 				</button>
-				<div class="navHeader">
+				<!-- <div class="navHeader">
 					{#each groupAdData.clientListing as { item }}
 						<button
 							on:click={() => {
@@ -138,8 +149,8 @@
 							}}
 							class="navItem">{item.toUpperCase()}</button>
 					{/each}
-				</div>
-			</button>
+				</div> -->
+			</div>
 		</div>
 	{/if}
 
@@ -152,6 +163,10 @@
 {/if}
 
 <style>
+	.bottomNavSpace {
+		height: 79px;
+		width: 100%;
+	}
 	.navItemsList {
 		display: flex;
 		flex-wrap: wrap;
@@ -164,13 +179,20 @@
 		margin-bottom: var(--averageMargin);
 	}
 	.navHeader {
-		display: flex;
+		/* position: absolute; */
+		/* z-index: 1000000; */
 		width: 100%;
 		height: 50px;
 		margin: var(--averageMargin) 0;
 		margin-top: var(--lessAverageMargin);
+
+		display: flex;
 		align-items: center;
 		justify-content: center;
+
+		position: absolute;
+		bottom: 69px;
+		z-index: 4;
 	}
 	.navItem {
 		display: flex;
@@ -218,7 +240,7 @@
 		transition: all 0.2s ease-in-out;
 
 		filter: drop-shadow(0px 0px 69px var(--primaryTheme));
-		border: 1px solid var(--secondaryTheme);
+		border: 1px solid var(--tertiaryThemeInverted);
 	}
 	.itemHeader:hover {
 		color: var(--primaryThemeInverted);
@@ -233,7 +255,7 @@
 		justify-content: center;
 		width: 100%;
 		height: 100%;
-		margin-right: -1px;
+		/* margin-right: -10px; */
 	}
 	.headerDiv {
 		display: flex;
@@ -291,13 +313,12 @@
 		justify-content: center;
 	}
 	.fullWindow {
-		width: 100%;
+		width: calc(100% - 2 * var(--averageMargin));
 		height: calc(100% - 175px);
 		position: absolute;
 		top: 100px;
-		z-index: 10000;
+		z-index: 1;
 		padding: 0 calc(var(--averageMargin));
-		padding-bottom: var(--averageMargin);
 		padding-top: var(--averageMargin);
 
 		display: flex;
