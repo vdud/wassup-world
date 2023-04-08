@@ -35,7 +35,12 @@
 
 	const scrolltoBottom = () => {
 		const middleScroll: any = document.getElementById('middleScroll');
-		middleScroll.scrollTop = middleScroll.scrollHeight;
+		// middleScroll.scrollTop = middleScroll.scrollHeight;
+		// with animation
+		middleScroll.scrollTo({
+			top: middleScroll.scrollHeight,
+			behavior: 'smooth',
+		});
 	};
 
 	let aboveSwitch = false;

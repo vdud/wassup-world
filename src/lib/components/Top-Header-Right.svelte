@@ -31,7 +31,19 @@
 		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
 			setTimeout(() => {
-				middleScroll.scrollTop = middleScroll.scrollHeight * -1;
+				// middleScroll.scrollTop = middleScroll.scrollHeight * -1;
+				//with animation
+				middleScroll.scrollTo({
+					top: middleScroll.scrollHeight * -1,
+					behavior: 'smooth',
+				});
+				if (!$isShowInfo) {
+					//scroll to bottom
+					middleScroll.scrollTo({
+						top: 0,
+						behavior: 'smooth',
+					});
+				}
 			}, 10);
 		}
 		// if (middleScroll.scrollTop === scrollTop) {
@@ -40,7 +52,12 @@
 	const headToTop = () => {
 		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
-			middleScroll.scrollTop = middleScroll.scrollHeight * -1;
+			// middleScroll.scrollTop = middleScroll.scrollHeight * -1;
+			//with animation
+			middleScroll.scrollTo({
+				top: middleScroll.scrollHeight * -1,
+				behavior: 'smooth',
+			});
 		}
 	};
 </script>
