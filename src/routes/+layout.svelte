@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '$lib/css/middle-left.css';
 	import '../css/new-app.css';
+	import { page } from '$app/stores';
 
 	import { isFlex } from '$lib/stores/isFlex';
 	import { isLocked } from '$lib/stores/isLocked';
@@ -20,6 +21,7 @@
 	import LockScreen from '$lib/components/Lock-Screen.svelte';
 
 	import { onDestroy, onMount } from 'svelte';
+	import { userGroup_id } from '$lib/stores/userGroup_id';
 
 	onMount(() => {
 		const savedNatureDataString = localStorage.getItem('nature');
@@ -91,7 +93,9 @@
 				<TopHeaderRight />
 			</div>
 			<div class="windowContainers container2">
-				<slot />
+				{#key $page.url.pathname}
+					<slot />
+				{/key}
 			</div>
 			<div class="windowContainers container3" style={$currentPage === '' ? 'display:none;' : ''}><BottomTextArea /></div>
 		</div>

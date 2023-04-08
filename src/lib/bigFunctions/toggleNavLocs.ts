@@ -1,12 +1,11 @@
-export const toggleLoc = (groupName: any) => {
-	localStorage.setItem('nature', JSON.stringify({ $nature: 'LOCATION' }))
-	window.location.pathname = '/LOC/' + groupName
-}
-export const toggleHashtag = (groupName: any) => {
-	localStorage.setItem('nature', JSON.stringify({ $nature: 'HASHTAG' }))
-	window.location.pathname = '/HASH/' + groupName
-}
-export const togglePublic = (groupName: any) => {
-	localStorage.setItem('nature', JSON.stringify({ $nature: 'PUBLIC' }))
-	window.location.pathname = '/PUB/' + groupName
-}
+import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
+
+export const toggleLoc = (groupName: any, _id: any) => {
+	localStorage.setItem('nature', JSON.stringify({ $nature: 'LOCATION' }));
+};
+export const toggleHashtag = (groupName: any, _id: any) => {
+	localStorage.setItem('nature', JSON.stringify({ $nature: 'HASHTAG' }));
+};
+export const togglePublic = (groupName: any, _id: any) => {
+	localStorage.setItem('nature', JSON.stringify({ $nature: 'PUBLIC' }));
+};

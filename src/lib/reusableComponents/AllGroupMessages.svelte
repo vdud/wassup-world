@@ -55,20 +55,13 @@
 		$userGroup_id = JSON.parse(data.groupId);
 		$currentPageHeaderData = data.body.groupName;
 
-		// const debouncedInvader = debounce(() => {
-		// 	$invader = false;
-		// }, 1000);
-
 		pusher
 			.subscribe($userGroup_id)
 
 			.bind('injectMessage', (data: any) => {
-				// console.log('data', data);
 				if (data.sender === $userName) {
 					return;
 				} else {
-					// console.log('data', data);
-
 					const isYoMe = false;
 					applyMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, messageId: data.messageId, $userName_id, $userGroup_id, isYoMe });
 					applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
@@ -110,6 +103,7 @@
 
 	onDestroy(() => {
 		$currentPage = '';
+		$userGroup_id = '';
 	});
 </script>
 
@@ -124,7 +118,7 @@
 	<div class="gradientBtm" />
 	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
-	<div id="textMessages" class="textMessages" />
+	<div id="textMessages?{$userGroup_id}" class="textMessages" />
 	<GroupAd {groupAdData} />
 	<div class="hashMessagesContainer">
 		{#each JSON.parse(data.body.messages) as { sender, message, createdAt, _id, likedPeople, likes, totalReplies }}

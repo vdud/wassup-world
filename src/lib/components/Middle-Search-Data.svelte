@@ -1,21 +1,21 @@
 <script lang="ts">
-	import { user_message } from '$lib/stores/user_message'
-	import { isFlex } from '$lib/stores/isFlex'
-	import { fullDisplay } from '$lib/stores/fullDisplay'
+	import { user_message } from '$lib/stores/user_message';
+	import { isFlex } from '$lib/stores/isFlex';
+	import { fullDisplay } from '$lib/stores/fullDisplay';
 
-	import { locationPrediction } from '$lib/stores/locationPrediction'
-	import { nature } from '$lib/stores/nature'
-	import { searchInput } from '$lib/stores/searchInput'
-	import { searchData } from '$lib/stores/searchData'
-	import { userName_id } from '$lib/stores/userName_id'
+	import { locationPrediction } from '$lib/stores/locationPrediction';
+	import { nature } from '$lib/stores/nature';
+	import { searchInput } from '$lib/stores/searchInput';
+	import { searchData } from '$lib/stores/searchData';
+	import { userName_id } from '$lib/stores/userName_id';
 
 	const toggleTranslation = async (loc: any) => {
-		$fullDisplay = 'nonHidden'
+		$fullDisplay = 'nonHidden';
 
 		loc = loc
 			.replace(/\s/g, '-')
 			.replace(/[^a-zA-Z0-9-]/g, '')
-			.toLowerCase()
+			.toLowerCase();
 
 		const res = await fetch('/api/locGroup_Id', {
 			method: 'POST',
@@ -23,24 +23,24 @@
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ loc, $userName_id }),
-		})
-		const response = await res.json()
+		});
+		const response = await res.json();
 		if (res.ok) {
-			window.location.pathname = $userName_id + '/LOC/' + response.locGroup_Id
+			window.location.pathname = $userName_id + '/LOC/' + response.locGroup_Id;
 		} else if (!res.ok) {
-			alert(response.message)
+			alert(response.message);
 		}
 
-		$isFlex = !$isFlex
+		$isFlex = !$isFlex;
 
 		setTimeout(() => {
-			$user_message = ''
-			$fullDisplay = 'hidden'
-		}, 600)
-	}
+			$user_message = '';
+			$fullDisplay = 'hidden';
+		}, 600);
+	};
 
 	function hasSpace(searchInput: string) {
-		return searchInput.indexOf('-') >= 0
+		return searchInput.indexOf('-') >= 0;
 	}
 </script>
 
@@ -58,13 +58,13 @@
 								{#each $searchData.searchUserData as user}
 									<button
 										on:click={() => {
-											$fullDisplay = 'nonHidden'
-											window.location.pathname = $userName_id + '/PUB/' + user._id
-											$isFlex = !$isFlex
+											$fullDisplay = 'nonHidden';
+											window.location.pathname = $userName_id + '/PUB/' + user._id;
+											$isFlex = !$isFlex;
 											setTimeout(() => {
-												$user_message = ''
-												$fullDisplay = 'hidden'
-											}, 600)
+												$user_message = '';
+												$fullDisplay = 'hidden';
+											}, 600);
 										}}
 										class="contactBox">
 										<div class="i"><i class="fa fa-user-o LogoButton" /></div>
@@ -89,25 +89,25 @@
 						<button
 							class="sendMsgBox"
 							on:click={async () => {
-								$fullDisplay = 'nonHidden'
+								$fullDisplay = 'nonHidden';
 								const res = await fetch('/api/publicReciever_Id', {
 									method: 'POST',
 									headers: {
 										'Content-Type': 'application/json',
 									},
 									body: JSON.stringify({ searchInput: $searchInput }),
-								})
-								const response = await res.json()
+								});
+								const response = await res.json();
 								if (res.ok) {
-									window.location.pathname = $userName_id + '/PUB/' + response.publicReciever_Id
+									window.location.pathname = $userName_id + '/PUB/' + response.publicReciever_Id;
 								} else if (!res.ok) {
-									alert(response.message)
+									alert(response.message);
 								}
-								$isFlex = !$isFlex
+								$isFlex = !$isFlex;
 								setTimeout(() => {
-									$user_message = ''
-									$fullDisplay = 'hidden'
-								}, 600)
+									$user_message = '';
+									$fullDisplay = 'hidden';
+								}, 600);
 							}}>
 							<p class="hashMsg">
 								<span class="fa fa-arrow-right fontBox arrow" />
@@ -138,13 +138,13 @@
 							{#each $searchData.searchGroupData as group}
 								<button
 									on:click={() => {
-										$fullDisplay = 'nonHidden'
-										window.location.pathname = '/HASH/' + group.name
-										$isFlex = !$isFlex
+										$fullDisplay = 'nonHidden';
+										window.location.pathname = '/HASH/' + group.name;
+										$isFlex = !$isFlex;
 										setTimeout(() => {
-											$user_message = ''
-											$fullDisplay = 'hidden'
-										}, 600)
+											$user_message = '';
+											$fullDisplay = 'hidden';
+										}, 600);
 									}}
 									class="contactBox">
 									<div class="i"><i class="fa fa-hashtag LogoButton" /></div>
@@ -168,25 +168,25 @@
 				<button
 					class="sendMsgBox"
 					on:click={async () => {
-						$fullDisplay = 'nonHidden'
+						$fullDisplay = 'nonHidden';
 						const res = await fetch('/api/hashtagGroup_Id', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',
 							},
 							body: JSON.stringify({ $searchInput, $userName_id }),
-						})
-						const response = await res.json()
+						});
+						const response = await res.json();
 						if (res.ok) {
-							window.location.pathname = $userName_id + '/HASH/' + response.hashtagGroup_Id
+							window.location.pathname = $userName_id + '/HASH/' + response.hashtagGroup_Id;
 						} else if (!res.ok) {
-							alert(response.message)
+							alert(response.message);
 						}
-						$isFlex = !$isFlex
+						$isFlex = !$isFlex;
 						setTimeout(() => {
-							$user_message = ''
-							$fullDisplay = 'hidden'
-						}, 600)
+							$user_message = '';
+							$fullDisplay = 'hidden';
+						}, 600);
 					}}
 					><p class="hashMsg">
 						<span class="fa fa-arrow-right fontBox arrow" />

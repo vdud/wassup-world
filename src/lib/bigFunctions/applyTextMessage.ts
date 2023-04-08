@@ -3,7 +3,7 @@ import { timeSince } from './timeFormat';
 import { togglePublic } from './toggleNavLocs';
 
 export const applyNewMessageFresh = (data: any) => {
-	const textMessages: any = document.getElementById('textMessages');
+	const textMessages: any = document.getElementById(`textMessages?${data.$userGroup_id}`);
 	if (textMessages) {
 		const div = document.createElement('div');
 		div.classList.add('text');
@@ -46,7 +46,7 @@ export const applyNewMessageFresh = (data: any) => {
 };
 
 export const applyMessage = async (data: any) => {
-	const textMessages: any = document.getElementById('textMessages');
+	const textMessages: any = document.getElementById(`textMessages?${data.$userGroup_id}`);
 	if (textMessages) {
 		// if (data.isYoMe) {
 		// setTimeout(() => {

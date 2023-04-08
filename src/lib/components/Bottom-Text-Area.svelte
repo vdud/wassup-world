@@ -20,10 +20,6 @@
 		}
 	}
 
-	function handleKeyUp(event: KeyboardEvent) {
-		debouncedPingTyping();
-	}
-
 	const pingTyping = async () => {
 		if ($user_message === '') {
 			return;
@@ -36,8 +32,10 @@
 			body: JSON.stringify({ $userGroup_id, $userName }),
 		});
 	};
-
-	const debouncedPingTyping = debounce(pingTyping, 300);
+	const debouncedPingTyping = debounce(pingTyping, 330);
+	function handleKeyUp(event: KeyboardEvent) {
+		debouncedPingTyping();
+	}
 
 	const socketWorker = async () => {
 		const message = $user_message.slice(0, 999);
@@ -69,13 +67,6 @@
 
 				if (!res.ok) {
 					alert(response.message);
-				}
-
-				const replyBody = document.getElementById('middleScroll');
-				if (replyBody) {
-					setTimeout(() => {
-						replyBody.scrollTo({ top: replyBody.scrollHeight, behavior: 'smooth' });
-					}, 100);
 				}
 			}
 		} else {
