@@ -215,7 +215,7 @@
 	}
 	.sendArrow {
 		margin-left: var(--lessAverageMargin);
-		padding-bottom: 4px;
+		/* padding-bottom: 4px; */
 	}
 	.sendArrow:hover,
 	.sendAll:hover {

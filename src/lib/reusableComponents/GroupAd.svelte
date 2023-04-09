@@ -88,10 +88,8 @@
 	{#if !isShowMenu}
 		<div class="pTextAdContainer">
 			<button class="replyBox">
-				<!-- <img src={imgUrl} alt="image {active + 1}" class="image" /> -->
 				<div class="buttonWindowMng">
 					{#each groupAdData.clientListing as { item, itemImages }, i}
-						<!-- last header -->
 						<button
 							on:click={() => {
 								isShowMenuToggle();
@@ -126,12 +124,9 @@
 				{/each}
 			</div>
 			<div class="fullWindow" id="adWindow">
-				<!-- <img src={imgUrl} alt="image {active + 1}" class="image" />
-				<img src={imgUrl} alt="image {active + 1}" class="image" /> -->
 				<button
 					on:click={() => {
 						isShowMenuToggle();
-						// scroll to top id: adWindow
 					}}
 					class="navItemsList">
 					{#each groupAdData.clientListing as { item, itemImages }}
@@ -150,15 +145,6 @@
 					{/each}
 					<div class="bottomNavSpace" />
 				</button>
-				<!-- <div class="navHeader">
-					{#each groupAdData.clientListing as { item }}
-						<button
-							on:click={() => {
-								currentListing = { item };
-							}}
-							class="navItem">{item.toUpperCase()}</button>
-					{/each}
-				</div> -->
 			</div>
 		</div>
 	{/if}
@@ -167,7 +153,6 @@
 	<div class="aboutWallpaper">
 		<div class="gradient" />
 		<img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" />
-		<!-- <img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" /> -->
 		<div class="paddingBottom" />
 	</div>
 {/if}
@@ -313,7 +298,7 @@
 		height: 105%;
 		width: 100%;
 		z-index: 10000;
-		background-image: linear-gradient(0deg, var(--secondaryTheme) 33%, #0000 100%), linear-gradient(180deg, var(--secondaryTheme) 0%, #0000 40%);
+		background-image: linear-gradient(0deg, var(--secondaryTheme) 0%, #0000 100%), linear-gradient(180deg, var(--secondaryTheme) 0%, #0000 40%);
 
 		pointer-events: none;
 	}
