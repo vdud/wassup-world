@@ -52,6 +52,7 @@ export const POST = (async ({ request }) => {
 							lastMessage: 1,
 							updatedAt: 1,
 							latestMessageSender: 1,
+							Theme: 1,
 						},
 					},
 				},
@@ -76,8 +77,7 @@ export const POST = (async ({ request }) => {
 			if (formattedUserData.length === 0) {
 				return [];
 			}
-			formattedUserData[0].allGroups.sort((a: any, b: any) => b.updatedAt - a.updatedAt);
-			// get only ids
+			formattedUserData[0].allGroups = formattedUserData[0].allGroups.map((group: any) => group._id);
 			return formattedUserData[0].allGroups;
 		};
 

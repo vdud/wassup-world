@@ -37,9 +37,10 @@
 						<div class="noMoreBox" />
 						<div class="noMoreText"><i class="fa-solid fa-hand-middle-finger noText" /></div>
 					{:else if $loginResponseData.success === true}
-						{#each $loginResponseData.data.formatedLOCdata as { _id, name, lastMessage, updatedAt, latestMessageSender }, i}
+						{#each $loginResponseData.data.formatedLOCdata as { _id, name, lastMessage, updatedAt, latestMessageSender, Theme }, i}
 							<!-- CONTACT BUTTON - START-->
 							{#if i < 9}
+								<!-- <div class="absThemeImg"></div> -->
 								<a href="/LOC/{name}" on:click={toggleLoc.bind(globalThis, name, _id)} id="locBox?{_id}" class="locBox {i === 0 ? 'locBoxLocationNotification' : ''}">
 									<!-- SENDER -->
 									<div class="locBoxItems item1" style="padding-top:5px;margin-bottom:-5px;">
@@ -67,7 +68,15 @@
 									<div class="locBoxItems item3">
 										<p id="LMT?{_id}" class="textLoc text3">{timeSince(updatedAt)}</p>
 									</div>
+
+									{#if Theme}
+										<div class="locBoxItems itemTheme" style="z-index: 0;">
+											<div class="gradientTheme" />
+											<img src={Theme} alt={Theme} class="ThemeImg" />
+										</div>
+									{/if}
 								</a>
+
 								<!-- CONTACT BUTTON - END -->
 							{/if}
 						{/each}
@@ -162,6 +171,34 @@
 </div>
 
 <style>
+	.gradientTheme {
+		background: linear-gradient(90deg, #0000, var(--secondaryTheme));
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 100;
+		width: 100%;
+		height: 100%;
+	}
+	.itemTheme {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		height: 100%;
+		width: auto;
+		padding-left: 0;
+	}
+	.ThemeImg {
+		/* position: absolute; */
+		/* top: 0; */
+		/* left: 0; */
+		/* z-index: ; */
+		/* width: 100%; */
+		height: 100%;
+		opacity: 0.75;
+		/* object-fit: cover; */
+	}
 	.sendBox {
 		font-family: UBold;
 	}

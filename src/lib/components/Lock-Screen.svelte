@@ -49,56 +49,9 @@
 					applyNewMessage({ groupName: data.groupName, sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'PUBLIC' });
 				});
 
-				// $loginResponseData.data.formatedHASHTAGSdata.forEach((element: any) => {
-				// 	// if ($userGroup_id != element._id) {
-				// 	pusher
-				// 		.subscribe(element._id)
-				// 		.bind('injectNav', (data: any) => {
-				// 			applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'HASHTAGS' });
-				// 		})
-				// 		.bind('pingNavTyping', (data: any) => {
-				// 			if (data.pinging === $userName) {
-				// 				return;
-				// 			} else {
-				// 				const LMT = document.getElementById('LMT?' + element._id);
-				// 				if (LMT) {
-				// 					LMT.innerHTML = data.pinging + ' is typing...';
-
-				// 					setTimeout(() => {
-				// 						LMT.innerHTML = data.pinging + ' was typing...';
-				// 					}, 3000);
-				// 				}
-				// 			}
-				// 		});
-				// 	// }
-				// });
-				// $loginResponseData.data.formatedLOCdata.forEach((element: any) => {
-				// 	// if ($userGroup_id != element._id) {
-				// 	pusher
-				// 		.subscribe(element._id)
-				// 		.bind('injectNav', (data: any) => {
-				// 			applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: 'LOCATIONS' });
-				// 		})
-				// 		.bind('pingNavTyping', (data: any) => {
-				// 			if (data.pinging === $userName) {
-				// 				return;
-				// 			} else {
-				// 				const LMT = document.getElementById('LMT?' + element._id);
-				// 				if (LMT) {
-				// 					LMT.innerHTML = data.pinging + ' is typing...';
-
-				// 					setTimeout(() => {
-				// 						LMT.innerHTML = data.pinging + ' was typing...😿';
-				// 					}, 3000);
-				// 				}
-				// 			}
-				// 		});
-				// 	// }
-				// });
 				$loginResponseData.data.formattedUserData_Group_ids.forEach((element: any) => {
-					// if ($userGroup_id != element._id) {x
 					pusher
-						.subscribe(element._id)
+						.subscribe(element)
 						.bind('injectNav', (data: any) => {
 							applyNavDataMessage({ sender: data.sender, message: data.message, createdAt: data.createdAt, groupId: data.groupId, nature: data.nature, groupName: data.groupName });
 						})
@@ -106,7 +59,7 @@
 							if (data.pinging === $userName) {
 								return;
 							} else {
-								const LMT = document.getElementById('LMT?' + element._id);
+								const LMT = document.getElementById('LMT?' + element);
 								if (LMT) {
 									LMT.innerHTML = data.pinging + ' is typing...';
 
@@ -116,11 +69,9 @@
 								}
 							}
 						});
-					// }
 				});
 			} else if (!res.ok) {
 				alert(response.message);
-				// $canSend = false
 			}
 		}
 	};

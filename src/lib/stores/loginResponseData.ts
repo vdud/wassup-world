@@ -38,6 +38,7 @@ export const loginResponseData = writable({
 				nature: 'string',
 				updatedAt: 0,
 				latestMessageSender: 'string',
+				Theme: 'string',
 			},
 		],
 	},

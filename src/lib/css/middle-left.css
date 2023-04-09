@@ -71,6 +71,7 @@
 	justify-content: space-between;
 	background-color: var(--secondaryTheme);
 
+	position: relative;
 	transition: border-left 100ms ease-out;
 }
 .locBox:hover {
@@ -103,6 +104,7 @@
 .locBoxItems {
 	width: auto;
 	height: 100%;
+	z-index: 1;
 
 	padding-left: var(--averageMargin);
 }
