@@ -275,16 +275,18 @@ export const applyNewMessage = (data: any) => {
 				noMoreText.style.display = 'none';
 			}
 
-			const button = document.createElement('button');
+			const button = document.createElement('a');
 			button.style.order = '-1';
+			//add href
+			button.href = `/PUB/${data.groupName}`;
 
 			button.classList.add('locBox');
 			button.classList.add('locBoxPubNotification');
 			button.id = `locBox?${data.groupId}`;
 
-			button.onclick = () => {
-				togglePublic(data.groupName);
-			};
+			// button.onclick = () => {
+			// 	toggleMiddleNavRef({ Nature: 'PUBLIC' });
+			// };
 
 			const div1 = document.createElement('div');
 			div1.classList.add('locBoxItems');

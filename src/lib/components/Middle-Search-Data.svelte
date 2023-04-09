@@ -39,6 +39,8 @@
 		}, 600);
 	};
 
+	$: console.log('$searchData', $searchData);
+
 	function hasSpace(searchInput: string) {
 		return searchInput.indexOf('-') >= 0;
 	}
@@ -57,7 +59,7 @@
 							{#if $searchData.searchUserData.length > 0}
 								{#each $searchData.searchUserData as user}
 									<a
-										href="{$userName_id}/PUB/{user._id}"
+										href="/{$userName_id}/PUB/{user._id}"
 										on:click={() => {
 											$fullDisplay = 'nonHidden';
 											// window.location.pathname = $userName_id + '/PUB/' + user._id;
