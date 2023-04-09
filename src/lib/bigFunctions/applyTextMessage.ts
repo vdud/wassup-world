@@ -3,7 +3,7 @@ import { timeSince } from './timeFormat';
 import { togglePublic } from './toggleNavLocs';
 
 export const applyNewMessageFresh = (data: any) => {
-	const textMessages: any = document.getElementById(`textMessages?${data.groupId}`);
+	const textMessages: any = document.getElementById(`textMessages?${data.$userGroup_id}`);
 	if (textMessages) {
 		const div = document.createElement('div');
 		div.classList.add('text');
@@ -132,16 +132,19 @@ export const applyMessage = async (data: any) => {
 		loveButton.append(span6);
 
 		//Got to reply button
-		const goToReplyButton = document.createElement('button');
+		const goToReplyButton = document.createElement('a');
 		goToReplyButton.classList.add('timeSpan');
 		goToReplyButton.classList.add('LikeSpan');
-		goToReplyButton.onclick = () => {
-			window.location.pathname = '/Messages/' + data.messageId;
-		};
+		// add href
+		goToReplyButton.href = `/Messages/${data.messageId}`;
+		// goToReplyButton.onclick = () => {
+		// 	window.location.pathname = '/Messages/' + data.messageId;
+		// };
 		const totalRepliespText = document.createElement('p');
 		totalRepliespText.classList.add('totalRepliespText');
 		const span4 = document.createElement('span');
 		span4.innerText = 'REPLY';
+		// span4.classList.add('ReplyTextCenter');
 		totalRepliespText.classList.add('REPLY_TEXT');
 		span4.style.fontFamily = 'UBold';
 		span4.style.marginRight = '5px';
@@ -453,16 +456,19 @@ export const replyMessage = (data: any) => {
 		likeButton.appendChild(optDark);
 		likeButton.appendChild(FA_SOLIDi);
 
-		const goToButton = document.createElement('button');
+		const goToButton = document.createElement('a');
 		goToButton.classList.add('timeSpan', 'LikeSpan');
+		// add href
+		goToButton.href = '/Messages/' + data.data._id;
 		goToButton.style.marginLeft = '10px';
-		goToButton.onclick = () => {
-			window.location.pathname = '/Messages/' + data.data._id;
-		};
+		// goToButton.onclick = () => {
+		// 	window.location.pathname = '/Messages/' + data.data._id;
+		// };
 		const goToText = document.createElement('p');
 		goToText.classList.add('totalRepliespText', 'REPLY_TEXT');
 		const REPLYSPAN = document.createElement('span');
 		REPLYSPAN.innerText = 'REPLY';
+		// REPLYSPAN.classList.add('ReplyTextCenter');
 		REPLYSPAN.style.marginRight = '5px';
 		const FA_SQ_U_R = document.createElement('i');
 		FA_SQ_U_R.classList.add('fa', 'fa-square-up-right');

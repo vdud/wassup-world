@@ -56,10 +56,11 @@
 						<div class="flexContact">
 							{#if $searchData.searchUserData.length > 0}
 								{#each $searchData.searchUserData as user}
-									<button
+									<a
+										href="{$userName_id}/PUB/{user._id}"
 										on:click={() => {
 											$fullDisplay = 'nonHidden';
-											window.location.pathname = $userName_id + '/PUB/' + user._id;
+											// window.location.pathname = $userName_id + '/PUB/' + user._id;
 											$isFlex = !$isFlex;
 											setTimeout(() => {
 												$user_message = '';
@@ -73,7 +74,7 @@
 												{user.name}
 											</p>
 										</div>
-									</button>
+									</a>
 								{/each}
 							{:else}
 								<div class="contactBox">
@@ -136,10 +137,10 @@
 					<div class="flexContact">
 						{#if $searchData.searchGroupData.length > 0}
 							{#each $searchData.searchGroupData as group}
-								<button
+								<a
+									href="/HASH/{group.name}"
 									on:click={() => {
 										$fullDisplay = 'nonHidden';
-										window.location.pathname = '/HASH/' + group.name;
 										$isFlex = !$isFlex;
 										setTimeout(() => {
 											$user_message = '';
@@ -153,7 +154,7 @@
 											{group.name}
 										</p>
 									</div>
-								</button>
+								</a>
 							{/each}
 						{:else}
 							<div class="contactBox">

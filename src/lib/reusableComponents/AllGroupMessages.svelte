@@ -18,15 +18,6 @@
 	import { applyMessage, applyNavDataMessage, applyNewMessageFresh } from '$lib/bigFunctions/applyTextMessage';
 	import { isTypingData } from '$lib/stores/isTypingData';
 
-	const like = ({ _id, likes }: any) => {
-		likeThatMsg({ _id, $userName_id, likes, $userGroup_id });
-	};
-
-	const goTo = (_id: any) => {
-		$isFlex = true;
-		window.location.pathname = '/Messages/' + _id;
-	};
-
 	export let data: any;
 	// onMount(() => {
 	// });
@@ -75,8 +66,9 @@
 			})
 
 			.bind('injectEmptyMessage', (data: any) => {
-				if (data.sender !== $userName && data.groupId === $userGroup_id) {
-					applyNewMessageFresh({ sender: data.sender, message: data.message, createdAt: data.createdAt, isYoMe: false });
+				// if (data.sender !== $userName && data.groupId === $userGroup_id) {
+				if (data.sender !== $userName) {
+					applyNewMessageFresh({ sender: data.sender, message: data.message, createdAt: data.createdAt, isYoMe: false, $userGroup_id });
 				}
 			})
 
@@ -105,6 +97,15 @@
 				}
 			});
 	});
+
+	const like = ({ _id, likes }: any) => {
+		likeThatMsg({ _id, $userName_id, likes, $userGroup_id });
+	};
+
+	const goTo = (_id: any) => {
+		$isFlex = true;
+		// window.location.pathname = '/Messages/' + _id;
+	};
 
 	onDestroy(() => {
 		$currentPage = '';
@@ -137,7 +138,7 @@
 						<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
 						<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
 						<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
-						<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+						<a href="/Messages/{_id}" on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></a>
 					</span>
 				</div>
 			{:else if sender === $userName}
@@ -147,7 +148,7 @@
 						<span class="pageMessage">{message}</span>
 					</p>
 					<span class="spanFlexRight">
-						<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+						<a href="/Messages/{_id}" on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></a>
 						<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan replyLikeButton" style="margin-right: 10px;"><span class="optDark" id="LIKE_NO?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
 						<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
 						<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
@@ -175,7 +176,7 @@
 									<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
 									<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
 									<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID_TOP?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
-									<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+									<a href="/Messages/{_id}" on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></a>
 								</span>
 							</p>
 						</div>
@@ -185,7 +186,7 @@
 								<span class="senderReply" style="color:var(--secondary)">{sender}; </span>
 								<span class="pageMessage">{message}</span>
 								<span class="spanFlexRight">
-									<button on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></button>
+									<a href="/Messages/{_id}" on:click={goTo.bind(globalThis, _id)} class="timeSpan LikeSpan" style="margin-right: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style=" margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></a>
 									<button on:click={like.bind(globalThis, { _id: _id, likes: likes })} class="timeSpan replyLikeButton" style="margin-right: 10px;"><span class="optDark" id="TopLike_No?{_id}">{likesabove10k(likes)}</span><i id="FA_SOLID_TOP?{_id}" class="{likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
 									<button class="timeSpan" style="margin-right: 10px;"><p class="totalRepliespText"><span id="Replies_No?{_id}">{likesabove10k(totalReplies)} replies</span></p></button>
 									<span class="timeSpan flexTime">{timeSince(createdAt)}</span>
@@ -204,7 +205,7 @@
 	.gradientBtm {
 		width: 100%;
 		height: 60px;
-		background: linear-gradient(0deg, var(--red) 60%, #0000 100%);
+		background: linear-gradient(0deg, var(--primaryTheme) 60%, #0000 100%);
 		/* background-color: var(--red); */
 		position: absolute;
 		z-index: 2;

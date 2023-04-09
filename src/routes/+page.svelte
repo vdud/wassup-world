@@ -14,7 +14,7 @@
 
 	onMount(() => {
 		$currentPage = '';
-		$isFlex = false;
+		// $isFlex = false;
 
 		$currentPageHeaderData = 'HOME';
 	});

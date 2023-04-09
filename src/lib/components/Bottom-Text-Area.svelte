@@ -44,13 +44,6 @@
 		const time = new Date();
 		$invader = true;
 
-		const middleScroll: any = document.getElementById('middleScroll');
-		if (middleScroll) {
-			setTimeout(() => {
-				middleScroll.scrollTo({ top: middleScroll.scrollHeight, behavior: 'smooth' });
-			}, 100);
-		}
-
 		if ($currentPage === 'REPLIES') {
 			if (message === '' && $messageId !== '') {
 				return;
@@ -92,6 +85,13 @@
 				}
 			}
 		}
+
+		const middleScroll: any = document.getElementById('middleScroll');
+		if (middleScroll) {
+			// setTimeout(() => {
+			middleScroll.scrollTo({ top: middleScroll.scrollHeight, behavior: 'smooth' });
+			// }, 10);
+		}
 	};
 </script>
 
@@ -127,7 +127,11 @@
 	textarea {
 		color: var(--primaryThemeInverted);
 		font-family: ULight;
+		border: 1px solid var(--primaryTheme);
 		box-shadow: var(--boxShadows), var(--boxInsetShadows);
+	}
+	textarea:focus {
+		border: 1px solid var(--secondary);
 	}
 	textarea::placeholder {
 		color: var(--disabled);
@@ -173,7 +177,7 @@
 		height: 100%;
 		/* margin-right: calc(var(--buttonHW) + 30px); */
 		padding: 14px;
-		border: none;
+		/* border: none; */
 		outline: none;
 		resize: none;
 		font-size: 1.2rem;

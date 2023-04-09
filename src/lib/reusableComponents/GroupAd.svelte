@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import imgSource from '$lib/assets/menuItems.jpg';
 	import { currentPage } from '$lib/stores/currentPage';
 
@@ -134,8 +135,15 @@
 					class="navItemsList">
 					{#each groupAdData.clientListing as { item, itemImages }}
 						{#if item === currentListing.item}
-							{#each itemImages as img}
-								<img src={img} alt="image {active + 1}" class="image navItemsImg" />
+							{#each itemImages as img, i}
+								<div class="imgElement">
+									<div class="pageNumberTitle">
+										<p class="pClassPNumberTitle">
+											PAGE; {i + 1} / {itemImages.length}
+										</p>
+									</div>
+									<img src={img} alt="image {active + 1}" class="image navItemsImg" />
+								</div>
 							{/each}
 						{/if}
 					{/each}
@@ -163,6 +171,26 @@
 {/if}
 
 <style>
+	.pClassPNumberTitle {
+		color: var(--white);
+		background-color: var(--secOptDark);
+		/* text-shadow: none; */
+		padding: var(--lessAverageMargin) var(--averageMargin);
+		border-radius: var(--lessAverageMargin);
+		font-family: UBold;
+		box-shadow: var(--boxInsetShadows);
+		border: 1px solid var(--tertiaryTheme);
+	}
+	.imgElement {
+		position: relative;
+		width: 100%;
+	}
+	.pageNumberTitle {
+		position: absolute;
+		top: var(--lessAverageMargin);
+		right: var(--lessAverageMargin);
+		z-index: 100000;
+	}
 	.bottomNavSpace {
 		height: 79px;
 		width: 100%;

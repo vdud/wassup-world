@@ -13,6 +13,7 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { searchData } from '$lib/stores/searchData';
 	import { debounce } from '$lib/bigFunctions/debounce';
+	import { page } from '$app/stores';
 
 	$: $searchInput = $searchInput
 		.replace(/\s/g, '-')
@@ -25,7 +26,7 @@
 	const toggle = (e: any) => {
 		$fullDisplay = 'nonHidden';
 
-		if (window.location.pathname === '/') {
+		if ($page.url.pathname === '/') {
 			$isFlex = !$isFlex;
 			return;
 		}
