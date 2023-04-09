@@ -298,7 +298,7 @@
 		height: 105%;
 		width: 100%;
 		z-index: 10000;
-		background-image: linear-gradient(0deg, var(--secondaryTheme) 0%, #0000 100%), linear-gradient(180deg, var(--secondaryTheme) 0%, #0000 40%);
+		background-image: linear-gradient(0deg, var(--secondaryTheme) 3%, #0000 60%), linear-gradient(180deg, var(--secondaryTheme) 0%, #0000 40%), linear-gradient(33deg, var(--secondaryTheme) 1%, #0000 80%), linear-gradient(-33deg, var(--secondaryTheme) 1%, #0000 80%);
 
 		pointer-events: none;
 	}

@@ -3,7 +3,6 @@
 	import { isFlex } from '$lib/stores/isFlex';
 	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
 
-	// import imageLogoSrc from '../../lib/assets/newL.svg'
 	import imageLogoSrc from '$lib/assets/fknLatest.png';
 
 	import { currentPage } from '$lib/stores/currentPage';
@@ -18,27 +17,22 @@
 	const toggle = () => {
 		$fullDisplay = 'nonHidden';
 		$isFlex = !$isFlex;
-		// window.location.pathname = '/'
-		// window.location.href = '/'
 
 		setTimeout(() => {
-			// $user_message = ''
 			$fullDisplay = 'hidden';
 		}, 600);
 	};
+
 	const togglehRef = () => {
 		$isShowInfo = !$isShowInfo;
 		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
 			setTimeout(() => {
-				// middleScroll.scrollTop = middleScroll.scrollHeight * -1;
-				//with animation
 				middleScroll.scrollTo({
 					top: middleScroll.scrollHeight * -1,
 					behavior: 'smooth',
 				});
 				if (!$isShowInfo) {
-					//scroll to bottom
 					middleScroll.scrollTo({
 						top: 0,
 						behavior: 'smooth',
@@ -46,14 +40,11 @@
 				}
 			}, 10);
 		}
-		// if (middleScroll.scrollTop === scrollTop) {
-		// }
 	};
+
 	const headToTop = () => {
 		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
-			// middleScroll.scrollTop = middleScroll.scrollHeight * -1;
-			//with animation
 			middleScroll.scrollTo({
 				top: middleScroll.scrollHeight * -1,
 				behavior: 'smooth',
@@ -82,25 +73,14 @@
 				<span>{$currentPageHeaderData.toUpperCase()}</span>
 			{/if}
 		</h1>
-		<!-- <div class="pFlex">
-			{#if $currentPage !== ''}
-				{#if $currentPageHeaderData.length > 29}
-					<p class="chatPText">
-						{$currentPageHeaderData.toUpperCase().slice(0, 60)}{#if $currentPageHeaderData.length > 59}...{/if}
-					</p>
-				{/if}
-			{:else}
-				<p class="chatPText">{titleData}</p>
-			{/if}
-		</div> -->
 		{#if $isTypingData.isTyping === true}
 			<div class="pFlex" in:fade out:fade>
 				<p class="chatPText" style="font-family: UBold;">{$isTypingData.message}</p>
 			</div>
 		{/if}
 	</button>
-	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 
+	<button class="absoluteBox boxLeft" on:click={toggle}><i class="fa-solid fa-bars" style="color: var(--secondary);scale:1.4;" /></button>
 	<button class="absoluteBox boxRight" on:click={togglehRef}><div><img class="Logo" src={imageLogoSrc} alt="Logo" /></div></button>
 </div>
 
