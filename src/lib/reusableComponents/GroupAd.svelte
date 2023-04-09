@@ -172,9 +172,9 @@
 
 <style>
 	.pClassPNumberTitle {
-		color: var(--white);
-		background-color: var(--secOptDark);
-		/* text-shadow: none; */
+		color: var(--secondaryTheme);
+		background-color: var(--secondaryThemeInverted);
+		text-shadow: none;
 		padding: var(--lessAverageMargin) var(--averageMargin);
 		border-radius: var(--lessAverageMargin);
 		font-family: UBold;

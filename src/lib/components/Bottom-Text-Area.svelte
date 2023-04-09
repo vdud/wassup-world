@@ -11,6 +11,7 @@
 	import { currentPage } from '$lib/stores/currentPage';
 	import { messageId } from '$lib/stores/messageId';
 	import { debounce } from '$lib/bigFunctions/debounce';
+	import { currentPageHeaderData } from '$lib/stores/currentPageHeaderData';
 
 	function handleKeyDown(event: KeyboardEvent) {
 		if (event.key === 'Enter' && !event.shiftKey) {
@@ -67,7 +68,7 @@
 				return;
 			} else {
 				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: time, isYoMe: true });
-				applyNavDataMessage({ sender: $userName, message, createdAt: time, groupId, nature: $currentPage });
+				applyNavDataMessage({ sender: $userName, message, createdAt: time, groupId, nature: $currentPage, groupName: $currentPageHeaderData });
 
 				const res = await fetch('/api/textAreaMessages', {
 					method: 'POST',
@@ -75,7 +76,7 @@
 						'Content-Type': 'application/json',
 					},
 
-					body: JSON.stringify({ message, $userGroup_id, $userName, $userName_id }),
+					body: JSON.stringify({ $currentPage, message, $userGroup_id, $userName, $userName_id, $currentPageHeaderData }),
 				});
 
 				const response = await res.json();

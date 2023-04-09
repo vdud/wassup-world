@@ -14,7 +14,7 @@ const pusher = new Pusher({
 });
 
 export const POST = (async ({ request }) => {
-	const { message, $userGroup_id, $userName, $userName_id } = await request.json();
+	const { $currentPageHeaderData, $currentPage, message, $userGroup_id, $userName, $userName_id } = await request.json();
 	const newTime = new Date();
 
 	pusher.trigger($userGroup_id, 'injectNav', {
@@ -22,6 +22,8 @@ export const POST = (async ({ request }) => {
 		sender: $userName,
 		createdAt: newTime,
 		groupId: $userGroup_id,
+		nature: $currentPage,
+		groupName: $currentPageHeaderData,
 	});
 
 	pusher.trigger($userGroup_id, 'injectEmptyMessage', {

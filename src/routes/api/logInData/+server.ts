@@ -72,6 +72,14 @@ export const POST = (async ({ request }) => {
 				},
 			])
 			.toArray();
+		const formattedUserData_Group_ids = () => {
+			if (formattedUserData.length === 0) {
+				return [];
+			}
+			formattedUserData[0].allGroups.sort((a: any, b: any) => b.updatedAt - a.updatedAt);
+			// get only ids
+			return formattedUserData[0].allGroups;
+		};
 
 		const formatedPUBLICdata = () => {
 			if (formattedUserData.length === 0) {
@@ -97,6 +105,6 @@ export const POST = (async ({ request }) => {
 			return locData;
 		};
 
-		return json({ success: true, userName_id: findUser._id, data: { formatedPUBLICdata: formatedPUBLICdata(), formatedHASHTAGSdata: formatedHASHTAGSdata(), formatedLOCdata: formatedLOCdata() } });
+		return json({ success: true, userName_id: findUser._id, data: { formatedPUBLICdata: formatedPUBLICdata(), formatedHASHTAGSdata: formatedHASHTAGSdata(), formatedLOCdata: formatedLOCdata(), formattedUserData_Group_ids: formattedUserData_Group_ids() } });
 	}
 }) satisfies RequestHandler;

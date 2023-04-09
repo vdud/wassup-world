@@ -1,10 +1,15 @@
-import { success } from '$lib/bigFunctions/pusher'
-import { writable } from 'svelte/store'
+import { success } from '$lib/bigFunctions/pusher';
+import { writable } from 'svelte/store';
 
 export const loginResponseData = writable({
 	success: false,
 	data: {
 		name: 'string',
+		formattedUserData_Group_ids: [
+			{
+				_id: 'string',
+			},
+		],
 		formatedPUBLICdata: [
 			{
 				_id: 'string',
@@ -36,4 +41,4 @@ export const loginResponseData = writable({
 			},
 		],
 	},
-})
+});

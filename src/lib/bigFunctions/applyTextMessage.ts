@@ -231,22 +231,26 @@ export const applyNavDataMessage = (data: any) => {
 	}
 	groupLocBox.style.order = '-1';
 	latestMessage.style.color = 'var(--primaryThemeInverted)';
+	gName.innerHTML = '';
 
 	if (data.nature === 'HASHTAGS') {
 		groupLocBox.classList.add('locBoxHashNotification');
 		senderWho.style.color = 'var(--primary)';
 		gName.style.color = 'var(--primary)';
 		latestMessageTime.style.color = 'var(--primary)';
+		gName.innerText = `#${data.groupName}`;
 	} else if (data.nature === 'LOCATIONS') {
 		groupLocBox.classList.add('locBoxLocationNotification');
 		senderWho.style.color = 'var(--secOptDark)';
 		gName.style.color = 'var(--secOptDark)';
 		latestMessageTime.style.color = 'var(--secOptDark)';
+		gName.innerText = data.groupName;
 	} else if (data.nature === 'PUBLIC') {
 		groupLocBox.classList.add('locBoxPubNotification');
 		senderWho.style.color = 'var(--secondary)';
 		gName.style.color = 'var(--secondary)';
 		latestMessageTime.style.color = 'var(--secondary)';
+		gName.innerText = data.groupName;
 	}
 	// clear inner HTML
 	senderWho.innerHTML = '';
