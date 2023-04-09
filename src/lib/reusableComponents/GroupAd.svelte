@@ -61,6 +61,7 @@
 	// 	'6g9BxgCNQv4',
 	// ];
 	// const randomKey = uSplashKeys[Math.floor(Math.random() * uSplashKeys.length)];
+	// const randomKey = 'XjKaPInYVCM'
 	// const imgUrl = 'https://source.unsplash.com/' + randomKey;
 
 	export let active = 0;
@@ -139,7 +140,7 @@
 								<div class="imgElement">
 									<div class="pageNumberTitle">
 										<p class="pClassPNumberTitle">
-											PAGE; {i + 1} / {itemImages.length}
+											{i + 1} / {itemImages.length}
 										</p>
 									</div>
 									<img src={img} alt="image {active + 1}" class="image navItemsImg" />
@@ -161,7 +162,8 @@
 			</div>
 		</div>
 	{/if}
-
+{/if}
+{#if groupAdData.Theme}
 	<div class="aboutWallpaper">
 		<div class="gradient" />
 		<img src={groupAdData.Theme} alt="image {active + 1}" class="imgWallpaper" />
@@ -172,11 +174,11 @@
 
 <style>
 	.pClassPNumberTitle {
-		color: var(--secondaryTheme);
-		background-color: var(--secondaryThemeInverted);
+		color: var(--primaryThemeInverted);
+		background-color: var(--secondaryTheme);
 		text-shadow: none;
 		padding: var(--lessAverageMargin) var(--averageMargin);
-		border-radius: var(--lessAverageMargin);
+		border-radius: var(--averageMargin);
 		font-family: UBold;
 		box-shadow: var(--boxInsetShadows);
 		border: 1px solid var(--tertiaryTheme);
@@ -187,8 +189,8 @@
 	}
 	.pageNumberTitle {
 		position: absolute;
-		top: var(--lessAverageMargin);
-		right: var(--lessAverageMargin);
+		top: var(--averageMargin);
+		right: var(--averageMargin);
 		z-index: 100000;
 	}
 	.bottomNavSpace {
@@ -240,6 +242,7 @@
 		color: var(--primaryThemeInverted);
 		font-family: UBold;
 		font-size: 2rem;
+		transition: all 0.2s ease-in-out;
 	}
 	.navItem:hover {
 		background-color: var(--primaryThemeInverted);
