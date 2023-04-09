@@ -166,7 +166,7 @@
 	}
 
 	.searchInput {
-		width: calc(100% - 2 * var(--averageMargin));
+		width: calc(100% - 4 * var(--averageMargin));
 		margin: var(--averageMargin);
 		height: 10px;
 		background-color: var(--secondaryTheme);

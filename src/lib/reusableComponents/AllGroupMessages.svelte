@@ -45,8 +45,8 @@
 	};
 	const debouncedScroll = debounce(parseScroll, 30);
 
+	$isFlex = false;
 	onMount(() => {
-		$isFlex = false;
 		$currentPage = data.body.nature;
 		$userGroup_id = JSON.parse(data.groupId);
 		$currentPageHeaderData = data.body.groupName;
