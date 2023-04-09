@@ -50,8 +50,8 @@
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize)">
 											{#if lastMessage === undefined}
-												<span id="SENDER?{_id}" class="latestMessageSender"><span class="sendBox" style="background-color:var(--secOptDark)"> SEND MESSAGE </span></span>
-												<span id="LM?{_id}" class="latestMessage"><span style="background-color:var(--secOptDark)" class="fa fa-arrow-right sendArrow" /></span>
+												<span id="SENDER?{_id}" class="latestMessageSender"><span class="sendAll sendBox" style="background-color:var(--secOptDark)"> SEND MESSAGE </span></span>
+												<span id="LM?{_id}" class="latestMessage"><span style="background-color:var(--secOptDark)" class="fa fa-arrow-right sendAll sendArrow" /></span>
 											{:else}
 												<span id="SENDER?{_id}" class="latestMessageSender">
 													{latestMessageSender};
@@ -94,8 +94,8 @@
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize)">
 											{#if group.lastMessage === undefined}
-												<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style="background-color:var(--primary)"> SEND MESSAGE </span></span>
-												<span id="LM?{group._id}" class="latestMessage"><span style="background-color:var(--primary)" class="fa fa-arrow-right sendArrow" /></span>
+												<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendAll sendBox" style="background-color:var(--primary)"> SEND MESSAGE </span></span>
+												<span id="LM?{group._id}" class="latestMessage"><span style="background-color:var(--primary)" class="fa fa-arrow-right sendAll sendArrow" /></span>
 											{:else}
 												<span id="SENDER?{group._id}" class="latestMessageSender">
 													{group.latestMessageSender};
@@ -135,8 +135,8 @@
 									<div class="locBoxItems item2">
 										<p class="textLoc text1" style="font-size:var(--fontSize); ">
 											{#if group.lastMessage === undefined}
-												<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendBox" style="background-color:var(--secondary)"> SEND MESSAGE </span></span>
-												<span id="LM?{group._id}" class="latestMessage"><span class="fa fa-arrow-right sendArrow" style="background-color:var(--secondary)" /></span>
+												<span id="SENDER?{group._id}" class="latestMessageSender"><span class="sendAll sendBox" style="background-color:var(--secondary)"> SEND MESSAGE </span></span>
+												<span id="LM?{group._id}" class="latestMessage"><span class="fa fa-arrow-right sendAll sendArrow" style="background-color:var(--secondary)" /></span>
 											{:else}
 												<span id="SENDER?{group._id}" class="latestMessageSender">
 													{group.latestMessageSender};
@@ -163,31 +163,26 @@
 
 <style>
 	.sendBox {
-		font-size: calc(var(--fontSize) / 1.2);
 		font-family: UBold;
+	}
+	.sendAll {
+		font-size: calc(var(--fontSize) / 1.2);
 		width: max-content;
 		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
 		border-radius: calc(var(--borderRadius) / 3);
-		color: var(--primaryTheme);
 		box-shadow: var(--boxShadows);
 
 		transition: all 200ms ease-in-out;
 		text-shadow: none;
+		color: var(--secondaryTheme);
 	}
 	.sendArrow {
-		color: var(--primaryTheme);
-		font-size: calc(var(--fontSize) / 1.2);
-		margin-left: calc(var(--averageMargin) / 2);
-		box-shadow: var(--boxShadows);
-		padding: calc(var(--averageMargin) / 4) calc(var(--averageMargin) / 1.2);
-		border-radius: calc(var(--borderRadius) / 3);
-		transition: all 200ms ease-in-out;
-		text-shadow: none;
+		margin-left: var(--lessAverageMargin);
+		padding-bottom: 4px;
 	}
 	.sendArrow:hover,
-	.sendBox:hover {
-		color: var(--secondaryThemeInverted);
-		text-shadow: var(--boxShadows);
+	.sendAll:hover {
+		color: var(--primaryThemeInverted);
 	}
 	.noMoreBox {
 		height: calc(var(--averageMargin) * 2);

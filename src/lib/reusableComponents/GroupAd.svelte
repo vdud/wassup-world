@@ -217,6 +217,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		pointer-events: none;
 
 		position: absolute;
 		bottom: 69px;
@@ -234,6 +235,7 @@
 		margin: var(--averageMargin);
 		/* margin-bottom: ; */
 		box-shadow: var(--boxShadows);
+		pointer-events: all;
 
 		color: var(--primaryThemeInverted);
 		font-family: UBold;
