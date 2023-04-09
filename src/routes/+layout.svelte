@@ -3,6 +3,11 @@
 	import '../css/new-app.css';
 	import { page } from '$app/stores';
 
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+
+	inject({ mode: dev ? 'development' : 'production' });
+
 	import { isFlex } from '$lib/stores/isFlex';
 	import { isLocked } from '$lib/stores/isLocked';
 	import { nature } from '$lib/stores/nature';
