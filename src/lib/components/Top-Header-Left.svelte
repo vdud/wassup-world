@@ -26,10 +26,10 @@
 	const toggle = (e: any) => {
 		$fullDisplay = 'nonHidden';
 
-		if ($page.url.pathname === '/') {
-			$isFlex = !$isFlex;
-			return;
-		}
+		$isFlex = !$isFlex;
+		// if ($page.url.pathname === '/') {
+		// 	return;
+		// }
 
 		setTimeout(() => {
 			$fullDisplay = 'hidden';
