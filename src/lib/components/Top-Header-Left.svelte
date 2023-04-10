@@ -125,7 +125,7 @@
 		{/if}
 	</div>
 	<!-- <button class="absoluteBox icon" on:click={toggle}> -->
-	<a href="/" class="absoluteBox icon" on:click={toggle}>
+	<a href="." class="absoluteBox icon" on:click={toggle}>
 		{#if $nature === 'PUBLIC'}
 			<i class="fa-regular fa-heart" style="color:var(--secondary)" />
 		{:else if $nature === 'HASHTAG'}

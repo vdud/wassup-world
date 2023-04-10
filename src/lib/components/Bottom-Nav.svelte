@@ -16,7 +16,6 @@
 				$nature = 'PUBLIC';
 				debouncedSetlocalStorage();
 				const middleData = document.querySelector('.middleData');
-				// middleData?.scrollTo(0, 0);
 				middleData?.scrollTo({ top: 0, behavior: 'smooth' });
 			}}
 			class="fa fa-user-o navContainer"
@@ -31,8 +30,6 @@
 				debouncedSetlocalStorage();
 
 				const middleData = document.querySelector('.middleData');
-				// middleData?.scrollTo(0, 0);
-				// with animation
 				middleData?.scrollTo({ top: 0, behavior: 'smooth' });
 			}}
 			class="fa fa-hashtag navContainer"
@@ -45,7 +42,6 @@
 				debouncedSetlocalStorage();
 
 				const middleData = document.querySelector('.middleData');
-				// middleData?.scrollTo(0, 0);
 				middleData?.scrollTo({ top: 0, behavior: 'smooth' });
 			}}
 			class="fa fa-location-pin navContainer"

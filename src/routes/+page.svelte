@@ -65,7 +65,7 @@
 		font-family: Imprima;
 		text-shadow: var(--boxShadows);
 		text-align: start;
-		color: var(--tertiaryThemeInverted);
+		color: var(--primaryThemeInverted);
 
 		width: 80%;
 		height: fit-content;
