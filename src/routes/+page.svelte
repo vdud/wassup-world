@@ -55,6 +55,7 @@
 
 <style>
 	.pWidth {
+		/* white-space: nowrap; */
 		width: clamp(300px, 60vw, 700px);
 	}
 	.buttonIcon {
@@ -67,8 +68,8 @@
 		text-align: start;
 		color: var(--primaryThemeInverted);
 
-		width: 80%;
 		height: fit-content;
+		width: 80%;
 	}
 	.Info {
 		transition: scale 333ms ease-in-out, padding 266ms ease-in-out, margin-top 266ms ease-in-out, opacity 266ms ease-in-out;
