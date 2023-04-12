@@ -27,13 +27,13 @@
 		"svelte": "^3.54.0"
 	},
 	"devDependencies": {
-		"@playwright/test": "^1.32.2",
+		"@playwright/test": "^1.32.3",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-vercel": "^2.4.1",
-		"@sveltejs/kit": "^1.15.2",
+		"@sveltejs/kit": "^1.15.4",
 		"@sveltejs/package": "^2.0.2",
-		"@typescript-eslint/eslint-plugin": "^5.57.1",
-		"@typescript-eslint/parser": "^5.57.1",
+		"@typescript-eslint/eslint-plugin": "^5.58.0",
+		"@typescript-eslint/parser": "^5.58.0",
 		"eslint": "^8.38.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte3": "^4.0.0",

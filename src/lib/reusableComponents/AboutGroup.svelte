@@ -258,7 +258,8 @@
 	}
 	.infoData {
 		height: 169px;
-		width: calc(100%-1rem);
+		/* width: calc(100%-1rem); */
+		width: calc(100% - 1rem);
 		/* background-color: var(--secondaryTheme); */
 		/* background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--secOptDark) 55%); */
 		box-shadow: var(--boxShadowsBlur);
