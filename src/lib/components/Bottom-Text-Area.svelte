@@ -67,7 +67,7 @@
 			if (message === '') {
 				return;
 			} else {
-				applyNewMessageFresh({ sender: $userName, message, groupId, createdAt: time, isYoMe: true });
+				applyNewMessageFresh({ sender: $userName, message, $userGroup_id, createdAt: time, isYoMe: true });
 				applyNavDataMessage({ sender: $userName, message, createdAt: time, groupId, nature: $currentPage, groupName: $currentPageHeaderData });
 
 				const res = await fetch('/api/textAreaMessages', {

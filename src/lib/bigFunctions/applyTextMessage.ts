@@ -4,6 +4,7 @@ import { togglePublic } from './toggleNavLocs';
 
 export const applyNewMessageFresh = (data: any) => {
 	const textMessages: any = document.getElementById(`textMessages?${data.$userGroup_id}`);
+	console.log('textMessages', textMessages);
 	if (textMessages) {
 		const div = document.createElement('div');
 		div.classList.add('text');
@@ -46,6 +47,10 @@ export const applyNewMessageFresh = (data: any) => {
 };
 
 export const applyMessage = async (data: any) => {
+	//wait for 10 sec before text message is applied
+	// setTimeout(() => {
+	// 	applyNewMessageFresh(data);
+	// }, 10000);
 	const textMessages: any = document.getElementById(`textMessages?${data.$userGroup_id}`);
 	if (textMessages) {
 		// if (data.isYoMe) {

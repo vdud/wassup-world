@@ -19,8 +19,7 @@
 	import { isTypingData } from '$lib/stores/isTypingData';
 
 	export let data: any;
-	// onMount(() => {
-	// });
+
 	const allUsers = JSON.parse(data.body.allUsers);
 	const groupAdData = JSON.parse(data.body.groupData);
 
@@ -122,7 +121,6 @@
 <div class="hashContainer" id="middleScroll" on:scroll={debouncedScroll}>
 	<div class="gradient" />
 	<div class="gradientBtm" />
-	<!-- <div class="hashContainer" id="middleScroll" on:scroll={parseScroll}> -->
 	<div class="margins margin-bottom" />
 	<div id="textMessages?{$userGroup_id}" class="textMessages" />
 	<GroupAd {groupAdData} />

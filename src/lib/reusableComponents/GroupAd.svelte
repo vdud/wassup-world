@@ -71,6 +71,7 @@
 		isClient: false,
 		currentListing: [],
 	};
+
 	let currentListing = {};
 
 	if (groupAdData.isClient === true) {
@@ -216,7 +217,6 @@
 		justify-content: center;
 		width: max-content;
 		height: 45px;
-		background-color: var(--primaryTheme);
 		border-radius: var(--borderRadius);
 		padding: 30px 40px;
 		margin: var(--averageMargin);
@@ -224,14 +224,16 @@
 		box-shadow: var(--boxShadows);
 		pointer-events: all;
 
-		color: var(--primaryThemeInverted);
 		font-family: UBold;
 		font-size: 2rem;
 		transition: all 0.2s ease-in-out;
-	}
-	.navItem:hover {
+
 		background-color: var(--primaryThemeInverted);
 		color: var(--primaryTheme);
+	}
+	.navItem:hover {
+		color: var(--primaryThemeInverted);
+		background-color: var(--primaryTheme);
 	}
 	.absMenuClass {
 		position: absolute;
