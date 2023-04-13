@@ -60,21 +60,33 @@ export const load = (async ({ params }) => {
 				.limit(100)
 				.toArray();
 
-			if (returnRepliesData) {
-				return {
-					status: 200,
-					groupId: JSON.stringify(findMessage.group_id),
-					body: {
-						message: JSON.stringify(findMessage),
-						replyData: JSON.stringify(returnRepliesData),
-						allUsers: JSON.stringify(groupUsers[0].allUsers),
-						groupNature: JSON.stringify(groupUsers[0].groupNature),
-						nature: JSON.stringify(findMessage.nature),
-					},
-				};
-			}
-		} else {
-			return;
+			const findReplyTo = await massagesCreate.findOne({ _id: findMessage.replyTo });
+
+			return {
+				status: 200,
+				groupId: JSON.stringify(findMessage.group_id),
+				body: {
+					message: JSON.stringify(findMessage),
+					replyData: JSON.stringify(returnRepliesData),
+					allUsers: JSON.stringify(groupUsers[0].allUsers),
+					groupNature: JSON.stringify(groupUsers[0].groupNature),
+					nature: JSON.stringify(findMessage.nature),
+					quoteFindReplyTo: JSON.stringify(findReplyTo),
+				},
+			};
 		}
 	}
+
+	return {
+		status: 404,
+		groupId: JSON.stringify(''),
+		body: {
+			message: 'Not Found',
+			replyData: JSON.stringify([]),
+			allUsers: JSON.stringify([]),
+			groupNature: JSON.stringify(''),
+			nature: JSON.stringify(''),
+			quoteFindReplyTo: JSON.stringify(''),
+		},
+	};
 }) satisfies PageServerLoad;

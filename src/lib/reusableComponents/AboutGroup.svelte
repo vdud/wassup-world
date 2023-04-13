@@ -8,7 +8,6 @@
 	export let allUsers: any;
 </script>
 
-<!-- {#if $currentPage !== 'PUBLIC'} -->
 <div class="infoBox" style={$isShowInfo ? 'scale: 1; opacity:1;' : 'scale: 0; padding:.2rem;margin-top:-2rem;margin-bottom:-11rem; opacity:0;'}>
 	<div class="infoData">
 		<div class="flexInfo">
@@ -72,8 +71,6 @@
 	</div>
 </div>
 
-<!-- {/if} -->
-
 <style>
 	.faBtn {
 		width: 100%;
@@ -93,7 +90,6 @@
 		-webkit-background-clip: text;
 	}
 	.fa-link {
-		/* background-image: linear-gradient(33deg, var(--primaryThemeInverted), var(--tertiaryThemeInverted)); */
 		background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--secOptDark) 55%);
 	}
 	.envoFa {
@@ -120,13 +116,8 @@
 	}
 	.sendAmsg {
 		color: var(--primaryThemeInverted);
-		/* text-shadow: var(--textShadows); */
 		width: max-content;
-		/* border-radius: 5px; */
 		margin-right: var(--lessAverageMargin);
-		/* background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--blue) 55%); */
-
-		/* scale: 0.9; */
 	}
 	.flexLeft {
 		width: 100%;
@@ -139,7 +130,6 @@
 	.pTextMember,
 	.headerText {
 		width: max-content;
-		/* width: 1000px; */
 		display: flex;
 		align-items: center;
 		justify-content: start;
@@ -186,7 +176,6 @@
 		height: 100%;
 		overflow-y: scroll;
 		margin-bottom: -1px;
-		/* margin-bottom: -10px; */
 	}
 	.sendMsgBtn {
 		background-color: var(--primaryTheme);
@@ -194,7 +183,6 @@
 	.membersColumn {
 		width: 100%;
 		height: 2rem;
-		/* margin-bottom: 1px; */
 
 		display: flex;
 		justify-content: start;
@@ -209,7 +197,6 @@
 	}
 	.flexItem {
 		height: 100%;
-		/* margin-right: 1px; */
 		border-right: 0.1px solid var(--secondaryThemeInverted);
 		overflow: hidden;
 	}
@@ -258,12 +245,8 @@
 	}
 	.infoData {
 		height: 169px;
-		/* width: calc(100%-1rem); */
 		width: calc(100% - 1rem);
-		/* background-color: var(--secondaryTheme); */
-		/* background-image: linear-gradient(33deg, var(--primaryThemeInverted) 33%, var(--secOptDark) 55%); */
 		box-shadow: var(--boxShadowsBlur);
-		/* border: 1px solid var(--secondaryThemeInverted); */
 
 		border-radius: var(--borderRadius);
 		overflow: hidden;

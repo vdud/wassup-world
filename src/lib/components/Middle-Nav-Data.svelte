@@ -190,14 +190,8 @@
 		padding-left: 0;
 	}
 	.ThemeImg {
-		/* position: absolute; */
-		/* top: 0; */
-		/* left: 0; */
-		/* z-index: ; */
-		/* width: 100%; */
 		height: 100%;
 		opacity: 0.75;
-		/* object-fit: cover; */
 	}
 	.sendBox {
 		font-family: UBold;
@@ -215,7 +209,6 @@
 	}
 	.sendArrow {
 		margin-left: var(--lessAverageMargin);
-		/* padding-bottom: 4px; */
 	}
 	.sendArrow:hover,
 	.sendAll:hover {

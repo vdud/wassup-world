@@ -109,6 +109,8 @@
 	onDestroy(() => {
 		$currentPage = '';
 		$userGroup_id = '';
+
+		pusher.unsubscribe($userGroup_id);
 	});
 </script>
 

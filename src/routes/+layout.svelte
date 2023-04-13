@@ -1,6 +1,6 @@
 <script lang="ts">
-	import '$lib/css/middle-left.css';
 	import '../css/new-app.css';
+	import '$lib/css/middle-left.css';
 	import { page } from '$app/stores';
 
 	import { dev } from '$app/environment';
@@ -26,7 +26,6 @@
 	import LockScreen from '$lib/components/Lock-Screen.svelte';
 
 	import { onDestroy, onMount } from 'svelte';
-	import { userGroup_id } from '$lib/stores/userGroup_id';
 
 	onMount(() => {
 		const savedNatureDataString = localStorage.getItem('nature');
@@ -54,10 +53,12 @@
 		if (e.key === 'Escape') {
 			e.preventDefault();
 			$isLocked = true;
-		} else if (e.key === '`') {
+		}
+		if (e.key === '`') {
 			e.preventDefault();
 			$isFlex = !$isFlex;
-		} else if (e.key === 'Tab') {
+		}
+		if (e.key === 'Tab') {
 			e.preventDefault();
 			if ($nature === 'LOCATION') {
 				$nature = 'HASHTAG';
@@ -68,6 +69,7 @@
 			}
 		}
 	};
+
 	onDestroy(() => {
 		pusher.disconnect();
 	});
@@ -78,6 +80,7 @@
 		<div class="absoluteFirstWindow lockScreen" style={$isLocked ? '' : 'display:none;'}>
 			<LockScreen />
 		</div>
+
 		<div class="windows windowLeft {$isFlex ? 'show' : 'notShow'} {$isFlex ? 'width' : 'nonWidth'}">
 			<div class="windowContainers container1 leftMargin">
 				<TopHeaderLeft />
@@ -93,6 +96,7 @@
 				<BottomNav />
 			</div>
 		</div>
+
 		<div class="windows windowRight {$isFlex ? 'notWide' : 'wide'} {$isFlex ? 'nonWidth' : 'width'}">
 			<div class="windowContainers container1 {$isFlex ? 'rightMargin' : 'overMargin'}">
 				<TopHeaderRight />
@@ -102,7 +106,9 @@
 					<slot />
 				{/key}
 			</div>
-			<div class="windowContainers container3" style={$currentPage === '' ? 'display:none;' : ''}><BottomTextArea /></div>
+			<div class="windowContainers container3" style={$currentPage === '' ? 'display:none;' : ''}>
+				<BottomTextArea />
+			</div>
 		</div>
 	</div>
 </div>
@@ -351,9 +357,4 @@
 			width: 99%;
 		}
 	}
-	/* @media screen and (min-width: 1810px) {
-		.window {
-			width: 1800px;
-		}
-	} */
 </style>

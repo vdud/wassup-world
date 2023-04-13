@@ -89,9 +89,9 @@
 
 		const middleScroll: any = document.getElementById('middleScroll');
 		if (middleScroll) {
-			// setTimeout(() => {
-			middleScroll.scrollTo({ top: middleScroll.scrollHeight, behavior: 'smooth' });
-			// }, 10);
+			setTimeout(() => {
+				middleScroll.scrollTo({ top: middleScroll.scrollHeight, behavior: 'smooth' });
+			}, 10);
 		}
 	};
 </script>
@@ -176,9 +176,7 @@
 		height: 100%;
 		margin: 6px;
 		height: 100%;
-		/* margin-right: calc(var(--buttonHW) + 30px); */
 		padding: 14px;
-		/* border: none; */
 		outline: none;
 		resize: none;
 		font-size: 1.2rem;

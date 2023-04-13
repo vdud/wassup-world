@@ -27,9 +27,6 @@
 		$fullDisplay = 'nonHidden';
 
 		$isFlex = !$isFlex;
-		// if ($page.url.pathname === '/') {
-		// 	return;
-		// }
 
 		setTimeout(() => {
 			$fullDisplay = 'hidden';

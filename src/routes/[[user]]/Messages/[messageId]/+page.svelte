@@ -25,6 +25,8 @@
 	const groupNature = JSON.parse(data.body.groupNature);
 
 	const replyData = JSON.parse(data.body.replyData);
+	const quoteFindReplyTo = JSON.parse(data.body.quoteFindReplyTo);
+	console.log('quoteFindReplyTo', quoteFindReplyTo);
 	const isReply = messageData.isReply;
 
 	const focusOnTextArea = () => {
@@ -114,16 +116,34 @@
 	{#if isReply === true}
 		<div class="goBackDiv">
 			<a href="/Messages/{messageData.replyTo}" class="goBack" on:click={toggle}>
-				<i class="fa fa-arrow-left pageMessage" />
+				<i class="fa fa-arrow-left primaryThemeInverted" />
 				<p class="UBold pageMessage">GO BACK</p>
 			</a>
 		</div>
 	{:else}
 		<div class="goBackDiv">
 			<a href="/{messageData.group_id}" class="goBack" on:click={toggle}>
-				<i class="fa fa-arrow-left pageMessage" />
+				<i class="fa fa-arrow-left primaryThemeInverted" />
 				<p class="UBold pageMessage">GO BACK</p>
 			</a>
+		</div>
+	{/if}
+
+	{#if quoteFindReplyTo !== null}
+		<div class="replyMainMsg">
+			<div class="flexBod paddingBottom">
+				<p class="mainMessage" style={quoteFindReplyTo.message.length > 33 ? '' : 'font-size: calc(var(--fontSize) * 1.6);'}><span class="sender">{quoteFindReplyTo.sender}; </span> <span class="pageMessage">{quoteFindReplyTo.message}</span></p>
+				<span class="bottomButtons">
+					<span class="timeSpan flexTime">{timeSince(quoteFindReplyTo.createdAt)}</span>
+					<button class="timeSpan" style="margin-left: 10px;"><p class="totalRepliespText"><span id="Replies_No?{quoteFindReplyTo._id}">{likesabove10k(quoteFindReplyTo.totalReplies.toString())} replies</span></p></button>
+					<button on:click={like.bind(globalThis, { _id: quoteFindReplyTo._id, likes: quoteFindReplyTo.likes })} class="timeSpan replyLikeButton" style="margin-left: 10px;"><span class="optDark" id="LIKE_NO?{quoteFindReplyTo._id}">{likesabove10k(quoteFindReplyTo.likes)}</span><i id="FA_SOLID?{quoteFindReplyTo._id}" class="{quoteFindReplyTo.likedPeople.includes($userName_id) ? 'fa-solid' : 'fa-regular'} fa-heart optDark" style="margin:3px;" /></button>
+					<a href="/Messages/{quoteFindReplyTo._id}" on:click={goTo.bind(globalThis, quoteFindReplyTo._id)} class="timeSpan LikeSpan" style="margin-left: 10px;"><p class="totalRepliespText REPLY_TEXT"><span style="margin-right: 5px">REPLY</span><span><i class="fa fa-square-up-right" /></span></p></a>
+				</span>
+			</div>
+		</div>
+
+		<div class="ReplyToText">
+			<p class="pageMessage">Replying to <span class="sender">{messageData.sender}...</span></p>
 		</div>
 	{/if}
 
@@ -173,6 +193,12 @@
 </div>
 
 <style>
+	.pageMessage {
+		font-family: Imprima;
+	}
+	.ReplyToText {
+		text-align: center;
+	}
 	.allReplies {
 		padding-bottom: 1rem;
 	}
